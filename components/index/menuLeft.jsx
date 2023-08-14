@@ -1,15 +1,14 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Desktop, Newspaper, Print, DocumentAttach, StatsChart } from 'react-ionicons'
-import { useEffect, useState } from "react";
-import Loader from "@/components/Loader";
+import { useState } from "react";
 import styled from 'styled-components'
-import * as furosmock from "@/components/mockedContent/furos";
-import * as chipboxesmock from "@/components/mockedContent/chipboxes";
-import OpenInFullIcon from '@mui/icons-material/OpenInFull';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 
-export default function MenuLeft() {
+export default function MenuLeft({ setSelected }) {
+    const [selectedItem, setSelectedItem] = useState(null);
 
+    function sett(selected) {
+        setSelected(selected)
+        setSelectedItem(selected);
+    }
 
     return (
         <MenuHamburguer>
@@ -17,77 +16,97 @@ export default function MenuLeft() {
                 <img src='/assets/logovale.png' />
             </div>
             <Content>
-                <Row>
+                <Row onClick={() => sett('Dashboard')} >
                     <ImgContainer>
                         <img src='/assets/dashboard.png' />
                     </ImgContainer>
-                    <TitleOption>Dashboard</TitleOption>
+                    <Button>
+                        <TitleOption selected={selectedItem === 'Dashboard'}>Dashboard</TitleOption>
+                    </Button>
                 </Row>
-                <Row>
+                <Row onClick={() => sett('Relatórios')}>
                     <ImgContainer>
                         <img src='/assets/relatorios.png' />
                     </ImgContainer>
-                    <TitleOption>Relatórios</TitleOption>
+                    <Button>
+                        <TitleOption selected={selectedItem === 'Relatórios'}>Relatórios</TitleOption>
+                    </Button>
                 </Row>
                 <Resources>
                     <SwapHorizIcon style={{ color: 'white' }} />
                     <TitleOption>RECURSOS</TitleOption>
                 </Resources>
-                <Row>
+                <Row onClick={() => sett('Cadastrar Furo')}>
                     <ImgContainer>
                         <img src='/assets/cadastrarfuro.png' />
                     </ImgContainer>
-                    <TitleOption>Cadastrar Furo</TitleOption>
+                    <Button>
+                        <TitleOption selected={selectedItem === 'Cadastrar Furo'}>Cadastrar Furo</TitleOption>
+                    </Button>
                 </Row>
-                <Row>
+                <Row onClick={() => sett('Impressão Etiquetas')}>
                     <ImgContainer>
                         <img src='/assets/print.png' />
                     </ImgContainer>
-                    <TitleOption>Impressão Etiquetas</TitleOption>
+                    <Button>
+                        <TitleOption selected={selectedItem === 'Impressão Etiquetas'}>Impressão Etiquetas</TitleOption>
+                    </Button>
                 </Row>
-                <Row>
+                <Row onClick={() => sett('Importar Arquivo')}>
                     <ImgContainer>
                         <img src='/assets/addarquivo.png' />
                     </ImgContainer>
-                    <TitleOption>Importar Arquivo</TitleOption>
+                    <Button>
+                        <TitleOption selected={selectedItem === 'Importar Arquivo'}>Importar Arquivo</TitleOption>
+                    </Button>
                 </Row>
-                <Row>
+                <Row onClick={() => sett('Dados Processamento')}>
                     <ImgContainer>
                         <img src='/assets/dadosprocessamento.png' />
                     </ImgContainer>
-                    <TitleOption>Dados Processamento</TitleOption>
+                    <Button>
+                        <TitleOption selected={selectedItem === 'Dados Processamento'}>Dados Processamento</TitleOption>
+                    </Button>
                 </Row>
                 <Resources>
                     <SwapHorizIcon style={{ color: 'white' }} />
                     <TitleOption>CONFIGURAÇÃO</TitleOption>
                 </Resources>
-                <Row>
+                <Row onClick={() => sett('Config. Impressora')}>
                     <ImgContainer>
                         <img src='/assets/configprinter.png' />
                     </ImgContainer>
-                    <TitleOption>Config. Impressora</TitleOption>
+                    <Button>
+                        <TitleOption selected={selectedItem === 'Config. Impressora'}>Config. Impressora</TitleOption>
+                    </Button>
                 </Row>
-                <Row>
+                <Row onClick={() => sett('Parâmetros')}>
                     <ImgContainer>
                         <img src='/assets/params.png' />
                     </ImgContainer>
-                    <TitleOption>Parâmetros</TitleOption>
+                    <Button>
+                        <TitleOption selected={selectedItem === 'Parâmetros'}>Parâmetros</TitleOption>
+                    </Button>
                 </Row>
                 <Resources>
                     <SwapHorizIcon style={{ color: 'white' }} />
                     <TitleOption>ADMINISTRAÇÃO</TitleOption>
                 </Resources>
-                <Row>
+                <Row onClick={() => sett('Relatórios')}>
                     <ImgContainer>
                         <img src='/assets/user.png' />
                     </ImgContainer>
-                    <TitleOption>Usuário</TitleOption>
+                    <Button>
+                        <TitleOption selected={selectedItem === 'Usuário'}>Usuário</TitleOption>
+                    </Button>
                 </Row>
-                <Row>
+                <Row onClick={() => sett('Mensagens/Avisos')}>
                     <ImgContainer>
                         <img src='/assets/avisos.png' />
                     </ImgContainer>
-                    <TitleOption>Mensagens/Avisos</TitleOption>
+                    <Button>
+                        <TitleOption selected={selectedItem === 'Mensagens/Avisos'}>Mensagens/Avisos</TitleOption>
+                    </Button>
                 </Row>
             </Content>
         </MenuHamburguer>
@@ -112,12 +131,18 @@ const ImgContainer = styled.div({
     padding: 4
 })
 
-const TitleOption = styled.text({
-    color: 'white',
-    fontSize: 15,
-    marginLeft: 8,
-    fontWeight: '500', letterSpacing: 0.3
-})
+const TitleOption = styled.text`
+    color: ${props => (props.selected ? '#3699FF' : 'white')};
+    font-size: 15px;
+    margin-left: 8px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: opacity 0.3s;
+
+    &:hover {
+        opacity: 0.7;
+    }
+`;
 
 const Row = styled.div({
     display: 'flex',
@@ -136,3 +161,13 @@ const Resources = styled.div({
     alignItems: 'center',
     justifyContent: 'center'
 })
+
+const Button = styled.button`
+    transition: opacity 0.3s;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+        opacity: 0.2;
+    }
+
+`

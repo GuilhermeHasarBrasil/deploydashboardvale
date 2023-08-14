@@ -5,7 +5,6 @@ import Loader from "@/components/Loader";
 import styled from 'styled-components'
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-import { Desktop, Newspaper, Print, DocumentAttach, StatsChart } from 'react-ionicons'
 import * as furosmock from "@/components/mockedContent/furos";
 import * as chipboxesmock from "@/components/mockedContent/chipboxes";
 import Header from "@/components/Header";
@@ -13,6 +12,7 @@ import RowFuros from "@/components/index/rowFuros";
 import TableFuros from "@/components/index/tableFuros";
 import MenuLeft from "@/components/index/menuLeft";
 import TopDashboard from "@/components/Dashboard/topDashboard";
+import { Divider } from '@mui/material';
 
 export default function Home() {
     const [todoInput, setTodoInput] = useState("");
@@ -21,6 +21,8 @@ export default function Home() {
     const [furos, setFuros] = useState(furosmock.furos)
     const [chipBoxes, setChipBoxes] = useState(chipboxesmock.chipboxes)
     const [chipBoxesInternos, setChipBoxesInternos] = useState([])
+    const [selected, setSelected] = useState('Dashboard')
+    const [furoSelecionado, setFuroSelecionado] = useState([furos[0].numero])
 
     useEffect(() => {
         if (!isLoading && !authUser) {
@@ -69,27 +71,42 @@ export default function Home() {
 
     const [quantidadeConferidos, setQuantidadeConferidos] = useState(0);
     const [quantidadeFinalizados, setQuantidadeFinalizados] = useState(0);
-    useEffect(()=>{
+    useEffect(() => {
         const quantidadeConferidos = furos.filter(furo => furo.conferido === true).length;
         const quantidadeFinalizado = furos.filter(furo => furo.finalizado === true).length;
         setQuantidadeConferidos(quantidadeConferidos);
         setQuantidadeFinalizados(quantidadeFinalizado);
-    },[furos])
+    }, [furos])
+
+    console.log(chipBoxesInternos)
+    console.log('f. select', furoSelecionado)
 
     return !authUser ? (
         <Loader />
     ) : (
         <main className="">
-
             <Container>
                 <Header onClick={signOut} authUser={authUser} />
                 <RenderFunctions>
-                    <MenuLeft />
+                    <MenuLeft setSelected={setSelected} />
                     <Content>
-                        <RowFuros furos={furos} />
-                        <TopDashboard finalizados={quantidadeFinalizados} conferidos={quantidadeConferidos} furos={furos}  />
-                        <TableFuros furos={furos} />
+                        <RowFuros furos={furos} setFuroSelecionado={setFuroSelecionado} />
+                        {
+                            selected === 'Dashboard' ?
+                                <>
+                                    <Divider sx={{ borderWidth: '1px', backgroundColor: 'grey', }} />
+                                    <TopDashboard finalizados={quantidadeFinalizados} conferidos={quantidadeConferidos} furos={furos} />
+                                    <Divider sx={{ borderWidth: '2px', backgroundColor: 'red', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)' }} />
+                                    <TableFuros furos={furos} />
+                                    <Divider sx={{ borderWidth: '2px', backgroundColor: '#3699FF', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)' }} />
+
+                                </>
+                                :
+                                <></>
+                        }
                     </Content>
+
+
                 </RenderFunctions>
             </Container>
         </main>

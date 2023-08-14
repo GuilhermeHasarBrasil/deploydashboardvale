@@ -5,7 +5,7 @@ export default function TopDashboard({ finalizados, conferidos, furos }) {
     console.log(finalizados, conferidos, furos.length)
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row', marginLeft:10 }} >
+        <div style={{ display: 'flex', flexDirection: 'row', marginLeft:10, marginTop:10 }} >
             <Row>
                 <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#206F0D', width: 80, height: 80 }} >
                     <img src="/assets/images/furoimg.png" />
