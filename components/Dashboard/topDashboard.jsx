@@ -5,12 +5,12 @@ export default function TopDashboard({ finalizados, conferidos, furos }) {
     console.log(finalizados, conferidos, furos.length)
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row', marginLeft:10, marginTop:10 }} >
+        <div style={{ display: 'flex', flexDirection: 'row', marginLeft:10, marginTop:10, }} >
             <Row>
                 <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#206F0D', width: 80, height: 80 }} >
                     <img src="/assets/images/furoimg.png" />
                 </div>
-                <div style={{ backgroundColor: '#2FAB10', height: 80, width: 280 }} >
+                <div style={{ backgroundColor: '#2FAB10', height: 80, width: 300 }} >
                     <Column>
                         <TitleBox>FUROS PROCESSADOS</TitleBox>
                         <Number>{finalizados}</Number>
@@ -21,7 +21,7 @@ export default function TopDashboard({ finalizados, conferidos, furos }) {
                 <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#2760BB', width: 80, height: 80 }} >
                     <img src="/assets/images/furoimg.png" />
                 </div>
-                <div style={{ backgroundColor: '#307BF4', height: 80, width: 280 }} >
+                <div style={{ backgroundColor: '#307BF4', height: 80, width: 300 }} >
                     <Column>
                         <TitleBox>FUROS NÃO PROCESSADOS</TitleBox>
                         <Number>{furos.length - conferidos}</Number>
@@ -32,7 +32,7 @@ export default function TopDashboard({ finalizados, conferidos, furos }) {
                 <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#996501', width: 80, height: 80 }} >
                     <img src="/assets/images/furoimg.png" />
                 </div>
-                <div style={{ backgroundColor: '#E89E0E', height: 80, width: 280 }} >
+                <div style={{ backgroundColor: '#E89E0E', height: 80, width: 300 }} >
                     <Column>
                         <TitleBox>FUROS EM PROCESSAMENTO</TitleBox>
                         <Number>{ conferidos - finalizados }</Number>
@@ -46,7 +46,7 @@ export default function TopDashboard({ finalizados, conferidos, furos }) {
 }
 const Row = styled.div({
     display: 'flex',
-    flexDirection: 'row', marginLeft:10
+    flexDirection: 'row', marginLeft:10, marginRight:20
 })
 const Column = styled.div({
     display: 'flex',

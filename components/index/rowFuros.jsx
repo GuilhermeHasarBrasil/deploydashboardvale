@@ -16,8 +16,8 @@ export default function RowFuros({ furos, setFuroSelecionado }) {
         }
     };
 
-    function sett(selected) {
-        setFuroSelecionado(selected)
+    function sett(selected, index) {
+        setFuroSelecionado({furo: selected, index: index})
         setSelectedItem(selected);
     }
 
@@ -34,11 +34,11 @@ export default function RowFuros({ furos, setFuroSelecionado }) {
             </BgIcon>
 
             <ul id='furos-list' style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
-                {furos.map((furo) => (
+                {furos.map((furo, index) => (
                     <li style={{ marginLeft: 50, marginRight: 50, backgroundColor: furo.numero == selectedItem ? '#008f83' : 'white', padding:8, borderRadius:10 }} key={furo.id}>
                         {furo.title}{" "}
                         <Button>
-                            <h1 style={{ color: furo.numero !== selectedItem ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett(furo.numero)} >
+                            <h1 style={{ color: furo.numero !== selectedItem ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett(furo.numero, index)} >
                                 {furo.numero}
                             </h1>
                         </Button>

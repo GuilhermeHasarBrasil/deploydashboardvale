@@ -13,6 +13,7 @@ import TableFuros from "@/components/index/tableFuros";
 import MenuLeft from "@/components/index/menuLeft";
 import TopDashboard from "@/components/Dashboard/topDashboard";
 import { Divider } from '@mui/material';
+import CircularChart from "@/components/Relatorios/pieChart";
 
 export default function Home() {
     const [todoInput, setTodoInput] = useState("");
@@ -66,11 +67,61 @@ export default function Home() {
             }
             const arraysInternos = Object.values(chipboxesPorFuro);
             setChipBoxesInternos(arraysInternos)
+
+            const arraysFiltradosConferencia = arraysInternos.map(arrayInterno =>
+                arrayInterno.filter(chipbox =>
+                    chipbox.processos.conferencia.sai !== null
+                )
+            );
+            setFiltroConferencia(arraysFiltradosConferencia)
+
+            const arraysFiltradosMarcacao = arraysInternos.map(arrayInterno =>
+                arrayInterno.filter(chipbox =>
+                    chipbox.processos.marcacao.sai !== null
+                )
+            );
+            setFiltroMarcacao(arraysFiltradosMarcacao)
+
+            const arraysFiltradosFotografia = arraysInternos.map(arrayInterno =>
+                arrayInterno.filter(chipbox =>
+                    chipbox.processos.fotografia.sai !== null
+                )
+            );
+            setFiltroFotografia(arraysFiltradosFotografia)
+
+            const arraysFiltradosDensidade = arraysInternos.map(arrayInterno =>
+                arrayInterno.filter(chipbox =>
+                    chipbox.processos.densidade.sai !== null
+                )
+            );
+            setFiltroDensidade(arraysFiltradosDensidade)
+
+            const arraysFiltradosSerragem = arraysInternos.map(arrayInterno =>
+                arrayInterno.filter(chipbox =>
+                    chipbox.processos.serragem.sai !== null
+                )
+            );
+            setFiltroSerragem(arraysFiltradosSerragem)
+
+            const arraysFiltradosArquivamento = arraysInternos.map(arrayInterno =>
+                arrayInterno.filter(chipbox =>
+                    chipbox.processos.arquivamento.sai !== null
+                )
+            );
+            setFiltroArquivamento(arraysFiltradosArquivamento)
         }
     }, [chipBoxes])
 
+    console.log(furoSelecionado)
     const [quantidadeConferidos, setQuantidadeConferidos] = useState(0);
     const [quantidadeFinalizados, setQuantidadeFinalizados] = useState(0);
+    const [filtroConferencia, setFiltroConferencia] = useState([])
+    const [filtroMarcacao, setFiltroMarcacao] = useState([])
+    const [filtroFotografia, setFiltroFotografia] = useState([])
+    const [filtroDensidade, setFiltroDensidade] = useState([])
+    const [filtroSerragem, setFiltroSerragem] = useState([])
+    const [filtroArquivamento, setFiltroArquivamento] = useState([])
+    
     useEffect(() => {
         const quantidadeConferidos = furos.filter(furo => furo.conferido === true).length;
         const quantidadeFinalizado = furos.filter(furo => furo.finalizado === true).length;
@@ -78,8 +129,6 @@ export default function Home() {
         setQuantidadeFinalizados(quantidadeFinalizado);
     }, [furos])
 
-    console.log(chipBoxesInternos)
-    console.log('f. select', furoSelecionado)
 
     return !authUser ? (
         <Loader />
@@ -103,6 +152,12 @@ export default function Home() {
                                 </>
                                 :
                                 <></>
+                        }
+                        {
+                            selected === 'Relatórios' ?
+                            <CircularChart/>
+                            :
+                            <></>
                         }
                     </Content>
 
