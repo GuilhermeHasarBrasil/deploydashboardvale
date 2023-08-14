@@ -60,7 +60,7 @@ export const furos = [
         "id": "SSG-FD00010",
         "projeto": "SSG",
         "numero": "SSG-FD00010",
-        "finalizado": true,
+        "finalizado": false,
         "createdAt": {
             "seconds": 1688564302,
             "nanoseconds": 933000000

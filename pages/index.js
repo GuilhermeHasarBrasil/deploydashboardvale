@@ -12,6 +12,7 @@ import Header from "@/components/Header";
 import RowFuros from "@/components/index/rowFuros";
 import TableFuros from "@/components/index/tableFuros";
 import MenuLeft from "@/components/index/menuLeft";
+import TopDashboard from "@/components/Dashboard/topDashboard";
 
 export default function Home() {
     const [todoInput, setTodoInput] = useState("");
@@ -67,12 +68,13 @@ export default function Home() {
     }, [chipBoxes])
 
     const [quantidadeConferidos, setQuantidadeConferidos] = useState(0);
+    const [quantidadeFinalizados, setQuantidadeFinalizados] = useState(0);
     useEffect(()=>{
-        const quantidade = furos.filter(furo => furo.conferido === true).length;
-        setQuantidadeConferidos(quantidade);
+        const quantidadeConferidos = furos.filter(furo => furo.conferido === true).length;
+        const quantidadeFinalizado = furos.filter(furo => furo.finalizado === true).length;
+        setQuantidadeConferidos(quantidadeConferidos);
+        setQuantidadeFinalizados(quantidadeFinalizado);
     },[furos])
-
-    console.log(quantidadeConferidos)
 
     return !authUser ? (
         <Loader />
@@ -85,6 +87,7 @@ export default function Home() {
                     <MenuLeft />
                     <Content>
                         <RowFuros furos={furos} />
+                        <TopDashboard finalizados={quantidadeFinalizados} conferidos={quantidadeConferidos} furos={furos}  />
                         <TableFuros furos={furos} />
                     </Content>
                 </RenderFunctions>

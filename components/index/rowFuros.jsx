@@ -1,4 +1,4 @@
-import { LogOutSharp, BarChartSharp, ArrowBackCircleSharp, ArrowForwardCircleSharp, CloseCircleSharp, CheckmarkCircleSharp } from 'react-ionicons'
+import { ArrowBackCircleSharp, ArrowForwardCircleSharp } from 'react-ionicons'
 
 export default function RowFuros({  furos }) {
 
