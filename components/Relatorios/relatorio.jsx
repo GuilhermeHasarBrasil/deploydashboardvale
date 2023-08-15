@@ -4,15 +4,22 @@ import { useState } from "react";
 
 export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos }) {
 
+    if(!furoSelecionado)
+    return(
+        <div style={{display:'flex', alignItems:'center', justifyContent:'center'}} >
+            <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:30 }}>Selecione o furo acima</text>
+        </div>
+    )
+
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between',padding: 5, flexDirection:'column' }} >
-            <text>Furo: {furoSelecionado.furo}</text>
-            <text>Conferência: {filtroConferencia[furoSelecionado.index]?.length} de {chipBoxesInternos[furoSelecionado.index]?.length} </text>
-            <text>Marcação: {filtroMarcacao[furoSelecionado.index]?.length} de {chipBoxesInternos[furoSelecionado.index]?.length}</text>
-            <text>Fotografia: {filtroFotografia[furoSelecionado.index]?.length} de {chipBoxesInternos[furoSelecionado.index]?.length}</text>
-            <text>Densidade: {filtroDensidade[furoSelecionado.index]?.length} de {chipBoxesInternos[furoSelecionado.index]?.length}</text>
-            <text>Serragem: {filtroSerragem[furoSelecionado.index]?.length} de {chipBoxesInternos[furoSelecionado.index]?.length}</text>
-            <text>Arquivamento: {filtroArquivamento[furoSelecionado.index]?.length} de {chipBoxesInternos[furoSelecionado.index]?.length}</text>
+            <text>Furo: {furoSelecionado?.furo}</text>
+            <text>Conferência: {filtroConferencia[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length} </text>
+            <text>Marcação: {filtroMarcacao[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+            <text>Fotografia: {filtroFotografia[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+            <text>Densidade: {filtroDensidade[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+            <text>Serragem: {filtroSerragem[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+            <text>Arquivamento: {filtroArquivamento[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
         </div>
     )
 }
