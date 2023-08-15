@@ -92,7 +92,7 @@ export default function MenuLeft({ setSelected }) {
                     <SwapHorizIcon style={{ color: 'white' }} />
                     <TitleOption>ADMINISTRAÇÃO</TitleOption>
                 </Resources>
-                <Row onClick={() => sett('Relatórios')}>
+                <Row onClick={() => sett('Usuário')}>
                     <ImgContainer>
                         <img src='/assets/user.png' />
                     </ImgContainer>
