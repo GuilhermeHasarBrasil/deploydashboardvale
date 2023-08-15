@@ -14,6 +14,8 @@ import MenuLeft from "@/components/index/menuLeft";
 import TopDashboard from "@/components/Dashboard/topDashboard";
 import { Divider } from '@mui/material';
 import CircularChart from "@/components/Relatorios/pieChart";
+import Relatorio from "@/components/Relatorios/relatorio";
+import DadosProcessamento from "@/components/DadosProcessamento/dadosProcessamento";
 
 export default function Home() {
     const [todoInput, setTodoInput] = useState("");
@@ -23,7 +25,8 @@ export default function Home() {
     const [chipBoxes, setChipBoxes] = useState(chipboxesmock.chipboxes)
     const [chipBoxesInternos, setChipBoxesInternos] = useState([])
     const [selected, setSelected] = useState('Dashboard')
-    const [furoSelecionado, setFuroSelecionado] = useState([furos[0].numero])
+    const [furoSelecionado, setFuroSelecionado] = useState()
+    console.log('aaa',furos[0].numero)
 
     useEffect(() => {
         if (!isLoading && !authUser) {
@@ -112,7 +115,6 @@ export default function Home() {
         }
     }, [chipBoxes])
 
-    console.log(furoSelecionado)
     const [quantidadeConferidos, setQuantidadeConferidos] = useState(0);
     const [quantidadeFinalizados, setQuantidadeFinalizados] = useState(0);
     const [filtroConferencia, setFiltroConferencia] = useState([])
@@ -121,7 +123,7 @@ export default function Home() {
     const [filtroDensidade, setFiltroDensidade] = useState([])
     const [filtroSerragem, setFiltroSerragem] = useState([])
     const [filtroArquivamento, setFiltroArquivamento] = useState([])
-    
+
     useEffect(() => {
         const quantidadeConferidos = furos.filter(furo => furo.conferido === true).length;
         const quantidadeFinalizado = furos.filter(furo => furo.finalizado === true).length;
@@ -155,13 +157,29 @@ export default function Home() {
                         }
                         {
                             selected === 'Relatórios' ?
-                            <CircularChart/>
+                            <Relatorio 
+                                        chipBoxes={chipBoxes} furoSelecionado={furoSelecionado} 
+                                        filtroConferencia={filtroConferencia} filtroMarcacao={filtroMarcacao} 
+                                        filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade} 
+                                        filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento} 
+                                        chipBoxesInternos={chipBoxesInternos}
+                            />
+                            :
+                            <></>
+                        }
+                        {
+                            selected === 'Dados Processamento' ?
+                            <DadosProcessamento 
+                                        chipBoxes={chipBoxes} furoSelecionado={furoSelecionado} 
+                                        filtroConferencia={filtroConferencia} filtroMarcacao={filtroMarcacao} 
+                                        filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade} 
+                                        filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento} 
+                                        chipBoxesInternos={chipBoxesInternos}
+                            />
                             :
                             <></>
                         }
                     </Content>
-
-
                 </RenderFunctions>
             </Container>
         </main>
