@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export default function TopDashboard({ finalizados, conferidos, furos }) {
 
-    console.log(finalizados, conferidos, furos.length)
+    //console.log(finalizados, conferidos, furos.length)
 
     return (
         <div style={{ display: 'flex', flexDirection: 'row', marginLeft:10, marginTop:10, }} >

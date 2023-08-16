@@ -16,6 +16,8 @@ import { Divider } from '@mui/material';
 import CircularChart from "@/components/Relatorios/pieChart";
 import Relatorio from "@/components/Relatorios/relatorio";
 import DadosProcessamento from "@/components/DadosProcessamento/dadosProcessamento";
+import PrintButton from "@/components/ImpressaoEtiquetas/impressao";
+import PrinterSettings from "@/components/ConfigImpressora/ConfigImpressora";
 
 export default function Home() {
     const [todoInput, setTodoInput] = useState("");
@@ -26,7 +28,6 @@ export default function Home() {
     const [chipBoxesInternos, setChipBoxesInternos] = useState([])
     const [selected, setSelected] = useState('Dashboard')
     const [furoSelecionado, setFuroSelecionado] = useState()
-    console.log('aaa',furos[0].numero)
 
     useEffect(() => {
         if (!isLoading && !authUser) {
@@ -131,6 +132,8 @@ export default function Home() {
         setQuantidadeFinalizados(quantidadeFinalizado);
     }, [furos])
 
+    console.log(furoSelecionado)
+
 
     return !authUser ? (
         <Loader />
@@ -176,6 +179,18 @@ export default function Home() {
                                         filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento} 
                                         chipBoxesInternos={chipBoxesInternos}
                             />
+                            :
+                            <></>
+                        }
+                        {
+                            selected === 'Impressão Etiquetas' ?
+                            <PrintButton  furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} />
+                            :
+                            <></>
+                        }
+                        {
+                            selected === 'Config. Impressora' ?
+                            <PrinterSettings/>
                             :
                             <></>
                         }
