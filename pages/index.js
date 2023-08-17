@@ -7,7 +7,7 @@ import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import * as furosmock from "@/components/mockedContent/furos";
 import * as chipboxesmock from "@/components/mockedContent/chipboxes";
-import Header from "@/components/Header";
+import Header from "../components/Header";
 import RowFuros from "@/components/index/rowFuros";
 import TableFuros from "@/components/index/tableFuros";
 import MenuLeft from "@/components/index/menuLeft";
@@ -17,7 +17,7 @@ import CircularChart from "@/components/Relatorios/pieChart";
 import Relatorio from "@/components/Relatorios/relatorio";
 import DadosProcessamento from "@/components/DadosProcessamento/dadosProcessamento";
 import PrintButton from "@/components/ImpressaoEtiquetas/impressao";
-import PrinterSettings from "@/components/ConfigImpressora/ConfigImpressora";
+import PrinterSettings from "../components/ConfigImpressora/ConfigImpressora";
 
 export default function Home() {
     const [todoInput, setTodoInput] = useState("");
@@ -134,6 +134,15 @@ export default function Home() {
 
     console.log(furoSelecionado)
 
+    const [printer, setPrinter] = useState()
+    useEffect(() => {
+        const storedPrinter = JSON.parse(localStorage.getItem('printer'));
+        if (storedPrinter) {
+          setPrinter(storedPrinter);
+        }
+      }, []);
+
+      console.log(printer)
 
     return !authUser ? (
         <Loader />

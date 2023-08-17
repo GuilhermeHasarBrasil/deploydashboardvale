@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "@/firebase/auth";
-import { useRouter } from "next/router";
 import styled from 'styled-components'
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/firebase";

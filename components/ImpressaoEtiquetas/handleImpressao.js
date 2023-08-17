@@ -1,6 +1,7 @@
 import { defaultLayout } from "./defaultLayout";
 
 export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxes) {
+    const storedPrinter = JSON.parse(localStorage.getItem('printer'));
 
     const Print = async (content) => {
         try {
@@ -9,7 +10,7 @@ export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxe
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ zpl: content }),
+                body: JSON.stringify({ zpl: content, config: storedPrinter }),
             });
             if (response.ok) {
                 setMessage('ZPL enviado com sucesso para impressão.');
@@ -20,7 +21,6 @@ export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxe
             console.log('Erro ao enviar a requisição.');
         }
     };
-
     if (paramsPrint.inicio == undefined || paramsPrint.fim == undefined) {
         console.log('digite inicio e fim')
         return
@@ -29,7 +29,6 @@ export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxe
         const etiquetas = await gerarEtiquetasParaImpressao(caixasNoIntervalo, paramsPrint)
         Print(etiquetas)
     }
-
     async function gerarEtiquetasParaImpressao(caixas, params) {
         try {
             const chipBoxLayout = defaultLayout;
@@ -65,6 +64,4 @@ export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxe
             console.log(error)
         }
     }
-
-
 }

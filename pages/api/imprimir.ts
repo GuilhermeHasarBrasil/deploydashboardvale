@@ -3,9 +3,10 @@ import { printZpl } from "@/impressao/printModule";
 export default async (req, res) => {
     if (req.method === 'POST') {
       const { zpl } = req.body;
+      const {config} = req.body
   
       try {
-        await printZpl(zpl);
+        await printZpl(zpl, config);
         res.status(200).json({ message: 'ZPL enviado com sucesso' });
       } catch (error) {
         console.error('Erro ao imprimir:', error);

@@ -1,8 +1,10 @@
 import net from 'net';
 
-export const printZpl = async (zpl: string | Uint8Array) => {
+export const printZpl = async (zpl: string | Uint8Array, config: any) => {
   const IP = '192.168.0.209';
   const PORT = 9100;
+
+  console.log(config)
 
   const socket = new net.Socket();
 
