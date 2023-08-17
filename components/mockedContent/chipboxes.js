@@ -29914,7 +29914,7 @@ export const chipboxes = [
         "qrcode": "9;SSG;SSG-FD00010;012,20;014,20",
         "processos": {
             "arquivamento": {
-                "sai": null,
+                "sai": 'null',
                 "user": null,
                 "ent": null
             },

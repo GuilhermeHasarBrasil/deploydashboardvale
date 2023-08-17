@@ -138,11 +138,11 @@ export default function Home() {
     useEffect(() => {
         const storedPrinter = JSON.parse(localStorage.getItem('printer'));
         if (storedPrinter) {
-          setPrinter(storedPrinter);
+            setPrinter(storedPrinter);
         }
-      }, []);
+    }, []);
 
-      console.log(printer)
+    console.log(printer)
 
     return !authUser ? (
         <Loader />
@@ -162,46 +162,52 @@ export default function Home() {
                                     <Divider sx={{ borderWidth: '2px', backgroundColor: 'red', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)' }} />
                                     <TableFuros furos={furos} />
                                     <Divider sx={{ borderWidth: '2px', backgroundColor: '#3699FF', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)' }} />
-
+                                    <text>Furo: {furoSelecionado?.furo}</text>
+                                    <text>Conferência: {filtroConferencia[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length} </text>
+                                    <text>Marcação: {filtroMarcacao[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+                                    <text>Fotografia: {filtroFotografia[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+                                    <text>Densidade: {filtroDensidade[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+                                    <text>Serragem: {filtroSerragem[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+                                    <text>Arquivamento: {filtroArquivamento[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
                                 </>
                                 :
                                 <></>
                         }
                         {
                             selected === 'Relatórios' ?
-                            <Relatorio 
-                                        chipBoxes={chipBoxes} furoSelecionado={furoSelecionado} 
-                                        filtroConferencia={filtroConferencia} filtroMarcacao={filtroMarcacao} 
-                                        filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade} 
-                                        filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento} 
-                                        chipBoxesInternos={chipBoxesInternos}
-                            />
-                            :
-                            <></>
+                                <Relatorio
+                                    chipBoxes={chipBoxes} furoSelecionado={furoSelecionado}
+                                    filtroConferencia={filtroConferencia} filtroMarcacao={filtroMarcacao}
+                                    filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade}
+                                    filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
+                                    chipBoxesInternos={chipBoxesInternos}
+                                />
+                                :
+                                <></>
                         }
                         {
                             selected === 'Dados Processamento' ?
-                            <DadosProcessamento 
-                                        chipBoxes={chipBoxes} furoSelecionado={furoSelecionado} 
-                                        filtroConferencia={filtroConferencia} filtroMarcacao={filtroMarcacao} 
-                                        filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade} 
-                                        filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento} 
-                                        chipBoxesInternos={chipBoxesInternos}
-                            />
-                            :
-                            <></>
+                                <DadosProcessamento
+                                    chipBoxes={chipBoxes} furoSelecionado={furoSelecionado}
+                                    filtroConferencia={filtroConferencia} filtroMarcacao={filtroMarcacao}
+                                    filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade}
+                                    filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
+                                    chipBoxesInternos={chipBoxesInternos}
+                                />
+                                :
+                                <></>
                         }
                         {
                             selected === 'Impressão Etiquetas' ?
-                            <PrintButton  furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} />
-                            :
-                            <></>
+                                <PrintButton furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} />
+                                :
+                                <></>
                         }
                         {
                             selected === 'Config. Impressora' ?
-                            <PrinterSettings/>
-                            :
-                            <></>
+                                <PrinterSettings />
+                                :
+                                <></>
                         }
                     </Content>
                 </RenderFunctions>

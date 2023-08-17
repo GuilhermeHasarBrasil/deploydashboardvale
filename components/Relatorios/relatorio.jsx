@@ -1,6 +1,8 @@
 import { ArrowBackCircleSharp, ArrowForwardCircleSharp } from 'react-ionicons'
 import styled from 'styled-components'
 import { useState } from "react";
+import CustomBarChart from './BarChart';
+
 
 export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos }) {
 
@@ -11,15 +13,21 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
         </div>
     )
 
+    const dataArray = filtroConferencia[furoSelecionado?.index]
+    const conferenciaData = dataArray.map(item => ({
+        id: item.id,
+        diferencaTempo: item.processos.conferencia.sai.seconds - item.processos.conferencia.ent.seconds,
+      }));
+
+    console.log(conferenciaData)
+
+
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between',padding: 5, flexDirection:'column' }} >
-            <text>Furo: {furoSelecionado?.furo}</text>
-            <text>Conferência: {filtroConferencia[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length} </text>
-            <text>Marcação: {filtroMarcacao[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-            <text>Fotografia: {filtroFotografia[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-            <text>Densidade: {filtroDensidade[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-            <text>Serragem: {filtroSerragem[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-            <text>Arquivamento: {filtroArquivamento[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+        <div style={{ display: 'flex', justifyContent: 'space-between',padding: 5, flexDirection:'column', width:'100%' }} >
+            
+
+            <CustomBarChart data={conferenciaData} />
+
         </div>
     )
 }

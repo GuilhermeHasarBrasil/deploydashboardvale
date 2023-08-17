@@ -49,7 +49,7 @@ export default function TableFuros({ furos }) {
                                     !furo.dataFinalizado ?
                                         <CloseCircleSharp
                                             color={'red'}
-                                            title={'   aaaa'}
+                                            title={''}
                                             height="20px"
                                             width="20px"
                                             style={{ marginRight: 10, marginLeft: 10 }}
@@ -57,7 +57,7 @@ export default function TableFuros({ furos }) {
                                         :
                                         <CheckmarkCircleSharp
                                             color={'green'}
-                                            title={'asda'}
+                                            title={''}
                                             height="20px"
                                             width="20px"
                                             style={{ marginRight: 10, marginLeft: 10 }}
