@@ -1,8 +1,6 @@
-import { ArrowBackCircleSharp, ArrowForwardCircleSharp } from 'react-ionicons'
 import styled from 'styled-components'
 import { useEffect, useState } from "react";
 import CustomBarChart from './BarChart';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { motion } from 'framer-motion';
 
 export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos }) {
@@ -29,8 +27,6 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
     function sett(selected) {
         setProcess(selected);
     }
-
-    console.log(filtroConferencia[furoSelecionado?.index])
 
     useEffect(() => {
         console.log(process)
@@ -132,16 +128,15 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             </motion.div>
         )
     }
-
     const [arrayDataProcess, setArrayDataProcess] = useState()
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 5, flexDirection: 'column', width: '100%' }} >
-            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop:20 }} >Selecione o processo para exibir o gráfico de tempo de processamento {motionIcon()} </text>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, }} >
+            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop:20 }} >Selecione o processo para exibir o gráfico de tempo de processamento de cada caixa{motionIcon()} </text>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, marginLeft:50 }} >
                 <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
                     {processos.map((furo, index) => (
-                        <li style={{ marginLeft: 30, marginRight: 0, backgroundColor: furo.processo == process ? '#008f83' : 'white', padding: 8, borderRadius: 10 }} key={furo.id}>
+                        <li style={{ marginLeft: 30, marginRight: 0, backgroundColor: furo.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={furo.id}>
                             <Button>
                                 <h1 style={{ color: furo.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett(furo.processo, index)} >
                                     {furo.processo}

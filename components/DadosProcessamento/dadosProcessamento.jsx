@@ -140,8 +140,6 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                     </PieChart>
                 </Column>
                 <Column>
-                    <Mt>
-                    </Mt>
                     <text style={{ marginRight: 15, fontWeight: 'bold' }} >Serragem: {(filtroSerragem[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length) * 100}% </text>
                     <PieChart width={320} height={320}>
                         <Pie
