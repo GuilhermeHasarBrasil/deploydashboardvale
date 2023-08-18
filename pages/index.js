@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "@/firebase/auth";
+import { useAuth } from "../firebase/auth";
 import { useRouter } from "next/router";
-import Loader from "@/components/Loader";
+import Loader from "../components/Loader";
 import styled from 'styled-components'
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-import * as furosmock from "@/components/mockedContent/furos";
-import * as chipboxesmock from "@/components/mockedContent/chipboxes";
+import * as furosmock from "../components/mockedContent/furos";
+import * as chipboxesmock from "../components/mockedContent/chipboxes";
 import Header from "../components/Header";
-import RowFuros from "@/components/index/rowFuros";
-import TableFuros from "@/components/index/tableFuros";
-import MenuLeft from "@/components/index/menuLeft";
-import TopDashboard from "@/components/Dashboard/topDashboard";
+import RowFuros from "../components/index/rowFuros";
+import TableFuros from "../components/index/tableFuros";
+import MenuLeft from "../components/index/menuLeft";
+import TopDashboard from "../components/Dashboard/topDashboard";
 import { Divider } from '@mui/material';
-import CircularChart from "@/components/Relatorios/pieChart";
-import Relatorio from "@/components/Relatorios/relatorio";
-import DadosProcessamento from "@/components/DadosProcessamento/dadosProcessamento";
-import PrintButton from "@/components/ImpressaoEtiquetas/impressao";
+import CircularChart from "../components/Relatorios/pieChart";
+import Relatorio from "../components/Relatorios/relatorio";
+import DadosProcessamento from "../components/DadosProcessamento/dadosProcessamento";
+import PrintButton from "../components/ImpressaoEtiquetas/impressao";
 import PrinterSettings from "../components/ConfigImpressora/ConfigImpressora";
 
 export default function Home() {

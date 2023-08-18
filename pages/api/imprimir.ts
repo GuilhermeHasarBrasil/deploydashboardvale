@@ -1,4 +1,4 @@
-import { printZpl } from "@/impressao/printModule";
+import { printZpl } from "../../impressao/printModule";
 
 export default async (req, res) => {
     if (req.method === 'POST') {
