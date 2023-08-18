@@ -6,7 +6,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
 export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos }) {
 
-    const COLORS = ['#0088FE', '#FF8042'];
+    const COLORS = ['#008F83', '#ef3a25 '];
     const conferencia = [
         { name: 'Executada', value: filtroConferencia[furoSelecionado?.index]?.length },
         { name: 'Restante', value: chipBoxesInternos[furoSelecionado?.index]?.length - filtroConferencia[furoSelecionado?.index]?.length }

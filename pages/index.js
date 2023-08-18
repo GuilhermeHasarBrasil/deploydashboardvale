@@ -132,8 +132,6 @@ export default function Home() {
         setQuantidadeFinalizados(quantidadeFinalizado);
     }, [furos])
 
-    console.log(furoSelecionado)
-
     const [printer, setPrinter] = useState()
     useEffect(() => {
         const storedPrinter = JSON.parse(localStorage.getItem('printer'));
@@ -142,7 +140,7 @@ export default function Home() {
         }
     }, []);
 
-    console.log(printer)
+    console.log(filtroConferencia)
 
     return !authUser ? (
         <Loader />

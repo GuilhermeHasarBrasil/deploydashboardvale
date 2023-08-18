@@ -30,6 +30,8 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
         setProcess(selected);
     }
 
+    console.log(filtroConferencia[furoSelecionado?.index])
+
     useEffect(() => {
         console.log(process)
         if (process == 'Conferência') {
@@ -37,16 +39,20 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             const conferenciaData = dataArray.map(item => ({
                 'id': item.id,
                 'Tempo (segundos)': item.processos.conferencia.sai.seconds - item.processos.conferencia.ent.seconds,
-                'caixa': item.cx
+                'caixa': item.cx,
+                'user': item.processos.conferencia.user
             }));
             setArrayDataProcess(conferenciaData)
         }
+
+        console.log(arrayDataProcess)
         if (process == 'Marcação') {
             const dataArray = filtroMarcacao[furoSelecionado?.index]
             const marcacaoData = dataArray.map(item => ({
                 'id': item.id,
                 'Tempo (segundos)': item.processos.marcacao.sai.seconds - item.processos.marcacao.ent.seconds,
-                'caixa': item.cx
+                'caixa': item.cx,
+                'user': item.processos.marcacao.user
             }));
             setArrayDataProcess(marcacaoData)
         }
@@ -55,25 +61,28 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             const fotografiaData = dataArray.map(item => ({
                 'id': item.id,
                 'Tempo (segundos)': item.processos.fotografia.sai.seconds - item.processos.fotografia.ent.seconds,
-                'caixa': item.cx
+                'caixa': item.cx,
+                'user': item.processos.fotografia.user
             }));
             setArrayDataProcess(fotografiaData)
         }
         if (process == 'Densidade') {
-            const dataArray = filtroFotografia[furoSelecionado?.index]
+            const dataArray = filtroDensidade[furoSelecionado?.index]
             const densidadeData = dataArray.map(item => ({
                 'id': item.id,
                 'Tempo (segundos)': item.processos.densidade.sai.seconds - item.processos.densidade.ent.seconds,
-                'caixa': item.cx
+                'caixa': item.cx,
+                'user': item.processos.densidade.user
             }));
             setArrayDataProcess(densidadeData)
         }
         if (process == 'Serragem') {
-            const dataArray = filtroFotografia[furoSelecionado?.index]
+            const dataArray = filtroSerragem[furoSelecionado?.index]
             const serragemData = dataArray.map(item => ({
                 'id': item.id,
                 'Tempo (segundos)': item.processos.serragem.sai.seconds - item.processos.serragem.ent.seconds,
-                'caixa': item.cx
+                'caixa': item.cx,
+                'user': item.processos.serragem.user
             }));
             setArrayDataProcess(serragemData)
         }
@@ -82,16 +91,18 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             const despachoData = dataArray.map(item => ({
                 'id': item.id,
                 'Tempo (segundos)': item.processos.despacho.sai.seconds - item.processos.despacho.ent.seconds,
-                'caixa': item.cx
+                'caixa': item.cx,
+                'user': item.processos.despacho.user
             }));
             setArrayDataProcess(despachoData)
         }
         if (process == 'Arquivamento') {
-            const dataArray = filtroFotografia[furoSelecionado?.index]
+            const dataArray = filtroArquivamento[furoSelecionado?.index]
             const arquivamentoData = dataArray.map(item => ({
                 'id': item.id,
                 'Tempo (segundos)': item.processos.arquivamento.sai.seconds - item.processos.arquivamento.ent.seconds,
-                'caixa': item.cx
+                'caixa': item.cx,
+                'user': item.processos.arquivamento.user
             }));
             setArrayDataProcess(arquivamentoData)
         }
@@ -126,7 +137,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 5, flexDirection: 'column', width: '100%' }} >
-            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50 }} >Selecione o processo para exibir o gráfico de tempo de processamento {motionIcon()} </text>
+            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop:20 }} >Selecione o processo para exibir o gráfico de tempo de processamento {motionIcon()} </text>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, }} >
                 <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
                     {processos.map((furo, index) => (

@@ -8,10 +8,25 @@ const CustomBarChart = ({ data }) => (
     <YAxis>
       <Label value="Segundos" angle={-90} position="insideLeft" style={{ textAnchor: 'middle', fontWeight:'bold', fontSize:20 }} />
     </YAxis>
-    <Tooltip />
+    <Tooltip content={CustomTooltip} /> {/* Adicione o tooltip personalizado */}
     <Legend />
     <Bar dataKey="Tempo (segundos)" fill="#008F83" />
   </BarChart>
 );
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div style={{ background: 'white', border: '1px solid #ccc', padding: '10px', fontSize: '14px' }}>
+        <p><strong>ID:</strong> {data.id}</p>
+        <p><strong>Tempo (segundos):</strong> {data['Tempo (segundos)']}</p>
+        <p><strong>Caixa:</strong> {data.caixa}</p>
+        <p><strong>Usuário:</strong> {data.user}</p> {/* Exibir o nome do usuário */}
+      </div>
+    );
+  }
+  return null;
+}
 
 export default CustomBarChart;
