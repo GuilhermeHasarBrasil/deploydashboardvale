@@ -20,9 +20,9 @@ import PrintButton from "../components/ImpressaoEtiquetas/impressao";
 import PrinterSettings from "../components/ConfigImpressora/ConfigImpressora";
 import CustomBarChart from "../components/Dashboard/CustomBarChartHorizontal";
 import SquareIcon from '@mui/icons-material/Square';
+import BarChartWeek from "../components/Dashboard/WeekWorkBarchart";
 
 export default function Home() {
-    const [todoInput, setTodoInput] = useState("");
     const { signOut, authUser, isLoading } = useAuth();
     const router = useRouter();
     const [furos, setFuros] = useState(furosmock.furos)
@@ -30,6 +30,22 @@ export default function Home() {
     const [chipBoxesInternos, setChipBoxesInternos] = useState([])
     const [selected, setSelected] = useState('Dashboard')
     const [furoSelecionado, setFuroSelecionado] = useState()
+    const [quantidadeConferidos, setQuantidadeConferidos] = useState(0);
+    const [quantidadeFinalizados, setQuantidadeFinalizados] = useState(0);
+    const [filtroConferencia, setFiltroConferencia] = useState([])
+    const [filtroMarcacao, setFiltroMarcacao] = useState([])
+    const [filtroFotografia, setFiltroFotografia] = useState([])
+    const [filtroDensidade, setFiltroDensidade] = useState([])
+    const [filtroSerragem, setFiltroSerragem] = useState([])
+    const [filtroArquivamento, setFiltroArquivamento] = useState([])
+
+    const [contagensPorDiaConferencia, setContagensPorDiaConferencia] = useState({}); // Estado para armazenar as contagens por dia
+    const [contagensPorDiaMarcacao, setContagensPorDiaMarcacao] = useState({});
+    const [contagensPorDiaFotografia, setContagensPorDiaFotografia] = useState({});
+    const [contagensPorDiaDensidade, setContagensPorDiaDensidade] = useState({});
+    const [contagensPorDiaSerragem, setContagensPorDiaSerragem] = useState({});
+    const [contagensPorDiaDespacho, setContagensPorDiaDespacho] = useState({});
+    const [contagensPorDiaArquivamento, setContagensPorDiaArquivamento] = useState({});
 
     useEffect(() => {
         if (!isLoading && !authUser) {
@@ -118,29 +134,12 @@ export default function Home() {
         }
     }, [chipBoxes])
 
-    const [quantidadeConferidos, setQuantidadeConferidos] = useState(0);
-    const [quantidadeFinalizados, setQuantidadeFinalizados] = useState(0);
-    const [filtroConferencia, setFiltroConferencia] = useState([])
-    const [filtroMarcacao, setFiltroMarcacao] = useState([])
-    const [filtroFotografia, setFiltroFotografia] = useState([])
-    const [filtroDensidade, setFiltroDensidade] = useState([])
-    const [filtroSerragem, setFiltroSerragem] = useState([])
-    const [filtroArquivamento, setFiltroArquivamento] = useState([])
-
     useEffect(() => {
         const quantidadeConferidos = furos.filter(furo => furo.conferido === true).length;
         const quantidadeFinalizado = furos.filter(furo => furo.finalizado === true).length;
         setQuantidadeConferidos(quantidadeConferidos);
         setQuantidadeFinalizados(quantidadeFinalizado);
     }, [furos])
-
-    const [printer, setPrinter] = useState()
-    useEffect(() => {
-        const storedPrinter = JSON.parse(localStorage.getItem('printer'));
-        if (storedPrinter) {
-            setPrinter(storedPrinter);
-        }
-    }, []);
 
     const [dataBarChart, setDataBarChart] = useState([])
     useEffect(() => {
@@ -176,8 +175,134 @@ export default function Home() {
                 total: chipBoxesInternos[furoSelecionado?.index]?.length,
             },
         ]);
-
     }, [furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem])
+
+    useEffect(() => {
+        function getDayOfWeek(date) {
+            const daysOfWeek = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+            const dayIndex = date.getDay();
+            return daysOfWeek[dayIndex];
+        }
+        function processarDadosConferencia() {
+            const novaContagemPorDia = {};
+            chipBoxes.forEach(item => {
+                if (item.processos && item.processos.conferencia && item.processos.conferencia.sai) {
+                    const timestamp = item.processos.conferencia.sai.seconds * 1000; // Converter para milissegundos
+                    const data = new Date(timestamp);
+                    const diaDaSemana = getDayOfWeek(data);
+                    if (novaContagemPorDia[diaDaSemana]) {
+                        novaContagemPorDia[diaDaSemana]++;
+                    } else {
+                        novaContagemPorDia[diaDaSemana] = 1;
+                    }
+                }
+            });
+            setContagensPorDiaConferencia(novaContagemPorDia);
+        }
+        function processarDadosMarcacao() {
+            const novaContagemPorDia = {};
+            chipBoxes.forEach(item => {
+                if (item.processos && item.processos.marcacao && item.processos.marcacao.sai) {
+                    const timestamp = item.processos.marcacao.sai.seconds * 1000; // Converter para milissegundos
+                    const data = new Date(timestamp);
+                    const diaDaSemana = getDayOfWeek(data);
+                    if (novaContagemPorDia[diaDaSemana]) {
+                        novaContagemPorDia[diaDaSemana]++;
+                    } else {
+                        novaContagemPorDia[diaDaSemana] = 1;
+                    }
+                }
+            });
+            setContagensPorDiaMarcacao(novaContagemPorDia);
+        }
+        function processarDadosFotografia() {
+            const novaContagemPorDia = {};
+            chipBoxes.forEach(item => {
+                if (item.processos && item.processos.fotografia && item.processos.fotografia.sai) {
+                    const timestamp = item.processos.fotografia.sai.seconds * 1000; // Converter para milissegundos
+                    const data = new Date(timestamp);
+                    const diaDaSemana = getDayOfWeek(data);
+                    if (novaContagemPorDia[diaDaSemana]) {
+                        novaContagemPorDia[diaDaSemana]++;
+                    } else {
+                        novaContagemPorDia[diaDaSemana] = 1;
+                    }
+                }
+            });
+            setContagensPorDiaFotografia(novaContagemPorDia);
+        }
+        function processarDadosDensidade() {
+            const novaContagemPorDia = {};
+            chipBoxes.forEach(item => {
+                if (item.processos && item.processos.densidade && item.processos.densidade.sai) {
+                    const timestamp = item.processos.densidade.sai.seconds * 1000; // Converter para milissegundos
+                    const data = new Date(timestamp);
+                    const diaDaSemana = getDayOfWeek(data);
+                    if (novaContagemPorDia[diaDaSemana]) {
+                        novaContagemPorDia[diaDaSemana]++;
+                    } else {
+                        novaContagemPorDia[diaDaSemana] = 1;
+                    }
+                }
+            });
+            setContagensPorDiaDensidade(novaContagemPorDia);
+        }
+        function processarDadosSerragem() {
+            const novaContagemPorDia = {};
+            chipBoxes.forEach(item => {
+                if (item.processos && item.processos.serragem && item.processos.serragem.sai) {
+                    const timestamp = item.processos.serragem.sai.seconds * 1000; // Converter para milissegundos
+                    const data = new Date(timestamp);
+                    const diaDaSemana = getDayOfWeek(data);
+                    if (novaContagemPorDia[diaDaSemana]) {
+                        novaContagemPorDia[diaDaSemana]++;
+                    } else {
+                        novaContagemPorDia[diaDaSemana] = 1;
+                    }
+                }
+            });
+            setContagensPorDiaSerragem(novaContagemPorDia);
+        }
+        function processarDadosDespacho() {
+            const novaContagemPorDia = {};
+            chipBoxes.forEach(item => {
+                if (item.processos && item.processos.despacho && item.processos.despacho.sai) {
+                    const timestamp = item.processos.despacho.sai.seconds * 1000; // Converter para milissegundos
+                    const data = new Date(timestamp);
+                    const diaDaSemana = getDayOfWeek(data);
+                    if (novaContagemPorDia[diaDaSemana]) {
+                        novaContagemPorDia[diaDaSemana]++;
+                    } else {
+                        novaContagemPorDia[diaDaSemana] = 1;
+                    }
+                }
+            });
+            setContagensPorDiaDespacho(novaContagemPorDia);
+        }
+        function processarDadosArquivamento() {
+            const novaContagemPorDia = {};
+            chipBoxes.forEach(item => {
+                if (item.processos && item.processos.arquivamento && item.processos.arquivamento.sai) {
+                    const timestamp = item.processos.arquivamento.sai.seconds * 1000; // Converter para milissegundos
+                    const data = new Date(timestamp);
+                    const diaDaSemana = getDayOfWeek(data);
+                    if (novaContagemPorDia[diaDaSemana]) {
+                        novaContagemPorDia[diaDaSemana]++;
+                    } else {
+                        novaContagemPorDia[diaDaSemana] = 1;
+                    }
+                }
+            });
+            setContagensPorDiaArquivamento(novaContagemPorDia);
+        }
+        processarDadosConferencia();
+        processarDadosMarcacao();
+        processarDadosFotografia();
+        processarDadosDensidade();
+        processarDadosSerragem();
+        processarDadosDespacho();
+        processarDadosArquivamento();
+    }, [chipBoxes]);
 
     return !authUser ? (
         <Loader />
@@ -199,26 +324,25 @@ export default function Home() {
                                     <Divider sx={{ borderWidth: '2px', backgroundColor: '#3699FF', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)' }} />
                                     {
                                         furoSelecionado ?
-                                        <div style={{marginLeft:100, marginTop:20}} >
-                                            <text style={{fontSize:20, fontWeight:'bold'}} >Quantidade de caixas finalizadas por processo</text>
-                                            <br/>
-                                            <br/>
-                                            <text style={{margin:5}} >Legenda: Finalizadas {<SquareIcon style={{color:'#008f83'}} />} | Total {<SquareIcon style={{color:'#ef3a25'}} />}  </text>
-                                            <CustomBarChart data={dataBarChart} maxValue={chipBoxesInternos[furoSelecionado?.index]?.length} />
-                                        </div>
-                                            // <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 20, marginTop: '1%' }} >
-                                            //     <text>Furo: {furoSelecionado?.furo}</text>
-                                            //     <text>Conferência: {filtroConferencia[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length} </text>
-                                            //     <text>Marcação: {filtroMarcacao[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-                                            //     <text>Fotografia: {filtroFotografia[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-                                            //     <text>Densidade: {filtroDensidade[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-                                            //     <text>Serragem: {filtroSerragem[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-                                            //     <text>Arquivamento: {filtroArquivamento[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-                                            // </div>
+                                            <div style={{ marginLeft: 100, marginTop: 20 }} >
+                                                <text style={{ fontSize: 20, fontWeight: 'bold' }} >Quantidade de caixas finalizadas por processo</text>
+                                                <br />
+                                                <br />
+                                                <text style={{ margin: 5 }} >Legenda: Finalizadas {<SquareIcon style={{ color: '#008f83' }} />} | Total {<SquareIcon style={{ color: '#ef3a25' }} />}  </text>
+                                                <CustomBarChart data={dataBarChart} maxValue={chipBoxesInternos[furoSelecionado?.index]?.length} />
+                                            </div>
                                             :
                                             <></>
                                     }
-
+                                    <BarChartWeek contagensPorDiaConferencia={contagensPorDiaConferencia}
+                                                  contagensPorDiaMarcacao={contagensPorDiaMarcacao}
+                                                  contagensPorDiaFotografia={contagensPorDiaFotografia}
+                                                  contagensPorDiaDensidade={contagensPorDiaDensidade}
+                                                  contagensPorDiaSerragem={contagensPorDiaSerragem}
+                                                  contagensPorDiaDespacho={contagensPorDiaDespacho}
+                                                  contagensPorDiaArquivamento={contagensPorDiaArquivamento}
+                                                  chipBoxes={chipBoxes}
+                                    />
                                 </>
                                 :
                                 <></>
@@ -264,7 +388,6 @@ export default function Home() {
             </Container>
         </main>
     );
-
 }
 
 const Container = styled.div({
