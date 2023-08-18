@@ -21,7 +21,7 @@ export default function PrinterSettings() {
     setShowSucess(true)
     setTimeout(() => {
       setShowSucess(false)
-    }, 3000);
+    }, 1000);
   }
 
   const handleInputChange = (event) => {

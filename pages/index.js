@@ -18,6 +18,8 @@ import Relatorio from "../components/Relatorios/relatorio";
 import DadosProcessamento from "../components/DadosProcessamento/dadosProcessamento";
 import PrintButton from "../components/ImpressaoEtiquetas/impressao";
 import PrinterSettings from "../components/ConfigImpressora/ConfigImpressora";
+import CustomBarChart from "../components/Dashboard/CustomBarChartHorizontal";
+import SquareIcon from '@mui/icons-material/Square';
 
 export default function Home() {
     const [todoInput, setTodoInput] = useState("");
@@ -140,7 +142,42 @@ export default function Home() {
         }
     }, []);
 
-    console.log(filtroConferencia)
+    const [dataBarChart, setDataBarChart] = useState([])
+    useEffect(() => {
+        setDataBarChart([
+            {
+                name: 'Conferência',
+                processed: filtroConferencia[furoSelecionado?.index]?.length,
+                total: chipBoxesInternos[furoSelecionado?.index]?.length,
+            },
+            {
+                name: 'Marcação',
+                processed: filtroMarcacao[furoSelecionado?.index]?.length,
+                total: chipBoxesInternos[furoSelecionado?.index]?.length,
+            },
+            {
+                name: 'Fotografia',
+                processed: filtroFotografia[furoSelecionado?.index]?.length,
+                total: chipBoxesInternos[furoSelecionado?.index]?.length,
+            },
+            {
+                name: 'Densidade',
+                processed: filtroDensidade[furoSelecionado?.index]?.length,
+                total: chipBoxesInternos[furoSelecionado?.index]?.length,
+            },
+            {
+                name: 'Serragem',
+                processed: filtroSerragem[furoSelecionado?.index]?.length,
+                total: chipBoxesInternos[furoSelecionado?.index]?.length,
+            },
+            {
+                name: 'Arquivamento',
+                processed: filtroArquivamento[furoSelecionado?.index]?.length,
+                total: chipBoxesInternos[furoSelecionado?.index]?.length,
+            },
+        ]);
+
+    }, [furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem])
 
     return !authUser ? (
         <Loader />
@@ -162,15 +199,22 @@ export default function Home() {
                                     <Divider sx={{ borderWidth: '2px', backgroundColor: '#3699FF', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)' }} />
                                     {
                                         furoSelecionado ?
-                                            <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 20, marginTop: '1%' }} >
-                                                <text>Furo: {furoSelecionado?.furo}</text>
-                                                <text>Conferência: {filtroConferencia[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length} </text>
-                                                <text>Marcação: {filtroMarcacao[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-                                                <text>Fotografia: {filtroFotografia[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-                                                <text>Densidade: {filtroDensidade[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-                                                <text>Serragem: {filtroSerragem[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-                                                <text>Arquivamento: {filtroArquivamento[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
-                                            </div>
+                                        <div style={{marginLeft:100, marginTop:20}} >
+                                            <text style={{fontSize:20, fontWeight:'bold'}} >Quantidade de caixas finalizadas por processo</text>
+                                            <br/>
+                                            <br/>
+                                            <text style={{margin:5}} >Legenda: Finalizadas {<SquareIcon style={{color:'#008f83'}} />} | Total {<SquareIcon style={{color:'#ef3a25'}} />}  </text>
+                                            <CustomBarChart data={dataBarChart} maxValue={chipBoxesInternos[furoSelecionado?.index]?.length} />
+                                        </div>
+                                            // <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 20, marginTop: '1%' }} >
+                                            //     <text>Furo: {furoSelecionado?.furo}</text>
+                                            //     <text>Conferência: {filtroConferencia[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length} </text>
+                                            //     <text>Marcação: {filtroMarcacao[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+                                            //     <text>Fotografia: {filtroFotografia[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+                                            //     <text>Densidade: {filtroDensidade[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+                                            //     <text>Serragem: {filtroSerragem[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+                                            //     <text>Arquivamento: {filtroArquivamento[furoSelecionado?.index]?.length} de {chipBoxesInternos[furoSelecionado?.index]?.length}</text>
+                                            // </div>
                                             :
                                             <></>
                                     }

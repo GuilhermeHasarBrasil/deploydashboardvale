@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import handlePrint from './handleImpressao';
 import { QRCodeSVG } from 'qrcode.react';
 import { styles } from './styles';
+import Alert from '@mui/material/Alert';
+import { motion } from 'framer-motion';
 
 export default function PrintButton({ furoSelecionado, chipBoxesInternos, furos }) {
     if (!furoSelecionado)
@@ -13,6 +15,30 @@ export default function PrintButton({ furoSelecionado, chipBoxesInternos, furos 
                 <text style={{ marginRight: 15, fontWeight: 'bold', fontSize: 30 }}>Selecione o furo acima</text>
             </div>
         )
+    function motionIcon() {
+        return (
+            <motion.div
+                style={{ marginLeft: 600 }}
+                initial={{ y: -10 }}
+                animate={{ y: 0 }}
+                transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="60"
+                    height="60"
+                    fill="currentColor"
+                    className="bi bi-chevron-down"
+                    viewBox="0 0 16 16"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        d="M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"
+                    />
+                </svg>
+            </motion.div>
+        )
+    }
     const [selectedIndex, setSelectedIndex] = useState(0); // Adiciona esse estado
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
@@ -63,6 +89,18 @@ export default function PrintButton({ furoSelecionado, chipBoxesInternos, furos 
 
     console.log(chipBoxesInternos[furoSelecionado.index][0])
 
+    const [showAlert, setShowAlert] = useState(true)
+    const [alert, setAlert] = useState()
+
+    useEffect(() => {
+        if (!SelectedStart || !SelectedEnd) {
+            setAlert(<Alert style={{ marginBottom: 16, width:300, fontWeight:'bold' }} severity="warning">Insira o início e fim das caixas a serem impressas!</Alert>)
+        }
+        if (SelectedStart && SelectedEnd) {
+            setAlert(<Alert style={{ marginBottom: 16, width:300, fontWeight:'bold' }} severity="success">Pronto para impressão!</Alert>)
+        }
+    }, [SelectedStart, SelectedEnd])
+
     return (
         <Container>
             <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione o intervalo da impressão de etiquetas das caixas do furo {furoSelecionado.furo}</TitleText>
@@ -83,13 +121,85 @@ export default function PrintButton({ furoSelecionado, chipBoxesInternos, furos 
                     </div>
                 </div>
             </div>
+            <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-around', marginBottom: -40 }} >
+                {
+                    SelectedStart ?
+                        <motion.div
+                            style={{ marginLeft: 0 }}
+                            initial={{ y: -10 }}
+                            animate={{ y: 0 }}
+                            transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="60"
+                                height="60"
+                                fill="white"
+                                className="bi bi-chevron-down"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"
+                                />
+                            </svg>
+                        </motion.div> :
+                        <motion.div
+                            style={{ marginLeft: 0 }}
+                            initial={{ y: -10 }}
+                            animate={{ y: 0 }}
+                            transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="60"
+                                height="60"
+                                fill="currentColor"
+                                className="bi bi-chevron-down"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"
+                                />
+                            </svg>
+                        </motion.div>
+                }
+                {
+                    SelectedEnd ?
+                        <div style={{ width: 60, heigth: 60, backgroundColor: 'white' }} ></div>
+                        :
+                        <motion.div
+                            style={{ marginLeft: 0 }}
+                            initial={{ y: -10 }}
+                            animate={{ y: 0 }}
+                            transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="60"
+                                height="60"
+                                fill="currentColor"
+                                className="bi bi-chevron-down"
+                                viewBox="0 0 16 16"
+                            >
+                                <path
+                                    fill-rule="evenodd"
+                                    d="M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"
+                                />
+                            </svg>
+                        </motion.div>
+                }
+
+
+            </div>
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', width: '100%', marginTop: '3%' }} >
                 <Select
                     styles={{
                         control: (baseStyles, state) => ({
                             ...baseStyles,
                             borderColor: state.isFocused ? 'grey' : 'black',
-                            width:250
+                            width: 250
                         }),
                     }}
                     placeholder='Inicio'
@@ -102,7 +212,7 @@ export default function PrintButton({ furoSelecionado, chipBoxesInternos, furos 
                         control: (baseStyles, state) => ({
                             ...baseStyles,
                             borderColor: state.isFocused ? 'grey' : 'black',
-                            width:250
+                            width: 250
                         }),
                     }}
                     placeholder='Final'
@@ -111,19 +221,27 @@ export default function PrintButton({ furoSelecionado, chipBoxesInternos, furos 
                     options={selectListEnd}
                 />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop:10, marginBottom:50 }} >
+            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 10, marginBottom: 50 }} >
                 <Checkbox
                     checked={PrintAll}
                     onChange={handleCheckboxChange}
                     color="primary"
                 />
-                <TitleText style={{fontSize:30,}} >Impressão completa ({chipBoxesInternos[furoSelecionado.index].length} etiquetas)</TitleText>
+                <TitleText style={{ fontSize: 30, }} >Impressão completa ({chipBoxesInternos[furoSelecionado.index].length} etiquetas)</TitleText>
 
             </div>
 
-            <Button onClick={() => handlePrint(paramsPrint, furoSelecionado, chipBoxesInternos[furoSelecionado.index])} disabled={isLoading}>
-                <TitleText style={{color:'white', fontSize:20, fontWeight:'bold'}} >{isLoading ? 'Enviando...' : 'Imprimir'}</TitleText>
+            {
+                showAlert ?
+                    alert
+                    :
+                    <></>
+            }
+
+            <Button onClick={() => { handlePrint(paramsPrint, furoSelecionado, chipBoxesInternos[furoSelecionado.index]); setShowAlert(true) }} disabled={isLoading}>
+                <TitleText style={{ color: 'white', fontSize: 26, fontWeight: 'bold' }} >{isLoading ? 'Enviando...' : 'Imprimir'}</TitleText>
             </Button>
+
             {message && <p>{message}</p>}
         </Container>
     );
@@ -132,7 +250,7 @@ const Button = styled.button`
     background-color: #074F92;
     transition: opacity 0.3s;
     height: 80px;
-    width: 170px;
+    width: 210px;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
