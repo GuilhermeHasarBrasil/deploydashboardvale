@@ -313,8 +313,6 @@ export default function Home() {
         setValue(newValue);
     };
 
-    console.log(value)
-
     return !authUser ? (
         <Loader />
     ) : (
@@ -333,18 +331,18 @@ export default function Home() {
                                     <Divider sx={{ borderWidth: '2px', backgroundColor: 'red', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
                                     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                                         <Tabs value={value} onChange={handleChange} centered>
-                                            <Tab label="Quantidade de caixas finalizadas (total do furo)" style={{fontSize:16, fontWeight:'bold'}} />
-                                            <Tab label="Tempo de cada caixa por processo" style={{fontSize:16, fontWeight:'bold'}}/>
-                                            <Tab label="Caixas processadas por dia da semana" style={{fontSize:16, fontWeight:'bold'}}/>
+                                            <Tab label="Quantidade de caixas finalizadas (total do furo)" style={{ fontSize: 16, fontWeight: 'bold' }} />
+                                            <Tab label="Tempo de cada caixa por processo" style={{ fontSize: 16, fontWeight: 'bold' }} />
+                                            <Tab label="Caixas processadas por dia da semana" style={{ fontSize: 16, fontWeight: 'bold' }} />
                                         </Tabs>
                                     </Box>
                                     {
                                         furoSelecionado && value === 0 ?
                                             <div style={{ marginLeft: 100, marginTop: 20, display: 'flex', flexDirection: 'column' }} >
                                                 <text style={{ fontSize: 20, fontWeight: 'bold' }} >Quantidade de caixas finalizadas por processo</text>
-                                                <text style={{ margin: 5, marginLeft:55 }} >Total {<SquareIcon style={{ color: '#ef3a25' }} />} </text>
+                                                <text style={{ margin: 5, marginLeft: 55 }} >Total {<SquareIcon style={{ color: '#ef3a25' }} />} </text>
                                                 <text style={{ margin: 5 }} >Finalizadas {<SquareIcon style={{ color: '#008f83' }} />}   </text>
-                                                
+
                                                 <CustomBarChart data={dataBarChart} maxValue={chipBoxesInternos[furoSelecionado?.index]?.length} />
                                             </div>
                                             :
@@ -391,6 +389,12 @@ export default function Home() {
                                 <></>
                         }
                         {
+                            selected === 'Impressão Etiquetas' ?
+                                <PrintButton furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} />
+                                :
+                                <></>
+                        }
+                        {
                             selected === 'Dados Processamento' ?
                                 <DadosProcessamento
                                     chipBoxes={chipBoxes} furoSelecionado={furoSelecionado}
@@ -399,12 +403,6 @@ export default function Home() {
                                     filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
                                     chipBoxesInternos={chipBoxesInternos}
                                 />
-                                :
-                                <></>
-                        }
-                        {
-                            selected === 'Impressão Etiquetas' ?
-                                <PrintButton furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} />
                                 :
                                 <></>
                         }
@@ -420,7 +418,6 @@ export default function Home() {
                                 :
                                 <></>
                         }
-
                     </Content>
                 </RenderFunctions>
             </Container>
