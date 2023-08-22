@@ -1,7 +1,7 @@
 import { Telegraf } from 'telegraf';
 import dotenv from 'dotenv';
 
-export default async function (req, res) {
+export default async function Telegram(req, res) {
   const { message } = req.body;
   dotenv.config();
   console.log(req.body);

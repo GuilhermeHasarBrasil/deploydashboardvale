@@ -21,7 +21,7 @@ import PrinterSettings from "../components/ConfigImpressora/ConfigImpressora";
 import CustomBarChart from "../components/Dashboard/CustomBarChartHorizontal";
 import SquareIcon from '@mui/icons-material/Square';
 import BarChartWeek from "../components/Dashboard/WeekWorkBarchart";
-import Messages from "../components/MensagensAvisos/messages";
+import Mensagens from "../components/Mensagens/Mensagens";
 
 export default function Home() {
     const { signOut, authUser, isLoading } = useAuth();
@@ -386,10 +386,11 @@ export default function Home() {
                         }
                         {
                             selected === 'Mensagens/Avisos' ?
-                                <Messages/>
+                                <Mensagens/>
                                 :
                                 <></>
                         }
+
                     </Content>
                 </RenderFunctions>
             </Container>

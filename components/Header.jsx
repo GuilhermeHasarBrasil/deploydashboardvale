@@ -7,7 +7,7 @@ export default function Header({ onClick, authUser }) {
 
     return (
         <Cont>
-            <h1 style={{ color: 'white', marginLeft: 10 }} >Bem-vindo, {authUser.email}</h1>
+            <h1 style={{ color: 'white', marginLeft: 10 }} >Bem-vindo(a), {authUser.email}</h1>
             <Title>
                 <BarChartSharp
                     color={'#fff'}
