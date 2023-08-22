@@ -53,7 +53,7 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
 
 
     return (
-        <div style={{marginTop:10, marginLeft:60}} >
+        <div style={{marginTop:10, marginLeft:100}} >
             <h1 style={{marginLeft:40, marginTop:10, marginBottom:5, fontSize:20, fontWeight:'bold'}} >Caixas processadas por dia da semana (por processo)</h1>
             <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden', marginLeft:20, marginBottom:10 }} >
                 {processos.map((furo, index) => (
@@ -66,7 +66,7 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
                     </li>
                 ))}
             </ul>
-            <BarChart width={600} height={400} data={arrayDiasProcesso}>
+            <BarChart width={900} height={550} style={{marginLeft:100}} data={arrayDiasProcesso}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="dia" />
                 <YAxis />

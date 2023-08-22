@@ -2,7 +2,7 @@ import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
 
 const CustomBarChart = ({ data }) => (
-  <BarChart width={1500} height={650} data={data}> {/* Aumente o valor de width */}
+  <BarChart width={1100} height={500} data={data}> {/* Aumente o valor de width */}
     <CartesianGrid strokeDasharray="3 3" />
     <XAxis dataKey="id" />
     <YAxis>

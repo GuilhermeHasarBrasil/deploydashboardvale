@@ -107,7 +107,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
     function motionIcon() {
         return (
             <motion.div
-                style={{ marginLeft: 600 }}
+                style={{ marginLeft: 600, marginBottom:-20 }}
                 initial={{ y: -10 }}
                 animate={{ y: 0 }}
                 transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
@@ -159,7 +159,6 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
         </div>
     )
 }
-
 const Button = styled.button`
     transition: opacity 0.3s;
     align-items: center;
@@ -169,7 +168,6 @@ const Button = styled.button`
     }
 
 `
-
 const BgIcon = styled.button`
     transition: opacity 0.3s;
     height: 45px;
@@ -183,4 +181,3 @@ const BgIcon = styled.button`
     }
 
 `
-

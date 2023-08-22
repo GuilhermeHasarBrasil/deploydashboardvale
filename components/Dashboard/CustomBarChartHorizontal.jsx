@@ -3,7 +3,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'rec
 
 const CustomHorizontalBarChart = ({ data, maxValue }) => {
   return (
-    <BarChart width={1200} height={data.length * 50 + 100} data={data} layout="vertical">
+    <BarChart width={1300} height={data.length * 50 + 250} data={data} layout="vertical">
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis type="number" />
       <YAxis dataKey="name" type="category" width={120} />

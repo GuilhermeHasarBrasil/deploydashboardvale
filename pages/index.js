@@ -13,7 +13,6 @@ import TableFuros from "../components/index/tableFuros";
 import MenuLeft from "../components/index/menuLeft";
 import TopDashboard from "../components/Dashboard/topDashboard";
 import { Divider } from '@mui/material';
-import CircularChart from "../components/Relatorios/pieChart";
 import Relatorio from "../components/Relatorios/relatorio";
 import DadosProcessamento from "../components/DadosProcessamento/dadosProcessamento";
 import PrintButton from "../components/ImpressaoEtiquetas/impressao";
@@ -22,6 +21,9 @@ import CustomBarChart from "../components/Dashboard/CustomBarChartHorizontal";
 import SquareIcon from '@mui/icons-material/Square';
 import BarChartWeek from "../components/Dashboard/WeekWorkBarchart";
 import Mensagens from "../components/Mensagens/Mensagens";
+import Box from '@mui/material/Box';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 
 export default function Home() {
     const { signOut, authUser, isLoading } = useAuth();
@@ -305,6 +307,14 @@ export default function Home() {
         processarDadosArquivamento();
     }, [chipBoxes]);
 
+    const [value, setValue] = useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    console.log(value)
+
     return !authUser ? (
         <Loader />
     ) : (
@@ -320,43 +330,63 @@ export default function Home() {
                                 <>
                                     <Divider sx={{ borderWidth: '1px', backgroundColor: 'grey', }} />
                                     <TopDashboard finalizados={quantidadeFinalizados} conferidos={quantidadeConferidos} furos={furos} />
-                                    <Divider sx={{ borderWidth: '2px', backgroundColor: 'red', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)' }} />
-                                    <TableFuros furos={furos} />
-                                    <Divider sx={{ borderWidth: '2px', backgroundColor: '#3699FF', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)' }} />
+                                    <Divider sx={{ borderWidth: '2px', backgroundColor: 'red', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
+                                    <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
+                                        <Tabs value={value} onChange={handleChange} centered>
+                                            <Tab label="Quantidade de caixas finalizadas (total do furo)" style={{fontSize:16, fontWeight:'bold'}} />
+                                            <Tab label="Tempo de cada caixa por processo" style={{fontSize:16, fontWeight:'bold'}}/>
+                                            <Tab label="Caixas processadas por dia da semana" style={{fontSize:16, fontWeight:'bold'}}/>
+                                        </Tabs>
+                                    </Box>
                                     {
-                                        furoSelecionado ?
-                                            <div style={{ marginLeft: 100, marginTop: 20 }} >
+                                        furoSelecionado && value === 0 ?
+                                            <div style={{ marginLeft: 100, marginTop: 20, display: 'flex', flexDirection: 'column' }} >
                                                 <text style={{ fontSize: 20, fontWeight: 'bold' }} >Quantidade de caixas finalizadas por processo</text>
-                                                <br />
-                                                <br />
-                                                <text style={{ margin: 5 }} >Legenda: Finalizadas {<SquareIcon style={{ color: '#008f83' }} />} | Total {<SquareIcon style={{ color: '#ef3a25' }} />}  </text>
+                                                <text style={{ margin: 5, marginLeft:55 }} >Total {<SquareIcon style={{ color: '#ef3a25' }} />} </text>
+                                                <text style={{ margin: 5 }} >Finalizadas {<SquareIcon style={{ color: '#008f83' }} />}   </text>
+                                                
                                                 <CustomBarChart data={dataBarChart} maxValue={chipBoxesInternos[furoSelecionado?.index]?.length} />
                                             </div>
                                             :
                                             <></>
                                     }
-                                    <BarChartWeek contagensPorDiaConferencia={contagensPorDiaConferencia}
-                                                  contagensPorDiaMarcacao={contagensPorDiaMarcacao}
-                                                  contagensPorDiaFotografia={contagensPorDiaFotografia}
-                                                  contagensPorDiaDensidade={contagensPorDiaDensidade}
-                                                  contagensPorDiaSerragem={contagensPorDiaSerragem}
-                                                  contagensPorDiaDespacho={contagensPorDiaDespacho}
-                                                  contagensPorDiaArquivamento={contagensPorDiaArquivamento}
-                                                  chipBoxes={chipBoxes}
-                                    />
+                                    {
+                                        furoSelecionado && value === 1 ?
+                                            <div style={{ marginLeft: 100, marginTop: 12, display: 'flex', flexDirection: 'column' }} >
+                                                <Relatorio
+                                                    chipBoxes={chipBoxes} furoSelecionado={furoSelecionado}
+                                                    filtroConferencia={filtroConferencia} filtroMarcacao={filtroMarcacao}
+                                                    filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade}
+                                                    filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
+                                                    chipBoxesInternos={chipBoxesInternos}
+                                                />
+                                            </div>
+                                            :
+                                            <></>
+                                    }
+                                    {
+                                        value === 2 ?
+                                            <BarChartWeek contagensPorDiaConferencia={contagensPorDiaConferencia}
+                                                contagensPorDiaMarcacao={contagensPorDiaMarcacao}
+                                                contagensPorDiaFotografia={contagensPorDiaFotografia}
+                                                contagensPorDiaDensidade={contagensPorDiaDensidade}
+                                                contagensPorDiaSerragem={contagensPorDiaSerragem}
+                                                contagensPorDiaDespacho={contagensPorDiaDespacho}
+                                                contagensPorDiaArquivamento={contagensPorDiaArquivamento}
+                                                chipBoxes={chipBoxes}
+                                            />
+                                            :
+                                            <></>
+                                    }
                                 </>
                                 :
                                 <></>
                         }
                         {
                             selected === 'Relatórios' ?
-                                <Relatorio
-                                    chipBoxes={chipBoxes} furoSelecionado={furoSelecionado}
-                                    filtroConferencia={filtroConferencia} filtroMarcacao={filtroMarcacao}
-                                    filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade}
-                                    filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
-                                    chipBoxesInternos={chipBoxesInternos}
-                                />
+                                <div style={{ display: 'flex', flexDirection: 'column' }} >
+                                    <TableFuros furos={furos} />
+                                </div>
                                 :
                                 <></>
                         }
@@ -386,7 +416,7 @@ export default function Home() {
                         }
                         {
                             selected === 'Mensagens/Avisos' ?
-                                <Mensagens/>
+                                <Mensagens />
                                 :
                                 <></>
                         }

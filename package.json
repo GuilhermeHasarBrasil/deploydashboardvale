@@ -21,6 +21,8 @@
     "eslint-config-next": "13.3.0",
     "firebase": "^9.19.1",
     "framer-motion": "^10.16.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.31",
     "next": "13.3.0",
     "node-cron": "^3.0.2",
     "node-schedule": "^2.1.1",
