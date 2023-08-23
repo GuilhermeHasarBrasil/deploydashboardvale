@@ -27,88 +27,46 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
         })
     }
 
-    // function generatePDF(data) {
-    //     const doc = new jsPDF();
-    //     const formattedDate = dayjs().format('DD/MMM/YYYY') + ' as ' + dayjs().format('HH:mm:ss ');
-    //     const data1 = [
-    //         ['Usuário', 'Furo', 'Tempo em processamento', 'Caixas'],
-    //         [authUser.email, furoSelecionado.furo, furoSelecionado.tempoProcessamento, furoSelecionado.quantidadeCaixas],
-    //     ];
-    //     const img = imageB64
-    //     //primeira pagina do pdf: capa
-    //     doc.addImage(img, 'jpg', 50, 10)
-    //     doc.setFont('times', 'normal', 'bold')
-    //     doc.text(`Dados do furo ${furoSelecionado.furo}`, 70, 80)
-    //     doc.text(`Relatório exportado por ""${authUser.email}"" dia ${formattedDate}`, 0, 120)
-    //     // segunda pagina do pdf
-    //     doc.addPage(1, 'p')
-    //     doc.text('Dados gerais do furo:', 10, 9)
-    //     doc.autoTable({
-    //         head: [data1[0]],
-    //         body: data1.slice(1),
-    //     });
-    //     doc.save(`${furoSelecionado.furo}.pdf`);
-    //     sendPdfToApi(`C:\\Users\\Hasar\\Downloads\\${furoSelecionado.furo}.pdf`);
-    // }
-
-    async function generatePDF(data) {
-        return new Promise((resolve, reject) => {
-            const doc = new jsPDF();
-            const formattedDate = dayjs().format('DD/MMM/YYYY') + ' as ' + dayjs().format('HH:mm:ss ');
-            const data1 = [
-                ['Usuário', 'Furo', 'Tempo em processamento', 'Caixas'],
-                [authUser.email, furoSelecionado.furo, furoSelecionado.tempoProcessamento, furoSelecionado.quantidadeCaixas],
-            ];
-            const img = imageB64;
-            
-            doc.addImage(img, 'jpg', 50, 10);
-            doc.setFont('times', 'normal', 'bold');
-            doc.text(`Dados do furo ${furoSelecionado.furo}`, 70, 80);
-            doc.text(`Relatório exportado por "${authUser.email}" dia ${formattedDate}`, 0, 120);
-            
-            doc.addPage(1, 'p');
-            doc.text('Dados gerais do furo:', 10, 9);
-            doc.autoTable({
-                head: [data1[0]],
-                body: data1.slice(1),
-            });
-            
-            const pdfFilePath = `C:\\Users\\Hasar\\Downloads\\${furoSelecionado.furo}.pdf`;
-            doc.save(pdfFilePath);
-            
-            resolve(pdfFilePath);
+    function generatePDF(data) {
+        const doc = new jsPDF();
+        const formattedDate = dayjs().format('DD/MMM/YYYY') + ' as ' + dayjs().format('HH:mm:ss ');
+        const data1 = [
+            ['Usuário', 'Furo', 'Tempo em processamento', 'Caixas'],
+            [authUser.email, furoSelecionado.furo, furoSelecionado.tempoProcessamento, furoSelecionado.quantidadeCaixas],
+        ];
+        const img = imageB64
+        //primeira pagina do pdf: capa
+        doc.addImage(img, 'jpg', 50, 10)
+        doc.setFont('times', 'normal', 'bold')
+        doc.text(`Dados do furo ${furoSelecionado.furo}`, 70, 80)
+        doc.text(`Relatório exportado por ""${authUser.email}"" dia ${formattedDate}`, 0, 120)
+        // segunda pagina do pdf
+        doc.addPage(1, 'p')
+        doc.text('Dados gerais do furo:', 10, 9)
+        doc.autoTable({
+            head: [data1[0]],
+            body: data1.slice(1),
         });
-    }
-
-    async function sendPdfToApi(pdfFilePath) {
-        const arquivo = furoSelecionado.furo;
-        try {
-            const response = await fetch('/api/sendpdf', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ arquivo }),
-            });
-
-            if (response.ok) {
-                console.log('Arquivo enviado com sucesso');
-            }
-        } catch (error) {
-            console.error('Erro na solicitação:', error);
-        }
+        
+        doc.save(`${furoSelecionado.furo}.pdf`);
+        setTimeout(() => {
+            sendPdfToApi(`C:\\Users\\Hasar\\Downloads\\${furoSelecionado.furo}.pdf`);
+        }, 5000);
     }
 
     async function sendPdfToApi() {
+
         const arquivo = furoSelecionado.furo
+
         try {
             const response = await fetch('/api/sendpdf', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ arquivo }),
-            });
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ arquivo }),
+        });
+
             if (response.ok) {
                 console.log('Arquivo enviado com sucesso');
             }
@@ -141,13 +99,9 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                 <div>
                     <p>Furo selecionado: {furoSelecionado.furo}</p>
                     <p>Índice do furo selecionado: {furoSelecionado.index}</p>
-                    <Button onClick={async () => {
-                        try {
-                            const pdfFilePath = await generatePDF(chipBoxesInternos[furoSelecionado?.index]);
-                            await sendPdfToApi(pdfFilePath);
-                        } catch (error) {
-                            console.error('Erro ao gerar ou enviar PDF:', error);
-                        }
+                    <Button onClick={() => {
+                        generatePDF(chipBoxesInternos[furoSelecionado?.index]);
+                         // Chamar a função para enviar o arquivo para a rota de API
                     }}>
                         Gerar PDF
                     </Button>
