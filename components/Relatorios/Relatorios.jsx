@@ -10,7 +10,7 @@ dayjs.locale('pt-br'); // Defina a localização
 import { imageB64 } from "./image";
 
 export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos, setFuroSelecionado, authUser }) {
-    console.log(chipBoxesInternos[furoSelecionado?.index])
+    //console.log(chipBoxesInternos[furoSelecionado?.index])
     function sett(selected, index, selectedInicio, selectedFim, quantidadeCaixas) {
         const inicio = dayjs.unix(selectedInicio?.seconds);
         const fim = dayjs.unix(selectedFim?.seconds);
@@ -47,16 +47,24 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
             head: [data1[0]],
             body: data1.slice(1),
         });
+
+        const dataNow = new Date()
+        const dia = String(dataNow.getDate()).padStart(2, '0');
+        const mes = String(dataNow.getMonth() + 1).padStart(2, '0');
+        const ano = dataNow.getFullYear();
+        const hora = String(dataNow.getHours()).padStart(2, '0');
+        const minuto = String(dataNow.getMinutes()).padStart(2, '0');
+        const NomeArquivo = `-DIA${dia}-${mes}-${ano}--HORA${hora}-${minuto}`;
         
-        doc.save(`${furoSelecionado.furo}.pdf`);
+        doc.save(`${furoSelecionado.furo+'-'+NomeArquivo}.pdf`);
         setTimeout(() => {
-            sendPdfToApi(`C:\\Users\\Hasar\\Downloads\\${furoSelecionado.furo}.pdf`);
+            sendPdfToApi(NomeArquivo);
         }, 5000);
     }
 
-    async function sendPdfToApi() {
+    async function sendPdfToApi(NomeArquivo) {
 
-        const arquivo = furoSelecionado.furo
+        const arquivo = furoSelecionado.furo+'-'+NomeArquivo
 
         try {
             const response = await fetch('/api/sendpdf', {
