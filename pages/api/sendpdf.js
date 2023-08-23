@@ -21,16 +21,16 @@ async function uploadPdfToStorage(pdfFilePath, arquivo) {
         const downloadToken = snapshot.metadata.downloadTokens;
         const fileDownloadUrl = `https://firebasestorage.googleapis.com/v0/b/hsbrsampledata-dev.appspot.com/o/pdfs%2F${arquivo}.pdf?alt=media&token=${downloadToken}`;
 
-        await sendFileLink(fileDownloadUrl);
+        await sendFileLink(fileDownloadUrl, arquivo);
     } catch (error) {
         console.error('Erro ao enviar o arquivo para o Firebase Storage:', error);
     }
 }
 
 // Enviar link do arquivo pelo bot do Telegram
-async function sendFileLink(fileUrl) {
+async function sendFileLink(fileUrl, arquivo) {
     try {
-        await bot.telegram.sendMessage(CHAT_ID, 'Link para o arquivo:');
+        await bot.telegram.sendMessage(CHAT_ID, `Link para download do relatório sobre o furo ${arquivo}:`);
         await bot.telegram.sendMessage(CHAT_ID, fileUrl);
     } catch (error) {
         console.error('Erro ao enviar mensagem:', error);
