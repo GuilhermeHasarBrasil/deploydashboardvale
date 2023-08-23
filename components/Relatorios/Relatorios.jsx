@@ -48,15 +48,22 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
             body: data1.slice(1),
         });
         
-        doc.save('tabela.pdf');
-        sendPdfToApi('C:\\Users\\Hasar\\Downloads\\tabela.pdf');
+        doc.save(`${furoSelecionado.furo}.pdf`);
+        sendPdfToApi(`C:\\Users\\Hasar\\Downloads\\${furoSelecionado.furo}.pdf`);
     }
 
     async function sendPdfToApi() {
+
+        const arquivo = furoSelecionado.furo
+
         try {
             const response = await fetch('/api/sendpdf', {
-                method: 'POST',
-            });
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ arquivo }),
+        });
 
             if (response.ok) {
                 console.log('Arquivo enviado com sucesso');
