@@ -6,11 +6,10 @@ import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br'; // localização
-dayjs.locale('pt-br'); // Defina a localização
+dayjs.locale('pt-br'); //localização
 import { imageB64 } from "./image";
 
 export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos, setFuroSelecionado, authUser }) {
-    //console.log(chipBoxesInternos[furoSelecionado?.index])
     function sett(selected, index, selectedInicio, selectedFim, quantidadeCaixas) {
         const inicio = dayjs.unix(selectedInicio?.seconds);
         const fim = dayjs.unix(selectedFim?.seconds);
@@ -48,6 +47,81 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
             body: data1.slice(1),
         });
 
+        if (selectedProcesses.includes('Conferência')) {
+            // Adicionar uma nova página para a tabela
+            doc.addPage();
+            doc.text('Tabela de Conferência:', 10, 9);
+    
+            const tableData = [
+                ['Usuário', 'Furo', 'Tempo em processamento', 'Caixa'],
+            ];
+    
+            // Percorrer o array de caixas e adicionar os dados de conferência à tabela
+            chipBoxesInternos[furoSelecionado?.index].forEach(caixa => {
+                const conferenciaProcess = caixa.processos.conferencia;
+                const tempoProcessamento = ((conferenciaProcess.sai.seconds - conferenciaProcess.ent.seconds) +
+                    (conferenciaProcess.sai.nanoseconds - conferenciaProcess.ent.nanoseconds) * 1e-9).toFixed(2);
+                const user = conferenciaProcess.user;
+    
+                tableData.push([user, caixa.furo, tempoProcessamento, caixa.cx]);
+            });
+    
+            doc.autoTable({
+                head: [tableData[0]],
+                body: tableData.slice(1),
+            });
+        }
+
+        if (selectedProcesses.includes('Marcação')) {
+            // Adicionar uma nova página para a tabela
+            doc.addPage();
+            doc.text('Tabela de Marcação:', 10, 9);
+    
+            const tableData = [
+                ['Usuário', 'Furo', 'Tempo em processamento', 'Caixa'],
+            ];
+    
+            // Percorrer o array de caixas e adicionar os dados de conferência à tabela
+            chipBoxesInternos[furoSelecionado?.index].forEach(caixa => {
+                const conferenciaProcess = caixa.processos.marcacao;
+                const tempoProcessamento = ((conferenciaProcess.sai.seconds - conferenciaProcess.ent.seconds) +
+                    (conferenciaProcess.sai.nanoseconds - conferenciaProcess.ent.nanoseconds) * 1e-9).toFixed(2);
+                const user = conferenciaProcess.user;
+    
+                tableData.push([user, caixa.furo, tempoProcessamento, caixa.cx]);
+            });
+    
+            doc.autoTable({
+                head: [tableData[0]],
+                body: tableData.slice(1),
+            });
+        }
+
+        if (selectedProcesses.includes('Fotografia')) {
+            // Adicionar uma nova página para a tabela
+            doc.addPage();
+            doc.text('Tabela de Fotografia:', 10, 9);
+    
+            const tableData = [
+                ['Usuário', 'Furo', 'Tempo em processamento', 'Caixa'],
+            ];
+    
+            // Percorrer o array de caixas e adicionar os dados de conferência à tabela
+            chipBoxesInternos[furoSelecionado?.index].forEach(caixa => {
+                const conferenciaProcess = caixa.processos.fotografia;
+                const tempoProcessamento = ((conferenciaProcess.sai.seconds - conferenciaProcess.ent.seconds) +
+                    (conferenciaProcess.sai.nanoseconds - conferenciaProcess.ent.nanoseconds) * 1e-9).toFixed(2);
+                const user = conferenciaProcess.user;
+    
+                tableData.push([user, caixa.furo, tempoProcessamento, caixa.cx]);
+            });
+    
+            doc.autoTable({
+                head: [tableData[0]],
+                body: tableData.slice(1),
+            });
+        }
+
         const dataNow = new Date()
         const dia = String(dataNow.getDate()).padStart(2, '0');
         const mes = String(dataNow.getMonth() + 1).padStart(2, '0');
@@ -55,8 +129,8 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
         const hora = String(dataNow.getHours()).padStart(2, '0');
         const minuto = String(dataNow.getMinutes()).padStart(2, '0');
         const NomeArquivo = `-DIA${dia}-${mes}-${ano}--HORA${hora}-${minuto}`;
-        
-        doc.save(`${furoSelecionado.furo+'-'+NomeArquivo}.pdf`);
+
+        doc.save(`${furoSelecionado.furo + '-' + NomeArquivo}.pdf`);
         setTimeout(() => {
             sendPdfToApi(NomeArquivo);
         }, 5000);
@@ -64,16 +138,16 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
 
     async function sendPdfToApi(NomeArquivo) {
 
-        const arquivo = furoSelecionado.furo+'-'+NomeArquivo
+        const arquivo = furoSelecionado.furo + '-' + NomeArquivo
 
         try {
             const response = await fetch('/api/sendpdf', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ arquivo }),
-        });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ arquivo }),
+            });
 
             if (response.ok) {
                 console.log('Arquivo enviado com sucesso');
@@ -83,12 +157,35 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
         }
     }
 
-    return (
-        <div style={{ display: 'flex', flexDirection: 'column' }} >
-            <TableFuros furos={furos} />
+    //console.log(chipBoxesInternos[furoSelecionado?.index])
+    const [selectedProcesses, setSelectedProcesses] = useState([]);
+    const processos = [
+        { 'processo': 'Conferência' },
+        { 'processo': 'Marcação' },
+        { 'processo': 'Fotografia' },
+        { 'processo': 'Densidade' },
+        { 'processo': 'Serragem' },
+        { 'processo': 'Despacho' },
+        { 'processo': 'Arquivamento' },
 
+    ]
+
+    function toggleProcess(processo) {
+        if (selectedProcesses.includes(processo)) {
+            setSelectedProcesses(selectedProcesses.filter(selected => selected !== processo));
+        } else {
+            setSelectedProcesses([...selectedProcesses, processo]);
+        }
+    }
+
+    console.log(selectedProcesses)
+
+
+    return (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
+            <TableFuros furos={furos} />
             <Dropdown
-                style={{ width: '40%', marginTop: 8, }}
+                style={{ width: 577, marginTop: '4%', marginLeft: '2%', borderRadius: 10 }}
                 options={furos.map((option, index) => ({ value: option.numero, label: option.numero, index: index, inicio: option.createdAt, fim: option.dataFinalizado, quantidadeCaixas: option.profundidade }))}
                 onChange={(values) => {
                     if (values.length > 0) {
@@ -103,16 +200,48 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                 placeholder="Selecione um número"
                 multi={false}
             />
+
+            <ul style={{ display: 'flex', flexDirection: 'row', marginTop: '2%' }}>
+                {processos.map((furo, index) => (
+                    <li
+                        style={{
+                            marginLeft: 30,
+                            marginRight: 0,
+                            backgroundColor: selectedProcesses.includes(furo.processo) ? '#008f83' : '#c4c4c4',
+                            padding: 8,
+                            borderRadius: 10
+                        }}
+                        key={index}
+                    >
+                        <button onClick={() => toggleProcess(furo.processo)}>
+                            <h1
+                                style={{
+                                    color: selectedProcesses.includes(furo.processo) ? '#f3c108' : 'black',
+                                    width: 120,
+                                    fontWeight: 'bold'
+                                }}
+                            >
+                                {furo.processo}
+                            </h1>
+                        </button>
+                    </li>
+                ))}
+            </ul>
             {furoSelecionado?.furo && (
-                <div>
+                <div style={{ marginTop: 40, alignItems: 'center', display: 'flex', flexDirection: 'column' }} >
                     <p>Furo selecionado: {furoSelecionado.furo}</p>
-                    <p>Índice do furo selecionado: {furoSelecionado.index}</p>
+                    <p>Processos selecionados: {selectedProcesses.join(', ')}</p>
+
+                    <div style={{ height: 50 }} />
+
                     <Button onClick={() => {
                         generatePDF(chipBoxesInternos[furoSelecionado?.index]);
-                         // Chamar a função para enviar o arquivo para a rota de API
                     }}>
-                        Gerar PDF
+                        <h1 style={{ padding: 15, fontSize: 18, fontWeight: 'bold', color: 'white', backgroundColor: '#074F92', borderRadius: 10 }} >
+                            Enviar PDF
+                        </h1>
                     </Button>
+
                 </div>
             )}
         </div>
