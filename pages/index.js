@@ -24,6 +24,7 @@ import Mensagens from "../components/Mensagens/Mensagens";
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import Relatorios from "../components/Relatorios/Relatorios";
 
 export default function Home() {
     const { signOut, authUser, isLoading } = useAuth();
@@ -313,6 +314,92 @@ export default function Home() {
         setValue(newValue);
     };
 
+    const [filtroConferenciaEnt, setFiltroConferenciaEnt] = useState([])
+    const [filtroMarcacaoEnt, setFiltroMarcacaoEnt] = useState([])
+    const [filtroFotografiaEnt, setFiltroFotografiaEnt] = useState([])
+    const [filtroDensidadeEnt, setFiltroDensidadeEnt] = useState([])
+    const [filtroSerragemEnt, setFiltroSerragemEnt] = useState([])
+    const [filtroArquivamentoEnt, setFiltroArquivamentoEnt] = useState([])
+
+    useEffect(() => {
+        if (chipBoxes) {
+            const chipboxesPorFuro = {};
+            for (const chipbox of chipBoxes) {
+                const furo = chipbox.furo;
+                if (chipboxesPorFuro[furo]) {
+                    chipboxesPorFuro[furo].push(chipbox);
+                } else {
+                    chipboxesPorFuro[furo] = [chipbox];
+                }
+            }
+            const arraysInternos = Object.values(chipboxesPorFuro);
+         
+            const arraysFiltradosConferencia = arraysInternos.map(arrayInterno =>
+                arrayInterno.filter(chipbox =>
+                    chipbox.processos.conferencia.sai !== null
+                )
+            );
+            setFiltroConferenciaEnt(arraysFiltradosConferencia)
+
+            const arraysFiltradosMarcacao = arraysInternos.map(arrayInterno =>
+                arrayInterno.filter(chipbox =>
+                    chipbox.processos.marcacao.sai !== null
+                )
+            );
+            setFiltroMarcacaoEnt(arraysFiltradosMarcacao)
+
+            const arraysFiltradosFotografia = arraysInternos.map(arrayInterno =>
+                arrayInterno.filter(chipbox =>
+                    chipbox.processos.fotografia.sai !== null
+                )
+            );
+            setFiltroFotografiaEnt(arraysFiltradosFotografia)
+
+            const arraysFiltradosDensidade = arraysInternos.map(arrayInterno =>
+                arrayInterno.filter(chipbox =>
+                    chipbox.processos.densidade.sai !== null
+                )
+            );
+            setFiltroDensidadeEnt(arraysFiltradosDensidade)
+
+            const arraysFiltradosSerragem = arraysInternos.map(arrayInterno =>
+                arrayInterno.filter(chipbox =>
+                    chipbox.processos.serragem.sai !== null
+                )
+            );
+            setFiltroSerragemEnt(arraysFiltradosSerragem)
+
+            const arraysFiltradosArquivamento = arraysInternos.map(arrayInterno =>
+                arrayInterno.filter(chipbox =>
+                    chipbox.processos.arquivamento.sai !== null
+                )
+            );
+            setFiltroArquivamentoEnt(arraysFiltradosArquivamento)
+        }
+    }, [chipBoxes])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return !authUser ? (
         <Loader />
     ) : (
@@ -322,7 +409,7 @@ export default function Home() {
                 <RenderFunctions>
                     <MenuLeft setSelected={setSelected} />
                     <Content>
-                        <RowFuros furos={furos} setFuroSelecionado={setFuroSelecionado} />
+                        <RowFuros furos={furos} setFuroSelecionado={setFuroSelecionado} selected={selected} />
                         {
                             selected === 'Dashboard' ?
                                 <>
@@ -357,6 +444,7 @@ export default function Home() {
                                                     filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade}
                                                     filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
                                                     chipBoxesInternos={chipBoxesInternos}
+                                                    authUser={authUser}
                                                 />
                                             </div>
                                             :
@@ -383,7 +471,19 @@ export default function Home() {
                         {
                             selected === 'Relatórios' ?
                                 <div style={{ display: 'flex', flexDirection: 'column' }} >
-                                    <TableFuros furos={furos} />
+                                    <Relatorios furos={furos} 
+                                                chipBoxes={chipBoxes} 
+                                                furoSelecionado={furoSelecionado}
+                                                filtroConferencia={filtroConferenciaEnt} 
+                                                filtroMarcacao={filtroMarcacaoEnt}
+                                                filtroFotografia={filtroFotografiaEnt} 
+                                                filtroDensidade={filtroDensidadeEnt}
+                                                filtroSerragem={filtroSerragemEnt} 
+                                                filtroArquivamento={filtroArquivamentoEnt}
+                                                chipBoxesInternos={chipBoxesInternos}
+                                                setFuroSelecionado={setFuroSelecionado}
+                                                authUser={authUser}
+                                    />
                                 </div>
                                 :
                                 <></>

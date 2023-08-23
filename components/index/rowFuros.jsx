@@ -2,7 +2,7 @@ import { ArrowBackCircleSharp, ArrowForwardCircleSharp } from 'react-ionicons'
 import styled from 'styled-components'
 import { useState } from "react";
 
-export default function RowFuros({ furos, setFuroSelecionado }) {
+export default function RowFuros({ furos, setFuroSelecionado, selected }) {
 
     const [selectedItem, setSelectedItem] = useState(null);
 
@@ -22,7 +22,7 @@ export default function RowFuros({ furos, setFuroSelecionado }) {
     }
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, }} >
+        <div style={{ display: selected == 'Relatórios' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, }} >
             <BgIcon>
                 <ArrowBackCircleSharp
                     color={'#00000'}
