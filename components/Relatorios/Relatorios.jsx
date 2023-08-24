@@ -59,9 +59,12 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
             // Percorrer o array de caixas e adicionar os dados de conferência à tabela
             chipBoxesInternos[furoSelecionado?.index].forEach(caixa => {
                 const conferenciaProcess = caixa.processos.conferencia;
-                const tempoProcessamento = ((conferenciaProcess.sai.seconds - conferenciaProcess.ent.seconds) +
-                    (conferenciaProcess.sai.nanoseconds - conferenciaProcess.ent.nanoseconds) * 1e-9).toFixed(2);
-                const user = conferenciaProcess.user;
+                const tempoProcessamento = conferenciaProcess.ent !==null && conferenciaProcess.sai !==null ?
+                ((conferenciaProcess.sai.seconds - conferenciaProcess.ent.seconds) +
+                (conferenciaProcess.sai.nanoseconds - conferenciaProcess.ent.nanoseconds) * 1e-9).toFixed(2)
+                :
+                'Não iniciado';
+                const user = conferenciaProcess.user !== null ? conferenciaProcess.user : '-';
     
                 tableData.push([user, caixa.furo, tempoProcessamento, caixa.cx]);
             });
@@ -84,9 +87,12 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
             // Percorrer o array de caixas e adicionar os dados de conferência à tabela
             chipBoxesInternos[furoSelecionado?.index].forEach(caixa => {
                 const conferenciaProcess = caixa.processos.marcacao;
-                const tempoProcessamento = ((conferenciaProcess.sai.seconds - conferenciaProcess.ent.seconds) +
-                    (conferenciaProcess.sai.nanoseconds - conferenciaProcess.ent.nanoseconds) * 1e-9).toFixed(2);
-                const user = conferenciaProcess.user;
+                const tempoProcessamento = conferenciaProcess.ent !==null && conferenciaProcess.sai !==null ?
+                ((conferenciaProcess.sai.seconds - conferenciaProcess.ent.seconds) +
+                (conferenciaProcess.sai.nanoseconds - conferenciaProcess.ent.nanoseconds) * 1e-9).toFixed(2)
+                :
+                'Não iniciado';
+                const user = conferenciaProcess.user !== null ? conferenciaProcess.user : '-';
     
                 tableData.push([user, caixa.furo, tempoProcessamento, caixa.cx]);
             });
@@ -109,9 +115,12 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
             // Percorrer o array de caixas e adicionar os dados de conferência à tabela
             chipBoxesInternos[furoSelecionado?.index].forEach(caixa => {
                 const conferenciaProcess = caixa.processos.fotografia;
-                const tempoProcessamento = ((conferenciaProcess.sai.seconds - conferenciaProcess.ent.seconds) +
-                    (conferenciaProcess.sai.nanoseconds - conferenciaProcess.ent.nanoseconds) * 1e-9).toFixed(2);
-                const user = conferenciaProcess.user;
+                const tempoProcessamento = conferenciaProcess.ent !==null && conferenciaProcess.sai !==null ?
+                ((conferenciaProcess.sai.seconds - conferenciaProcess.ent.seconds) +
+                (conferenciaProcess.sai.nanoseconds - conferenciaProcess.ent.nanoseconds) * 1e-9).toFixed(2)
+                :
+                'Não iniciado';
+                const user = conferenciaProcess.user !== null ? conferenciaProcess.user : '-';
     
                 tableData.push([user, caixa.furo, tempoProcessamento, caixa.cx]);
             });
