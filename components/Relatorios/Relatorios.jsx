@@ -17,28 +17,47 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
         const hours = Math.floor(diffInSeconds / 3600);
         const minutes = Math.floor((diffInSeconds % 3600) / 60);
         const seconds = diffInSeconds % 60;
+        const formattedDate = dayjs.unix(selectedInicio.seconds).format('DD/MM/YYYY HH:mm:ss');
 
         setFuroSelecionado({
             furo: selected,
             index: index,
             tempoProcessamento: selectedInicio && selectedFim ? hours.toString().padStart(2, '0') + ':' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0') : 'Furo não finalizado',
-            quantidadeCaixas: quantidadeCaixas
+            quantidadeCaixas: quantidadeCaixas,
+            importadoEm: formattedDate
         })
     }
 
+    function secondsToHMS(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = seconds % 60;
+    
+        return `${hours}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+    }
+
+    console.log(furoSelecionado)
+
     function generatePDF(data) {
+        const sortedChipBoxes = chipBoxesInternos[furoSelecionado?.index].slice().sort((a, b) => a.cx - b.cx);
         const doc = new jsPDF();
-        const formattedDate = dayjs().format('DD/MMM/YYYY') + ' as ' + dayjs().format('HH:mm:ss ');
+        const formattedDate = dayjs().format('DD/MMM/YYYY') + ', ' + dayjs().format('HH:mm:ss ');
         const data1 = [
             ['Usuário', 'Furo', 'Tempo em processamento', 'Caixas'],
             [authUser.email, furoSelecionado.furo, furoSelecionado.tempoProcessamento, furoSelecionado.quantidadeCaixas],
         ];
         const img = imageB64
         //primeira pagina do pdf: capa
-        doc.addImage(img, 'jpg', 50, 10)
+        doc.addImage(img, 'jpg', 5, 5)
         doc.setFont('times', 'normal', 'bold')
-        doc.text(`Dados do furo ${furoSelecionado.furo}`, 70, 80)
-        doc.text(`Relatório exportado por ""${authUser.email}"" dia ${formattedDate}`, 0, 120)
+        doc.text(`Relatório de processamento do furo`, 118, 15)
+        doc.text(`${furoSelecionado.furo}`, 118, 22)
+        doc.text(`Furo importado no sistema em:`, 118, 37)
+        doc.text(`${furoSelecionado.importadoEm}h`, 118, 44)
+
+        doc.text(`Processos incluídos: ${selectedProcesses.join(', ')}`, 38, 135)
+        doc.text(`Paraupebas, ${formattedDate}`, 65, 145)
+        doc.text(`Relatório exportado por ${authUser.email}`, 47, 260)
         // segunda pagina do pdf
         doc.addPage(1, 'p')
         doc.text('Dados gerais do furo:', 10, 9)
@@ -57,16 +76,17 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
             ];
     
             // Percorrer o array de caixas e adicionar os dados de conferência à tabela
-            chipBoxesInternos[furoSelecionado?.index].forEach(caixa => {
+            sortedChipBoxes.forEach(caixa => {
                 const conferenciaProcess = caixa.processos.conferencia;
-                const tempoProcessamento = conferenciaProcess.ent !==null && conferenciaProcess.sai !==null ?
-                ((conferenciaProcess.sai.seconds - conferenciaProcess.ent.seconds) +
-                (conferenciaProcess.sai.nanoseconds - conferenciaProcess.ent.nanoseconds) * 1e-9).toFixed(2)
-                :
-                'Não iniciado';
-                const user = conferenciaProcess.user !== null ? conferenciaProcess.user : '-';
+                const startTimestamp = conferenciaProcess.ent ? conferenciaProcess.ent.seconds : 0;
+                const endTimestamp = conferenciaProcess.sai ? conferenciaProcess.sai.seconds : 0;
     
-                tableData.push([user, caixa.furo, tempoProcessamento, caixa.cx]);
+                const timeInSeconds = endTimestamp - startTimestamp;
+                const formattedTime = secondsToHMS(timeInSeconds);
+    
+                const user = conferenciaProcess.user || '-';
+    
+                tableData.push([user, caixa.furo, formattedTime, caixa.cx]);
             });
     
             doc.autoTable({
@@ -84,17 +104,17 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                 ['Usuário', 'Furo', 'Tempo em processamento', 'Caixa'],
             ];
     
-            // Percorrer o array de caixas e adicionar os dados de conferência à tabela
-            chipBoxesInternos[furoSelecionado?.index].forEach(caixa => {
+            sortedChipBoxes.forEach(caixa => {
                 const conferenciaProcess = caixa.processos.marcacao;
-                const tempoProcessamento = conferenciaProcess.ent !==null && conferenciaProcess.sai !==null ?
-                ((conferenciaProcess.sai.seconds - conferenciaProcess.ent.seconds) +
-                (conferenciaProcess.sai.nanoseconds - conferenciaProcess.ent.nanoseconds) * 1e-9).toFixed(2)
-                :
-                'Não iniciado';
-                const user = conferenciaProcess.user !== null ? conferenciaProcess.user : '-';
+                const startTimestamp = conferenciaProcess.ent ? conferenciaProcess.ent.seconds : 0;
+                const endTimestamp = conferenciaProcess.sai ? conferenciaProcess.sai.seconds : 0;
     
-                tableData.push([user, caixa.furo, tempoProcessamento, caixa.cx]);
+                const timeInSeconds = endTimestamp - startTimestamp;
+                const formattedTime = secondsToHMS(timeInSeconds);
+    
+                const user = conferenciaProcess.user || '-';
+    
+                tableData.push([user, caixa.furo, formattedTime, caixa.cx]);
             });
     
             doc.autoTable({
@@ -112,17 +132,17 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                 ['Usuário', 'Furo', 'Tempo em processamento', 'Caixa'],
             ];
     
-            // Percorrer o array de caixas e adicionar os dados de conferência à tabela
-            chipBoxesInternos[furoSelecionado?.index].forEach(caixa => {
+            sortedChipBoxes.forEach(caixa => {
                 const conferenciaProcess = caixa.processos.fotografia;
-                const tempoProcessamento = conferenciaProcess.ent !==null && conferenciaProcess.sai !==null ?
-                ((conferenciaProcess.sai.seconds - conferenciaProcess.ent.seconds) +
-                (conferenciaProcess.sai.nanoseconds - conferenciaProcess.ent.nanoseconds) * 1e-9).toFixed(2)
-                :
-                'Não iniciado';
-                const user = conferenciaProcess.user !== null ? conferenciaProcess.user : '-';
+                const startTimestamp = conferenciaProcess.ent ? conferenciaProcess.ent.seconds : 0;
+                const endTimestamp = conferenciaProcess.sai ? conferenciaProcess.sai.seconds : 0;
     
-                tableData.push([user, caixa.furo, tempoProcessamento, caixa.cx]);
+                const timeInSeconds = endTimestamp - startTimestamp;
+                const formattedTime = secondsToHMS(timeInSeconds);
+    
+                const user = conferenciaProcess.user || '-';
+    
+                tableData.push([user, caixa.furo, formattedTime, caixa.cx]);
             });
     
             doc.autoTable({
@@ -141,13 +161,15 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
 
         doc.save(`${furoSelecionado.furo + '-' + NomeArquivo}.pdf`);
         setTimeout(() => {
-            sendPdfToApi(NomeArquivo);
+            sendPdfToApi(NomeArquivo, formattedDate, selectedProcesses.join(', '));
         }, 5000);
     }
 
-    async function sendPdfToApi(NomeArquivo) {
+    async function sendPdfToApi(NomeArquivo, formattedDate, processos) {
 
         const arquivo = furoSelecionado.furo + '-' + NomeArquivo
+        const data = formattedDate
+        const furo = furoSelecionado.furo
 
         try {
             const response = await fetch('/api/sendpdf', {
@@ -155,7 +177,7 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ arquivo }),
+                body: JSON.stringify({ arquivo, furo, data, processos }),
             });
 
             if (response.ok) {
@@ -166,7 +188,6 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
         }
     }
 
-    //console.log(chipBoxesInternos[furoSelecionado?.index])
     const [selectedProcesses, setSelectedProcesses] = useState([]);
     const processos = [
         { 'processo': 'Conferência' },
@@ -186,9 +207,6 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
             setSelectedProcesses([...selectedProcesses, processo]);
         }
     }
-
-    console.log(selectedProcesses)
-
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
