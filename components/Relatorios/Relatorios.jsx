@@ -224,7 +224,7 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                         sett(selectedValue, selectedIndex, selectedInicio, selectedFim, selectedQtdCx);
                     }
                 }}
-                placeholder="Selecione um número"
+                placeholder="Selecione um furo"
                 multi={false}
             />
 
