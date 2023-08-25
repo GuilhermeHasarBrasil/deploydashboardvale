@@ -25,6 +25,7 @@ import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Relatorios from "../components/Relatorios/Relatorios";
+import Import from "../components/ImportarArquivo/importar";
 
 export default function Home() {
     const { signOut, authUser, isLoading } = useAuth();
@@ -378,28 +379,6 @@ export default function Home() {
         }
     }, [chipBoxes])
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     return !authUser ? (
         <Loader />
     ) : (
@@ -495,6 +474,12 @@ export default function Home() {
                                 <></>
                         }
                         {
+                            selected === 'Importar Arquivo' ?
+                                <Import/>
+                                :
+                                <></>
+                        }
+                        {
                             selected === 'Dados Processamento' ?
                                 <DadosProcessamento
                                     chipBoxes={chipBoxes} furoSelecionado={furoSelecionado}
@@ -518,6 +503,7 @@ export default function Home() {
                                 :
                                 <></>
                         }
+
                     </Content>
                 </RenderFunctions>
             </Container>
