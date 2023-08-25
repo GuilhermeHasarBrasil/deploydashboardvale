@@ -36,14 +36,14 @@ export default function MenuLeft({ setSelected }) {
                     <SwapHorizIcon style={{ color: 'white' }} />
                     <TitleOption>RECURSOS</TitleOption>
                 </Resources>
-                <Row onClick={() => sett('Cadastrar Furo')}>
+                {/* <Row onClick={() => sett('Cadastrar Furo')}>
                     <ImgContainer>
                         <img src='/assets/cadastrarfuro.png' />
                     </ImgContainer>
                     <Button>
                         <TitleOption selected={selectedItem === 'Cadastrar Furo'}>Cadastrar Furo</TitleOption>
                     </Button>
-                </Row>
+                </Row> */}
                 <Row onClick={() => sett('Impressão Etiquetas')}>
                     <ImgContainer>
                         <img src='/assets/print.png' />
@@ -133,7 +133,7 @@ const ImgContainer = styled.div({
 
 const TitleOption = styled.text`
     color: ${props => (props.selected ? '#3699FF' : 'white')};
-    font-size: 15px;
+    font-size: 16px;
     margin-left: 8px;
     font-weight: 500;
     letter-spacing: 0.3px;
@@ -149,13 +149,13 @@ const Row = styled.div({
     flexDirection: 'row',
     alignItems: 'center',
     marginLeft: 5,
-    marginTop: 6
+    marginTop: 12
 })
 
 const Resources = styled.div({
     backgroundColor: '#6D6262',
     width: '100%',
-    height: 30,
+    height: 40,
     marginTop: 10,
     display: 'flex',
     alignItems: 'center',
