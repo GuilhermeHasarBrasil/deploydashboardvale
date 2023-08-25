@@ -381,7 +381,7 @@ export default function Import() {
             {
                 furo && chipBoxes.length > 0 ?
                 !sincro ? 
-                <Alert style={{marginTop:15, width:600}} severity="warning">Ao pressionar o botão acima, você enviará todas as caixas ao banco de dados!</Alert>
+                <Alert style={{marginTop:15, width:600, marginBottom: 12}} severity="warning">Ao pressionar o botão acima, você enviará todas as caixas ao banco de dados!</Alert>
                 :
                 <Alert style={{marginTop:15, marginBottom:12, width:600}} severity="success">Sincronizado com sucesso! As caixas foram enviadas ao banco com sucesso.</Alert>
                 
