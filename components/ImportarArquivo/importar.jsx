@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import * as XLSX from 'xlsx'
 const ExcelJS = require('exceljs');
 import {
     collection,
-    addDoc,
     getDocs,
     where,
     query,
-    deleteDoc,
     updateDoc,
     doc,
     setDoc,
     Timestamp,
-    serverTimestamp
 } from "firebase/firestore";
 import { db } from '../../firebase/firebase'
-import firebase from 'firebase/app'
 import "firebase/database"
-import dayjs from "dayjs";
+import TableFuro from './table';
+import styled from 'styled-components'
+import { AiOutlineUpload } from "react-icons/ai";
+import { Alert } from '@mui/material';
 
 export default function Import() {
     const [data, setData] = useState([]);
@@ -113,20 +112,15 @@ export default function Import() {
         reader.readAsBinaryString(file);
     };
 
-    useEffect(()=>{
-        console.log('useeffect',furo?.furo)
-        console.log(chipBoxes.length>1  )
-    },[furo, chipBoxes])
-    
     async function inserirFuroECaixasNoBanco(furo, caixas) {
         const furosCollection = collection(db, "Furos");
         const q = query(furosCollection, where("numero", "==", furo.furo));
         const querySnapshot = await getDocs(q);
         let documento = querySnapshot.docs[0]?.data()
-        
+
         if (documento?.numero == furo.furo) {
             try {
-                const reversedCaixas = [...caixas].reverse(); 
+                const reversedCaixas = [...caixas].reverse();
                 console.log('cheguei dentro do try ', querySnapshot.docs[0].data().profundidade)
 
                 for (let i = 0; i < reversedCaixas.length - querySnapshot.docs[0].data().profundidade; i++) {
@@ -137,7 +131,7 @@ export default function Import() {
                     try {
                         const chipBoxesCollectionRef = collection(db, "ChipBoxes"); // Referência da coleção "ChipBoxes"
                         const chipBoxDocRef = doc(chipBoxesCollectionRef, chipBoxId); // Cria uma referência ao documento com ID personalizado
-                
+
                         await setDoc(chipBoxDocRef, {
                             conferido: false,
                             furo: furo.furo,
@@ -200,7 +194,7 @@ export default function Import() {
                                 createdAt: Date.now(),
                             },
                         });
-                        console.log('Documento do furo atualizado com sucesso.');
+                        setSincro(true)
                     } catch (error) {
                         console.error('Erro ao atualizar o documento do furo:', error);
                     }
@@ -216,123 +210,123 @@ export default function Import() {
             const FurosCollectionRef = collection(db, "Furos"); // Referência da coleção "Furos"
             const FuroDocRef = doc(FurosCollectionRef, furoId); // Cria uma referência ao documento com ID personalizado
             await setDoc(FuroDocRef, {
-                    numero: furo.furo,
-                    projeto: furo.projeto,
-                    profundidade: furo.profundidade,
-                    createdAt: Timestamp.now(),
-                    processadasFotografia: 0,
-                    de: caixas[0].de,
+                numero: furo.furo,
+                projeto: furo.projeto,
+                profundidade: furo.profundidade,
+                createdAt: Timestamp.now(),
+                processadasFotografia: 0,
+                de: caixas[0].de,
+                ate: caixas[caixas.length - 1].ate,
+                ultimaCaixa: {
+                    furo: furo.furo,
+                    cx: caixas[caixas.length - 1].cx,
+                    dataExtraida: new Date(caixas[caixas.length - 1].dt),
+                    sonda: caixas[caixas.length - 1].sonda,
+                    de: caixas[caixas.length - 1].de,
                     ate: caixas[caixas.length - 1].ate,
-                    ultimaCaixa: {
-                        furo: furo.furo,
-                        cx: caixas[caixas.length - 1].cx,
-                        dataExtraida: new Date(caixas[caixas.length - 1].dt),
-                        sonda: caixas[caixas.length - 1].sonda,
-                        de: caixas[caixas.length - 1].de,
-                        ate: caixas[caixas.length - 1].ate,
-                        qrcode: `${caixas[caixas.length - 1].cx};${furo.projeto};${furo.furo};${caixas[caixas.length - 1].de
+                    qrcode: `${caixas[caixas.length - 1].cx};${furo.projeto};${furo.furo};${caixas[caixas.length - 1].de
+                        .toFixed(2)
+                        .replace('.', ',')
+                        .padStart(6, '0')};${caixas[caixas.length - 1].ate
                             .toFixed(2)
                             .replace('.', ',')
-                            .padStart(6, '0')};${caixas[caixas.length - 1].ate
-                                .toFixed(2)
-                                .replace('.', ',')
-                                .padStart(6, '0')}`,
-                        createdAt: Timestamp.now(),
+                            .padStart(6, '0')}`,
+                    createdAt: Timestamp.now(),
+                },
+                processos: {
+                    geologia: {
+                        descGeologica: {
+                            ent: null,
+                            sai: null,
+                            obs: null,
+                            user: null,
+                        },
+                        descGeotecnica: {
+                            ent: null,
+                            sai: null,
+                            obs: null,
+                            user: null,
+                        },
+                        descEstrutural: {
+                            ent: null,
+                            sai: null,
+                            obs: null,
+                            user: null,
+                        },
                     },
-                    processos: {
-                        geologia: {
-                            descGeologica: {
-                                ent: null,
-                                sai: null,
-                                obs: null,
-                                user: null,
-                            },
-                            descGeotecnica: {
-                                ent: null,
-                                sai: null,
-                                obs: null,
-                                user: null,
-                            },
-                            descEstrutural: {
-                                ent: null,
-                                sai: null,
-                                obs: null,
-                                user: null,
-                            },
-                        },
-                        densidade: {
-                            ent: null,
-                            sai: null,
-                            obs: null,
-                            user: null,
-                        },
-                        serragem: {
-                            ent: null,
-                            sai: null,
-                            obs: null,
-                            user: null,
-                        },
-                        amostragem: {
-                            ent: null,
-                            sai: null,
-                            user: null,
-                        },
-                        despacho: {
-                            ent: null,
-                            sai: null,
-                            user: null,
-                        },
-                    }
-                })
+                    densidade: {
+                        ent: null,
+                        sai: null,
+                        obs: null,
+                        user: null,
+                    },
+                    serragem: {
+                        ent: null,
+                        sai: null,
+                        obs: null,
+                        user: null,
+                    },
+                    amostragem: {
+                        ent: null,
+                        sai: null,
+                        user: null,
+                    },
+                    despacho: {
+                        ent: null,
+                        sai: null,
+                        user: null,
+                    },
+                }
+            })
                 .then(() => {
                     caixas.forEach(async cx => {
-                        let chipBoxId = furo.furo+cx.cx
+                        let chipBoxId = furo.furo + '-' + cx.cx
                         const chipBoxesCollectionRef = collection(db, "ChipBoxes"); // Referência da coleção "ChipBoxes"
                         const chipBoxDocRef = doc(chipBoxesCollectionRef, chipBoxId); // Cria uma referência ao documento com ID personalizado
-                
+
                         await setDoc(chipBoxDocRef, {
-                                conferido: false,
-                                furo: furo.furo,
-                                cx: cx.cx,
-                                dataExtraida: new Date(cx.dt),
-                                sonda: cx.sonda,
-                                de: cx.de,
-                                ate: cx.ate,
-                                qrcode: `${cx.cx};${furo.projeto};${furo.furo};${cx.de
+                            conferido: false,
+                            furo: furo.furo,
+                            cx: cx.cx,
+                            dataExtraida: new Date(cx.dt),
+                            sonda: cx.sonda,
+                            de: cx.de,
+                            ate: cx.ate,
+                            qrcode: `${cx.cx};${furo.projeto};${furo.furo};${cx.de
+                                .toFixed(2)
+                                .replace('.', ',')
+                                .padStart(6, '0')};${cx.ate
                                     .toFixed(2)
                                     .replace('.', ',')
-                                    .padStart(6, '0')};${cx.ate
-                                        .toFixed(2)
-                                        .replace('.', ',')
-                                        .padStart(6, '0')}`,
-                                createdAt: Timestamp.now(),
-                                processos: {
-                                    conferencia: {
-                                        ent: null,
-                                        sai: null,
-                                        user: null,
-                                    },
-
-                                    marcacao: {
-                                        ent: null,
-                                        sai: null,
-                                        obs: null,
-                                        user: null,
-                                    },
-
-                                    fotografia: {
-                                        ent: null,
-                                        sai: null,
-                                        obs: null,
-                                        user: null,
-                                    },
-                                    arquivamento: {
-                                        ent: null,
-                                        sai: null,
-                                        user: null,
-                                    },
+                                    .padStart(6, '0')}`,
+                            createdAt: Timestamp.now(),
+                            processos: {
+                                conferencia: {
+                                    ent: null,
+                                    sai: null,
+                                    user: null,
                                 },
-                            })
+
+                                marcacao: {
+                                    ent: null,
+                                    sai: null,
+                                    obs: null,
+                                    user: null,
+                                },
+
+                                fotografia: {
+                                    ent: null,
+                                    sai: null,
+                                    obs: null,
+                                    user: null,
+                                },
+                                arquivamento: {
+                                    ent: null,
+                                    sai: null,
+                                    user: null,
+                                },
+                            },
+                        })
                             .catch(err => {
                                 console.log('Erro ao criar caixa:', err);
                             });
@@ -342,29 +336,83 @@ export default function Import() {
                     console.log('Erro ao criar furo: ', err);
                 });
         }
+        setSincro(true)
         return;
     }
 
+    const fileInputRef = useRef(null);
+
+    const [sincro, setSincro] = useState(false)
+
     return (
-        <div className="App">
-            <input type="file" onChange={handleFileUpload} />
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '3%' }}>
+            <input
+                type="file"
+                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                style={{ display: 'none' }}
+                ref={fileInputRef}
+                onChange={handleFileUpload}
+            />
+            <label
+                htmlFor="fileInput"
+                style={{
+                    cursor: 'pointer',
+                    height: 80,
+                    width: 260,
+                    backgroundColor: 'grey',
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    alignItems: 'center',
+                    borderRadius: 10,
+                    padding: 8
+                }}
+                onClick={() => fileInputRef.current.click()} // Simula o clique no input de arquivo
+            >
+                <AiOutlineUpload style={{ color: 'white' }} size={45} /> <text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }} >Selecione o arquivo </text>
+            </label>
             {
-                furo && chipBoxes.length>2?
-                <button style={{backgroundColor:'grey'}} onClick={() => inserirFuroECaixasNoBanco(furo, chipBoxes)} >aaaaaaaaaaaq</button>
-                :
-                <></>
+                furo && chipBoxes.length > 2 ?
+                    <Button disabled={!sincro ? false : true} onClick={() => inserirFuroECaixasNoBanco(furo, chipBoxes)} >
+                        <text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }} >{!sincro ? 'Sincronizar planilha no banco de dados' : 'Sincronizado!'}</text>
+                    </Button>
+                    :
+                    <></>
             }
-            <table>
-                <tbody>
-                    {data.map((row, rowIndex) => (
-                        <tr key={rowIndex}>
-                            {row.map((cell, cellIndex) => (
-                                <td key={cellIndex}>{cell}</td>
-                            ))}
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
+            {
+                furo && chipBoxes.length > 0 ?
+                !sincro ? 
+                <Alert style={{marginTop:15, width:600}} severity="warning">Ao pressionar o botão acima, você enviará todas as caixas ao banco de dados!</Alert>
+                :
+                <Alert style={{marginTop:15, marginBottom:12, width:600}} severity="success">Sincronizado com sucesso! As caixas foram enviadas ao banco com sucesso.</Alert>
+                
+                :
+                <Alert style={{marginTop:15, width:600}} severity="info">Após importar, você deve sincronizar a planilha!</Alert>
+            }
+            {
+                chipBoxes.length > 0 ?
+                    <TableFuro furo={furo} caixas={chipBoxes} />
+                    :
+                    <></>
+            }
+            
         </div>
     );
 }
+
+const Button = styled.button`
+
+    margin-top: 15px;
+    margin-bottom: 15px;
+    background-color: #074F92;
+    transition: opacity 0.3s;
+    height: 80px;
+    width: 260px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: 'white';
+    &:hover {
+        opacity: 0.2;
+    }
+
+`
