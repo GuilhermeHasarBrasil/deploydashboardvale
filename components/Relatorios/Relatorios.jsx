@@ -1,5 +1,5 @@
 import TableFuros from "./tableFuros"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from 'styled-components'
 import Dropdown from 'react-dropdown-select';
 import { jsPDF } from 'jspdf';

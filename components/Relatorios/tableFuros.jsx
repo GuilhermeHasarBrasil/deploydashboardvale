@@ -9,10 +9,10 @@ import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import dayjs from "dayjs";
-import "dayjs/locale/pt-br"; // Importe o local desejado, nesse caso, português do Brasil
+import "dayjs/locale/pt-br";
 import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
-import { LogOutSharp, BarChartSharp, ArrowBackCircleSharp, ArrowForwardCircleSharp, CloseCircleSharp, CheckmarkCircleSharp } from 'react-ionicons'
+import { CloseCircleSharp, CheckmarkCircleSharp } from 'react-ionicons'
 
 function TablePaginationActions(props) {
     const theme = useTheme();

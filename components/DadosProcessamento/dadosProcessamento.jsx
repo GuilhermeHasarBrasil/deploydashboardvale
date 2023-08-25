@@ -1,7 +1,6 @@
-import { ArrowBackCircleSharp, ArrowForwardCircleSharp } from 'react-ionicons'
 import styled from 'styled-components'
-import { useState, useEffect } from "react";
-import React, { PureComponent } from 'react';
+import { useEffect } from "react";
+import React from 'react';
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 
 export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos }) {
@@ -201,29 +200,4 @@ const Column = styled.div({
     flexDirection: 'column',
     alignItems: 'center'
 })
-
-
-const Button = styled.button`
-    transition: opacity 0.3s;
-    align-items: center;
-    justify-content: center;
-    &:hover {
-        opacity: 0.2;
-    }
-
-`
-
-const BgIcon = styled.button`
-    transition: opacity 0.3s;
-    height: 45px;
-    width: 45px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background-color:'white';
-    &:hover {
-        opacity: 0.2;
-    }
-
-`
 
