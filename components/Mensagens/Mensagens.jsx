@@ -17,7 +17,7 @@ export default function Mensagens({ chipBoxes, furos }) {
     const [processoMenssage, setProcessoMessage] = useState()
     const [mensagem, setMensagem] = useState()
     const temposOptions = [
-        { value: 0, label: "5 segundos" },
+        { value: 2, label: "2 segundos" },
         { value: 60, label: "1 minuto" },
         { value: 300, label: "5 minutos" },
         { value: 600, label: "10 minutos" },
@@ -32,7 +32,7 @@ export default function Mensagens({ chipBoxes, furos }) {
         { value: 345600, label: "4 dias" },
         { value: 432000, label: "5 dias" }
     ];
-    const [selectedTempo, setSelectedTempo] = useState(temposOptions[1].value);
+    const [selectedTempo, setSelectedTempo] = useState(0);
     const [label, setLabel] = useState()
 
     useEffect(() => {
@@ -175,7 +175,7 @@ export default function Mensagens({ chipBoxes, furos }) {
             const arquivamentosaida = arquivamento.sai ? arquivamento.sai : timestamp
             if (arquivamentosaida && arquivamento?.ent) {
                 const difference = getSecondsDifference(arquivamento.ent, arquivamentosaida);
-                return difference > selectedTempo;
+                return difference > selectedTempo? selectedTempo : 0;
             }
             return false;
         });
@@ -257,8 +257,6 @@ export default function Mensagens({ chipBoxes, furos }) {
         setMensagem(formattedString)
     }, [arrayRenderizado])
 
-    console.log(mensagem)
-
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
             <div style={{ display: 'flex', marginTop: '4%', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', width: '70%', marginLeft: '15%', marginRight: '15%' }} >
@@ -290,7 +288,7 @@ export default function Mensagens({ chipBoxes, furos }) {
                     <li style={{ marginLeft: 30, marginRight: 0, backgroundColor: '#074f92', padding: 18, borderRadius: 10, marginTop: 5, }} key={item.id}>
                         <div style={{ display: 'flex', flexDirection: 'column', width: 250, backgroundColor: 'white', padding: 3 }} >
                             <text style={{ color: 'red', fontWeight: 'bold', fontSize: 18 }} >Aviso!</text>
-                            <text style={{ fontWeight: 'bold' }} >A caixa {item.cx} do furo {item.furo} está a mais de {label} em {process}</text>
+                            <text style={{ fontWeight: 'bold' }} >A caixa {item.cx} do furo {item.furo} levou ou está a mais de {label} em {process}</text>
                         </div>
                     </li>
                 ))}

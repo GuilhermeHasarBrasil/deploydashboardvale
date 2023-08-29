@@ -118,50 +118,6 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                     </PieChart>
                 </Column>
                 <Column>
-                    <text style={{ marginRight: 15, fontWeight: 'bold' }} >Densidade: {(filtroDensidade[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length) * 100}% </text>
-                    <PieChart width={320} height={320}>
-                        <Pie
-                            data={densidade}
-                            dataKey="value"
-                            nameKey="name"
-                            cx="50%"
-                            cy="35%"
-                            outerRadius={110}
-                            fill="#84d8b1"
-                            label
-                        >
-                            {conferencia.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                            ))}
-                        </Pie>
-                        <Tooltip />
-                        <Legend verticalAlign="top" height={36} />
-                    </PieChart>
-                </Column>
-                <Column>
-                    <text style={{ marginRight: 15, fontWeight: 'bold' }} >Serragem: {(filtroSerragem[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length) * 100}% </text>
-                    <PieChart width={320} height={320}>
-                        <Pie
-                            data={serragem}
-                            dataKey="value"
-                            nameKey="name"
-                            cx="50%"
-                            cy="35%"
-                            outerRadius={110}
-                            fill="#84d8b1"
-                            label
-                        >
-                            {conferencia.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                            ))}
-                        </Pie>
-                        <Tooltip />
-                        <Legend verticalAlign="top" height={36} />
-                    </PieChart>
-                </Column>
-                <Column>
-                    <Mt>
-                    </Mt>
                     <text style={{ marginRight: 15, fontWeight: 'bold' }} >Arquivamento: {(filtroArquivamento[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length) * 100}% </text>
                     <PieChart width={320} height={320}>
                         <Pie
