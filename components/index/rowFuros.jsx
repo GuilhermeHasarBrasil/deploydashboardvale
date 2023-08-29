@@ -22,7 +22,7 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
     }
 
     return (
-        <div style={{ display: selected == 'Relatórios' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, }} >
+        <div style={{ display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, }} >
             <BgIcon>
                 <ArrowBackCircleSharp
                     color={'#00000'}

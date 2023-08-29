@@ -334,7 +334,7 @@ export default function Home() {
                 }
             }
             const arraysInternos = Object.values(chipboxesPorFuro);
-         
+
             const arraysFiltradosConferencia = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
                     chipbox.processos.conferencia.sai !== null
@@ -378,7 +378,7 @@ export default function Home() {
             setFiltroArquivamentoEnt(arraysFiltradosArquivamento)
         }
     }, [chipBoxes])
-
+   
     return !authUser ? (
         <Loader />
     ) : (
@@ -450,18 +450,18 @@ export default function Home() {
                         {
                             selected === 'Relatórios' ?
                                 <div style={{ display: 'flex', flexDirection: 'column' }} >
-                                    <Relatorios furos={furos} 
-                                                chipBoxes={chipBoxes} 
-                                                furoSelecionado={furoSelecionado}
-                                                filtroConferencia={filtroConferenciaEnt} 
-                                                filtroMarcacao={filtroMarcacaoEnt}
-                                                filtroFotografia={filtroFotografiaEnt} 
-                                                filtroDensidade={filtroDensidadeEnt}
-                                                filtroSerragem={filtroSerragemEnt} 
-                                                filtroArquivamento={filtroArquivamentoEnt}
-                                                chipBoxesInternos={chipBoxesInternos}
-                                                setFuroSelecionado={setFuroSelecionado}
-                                                authUser={authUser}
+                                    <Relatorios furos={furos}
+                                        chipBoxes={chipBoxes}
+                                        furoSelecionado={furoSelecionado}
+                                        filtroConferencia={filtroConferenciaEnt}
+                                        filtroMarcacao={filtroMarcacaoEnt}
+                                        filtroFotografia={filtroFotografiaEnt}
+                                        filtroDensidade={filtroDensidadeEnt}
+                                        filtroSerragem={filtroSerragemEnt}
+                                        filtroArquivamento={filtroArquivamentoEnt}
+                                        chipBoxesInternos={chipBoxesInternos}
+                                        setFuroSelecionado={setFuroSelecionado}
+                                        authUser={authUser}
                                     />
                                 </div>
                                 :
@@ -475,7 +475,7 @@ export default function Home() {
                         }
                         {
                             selected === 'Importar Arquivo' ?
-                                <Import/>
+                                <Import />
                                 :
                                 <></>
                         }
@@ -499,7 +499,10 @@ export default function Home() {
                         }
                         {
                             selected === 'Mensagens/Avisos' ?
-                                <Mensagens />
+                                <Mensagens
+                                    chipBoxes={chipBoxes}
+                                    furos={furos}
+                                />
                                 :
                                 <></>
                         }
