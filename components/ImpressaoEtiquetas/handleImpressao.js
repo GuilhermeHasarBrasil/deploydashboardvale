@@ -1,6 +1,7 @@
 import { defaultLayout } from "./defaultLayout";
+import { defaultLayoutAmostra } from './defaultLayoutBag'
 
-export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxes) {
+export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxes, selectedTipoImpressao) {
     const storedPrinter = JSON.parse(localStorage.getItem('printer'));
 
     const Print = async (content) => {
@@ -26,12 +27,12 @@ export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxe
         return
     } else {
         const caixasNoIntervalo = chipBoxes.filter(caixa => paramsPrint.inicio <= caixa.cx && caixa.cx <= paramsPrint.fim);
-        const etiquetas = await gerarEtiquetasParaImpressao(caixasNoIntervalo, paramsPrint)
+        const etiquetas = await gerarEtiquetasParaImpressao(caixasNoIntervalo, paramsPrint, selectedTipoImpressao)
         Print(etiquetas)
     }
-    async function gerarEtiquetasParaImpressao(caixas, params) {
+    async function gerarEtiquetasParaImpressao(caixas, params, selectedTipoImpressao) {
         try {
-            const chipBoxLayout = defaultLayout;
+            const chipBoxLayout = selectedTipoImpressao=='Caixa (Chip_Box)' ? defaultLayout : defaultLayoutAmostra;
             let etiquetasZpl = '';
             caixas.forEach(cx => {
                 let newEtiqueta = chipBoxLayout

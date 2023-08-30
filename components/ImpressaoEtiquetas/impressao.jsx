@@ -15,10 +15,9 @@ export default function PrintButton({ furoSelecionado, chipBoxesInternos, furos 
                 <text style={{ marginRight: 15, fontWeight: 'bold', fontSize: 30 }}>Selecione o furo acima</text>
             </div>
         )
-    
+
     const [selectedIndex, setSelectedIndex] = useState(0); // Adiciona esse estado
     const [isLoading, setIsLoading] = useState(false);
-    const [message, setMessage] = useState('');
     useEffect(() => {
         if (furoSelecionado && chipBoxesInternos[furoSelecionado.index]) {
             const furoOptions = chipBoxesInternos[furoSelecionado.index].map((furo, index) => ({
@@ -64,40 +63,94 @@ export default function PrintButton({ furoSelecionado, chipBoxesInternos, furos 
         }
     }, [SelectedStart, SelectedEnd, PrintAll])
 
-    console.log(chipBoxesInternos[furoSelecionado.index][0])
-
     const [showAlert, setShowAlert] = useState(true)
     const [alert, setAlert] = useState()
 
     useEffect(() => {
         if (!SelectedStart || !SelectedEnd) {
-            setAlert(<Alert style={{ marginBottom: 16, width:300, fontWeight:'bold' }} severity="warning">Insira o início e fim das caixas a serem impressas!</Alert>)
+            setAlert(<Alert style={{ marginBottom: 16, width: 300, fontWeight: 'bold' }} severity="warning">Insira o início e fim das caixas a serem impressas!</Alert>)
         }
         if (SelectedStart && SelectedEnd) {
-            setAlert(<Alert style={{ marginBottom: 16, width:300, fontWeight:'bold' }} severity="success">Pronto para impressão!</Alert>)
+            setAlert(<Alert style={{ marginBottom: 16, width: 300, fontWeight: 'bold' }} severity="success">Pronto para impressão!</Alert>)
         }
     }, [SelectedStart, SelectedEnd])
+
+    const [selectedTipoImpressao, setSelectedTipoImpressao] = useState([]);
+    const tipoImpressao = [
+        { 'tipo': 'Caixa (Chip_Box)' },
+        { 'tipo': 'Amostra (Sample_Bag)' },
+        { 'tipo': 'Caixa de amostras' },
+        { 'tipo': 'Palete' }
+    ]
+
+    function sett(selected) {
+        setSelectedTipoImpressao(selected);
+    }
 
     return (
         <Container>
             <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione o intervalo da impressão de etiquetas das caixas do furo {furoSelecionado.furo}</TitleText>
-            <div style={styles.etiquetaCard}>
-                <div style={styles.contentEsquerda}>
-                    <TitleText style={styles.etiquetaTitle}>Cx: {String(chipBoxesInternos[furoSelecionado.index][0].cx).padStart(3, '0')}</TitleText>
-                    <QRCodeSVG value={chipBoxesInternos[furoSelecionado.index][0].qrcode} size={90} />
-                </div>
-                <div style={styles.contentDireita}>
-                    <div style={{ display: 'flex', flexDirection: 'column' }} >
-                        <TitleText style={styles.etiquetaTitle}>{chipBoxesInternos[furoSelecionado.index][0].furo.substring(0, 3)}</TitleText>
-                        <TitleText style={styles.etiquetaTitle}>{furoSelecionado.furo}</TitleText>
-                    </div>
+            <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
+                {tipoImpressao.map((tipo, index) => (
+                    <li style={{ marginLeft: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 0, backgroundColor: tipo.tipo == selectedTipoImpressao ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={tipo.id}>
+                        <Button2>
+                            <h1 style={{ color: tipo.tipo !== selectedTipoImpressao ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett(tipo.tipo, index)} >
+                                {tipo.tipo}
+                            </h1>
+                        </Button2>
+                    </li>
+                ))}
+            </ul>
 
-                    <div style={styles.etiquetaRodape}>
-                        <TitleText style={styles.subTitle}>De:{String(chipBoxesInternos[furoSelecionado.index][0].de.toFixed(2)).padStart(6, '0').replace('.', ',')} </TitleText>
-                        <TitleText style={styles.subTitle}>Até:{String(chipBoxesInternos[furoSelecionado.index][0].ate.toFixed(2)).padStart(6, '0').replace('.', ',')}</TitleText>
+            {
+                selectedTipoImpressao === 'Caixa (Chip_Box)' ?
+                    < div style={styles.etiquetaCard}>
+                        <div style={styles.contentEsquerda}>
+                            <TitleText style={styles.etiquetaTitle}>Cx: {String(chipBoxesInternos[furoSelecionado.index][0].cx).padStart(3, '0')}</TitleText>
+                            <QRCodeSVG value={chipBoxesInternos[furoSelecionado.index][0].qrcode} size={90} />
+                        </div>
+                        <div style={styles.contentDireita}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }} >
+                                <TitleText style={styles.etiquetaTitle}>{chipBoxesInternos[furoSelecionado.index][0].furo.substring(0, 3)}</TitleText>
+                                <TitleText style={styles.etiquetaTitle}>{furoSelecionado.furo}</TitleText>
+                            </div>
+
+                            <div style={styles.etiquetaRodape}>
+                                <TitleText style={styles.subTitle}>De:{String(chipBoxesInternos[furoSelecionado.index][0].de.toFixed(2)).padStart(6, '0').replace('.', ',')} </TitleText>
+                                <TitleText style={styles.subTitle}>Até:{String(chipBoxesInternos[furoSelecionado.index][0].ate.toFixed(2)).padStart(6, '0').replace('.', ',')}</TitleText>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                    :
+                    <></>
+                    }
+
+                {  
+                    selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
+
+                    < div style={{ marginTop:15, display: 'flex', flexDirection: 'column', alignItems:'center', borderWidth: 1, borderColor: '#000', borderRadius: 7, padding:8, paddingLeft:16, paddingRight:16 }}>
+                        <div style={{ display: 'flex', flexDirection: 'row' }} >
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems:'flex-start' }} >
+                                <TitleText style={styles.etiquetaTitle}>Furo: {furoSelecionado.furo}</TitleText>
+                                <TitleText style={styles.etiquetaTitle}>Projeto:{chipBoxesInternos[furoSelecionado.index][0].furo.substring(0, 3)}</TitleText>
+                                <TitleText style={styles.etiquetaTitle}>Amostra nº: {String(chipBoxesInternos[furoSelecionado.index][0].cx).padStart(3, '0')}</TitleText>
+                            </div>
+                            <QRCodeSVG style={{margin:10}} value={chipBoxesInternos[furoSelecionado.index][0].qrcode} size={55} />
+                        </div>
+
+                        <div style={{width: '70%', marginTop:15, display:'flex', alignItems:'center', justifyContent:'center', backgroundColor:'black'}}>
+                            <TitleText style={{color:'white', fontSize: 16, fontWeight:'bold'}}>Intervalo da Amostra</TitleText>
+                        </div>
+
+                        <div style={{width: '100%', display:'flex', flexDirection: 'row', alignItems:'center', justifyContent:'space-between'}}>
+                            <TitleText style={styles.subTitle}>De:{String(chipBoxesInternos[furoSelecionado.index][0].de.toFixed(2)).padStart(6, '0').replace('.', ',')} </TitleText>
+                            <TitleText style={styles.subTitle}>Até:{String(chipBoxesInternos[furoSelecionado.index][0].ate.toFixed(2)).padStart(6, '0').replace('.', ',')}</TitleText>
+                        </div>
+                    </div>
+                    :
+                    <></>
+            }
+
             <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-around', marginBottom: -40 }} >
                 {
                     SelectedStart ?
@@ -215,12 +268,10 @@ export default function PrintButton({ furoSelecionado, chipBoxesInternos, furos 
                     <></>
             }
 
-            <Button onClick={() => { handlePrint(paramsPrint, furoSelecionado, chipBoxesInternos[furoSelecionado.index]); setShowAlert(true) }} disabled={isLoading}>
+            <Button onClick={() => { handlePrint(paramsPrint, furoSelecionado, chipBoxesInternos[furoSelecionado.index], selectedTipoImpressao); setShowAlert(true) }} disabled={isLoading}>
                 <TitleText style={{ color: 'white', fontSize: 26, fontWeight: 'bold' }} >{isLoading ? 'Enviando...' : 'Imprimir'}</TitleText>
             </Button>
-
-            {message && <p>{message}</p>}
-        </Container>
+        </Container >
     );
 };
 const Button = styled.button`
@@ -237,6 +288,16 @@ const Button = styled.button`
     }
 
 `
+const Button2 = styled.button`
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+        opacity: 0.2;
+    }
+`
+
 const TitleText = styled.text`
     
 
