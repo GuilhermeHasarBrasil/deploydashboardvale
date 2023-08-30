@@ -29352,9 +29352,9 @@ export const chipboxes = [
                 "sai": null,
                 "user": "dev2.hasarbrasil@gmail.com",
                 "ent": {
-                    "seconds": 1689249595,
-                    "nanoseconds": 4000000
-                }
+                    "seconds": 1689195147,
+                    "nanoseconds": 329000000
+                },
             },
             "amostragem": {
                 "ent": {
@@ -29914,9 +29914,15 @@ export const chipboxes = [
         "qrcode": "9;SSG;SSG-FD00010;012,20;014,20",
         "processos": {
             "arquivamento": {
-                "sai": 'null',
+                "sai": {
+                    "seconds": 1689195147,
+                    "nanoseconds": 329000000
+                },
                 "user": null,
-                "ent": null
+                "ent": {
+                    "seconds": 1689195145,
+                    "nanoseconds": 329000000
+                },
             },
             "fotografia": {
                 "obs": null,

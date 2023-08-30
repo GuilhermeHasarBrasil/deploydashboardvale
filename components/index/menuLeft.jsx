@@ -10,8 +10,6 @@ export default function MenuLeft({ setSelected, selected }) {
         setSelectedItem(selected);
     }
 
-    console.log('aq',selected)
-
     return (
         <MenuHamburguer>
             <div style={{ padding: 20 }}>

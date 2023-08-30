@@ -380,32 +380,6 @@ export default function Home() {
             setFiltroArquivamentoEnt(arraysFiltradosArquivamento)
         }
     }, [chipBoxes])
-
-    function motionIcon() {
-        return (
-            <motion.div
-                style={{ marginLeft: 600 }}
-                initial={{ y: -10 }}
-                animate={{ y: 0 }}
-                transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
-            >
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="60"
-                    height="60"
-                    fill="currentColor"
-                    className="bi bi-chevron-up" // Alterado para 'bi-chevron-up'
-                    viewBox="0 0 16 16"
-                >
-                    <path
-                        fill-rule="evenodd"
-                        transform="rotate(180, 8, 8)" // Rotação de 180 graus
-                        d="M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"
-                    />
-                </svg>
-            </motion.div>
-        );
-    }
    
     return !authUser ? (
         <Loader />

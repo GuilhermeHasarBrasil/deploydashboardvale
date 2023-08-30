@@ -8,6 +8,7 @@ import { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 registerLocale('pt-BR', ptBR);
 import 'dayjs/locale/pt-br';
+import InfoProcess from './infoProcess';
 
 export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos }) {
 
@@ -161,9 +162,91 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
         setArrayDataProcessDateFilterDateFilter(filteredData);
     }, [arrayDataProcess, selectedDateRange]);
 
+    const [countFinalizadosSelectedProcess, setCountFinalizadosSelectedProcess] = useState()
+    const [countProcessingBoxesSelectedProcess, setCountProcessingBoxesSelectedProcess] = useState()
+    const [countNotStartedBoxesSelectedProcess, setCountNotStartedBoxesSelectedProcess] = useState()
+
+    useEffect(()=>{
+
+        if(process==='Conferência'){
+            const arrayFinalizadoConferencia = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+                    chipbox.processos.conferencia.sai && chipbox.processos.conferencia.ent !== null
+                )
+            setCountFinalizadosSelectedProcess(arrayFinalizadoConferencia.length)
+            
+            const arrayIniciadoConferencia = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+                    chipbox.processos.conferencia.ent !== null && chipbox.processos.conferencia.sai === null
+                )
+            setCountProcessingBoxesSelectedProcess(arrayIniciadoConferencia.length)
+            
+            const arrayNotStartedConferencia = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+                chipbox.processos.conferencia.sai && chipbox.processos.conferencia.ent == null
+            )
+            setCountNotStartedBoxesSelectedProcess(arrayNotStartedConferencia.length)
+            
+        }
+        if(process==='Marcação'){
+            const arrayFinalizadomarcacao = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+                    chipbox.processos.marcacao.sai && chipbox.processos.marcacao.ent !== null
+                )
+            setCountFinalizadosSelectedProcess(arrayFinalizadomarcacao.length)
+            
+            const arrayIniciadomarcacao = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+                    chipbox.processos.marcacao.ent !== null && chipbox.processos.marcacao.sai === null
+                )
+            setCountProcessingBoxesSelectedProcess(arrayIniciadomarcacao.length)
+            
+            const arrayNotStartedmarcacao = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+                chipbox.processos.marcacao.sai && chipbox.processos.marcacao.ent == null
+            )
+            setCountNotStartedBoxesSelectedProcess(arrayNotStartedmarcacao.length)
+            
+        }
+        if(process==='Fotografia'){
+            const arrayFinalizadofotografia = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+                    chipbox.processos.fotografia.sai && chipbox.processos.fotografia.ent !== null
+                )
+            setCountFinalizadosSelectedProcess(arrayFinalizadofotografia.length)
+            
+            const arrayIniciadofotografia = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+                    chipbox.processos.fotografia.ent !== null && chipbox.processos.fotografia.sai === null
+                )
+            setCountProcessingBoxesSelectedProcess(arrayIniciadofotografia.length)
+            
+            const arrayNotStartedfotografia = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+                chipbox.processos.fotografia.sai && chipbox.processos.fotografia.ent == null
+            )
+            setCountNotStartedBoxesSelectedProcess(arrayNotStartedfotografia.length)
+            
+        }
+        if(process==='Arquivamento'){
+            const arrayFinalizadoarquivamento = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+                    chipbox.processos.arquivamento.sai && chipbox.processos.arquivamento.ent !== null
+                )
+            setCountFinalizadosSelectedProcess(arrayFinalizadoarquivamento.length)
+            
+            const arrayIniciadoarquivamento = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+                    chipbox.processos.arquivamento.ent !== null && chipbox.processos.arquivamento.sai === null
+                )
+            setCountProcessingBoxesSelectedProcess(arrayIniciadoarquivamento.length)
+            
+            const arrayNotStartedarquivamento = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+                chipbox.processos.arquivamento.sai && chipbox.processos.arquivamento.ent == null
+            )
+            setCountNotStartedBoxesSelectedProcess(arrayNotStartedarquivamento.length)
+            
+        }
+        
+
+    },[process, chipBoxesInternos[furoSelecionado.index]])
+
+    console.log('total:', chipBoxesInternos[furoSelecionado.index].length)
+    console.log('iniciado:', countProcessingBoxesSelectedProcess)
+    console.log('finalizado:', countFinalizadosSelectedProcess)
+
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 5, flexDirection: 'column', width: '100%' }} >
-            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop: 20 }} >Selecione o processo para exibir o gráfico de tempo de processamento de cada caixa{motionIcon()} </text>
+            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop: 5 }} >Selecione o processo para exibir o gráfico de tempo de processamento de cada caixa{motionIcon()} </text>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, marginLeft: 250 }} >
                 <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
                     {processos.map((furo, index) => (
@@ -179,7 +262,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             </div>
             {
                 arrayDataProcess ?
-                    <div style={{ marginLeft: '0%', display: 'flex', flexDirection: 'row' }} >
+                    <div style={{ marginLeft: '-2%', display: 'flex', flexDirection: 'row' }} >
                         <CustomBarChart data={selectedDateRange ? arrayDataProcessDateFilter : arrayDataProcess} />
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                             <text style={{ marginLeft: 15, fontWeight: 'bold' }} >Filtrar por data</text>
@@ -194,7 +277,11 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
                                     inline
                                 />
                             </DatePickerWrapper>
-                            
+                            <InfoProcess total={chipBoxesInternos[furoSelecionado.index].length} 
+                                         iniciado={countProcessingBoxesSelectedProcess} 
+                                         finalizado={countFinalizadosSelectedProcess} 
+                                         naoIniciado={countNotStartedBoxesSelectedProcess}
+                            />
                         </div>
 
                     </div>
@@ -217,6 +304,6 @@ const DatePickerWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10px;
+    margin-top: 0px;
     margin-left: 20px;
 `;
