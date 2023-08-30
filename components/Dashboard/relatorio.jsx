@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useEffect, useState } from "react";
-import CustomBarChart from './BarChart';
+import CustomBarChart from './BarChartRelatorio';
 import { motion } from 'framer-motion';
 
 export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos }) {
