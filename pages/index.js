@@ -26,6 +26,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Relatorios from "../components/Relatorios/Relatorios";
 import Import from "../components/ImportarArquivo/importar";
+import CustomBarChartMes from "../components/Dashboard/BarChartMes";
+import { motion } from 'framer-motion';
 
 export default function Home() {
     const { signOut, authUser, isLoading } = useAuth();
@@ -378,6 +380,32 @@ export default function Home() {
             setFiltroArquivamentoEnt(arraysFiltradosArquivamento)
         }
     }, [chipBoxes])
+
+    function motionIcon() {
+        return (
+            <motion.div
+                style={{ marginLeft: 600 }}
+                initial={{ y: -10 }}
+                animate={{ y: 0 }}
+                transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
+            >
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="60"
+                    height="60"
+                    fill="currentColor"
+                    className="bi bi-chevron-up" // Alterado para 'bi-chevron-up'
+                    viewBox="0 0 16 16"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        transform="rotate(180, 8, 8)" // Rotação de 180 graus
+                        d="M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"
+                    />
+                </svg>
+            </motion.div>
+        );
+    }
    
     return !authUser ? (
         <Loader />
@@ -386,7 +414,7 @@ export default function Home() {
             <Container>
                 <Header onClick={signOut} authUser={authUser} />
                 <RenderFunctions>
-                    <MenuLeft setSelected={setSelected} />
+                    <MenuLeft setSelected={setSelected} selected={selected} />
                     <Content>
                         <RowFuros furos={furos} setFuroSelecionado={setFuroSelecionado} selected={selected} />
                         {
@@ -399,7 +427,8 @@ export default function Home() {
                                         <Tabs value={value} onChange={handleChange} centered>
                                             <Tab label="Quantidade de caixas finalizadas (total do furo)" style={{ fontSize: 16, fontWeight: 'bold' }} />
                                             <Tab label="Tempo de cada caixa por processo" style={{ fontSize: 16, fontWeight: 'bold' }} />
-                                            <Tab label="Caixas processadas por dia da semana" style={{ fontSize: 16, fontWeight: 'bold' }} />
+                                            <Tab label="Dias de maior rendimento do processamento (todas as caixas)" style={{ fontSize: 16, fontWeight: 'bold' }} />
+                                            <Tab label="Processamento por periodo em metros (todas as caixas)" style={{ fontSize: 16, fontWeight: 'bold' }} />
                                         </Tabs>
                                     </Box>
                                     {
@@ -439,6 +468,19 @@ export default function Home() {
                                                 contagensPorDiaDespacho={contagensPorDiaDespacho}
                                                 contagensPorDiaArquivamento={contagensPorDiaArquivamento}
                                                 chipBoxes={chipBoxes}
+                                            />
+                                            :
+                                            <></>
+                                    }
+                                    {
+                                        value === 3 ?
+                                            <CustomBarChartMes  
+                                                chipBoxes={chipBoxes} furoSelecionado={furoSelecionado}
+                                                filtroConferencia={filtroConferencia} filtroMarcacao={filtroMarcacao}
+                                                filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade}
+                                                filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
+                                                chipBoxesInternos={chipBoxesInternos}
+                                                authUser={authUser}
                                             />
                                             :
                                             <></>

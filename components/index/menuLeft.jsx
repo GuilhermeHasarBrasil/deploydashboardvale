@@ -2,13 +2,15 @@ import { useState } from "react";
 import styled from 'styled-components'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 
-export default function MenuLeft({ setSelected }) {
+export default function MenuLeft({ setSelected, selected }) {
     const [selectedItem, setSelectedItem] = useState(null);
 
     function sett(selected) {
         setSelected(selected)
         setSelectedItem(selected);
     }
+
+    console.log('aq',selected)
 
     return (
         <MenuHamburguer>
@@ -21,7 +23,7 @@ export default function MenuLeft({ setSelected }) {
                         <img src='/assets/dashboard.png' />
                     </ImgContainer>
                     <Button>
-                        <TitleOption selected={selectedItem === 'Dashboard'}>Dashboard</TitleOption>
+                        <TitleOption selected={selected === 'Dashboard'}>Dashboard</TitleOption>
                     </Button>
                 </Row>
                 <Row onClick={() => sett('Relatórios')}>
@@ -29,27 +31,19 @@ export default function MenuLeft({ setSelected }) {
                         <img src='/assets/relatorios.png' />
                     </ImgContainer>
                     <Button>
-                        <TitleOption selected={selectedItem === 'Relatórios'}>Relatórios</TitleOption>
+                        <TitleOption selected={selected === 'Relatórios'}>Relatórios</TitleOption>
                     </Button>
                 </Row>
                 <Resources>
                     <SwapHorizIcon style={{ color: 'white' }} />
                     <TitleOption>RECURSOS</TitleOption>
                 </Resources>
-                {/* <Row onClick={() => sett('Cadastrar Furo')}>
-                    <ImgContainer>
-                        <img src='/assets/cadastrarfuro.png' />
-                    </ImgContainer>
-                    <Button>
-                        <TitleOption selected={selectedItem === 'Cadastrar Furo'}>Cadastrar Furo</TitleOption>
-                    </Button>
-                </Row> */}
                 <Row onClick={() => sett('Impressão Etiquetas')}>
                     <ImgContainer>
                         <img src='/assets/print.png' />
                     </ImgContainer>
                     <Button>
-                        <TitleOption selected={selectedItem === 'Impressão Etiquetas'}>Impressão Etiquetas</TitleOption>
+                        <TitleOption selected={selected === 'Impressão Etiquetas'}>Impressão Etiquetas</TitleOption>
                     </Button>
                 </Row>
                 <Row onClick={() => sett('Importar Arquivo')}>
@@ -57,7 +51,7 @@ export default function MenuLeft({ setSelected }) {
                         <img src='/assets/addarquivo.png' />
                     </ImgContainer>
                     <Button>
-                        <TitleOption selected={selectedItem === 'Importar Arquivo'}>Importar Arquivo</TitleOption>
+                        <TitleOption selected={selected === 'Importar Arquivo'}>Importar Arquivo</TitleOption>
                     </Button>
                 </Row>
                 <Row onClick={() => sett('Dados Processamento')}>
@@ -65,7 +59,7 @@ export default function MenuLeft({ setSelected }) {
                         <img src='/assets/dadosprocessamento.png' />
                     </ImgContainer>
                     <Button>
-                        <TitleOption selected={selectedItem === 'Dados Processamento'}>Dados Processamento</TitleOption>
+                        <TitleOption selected={selected === 'Dados Processamento'}>Dados Processamento</TitleOption>
                     </Button>
                 </Row>
                 <Resources>
@@ -77,7 +71,7 @@ export default function MenuLeft({ setSelected }) {
                         <img src='/assets/configprinter.png' />
                     </ImgContainer>
                     <Button>
-                        <TitleOption selected={selectedItem === 'Config. Impressora'}>Config. Impressora</TitleOption>
+                        <TitleOption selected={selected === 'Config. Impressora'}>Config. Impressora</TitleOption>
                     </Button>
                 </Row>
                 <Row onClick={() => sett('Parâmetros')}>
@@ -85,7 +79,7 @@ export default function MenuLeft({ setSelected }) {
                         <img src='/assets/params.png' />
                     </ImgContainer>
                     <Button>
-                        <TitleOption selected={selectedItem === 'Parâmetros'}>Parâmetros</TitleOption>
+                        <TitleOption selected={selected === 'Parâmetros'}>Parâmetros</TitleOption>
                     </Button>
                 </Row>
                 <Resources>
@@ -97,7 +91,7 @@ export default function MenuLeft({ setSelected }) {
                         <img src='/assets/user.png' />
                     </ImgContainer>
                     <Button>
-                        <TitleOption selected={selectedItem === 'Usuário'}>Usuário</TitleOption>
+                        <TitleOption selected={selected === 'Usuário'}>Usuário</TitleOption>
                     </Button>
                 </Row>
                 <Row onClick={() => sett('Mensagens/Avisos')}>
@@ -105,7 +99,7 @@ export default function MenuLeft({ setSelected }) {
                         <img src='/assets/avisos.png' />
                     </ImgContainer>
                     <Button>
-                        <TitleOption selected={selectedItem === 'Mensagens/Avisos'}>Mensagens/Avisos</TitleOption>
+                        <TitleOption selected={selected === 'Mensagens/Avisos'}>Mensagens/Avisos</TitleOption>
                     </Button>
                 </Row>
             </Content>

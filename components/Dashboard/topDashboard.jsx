@@ -7,10 +7,10 @@ export default function TopDashboard({ finalizados, conferidos, furos }) {
     return (
         <div style={{ display: 'flex', flexDirection: 'row', marginLeft:10, marginTop:10, }} >
             <Row>
-                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#206F0D', width: 80, height: 80 }} >
+                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#206F0D', width: 70, height: 70 }} >
                     <img src="/assets/images/furoimg.png" />
                 </div>
-                <div style={{ backgroundColor: '#2FAB10', height: 80, width: 300 }} >
+                <div style={{ backgroundColor: '#2FAB10', height: 70, width: 300 }} >
                     <Column>
                         <TitleBox>FUROS PROCESSADOS</TitleBox>
                         <Number>{finalizados}</Number>
@@ -18,10 +18,10 @@ export default function TopDashboard({ finalizados, conferidos, furos }) {
                 </div>
             </Row>
             <Row>
-                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#2760BB', width: 80, height: 80 }} >
+                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#2760BB', width: 70, height: 70 }} >
                     <img src="/assets/images/furoimg.png" />
                 </div>
-                <div style={{ backgroundColor: '#307BF4', height: 80, width: 300 }} >
+                <div style={{ backgroundColor: '#307BF4', height: 70, width: 300 }} >
                     <Column>
                         <TitleBox>FUROS NÃO PROCESSADOS</TitleBox>
                         <Number>{furos.length - conferidos}</Number>
@@ -29,10 +29,10 @@ export default function TopDashboard({ finalizados, conferidos, furos }) {
                 </div>
             </Row>
             <Row>
-                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#996501', width: 80, height: 80 }} >
+                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#996501', width: 70, height: 70 }} >
                     <img src="/assets/images/furoimg.png" />
                 </div>
-                <div style={{ backgroundColor: '#E89E0E', height: 80, width: 300 }} >
+                <div style={{ backgroundColor: '#E89E0E', height: 70, width: 300 }} >
                     <Column>
                         <TitleBox>FUROS EM PROCESSAMENTO</TitleBox>
                         <Number>{ conferidos - finalizados }</Number>
@@ -59,7 +59,7 @@ const TitleBox = styled.text({
     fontWeight: '600'
 })
 const Number = styled.text({
-    fontSize: 40,
+    fontSize: 35,
     color: 'white',
     fontWeight: 'bold'
 })
