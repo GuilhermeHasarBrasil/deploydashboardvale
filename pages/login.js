@@ -6,12 +6,9 @@ import {
 } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useAuth } from "../firebase/auth";
-import Link from "next/link";
 import Loader from "../components/Loader";
-import HasarImg from '../public/assets/hasarlogin.png'
 import styled from 'styled-components'
 import { MailOutline, LockClosedOutline } from 'react-ionicons'
-import { BeatLoader } from "react-spinners";
 
 const LoginForm = () => {
     const router = useRouter();
