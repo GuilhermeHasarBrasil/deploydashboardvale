@@ -46,7 +46,7 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
         ];
         const img = imageB64
         //primeira pagina do pdf: capa
-        doc.addImage(img, 'jpg', 5, 5)
+        doc.addImage(img, 'jpg', 60, 10)
         doc.setFont('helvetica', 'normal', 'bold')
 
         doc.text(`Relatório de processamento do furo`, 64, 80)
@@ -188,7 +188,7 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
 
         doc.save(`${furoSelecionado.furo + '-' + NomeArquivo}.pdf`);
         setTimeout(() => {
-            //sendPdfToApi(NomeArquivo, formattedDate, selectedProcesses.join(', '));
+            sendPdfToApi(NomeArquivo, formattedDate, selectedProcesses.join(', '));
         }, 5000);
     }
 
