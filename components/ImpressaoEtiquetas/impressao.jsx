@@ -102,20 +102,25 @@ export default function PrintLabel({ furoSelecionado, chipBoxesInternos, furos, 
 
     const [selectedWhiteBox, setSelectedWhiteBox] = useState()
     const [selectedPalete, setSelectedPalete] = useState()
-
     return (
         <Container>
-            <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione
-                {selectedTipoImpressao == 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
-                    ' ' + 'o intervalo da impressão de etiquetas de ' + selectedTipoImpressao + ' '
+            {
+                selectedTipoImpressao.length>4 ?
+                    <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione
+                        {selectedTipoImpressao == 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
+                            ' ' + 'o intervalo da impressão de etiquetas de ' + selectedTipoImpressao + ' '
+                            :
+                            selectedTipoImpressao === 'Caixa (White_Box)' || selectedTipoImpressao === 'Palete' ?
+                                ' ' + `a etiqueta perdida do(a) ${selectedTipoImpressao}` + ' '
+                                :
+                                ''
+                        }
+                        do furo {furoSelecionado.furo}
+                    </TitleText>
                     :
-                    selectedTipoImpressao === 'Caixa (White_Box)' || selectedTipoImpressao === 'Palete' ?
-                        ' ' + `a etiqueta perdida do(a) ${selectedTipoImpressao}` + ' '
-                        :
-                        ''
-                }
-                do furo {furoSelecionado.furo}
-            </TitleText>
+                    <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione o tipo de etiqueta que se deseja imprimir</TitleText>
+
+            }
             <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
                 {tipoImpressao.map((tipo, index) => (
                     <li style={{ marginLeft: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 0, backgroundColor: tipo.tipo == selectedTipoImpressao ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={tipo.id}>
@@ -127,7 +132,6 @@ export default function PrintLabel({ furoSelecionado, chipBoxesInternos, furos, 
                     </li>
                 ))}
             </ul>
-
             {
                 selectedTipoImpressao === 'Caixa (Chip_Box)' ?
                     < div style={styles.etiquetaCard}>
@@ -307,10 +311,10 @@ export default function PrintLabel({ furoSelecionado, chipBoxesInternos, furos, 
                         }
                         {
                             selectedTipoImpressao === 'Caixa (White_Box)' ?
-                                <div style={{ maxHeight: '400px', overflow: 'auto', width: '100%', marginTop:15 }} className="itemListContainer">
+                                <div style={{ maxHeight: '400px', overflow: 'auto', width: '100%', marginTop: 15 }} className="itemListContainer">
                                     {filteredWhiteBoxFuro.map((WhiteBoxFuro, index) => (
-                                        <li style={{ marginBottom: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 10 }}>
-                                            <Button2 onClick={() => setSelectedWhiteBox(WhiteBoxFuro)} >
+                                        <Button2 onClick={() => setSelectedWhiteBox(WhiteBoxFuro)} >
+                                            <li style={{ marginBottom: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 10 }}>
                                                 <div style={{ display: 'flex', width: 300, backgroundColor: selectedWhiteBox?.id === WhiteBoxFuro?.id ? '#D9D9D9' : 'white', flexDirection: 'column', alignItems: 'center', borderWidth: 1, borderColor: '#000', borderRadius: 7, padding: 8, paddingLeft: 16, paddingRight: 16 }} >
 
                                                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'end', width: '100%' }} >
@@ -328,8 +332,8 @@ export default function PrintLabel({ furoSelecionado, chipBoxesInternos, furos, 
                                                         <text style={{ color: 'black', fontWeight: 'bold' }} >Até: {WhiteBoxFuro?.ate}</text>
                                                     </div>
                                                 </div>
-                                            </Button2>
-                                        </li>
+                                            </li>
+                                        </Button2>
                                     ))}
                                 </div>
                                 :
@@ -338,10 +342,10 @@ export default function PrintLabel({ furoSelecionado, chipBoxesInternos, furos, 
                         {
                             selectedTipoImpressao === 'Palete' ?
 
-                                <div style={{ maxHeight: '400px', overflow: 'auto', width: '100%', marginTop:15 }} className="itemListContainer">
+                                <div style={{ maxHeight: '400px', overflow: 'auto', width: '100%', marginTop: 15 }} className="itemListContainer">
                                     {filteredPaleteFuro.map((PaleteFuro, index) => (
-                                        <li style={{ marginBottom: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 10 }}>
-                                            <Button2 onClick={() => setSelectedPalete(PaleteFuro)} >
+                                        <Button2 onClick={() => setSelectedPalete(PaleteFuro)} >
+                                            <li style={{ marginBottom: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 10 }}>
                                                 <div style={{ display: 'flex', width: 300, backgroundColor: selectedPalete?.qrcode === PaleteFuro?.qrcode ? '#D9D9D9' : 'white', flexDirection: 'column', alignItems: 'center', borderWidth: 1, borderColor: '#000', borderRadius: 7, padding: 8, paddingLeft: 16, paddingRight: 16 }} >
 
                                                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'end', width: '100%' }} >
@@ -359,8 +363,9 @@ export default function PrintLabel({ furoSelecionado, chipBoxesInternos, furos, 
                                                         <text style={{ color: 'black', fontWeight: 'bold' }} >Até: {PaleteFuro?.ate}</text>
                                                     </div>
                                                 </div>
-                                            </Button2>
-                                        </li>
+                                            </li>
+                                        </Button2>
+
                                     ))}
                                 </div>
                                 :
@@ -378,7 +383,15 @@ export default function PrintLabel({ furoSelecionado, chipBoxesInternos, furos, 
                             selectedTipoImpressao === 'Caixa (White_Box)' && !selectedWhiteBox
                         }
                         >
-                            <TitleText style={{ color: 'white', fontSize: 26, fontWeight: 'bold' }} >{isLoading ? 'Enviando...' : 'Imprimir'}</TitleText>
+                            <TitleText style={{ color: 'white', fontSize: 26, fontWeight: 'bold' }} >
+                                {selectedTipoImpressao === 'Palete' && !selectedPalete
+                                    ||
+                                    selectedTipoImpressao === 'Caixa (White_Box)' && !selectedWhiteBox ?
+                                    'Selecione a etiqueta'
+                                    :
+                                    'Imprimir'
+                                }
+                            </TitleText>
                         </Button>
                     </div>
                     :
@@ -388,8 +401,7 @@ export default function PrintLabel({ furoSelecionado, chipBoxesInternos, furos, 
             {
                 selectedTipoImpressao === 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
                     <Button onClick={() => {
-                        //handlePrint(paramsPrint, furoSelecionado, chipBoxesInternos[furoSelecionado.index], selectedTipoImpressao);
-                        console.log('imprimir amostra ou caixa')
+                        handlePrint(paramsPrint, furoSelecionado, chipBoxesInternos[furoSelecionado.index], selectedTipoImpressao);
                         setShowAlert(true)
                     }} disabled={isLoading}
                     >
@@ -402,11 +414,12 @@ export default function PrintLabel({ furoSelecionado, chipBoxesInternos, furos, 
     );
 };
 const Button = styled.button`
-    background-color: #074F92;
+    background-color: ${props => (!props.disabled ? '#074F92' : '#f18832')};
     transition: opacity 0.3s;
     height: 80px;
     width: 210px;
     align-items: center;
+    margin-top: 10px;
     justify-content: center;
     border-radius: 8px;
     color: 'white';
