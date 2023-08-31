@@ -36,8 +36,6 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
         return `${hours}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
     }
 
-    console.log(furoSelecionado)
-
     function generatePDF(data) {
         const sortedChipBoxes = chipBoxesInternos[furoSelecionado?.index].slice().sort((a, b) => a.cx - b.cx);
         const doc = new jsPDF();
@@ -49,25 +47,32 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
         const img = imageB64
         //primeira pagina do pdf: capa
         doc.addImage(img, 'jpg', 5, 5)
-        doc.setFont('times', 'normal', 'bold')
-        doc.text(`Relatório de processamento do furo`, 118, 15)
-        doc.text(`${furoSelecionado.furo}`, 118, 22)
-        doc.text(`Furo importado no sistema em:`, 118, 37)
-        doc.text(`${furoSelecionado.importadoEm}h`, 118, 44)
+        doc.setFont('helvetica', 'normal', 'bold')
 
-        doc.text(`Processos incluídos: ${selectedProcesses.join(', ')}`, 38, 135)
-        doc.text(`Paraupebas, ${formattedDate}`, 65, 145)
-        doc.text(`Relatório exportado por ${authUser.email}`, 47, 260)
+        doc.text(`Relatório de processamento do furo`, 64, 80)
+        doc.text(`${furoSelecionado.furo}`, 94, 87)
+
+        doc.text(`Paraupebas, ${formattedDate}`, 65, 135)
+        if(selectedProcesses.length > 3) {
+            doc.text(`Processos incluídos: ${selectedProcesses.slice(0,3).join(', ')},`, 38, 145)
+            doc.text(`${selectedProcesses.slice(3,6).join(', ')}`, 38, 155)
+            doc.text(`${selectedProcesses.slice(6,9).join(', ')}`, 38, 165)
+            doc.text(`${selectedProcesses.slice(9,12).join(', ')}`, 38, 175)
+
+        }else{
+            doc.text(`Processos incluídos: ${selectedProcesses.join(', ')}`, 38, 145)
+        }
+        doc.text(`Relatório exportado por ${authUser.email}`, 10, 260)
         // segunda pagina do pdf
         doc.addPage(1, 'p')
-        doc.text('Dados gerais do furo:', 10, 9)
+        doc.text('Dados gerais do furo:', 10, 10)
         doc.autoTable({
             head: [data1[0]],
             body: data1.slice(1),
         });
-
+        doc.text(`Furo importado no sistema em: ${furoSelecionado.importadoEm}h`, 15, 40)
+        
         if (selectedProcesses.includes('Conferência')) {
-            // Adicionar uma nova página para a tabela
             doc.addPage();
             doc.text('Tabela de Conferência:', 10, 9);
     
@@ -75,7 +80,6 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                 ['Usuário', 'Furo', 'Tempo em processamento', 'Caixa'],
             ];
     
-            // Percorrer o array de caixas e adicionar os dados de conferência à tabela
             sortedChipBoxes.forEach(caixa => {
                 const conferenciaProcess = caixa.processos.conferencia;
                 const startTimestamp = conferenciaProcess.ent ? conferenciaProcess.ent.seconds : 0;
@@ -94,9 +98,7 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                 body: tableData.slice(1),
             });
         }
-
         if (selectedProcesses.includes('Marcação')) {
-            // Adicionar uma nova página para a tabela
             doc.addPage();
             doc.text('Tabela de Marcação:', 10, 9);
     
@@ -122,9 +124,7 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                 body: tableData.slice(1),
             });
         }
-
         if (selectedProcesses.includes('Fotografia')) {
-            // Adicionar uma nova página para a tabela
             doc.addPage();
             doc.text('Tabela de Fotografia:', 10, 9);
     
@@ -134,6 +134,33 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
     
             sortedChipBoxes.forEach(caixa => {
                 const conferenciaProcess = caixa.processos.fotografia;
+                const startTimestamp = conferenciaProcess.ent ? conferenciaProcess.ent.seconds : 0;
+                const endTimestamp = conferenciaProcess.sai ? conferenciaProcess.sai.seconds : 0;
+    
+                const timeInSeconds = endTimestamp - startTimestamp;
+                const formattedTime = secondsToHMS(timeInSeconds);
+    
+                const user = conferenciaProcess.user || '-';
+    
+                tableData.push([user, caixa.furo, formattedTime, caixa.cx]);
+            });
+    
+            doc.autoTable({
+                head: [tableData[0]],
+                body: tableData.slice(1),
+            });
+        }
+        //add outros processos que são por furo
+        if (selectedProcesses.includes('Arquivamento')) {
+            doc.addPage();
+            doc.text('Tabela de Arquivamento:', 10, 9);
+    
+            const tableData = [
+                ['Usuário', 'Furo', 'Tempo em processamento', 'Caixa'],
+            ];
+    
+            sortedChipBoxes.forEach(caixa => {
+                const conferenciaProcess = caixa.processos.arquivamento;
                 const startTimestamp = conferenciaProcess.ent ? conferenciaProcess.ent.seconds : 0;
                 const endTimestamp = conferenciaProcess.sai ? conferenciaProcess.sai.seconds : 0;
     
@@ -161,7 +188,7 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
 
         doc.save(`${furoSelecionado.furo + '-' + NomeArquivo}.pdf`);
         setTimeout(() => {
-            sendPdfToApi(NomeArquivo, formattedDate, selectedProcesses.join(', '));
+            //sendPdfToApi(NomeArquivo, formattedDate, selectedProcesses.join(', '));
         }, 5000);
     }
 
