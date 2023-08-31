@@ -7,6 +7,8 @@ import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import * as furosmock from "../components/mockedContent/furos";
 import * as chipboxesmock from "../components/mockedContent/chipboxes";
+import * as paletesmock from "../components/mockedContent/paletes"
+import * as whiteBoxesmock from "../components/mockedContent/whiteboxes"
 import Header from "../components/Header";
 import RowFuros from "../components/index/rowFuros";
 import TableFuros from "../components/Relatorios/tableFuros";
@@ -15,7 +17,7 @@ import TopDashboard from "../components/Dashboard/topDashboard";
 import { Divider } from '@mui/material';
 import Relatorio from "../components/Dashboard/relatorio";
 import DadosProcessamento from "../components/DadosProcessamento/dadosProcessamento";
-import PrintButton from "../components/ImpressaoEtiquetas/impressao";
+import PrintLabel from "../components/ImpressaoEtiquetas/impressao";
 import PrinterSettings from "../components/ConfigImpressora/ConfigImpressora";
 import CustomBarChart from "../components/Dashboard/CustomBarChartHorizontal";
 import SquareIcon from '@mui/icons-material/Square';
@@ -54,12 +56,15 @@ export default function Home() {
     const [contagensPorDiaDespacho, setContagensPorDiaDespacho] = useState({});
     const [contagensPorDiaArquivamento, setContagensPorDiaArquivamento] = useState({});
 
+    const [whiteBoxes, setWhiteBoxes] = useState(whiteBoxesmock.whiteb)
+    const [paletes, setPaletes] = useState(paletesmock.paletes)
+
     useEffect(() => {
         if (!isLoading && !authUser) {
             router.push("/login");
         }
 
-        // if (!!authUser) {
+        //if (!!authUser) {
         //     const unsubscribeFuros = onSnapshot(query(collection(db, "Furos"), orderBy('numero')), (snapshot) => {
         //         const updatedFuros = snapshot.docs.map((doc) => ({
         //             id: doc.id,
@@ -76,11 +81,29 @@ export default function Home() {
         //         setChipBoxes(updatedChipBoxes);
         //     });
 
-        //     return () => {
-        //         unsubscribeFuros();
-        //         unsubscribeChipBoxes();
-        //     };
-        // }
+            // const unsubscribeWhiteBoxes = onSnapshot(query(collection(db, "WhiteBoxes"), orderBy('furo')), (snapshot) => {
+            //     const WhiteBoxes = snapshot.docs.map((doc) => ({
+            //         id: doc.id,
+            //         ...doc.data()
+            //     }));
+            //     setWhiteBoxes(WhiteBoxes);
+            // });
+
+            // const unsubscribePaletes = onSnapshot(query(collection(db, "Paletes"), orderBy('furo')), (snapshot) => {
+            //     const Paletes = snapshot.docs.map((doc) => ({
+            //         id: doc.id,
+            //         ...doc.data()
+            //     }));
+            //     setPaletes(Paletes);
+            // });
+
+            // return () => {
+                //unsubscribeFuros();
+                //unsubscribeChipBoxes();
+            //     unsubscribeWhiteBoxes();
+            //     unsubscribePaletes();
+            // };
+       // }
     }, [authUser, isLoading]);
 
     useEffect(() => {
@@ -485,7 +508,7 @@ export default function Home() {
                         }
                         {
                             selected === 'Impressão Etiquetas' ?
-                                <PrintButton furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} />
+                                <PrintLabel furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} whiteBoxes={whiteBoxes} paletes={paletes} />
                                 :
                                 <></>
                         }
