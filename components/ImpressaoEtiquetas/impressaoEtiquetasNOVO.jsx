@@ -123,7 +123,6 @@ export default function PrintLabelNovo({ furoSelecionado, chipBoxesInternos, fur
         //printer.send(defaultLayout)
     },[])
 
-    console.log(availableDevices)
 
     async function handlePrintCaixaOuAmostra(){
         const zpl = await handlePrint(paramsPrint, furoSelecionado, chipBoxesInternos[furoSelecionado.index], selectedTipoImpressao);

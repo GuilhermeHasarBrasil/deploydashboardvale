@@ -1,105 +1,68 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components'
 import Alert from '@mui/material/Alert';
-import CheckIcon from '@mui/icons-material/Check';
+import { useBroswerPrint } from '../../contexts/BrowserPrintContext';
 
 export default function PrinterSettings() {
-  const [printer, setPrinter] = useState({
-    ip: '',
-    port: ''
-  });
+
+  const { printer, BPrint } = useBroswerPrint();
+  const [availableDevices, setAvailableDevices] = useState([])
+  const [currentPrinter, setCurrentPrinter] = useState()
 
   useEffect(() => {
-    const storedPrinter = JSON.parse(localStorage.getItem('printer'));
-    if (storedPrinter) {
-      setPrinter(storedPrinter);
+    function onSuccess(devices) {
+      const devicesWithImages = devices.printer.map((device) => {
+        const name = device.name.toLowerCase();
+        let image = null;
+
+        if (name.includes("zt231")) {
+          image = '/assets/PrinterImages/ZT231.png';
+        } else if (name.includes("zd500")) {
+          image = '/assets/PrinterImages/ZD500R.png'; // Pode ser ZD500RImage ou ZD500Image, dependendo do nome exato.
+        } else if (name.includes("zt230")) {
+          image = '/assets/PrinterImages/ZT230.png';
+        }
+
+        return {
+          ...device,
+          image: image,
+        };
+      });
+
+      setAvailableDevices(devicesWithImages);
     }
+
+    function onError(error) {
+      console.error("Erro ao obter dispositivos:", error);
+    }
+
+    BPrint?.getLocalDevices(onSuccess, onError);
+    BPrint?.getDefaultDevice("printer", (deviceDefault) => {
+      setCurrentPrinter(deviceDefault);
+    });
   }, []);
-
-  async function saveConfig() {
-    localStorage.setItem('printer', JSON.stringify(printer))
-    setShowSucess(true)
-    setTimeout(() => {
-      setShowSucess(false)
-    }, 1000);
-  }
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setPrinter((prevPrinter) => ({
-      ...prevPrinter,
-      [name]: value
-    }));
-  };
-
-  const [config, setConfig] = useState()
-  useEffect(() => {
-    localStorage.getItem('printer', JSON.stringify(printer));
-    console.log('Valores salvos no localStorage:', JSON.stringify(printer));
-    setConfig(JSON.stringify(printer))
-  }, [printer]);
-
-  const [showSucess, setShowSucess] = useState(false)
 
   return (
     <div style={{ width: '80%', marginLeft: '10%', display: 'flex', flexDirection: 'column', marginTop: '3%', }} >
-
-      <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', }} >
+      <div style={{ width: '100%', display: 'flex', alignItems: 'start', justifyContent: 'center', }} >
         <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 20 }} >Configurações da Impressora</h1>
       </div>
+      <div style={{ display: 'flex', flexDirection: 'column', marginTop: 40 }} >
+        <text style={{ fontSize: 25, fontWeight: 'bold', }}>Impressoras disponíveis na rede: </text>
+        {
+          availableDevices.length > 0 ?
+            <div style={{ display: 'flex', flexDirection: 'column', marginTop: 20 }} >
+              {availableDevices.map((device) => (
+                <span style={{ fontSize: 18, marginTop: 8, fontWeight: 'bold', color: device.name == currentPrinter?.name ? 'green' : 'red' }} >
+                  {device.name}{device.name == currentPrinter?.name ? ' - Conectada' : ' - Desconectada'}
+                </span>
+              ))}
+            </div>
+            :
+            <span>Carrengando impressoras conectadas...</span>
+        }
 
-      <div style={{ display: 'flex', flexDirection: 'row' }} >
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <text style={{ backgroundColor: 'white', fontSize: 25, fontWeight: 'bold', marginBottom:10 }}> IP:</text>
-          <text style={{ backgroundColor: 'white', fontSize: 25, fontWeight: 'bold', }}>PORTA:</text>
-        </div>
-        <div style={{ display: 'flex', flexDirection: 'column', marginLeft:10 }}>
-          <input
-            style={{ backgroundColor: 'white', fontSize: 22, fontWeight: 'bold', borderWidth: 1,marginBottom:10 ,borderColor: 'grey', borderRadius: 5, marginLeft: 5, paddingLeft:5 }}
-            type="text"
-            name="ip"
-            value={printer.ip}
-            onChange={handleInputChange}
-            placeholder={config ? JSON.parse(config).ip : ''}
-
-          />
-          <input
-            style={{ backgroundColor: 'white', fontSize: 22, fontWeight: 'bold', borderWidth: 1, borderColor: 'grey', borderRadius: 5, marginLeft: 5, paddingLeft:5 }}
-            type="text"
-            name="port"
-            value={printer.port}
-            placeholder={config ? JSON.parse(config).port : ''}
-            onChange={handleInputChange}
-          />
-        </div>
       </div>
-
-      <div style={{ backgroundColor: 'white', padding: 5, boxSizing: 'border-box' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column', width: '100%', }} >
-          <Button onClick={saveConfig} >
-            <text style={{ color: 'white', fontSize: 20, fontWeight: 'bold' }}>Salvar configurações</text>
-          </Button>
-          <Alert style={{ marginTop: '5%', display: showSucess ? 'flex' : 'none', width: '70%' }} icon={<CheckIcon fontSize="inherit" />} severity="success">
-            Configurações salvas
-          </Alert>
-        </div>
-      </div>
-
     </div>
   );
 }
-
-const Button = styled.button`
-    background-color: #074F92;
-    transition: opacity 0.3s;
-    height: 80px;
-    width: 170px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    color: 'white';
-    &:hover {
-        opacity: 0.2;
-    }
-
-`
