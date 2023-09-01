@@ -4,32 +4,17 @@ import { defaultLayoutAmostra } from './defaultLayoutBag'
 export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxes, selectedTipoImpressao) {
     const storedPrinter = JSON.parse(localStorage.getItem('printer'));
 
-    const Print = async (content) => {
-        try {
-            const response = await fetch('/api/imprimir', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ zpl: content, config: storedPrinter }),
-            });
-            if (response.ok) {
-                setMessage('ZPL enviado com sucesso para impressão.');
-            } else {
-                setMessage('Erro ao enviar ZPL para impressão.');
-            }
-        } catch (error) {
-            console.log('Erro ao enviar a requisição.');
-        }
-    };
     if (paramsPrint.inicio == undefined || paramsPrint.fim == undefined) {
         console.log('digite inicio e fim')
         return
     } else {
         const caixasNoIntervalo = chipBoxes.filter(caixa => paramsPrint.inicio <= caixa.cx && caixa.cx <= paramsPrint.fim);
         const etiquetas = await gerarEtiquetasParaImpressao(caixasNoIntervalo, paramsPrint, selectedTipoImpressao)
-        Print(etiquetas)
+        //Print(etiquetas)
+
+        return etiquetas
     }
+
     async function gerarEtiquetasParaImpressao(caixas, params, selectedTipoImpressao) {
         try {
             const chipBoxLayout = selectedTipoImpressao=='Caixa (Chip_Box)' ? defaultLayout : defaultLayoutAmostra;
@@ -65,4 +50,23 @@ export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxe
             console.log(error)
         }
     }
+
+    // const Print = async (content) => {
+    //     try {
+    //         const response = await fetch('/api/imprimir', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({ zpl: content, config: storedPrinter }),
+    //         });
+    //         if (response.ok) {
+    //             setMessage('ZPL enviado com sucesso para impressão.');
+    //         } else {
+    //             setMessage('Erro ao enviar ZPL para impressão.');
+    //         }
+    //     } catch (error) {
+    //         console.log('Erro ao enviar a requisição.');
+    //     }
+    // };
 }

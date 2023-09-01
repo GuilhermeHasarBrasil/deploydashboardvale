@@ -30,6 +30,7 @@ import Relatorios from "../components/Relatorios/Relatorios";
 import Import from "../components/ImportarArquivo/importar";
 import CustomBarChartMes from "../components/Dashboard/BarChartMes";
 import { motion } from 'framer-motion';
+import PrintLabelNovo from "../components/ImpressaoEtiquetas/impressaoEtiquetasNOVO";
 
 export default function Home() {
     const { signOut, authUser, isLoading } = useAuth();
@@ -508,7 +509,8 @@ export default function Home() {
                         }
                         {
                             selected === 'Impressão Etiquetas' ?
-                                <PrintLabel furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} whiteBoxes={whiteBoxes} paletes={paletes} />
+                                // <PrintLabel furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} whiteBoxes={whiteBoxes} paletes={paletes} />
+                                <PrintLabelNovo furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} whiteBoxes={whiteBoxes} paletes={paletes} />
                                 :
                                 <></>
                         }

@@ -8,7 +8,8 @@ export default async function handlePrintPalete(palete) {
         return
     } else {
         const etiquetas = await gerarEtiquetasParaImpressao(palete)
-        Print(etiquetas)
+        //Print(etiquetas)
+        return etiquetas
     }
     async function gerarEtiquetasParaImpressao(palete) {
         try {
@@ -30,22 +31,22 @@ export default async function handlePrintPalete(palete) {
         }
     }
 
-    const Print = async (content) => {
-        try {
-            const response = await fetch('/api/imprimir', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ zpl: content, config: storedPrinter }),
-            });
-            if (response.ok) {
-                setMessage('ZPL enviado com sucesso para impressão.');
-            } else {
-                setMessage('Erro ao enviar ZPL para impressão.');
-            }
-        } catch (error) {
-            console.log('Erro ao enviar a requisição.');
-        }
-    };
+    // const Print = async (content) => {
+    //     try {
+    //         const response = await fetch('/api/imprimir', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify({ zpl: content, config: storedPrinter }),
+    //         });
+    //         if (response.ok) {
+    //             setMessage('ZPL enviado com sucesso para impressão.');
+    //         } else {
+    //             setMessage('Erro ao enviar ZPL para impressão.');
+    //         }
+    //     } catch (error) {
+    //         console.log('Erro ao enviar a requisição.');
+    //     }
+    // };
 }

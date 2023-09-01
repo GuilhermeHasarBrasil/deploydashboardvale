@@ -7,6 +7,8 @@ export default function Document() {
         rel="stylesheet"
         href="https://fonts.googleapis.com/icon?family=Material+Icons"
       />
+      <script type="text/javascript" src="/zebra/BrowserPrint.js" async></script>
+      <script type="text/javascript" src="/zebra/BrowserPrint-Zebra.js" async></script>
       <Head />
       <body>
         <Main />
