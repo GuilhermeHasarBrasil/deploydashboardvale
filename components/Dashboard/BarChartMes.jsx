@@ -278,6 +278,12 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                     <></>
 
             }
+            {
+                selectedDateRange.startDate ?
+                <></>
+                :
+                <text style={{fontSize:18, fontWeight:'bold', marginTop:15}} >Selecione o intervalo de datas para filtrar</text>
+            }
             <DatePickerWrapper>
                 <DatePicker
                     selected={selectedDateRange.startDate}
