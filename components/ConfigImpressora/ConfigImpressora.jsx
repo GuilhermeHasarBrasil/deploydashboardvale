@@ -59,7 +59,7 @@ export default function PrinterSettings() {
               ))}
             </div>
             :
-            <span>Carrengando impressoras conectadas...</span>
+            <span>Carregando impressoras conectadas...</span>
         }
 
       </div>

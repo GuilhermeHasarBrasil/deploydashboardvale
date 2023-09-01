@@ -35,8 +35,8 @@ import PrintLabelNovo from "../components/ImpressaoEtiquetas/impressaoEtiquetasN
 export default function Home() {
     const { signOut, authUser, isLoading } = useAuth();
     const router = useRouter();
-    const [furos, setFuros] = useState(furosmock.furos)
-    const [chipBoxes, setChipBoxes] = useState(chipboxesmock.chipboxes)
+    const [furos, setFuros] = useState([])
+    const [chipBoxes, setChipBoxes] = useState([])
     const [chipBoxesInternos, setChipBoxesInternos] = useState([])
     const [selected, setSelected] = useState('Dashboard')
     const [furoSelecionado, setFuroSelecionado] = useState()
@@ -65,46 +65,46 @@ export default function Home() {
             router.push("/login");
         }
 
-        //if (!!authUser) {
-        //     const unsubscribeFuros = onSnapshot(query(collection(db, "Furos"), orderBy('numero')), (snapshot) => {
-        //         const updatedFuros = snapshot.docs.map((doc) => ({
-        //             id: doc.id,
-        //             ...doc.data()
-        //         }));
-        //         setFuros(updatedFuros);
-        //     });
+        if (!!authUser) {
+            const unsubscribeFuros = onSnapshot(query(collection(db, "Furos"), orderBy('numero')), (snapshot) => {
+                const updatedFuros = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                setFuros(updatedFuros);
+            });
 
-        //     const unsubscribeChipBoxes = onSnapshot(query(collection(db, "ChipBoxes"), orderBy('furo')), (snapshot) => {
-        //         const updatedChipBoxes = snapshot.docs.map((doc) => ({
-        //             id: doc.id,
-        //             ...doc.data()
-        //         }));
-        //         setChipBoxes(updatedChipBoxes);
-        //     });
+            const unsubscribeChipBoxes = onSnapshot(query(collection(db, "ChipBoxes"), orderBy('furo')), (snapshot) => {
+                const updatedChipBoxes = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                setChipBoxes(updatedChipBoxes);
+            });
 
-            // const unsubscribeWhiteBoxes = onSnapshot(query(collection(db, "WhiteBoxes"), orderBy('furo')), (snapshot) => {
-            //     const WhiteBoxes = snapshot.docs.map((doc) => ({
-            //         id: doc.id,
-            //         ...doc.data()
-            //     }));
-            //     setWhiteBoxes(WhiteBoxes);
-            // });
+            const unsubscribeWhiteBoxes = onSnapshot(query(collection(db, "WhiteBoxes"), orderBy('furo')), (snapshot) => {
+                const WhiteBoxes = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                setWhiteBoxes(WhiteBoxes);
+            });
 
-            // const unsubscribePaletes = onSnapshot(query(collection(db, "Paletes"), orderBy('furo')), (snapshot) => {
-            //     const Paletes = snapshot.docs.map((doc) => ({
-            //         id: doc.id,
-            //         ...doc.data()
-            //     }));
-            //     setPaletes(Paletes);
-            // });
+            const unsubscribePaletes = onSnapshot(query(collection(db, "Paletes"), orderBy('furo')), (snapshot) => {
+                const Paletes = snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    ...doc.data()
+                }));
+                setPaletes(Paletes);
+            });
 
-            // return () => {
-                //unsubscribeFuros();
-                //unsubscribeChipBoxes();
-            //     unsubscribeWhiteBoxes();
-            //     unsubscribePaletes();
-            // };
-       // }
+            return () => {
+                unsubscribeFuros();
+                unsubscribeChipBoxes();
+                unsubscribeWhiteBoxes();
+                unsubscribePaletes();
+            };
+       }
     }, [authUser, isLoading]);
 
     useEffect(() => {
@@ -123,42 +123,42 @@ export default function Home() {
 
             const arraysFiltradosConferencia = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
-                    chipbox.processos.conferencia.sai !== null
+                    chipbox.processos.conferencia?.sai !== null
                 )
             );
             setFiltroConferencia(arraysFiltradosConferencia)
 
             const arraysFiltradosMarcacao = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
-                    chipbox.processos.marcacao.sai !== null
+                    chipbox.processos.marcacao?.sai !== null
                 )
             );
             setFiltroMarcacao(arraysFiltradosMarcacao)
 
             const arraysFiltradosFotografia = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
-                    chipbox.processos.fotografia.sai !== null
+                    chipbox.processos.fotografia?.sai !== null
                 )
             );
             setFiltroFotografia(arraysFiltradosFotografia)
 
             const arraysFiltradosDensidade = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
-                    chipbox.processos.densidade.sai !== null
+                    chipbox.processos.densidade?.sai !== null
                 )
             );
             setFiltroDensidade(arraysFiltradosDensidade)
 
             const arraysFiltradosSerragem = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
-                    chipbox.processos.serragem.sai !== null
+                    chipbox.processos.serragem?.sai !== null
                 )
             );
             setFiltroSerragem(arraysFiltradosSerragem)
 
             const arraysFiltradosArquivamento = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
-                    chipbox.processos.arquivamento.sai !== null
+                    chipbox.processos.arquivamento?.sai !== null
                 )
             );
             setFiltroArquivamento(arraysFiltradosArquivamento)
@@ -363,42 +363,42 @@ export default function Home() {
 
             const arraysFiltradosConferencia = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
-                    chipbox.processos.conferencia.sai !== null
+                    chipbox.processos.conferencia?.sai !== null
                 )
             );
             setFiltroConferenciaEnt(arraysFiltradosConferencia)
 
             const arraysFiltradosMarcacao = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
-                    chipbox.processos.marcacao.sai !== null
+                    chipbox.processos.marcacao?.sai !== null
                 )
             );
             setFiltroMarcacaoEnt(arraysFiltradosMarcacao)
 
             const arraysFiltradosFotografia = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
-                    chipbox.processos.fotografia.sai !== null
+                    chipbox.processos.fotografia?.sai !== null
                 )
             );
             setFiltroFotografiaEnt(arraysFiltradosFotografia)
 
             const arraysFiltradosDensidade = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
-                    chipbox.processos.densidade.sai !== null
+                    chipbox.processos.densidade?.sai !== null
                 )
             );
             setFiltroDensidadeEnt(arraysFiltradosDensidade)
 
             const arraysFiltradosSerragem = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
-                    chipbox.processos.serragem.sai !== null
+                    chipbox.processos.serragem?.sai !== null
                 )
             );
             setFiltroSerragemEnt(arraysFiltradosSerragem)
 
             const arraysFiltradosArquivamento = arraysInternos.map(arrayInterno =>
                 arrayInterno.filter(chipbox =>
-                    chipbox.processos.arquivamento.sai !== null
+                    chipbox.processos.arquivamento?.sai !== null
                 )
             );
             setFiltroArquivamentoEnt(arraysFiltradosArquivamento)
