@@ -180,7 +180,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
         }
     }, [numberCarrousel])
 
-    console.log(selectedDateRange.startDate?.toISOString().substr(0, 10))
+    //console.log(selectedDateRange.startDate?.toISOString().substr(0, 10))
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 5, flexDirection: 'column', alignItems: 'center', width: '100%' }}>

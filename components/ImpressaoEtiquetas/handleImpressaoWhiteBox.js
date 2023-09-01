@@ -4,7 +4,7 @@ export default async function handlePrintWhiteBox(whiteBox) {
     const storedPrinter = JSON.parse(localStorage.getItem('printer'));
 
     if (!whiteBox || whiteBox === undefined) {
-        console.log('sleecione a caixa')
+        //console.log('sleecione a caixa')
         return
     } else {
         const etiquetas = await gerarEtiquetasParaImpressao(whiteBox)

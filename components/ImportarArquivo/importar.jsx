@@ -121,13 +121,13 @@ export default function Import() {
         if (documento?.numero == furo.furo) {
             try {
                 const reversedCaixas = [...caixas].reverse();
-                console.log('cheguei dentro do try ', querySnapshot.docs[0].data().profundidade)
+                //console.log('cheguei dentro do try ', querySnapshot.docs[0].data().profundidade)
 
                 for (let i = 0; i < reversedCaixas.length - querySnapshot.docs[0].data().profundidade; i++) {
                     const docNumber = caixas.length - i;
                     const caixa = reversedCaixas[i];
                     let chipBoxId = `${furo.furo}-${docNumber}`
-                    console.log('cheguei aqui chipboxid: ', chipBoxId)
+                    //console.log('cheguei aqui chipboxid: ', chipBoxId)
                     try {
                         const chipBoxesCollectionRef = collection(db, "ChipBoxes"); // Referência da coleção "ChipBoxes"
                         const chipBoxDocRef = doc(chipBoxesCollectionRef, chipBoxId); // Cria uma referência ao documento com ID personalizado

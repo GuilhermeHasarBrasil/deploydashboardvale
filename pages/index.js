@@ -64,7 +64,7 @@ export default function Home() {
         if (!isLoading && !authUser) {
             router.push("/login");
         }
-
+        console.log('rodei')
         if (!!authUser) {
             const unsubscribeFuros = onSnapshot(query(collection(db, "Furos"), orderBy('numero')), (snapshot) => {
                 const updatedFuros = snapshot.docs.map((doc) => ({

@@ -5,7 +5,7 @@ export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxe
     const storedPrinter = JSON.parse(localStorage.getItem('printer'));
 
     if (paramsPrint.inicio == undefined || paramsPrint.fim == undefined) {
-        console.log('digite inicio e fim')
+        //console.log('digite inicio e fim')
         return
     } else {
         const caixasNoIntervalo = chipBoxes.filter(caixa => paramsPrint.inicio <= caixa.cx && caixa.cx <= paramsPrint.fim);
@@ -44,10 +44,10 @@ export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxe
                     }
                 }
             });
-            console.log(etiquetasZpl);
+            //console.log(etiquetasZpl);
             return etiquetasZpl;
         } catch (error) {
-            console.log(error)
+            //console.log(error)
         }
     }
 

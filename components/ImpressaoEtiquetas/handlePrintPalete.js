@@ -4,7 +4,7 @@ export default async function handlePrintPalete(palete) {
     const storedPrinter = JSON.parse(localStorage.getItem('printer'));
 
     if (!palete || palete === undefined) {
-        console.log('sleecione a caixa')
+        //console.log('sleecione a caixa')
         return
     } else {
         const etiquetas = await gerarEtiquetasParaImpressao(palete)

@@ -242,9 +242,9 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
 
     },[process, chipBoxesInternos[furoSelecionado.index]])
 
-    console.log('total:', chipBoxesInternos[furoSelecionado.index].length)
-    console.log('iniciado:', countProcessingBoxesSelectedProcess)
-    console.log('finalizado:', countFinalizadosSelectedProcess)
+    //console.log('total:', chipBoxesInternos[furoSelecionado.index].length)
+    //console.log('iniciado:', countProcessingBoxesSelectedProcess)
+    //console.log('finalizado:', countFinalizadosSelectedProcess)
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 5, flexDirection: 'column', width: '100%' }} >
