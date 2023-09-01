@@ -39,7 +39,7 @@ const LoginForm = () => {
             <div className="w-full lg:w-[100%] p-8 md:p-14 flex items-center justify-center lg:justify-start">
                 <img src='/assets/hasarlogin.png' style={{width:600}} />
                 
-                <div style={{marginLeft:200, width:600}} >
+                <div style={{marginLeft:'30%', width:600}} >
                     <form onSubmit={(e) => e.preventDefault()}>
                         <div className="mt-10 pl-1 flex flex-col">
                             <label style={{ color: '#00359B', fontWeight: 'bold', fontSize: 18, textShadow: '0 0 6px rgba(255, 255, 255, 0.9)'}} >LOGIN</label>
