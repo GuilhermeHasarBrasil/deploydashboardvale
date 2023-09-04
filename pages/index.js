@@ -29,8 +29,8 @@ import Tab from '@mui/material/Tab';
 import Relatorios from "../components/Relatorios/Relatorios";
 import Import from "../components/ImportarArquivo/importar";
 import CustomBarChartMes from "../components/Dashboard/BarChartMes";
-import { motion } from 'framer-motion';
 import PrintLabelNovo from "../components/ImpressaoEtiquetas/impressaoEtiquetasNOVO";
+import Users from "../components/Usuarios/Users";
 
 export default function Home() {
     const { signOut, authUser, isLoading } = useAuth();
@@ -535,6 +535,12 @@ export default function Home() {
                         {
                             selected === 'Config. Impressora' ?
                                 <PrinterSettings />
+                                :
+                                <></>
+                        }
+                        {
+                            selected === 'Usuário' ?
+                                <Users />
                                 :
                                 <></>
                         }
