@@ -44,6 +44,7 @@
     "react-icons": "^4.8.0",
     "react-ionicons": "^4.2.1",
     "react-loader-spinner": "^5.3.4",
+    "react-loading": "^2.0.3",
     "react-select": "^5.7.4",
     "react-spinners": "^0.13.8",
     "recharts": "^2.7.3",

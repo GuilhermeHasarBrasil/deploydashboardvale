@@ -1,39 +1,38 @@
 import React, { useState, useEffect } from "react"
-import { auth } from "../../firebase/firebase"
+import { authCreations, auth } from "../../firebase/firebase"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { useRouter } from "next/router"
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import {
-    getDocs,
-    where,
-    updateDoc,
     doc,
     setDoc,
-    Timestamp,
 } from "firebase/firestore";
-import { db } from "../../firebase/firebase"
+import { db, dbCreations } from "../../firebase/firebase"
 import { AddCircleOutline } from 'react-ionicons'
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Checkbox } from "@mui/material"
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import Alert from '@mui/material/Alert';
+import ReactLoading from "react-loading";
+import {
+    signInWithEmailAndPassword,
+} from "firebase/auth";
 
 export default function Users() {
 
-    const router = useRouter()
     const [name, setName] = useState(null)
     const [surname, setSurname] = useState(null)
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
     const [userType, setUserType] = useState('administrador');
-    const [todosSetores, setTodosSetores] = useState(false);
     const [setoresSelecionados, setSetoresSelecionados] = useState([]);
     const handleUserTypeChange = (event) => {
         setUserType(event.target.value);
     };
-
+    const [loading, setLoading] = useState(false)
     const [users, setUsers] = useState([])
+    const [currentUser, setCurrentUser] = useState()
 
     useEffect(() => {
         console.log('rodei')
@@ -52,6 +51,11 @@ export default function Users() {
             unsubscribeUsers();
         };
     }, [])
+
+    useEffect(() => {
+        const userLogged = users.filter(user => user.email === auth.currentUser.email)
+        setCurrentUser(userLogged[0])
+    }, [users])
 
     const setores = [
         'Conferência',
@@ -97,11 +101,14 @@ export default function Users() {
     }, [userType])
 
     async function SaveNewUser() {
+        const emailAtual = currentUser.email
+        const senhaAtual = currentUser.senha
+        setLoading(true)
         try {
             const UserId = email
-            const UsersCollectionRef = collection(db, "Users"); // Referência da coleção
+            const UsersCollectionRef = collection(dbCreations, "Users"); // Referência da coleção
             const UserDocRef = doc(UsersCollectionRef, UserId); // Cria uma referência ao documento com ID personalizado
-            await createUserWithEmailAndPassword(auth, email, password)
+            await createUserWithEmailAndPassword(authCreations, email, password)
             await setDoc(UserDocRef, {
                 admin: userType === 'administrador' ? true : false,
                 email: email,
@@ -112,6 +119,11 @@ export default function Users() {
                 setores: setoresSelecionados,
                 uid: uuidv4()
             })
+                .then(
+                    successOnCreateUser(),
+                    await signInWithEmailAndPassword(auth, emailAtual, senhaAtual),
+                    setLoading(false)
+                )
         } catch (error) {
             console.log(error)
         }
@@ -133,7 +145,14 @@ export default function Users() {
 
     }, [name, surname, email, password])
 
-    console.log('validForm', validForm)
+    const [showAlertSuccess, setShowAlertSuccess] = useState(false)
+
+    function successOnCreateUser() {
+        setShowAlertSuccess(true)
+        setTimeout(() => {
+            setShowAlertSuccess(false)
+        }, 5000);
+    }
 
     return (
         <div style={{ display: 'flex', justifyContent: 'row', padding: 20, justifyContent: 'space-around' }} >
@@ -249,21 +268,32 @@ export default function Users() {
                                 </View>
                             ))}
                         </div>
-
                         {
                             !validForm ?
                                 alertForm
                                 :
                                 <Button
-                                    //onClick={SaveNewUser}
-                                    onClick={() => console.log('salva user')}
+                                    onClick={SaveNewUser}
                                     disabled={!name || !surname || !email || !password}
                                 >
-                                    <text style={{ color: 'white', fontWeight: 'bold', fontSize: 20 }} >Salvar</text>
+                                    {
+                                        loading ?
+                                            <ReactLoading width={80} type={"bubbles"} color="#fff" />
+                                            :
+                                            <text style={{ color: 'white', fontWeight: 'bold', fontSize: 20 }} >Salvar</text>
+                                    }
                                 </Button>
                         }
                     </div>
                 </div>
+                {
+                    showAlertSuccess ?
+                        <Alert style={{ marginBottom: 16, width: 600, fontWeight: 'bold' }} severity="success">
+                            Usuário cadastrado com sucesso! email: {email}, senha: {password}
+                        </Alert>
+                        :
+                        <></>
+                }
             </div>
         </div>
     )
@@ -285,6 +315,7 @@ const Button = styled.button`
     background-color: #074F92;
     transition: opacity 0.3s;
     margin-top: 15px;
+    display: flex;
     height: 50px;
     width: 120px;
     align-items: center;
