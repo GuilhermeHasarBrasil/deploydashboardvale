@@ -141,7 +141,6 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
         )
     }
     const [arrayDataProcess, setArrayDataProcess] = useState()
-
     const [arrayDataProcessDateFilter, setArrayDataProcessDateFilterDateFilter] = useState()
 
     useEffect(() => {

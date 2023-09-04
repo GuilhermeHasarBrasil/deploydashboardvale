@@ -11,7 +11,7 @@ export default function PrinterSettings() {
 
   useEffect(() => {
     function onSuccess(devices) {
-      const devicesWithImages = devices.printer.map((device) => {
+      const devicesWithImages = devices?.printer?.map((device) => {
         const name = device.name.toLowerCase();
         let image = null;
 
