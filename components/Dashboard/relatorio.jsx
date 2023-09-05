@@ -39,37 +39,39 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
     }
 
     useEffect(() => {
+
+        const array = furoSelecionado.furo === "TODOS" ? chipBoxes : chipBoxesInternos[furoSelecionado.index]
         if (process == 'Conferência') {
-            const dataArray = filtroConferencia[furoSelecionado?.index]
-            const conferenciaData = dataArray.map(item => ({
+            const dataArray = array
+            const conferenciaData = dataArray?.map(item => ({
                 'id': item.id,
-                'Tempo (segundos)': item.processos.conferencia.sai.seconds - item.processos.conferencia.ent.seconds,
+                'Tempo (segundos)': item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds : 0,
                 'caixa': item.cx,
-                'user': item.processos.conferencia.user,
-                'Data finalização': item.processos.conferencia.sai.seconds
+                'user': item.processos.conferencia.user ? item.processos.conferencia.user : '-',
+                'Data finalização': item.processos.conferencia.sai?.seconds ? item.processos.conferencia.sai.seconds : '-'
             }));
             setArrayDataProcess(conferenciaData)
         }
 
         if (process == 'Marcação') {
-            const dataArray = filtroMarcacao[furoSelecionado?.index]
-            const marcacaoData = dataArray.map(item => ({
+            const dataArray = array
+            const marcacaoData = dataArray?.map(item => ({
                 'id': item.id,
-                'Tempo (segundos)': item.processos.marcacao.sai.seconds - item.processos.marcacao.ent.seconds,
+                'Tempo (segundos)': item.processos.marcacao.ent ? item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds : 0,
                 'caixa': item.cx,
-                'user': item.processos.marcacao.user,
-                'Data finalização': item.processos.marcacao.sai.seconds
+                'user': item.processos.marcacao.user ? item.processos.marcacao.user : '-',
+                'Data finalização': item.processos.marcacao.sai?.seconds ? item.processos.marcacao.sai?.seconds : '-'
             }));
             setArrayDataProcess(marcacaoData)
         }
         if (process == 'Fotografia') {
-            const dataArray = filtroFotografia[furoSelecionado?.index]
-            const fotografiaData = dataArray.map(item => ({
+            const dataArray = array
+            const fotografiaData = dataArray?.map(item => ({
                 'id': item.id,
-                'Tempo (segundos)': item.processos.fotografia.sai.seconds - item.processos.fotografia.ent.seconds,
+                'Tempo (segundos)': item.processos.fotografia.ent ? item.processos.fotografia.sai.seconds - item.processos.fotografia.ent.seconds : 0,
                 'caixa': item.cx,
-                'user': item.processos.fotografia.user,
-                'Data finalização': item.processos.fotografia.sai.seconds
+                'user': item.processos.fotografia.user ? item.processos.fotografia.user : '-',
+                'Data finalização': item.processos.fotografia.sai?.seconds ? item.processos.fotografia.sai?.seconds : '-'
             }));
             setArrayDataProcess(fotografiaData)
         }
@@ -104,17 +106,17 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
         //     setArrayDataProcess(despachoData)
         // }
         if (process == 'Arquivamento') {
-            const dataArray = filtroArquivamento[furoSelecionado?.index]
-            const arquivamentoData = dataArray.map(item => ({
+            const dataArray = array
+            const arquivamentoData = dataArray?.map(item => ({
                 'id': item.id,
-                'Tempo (segundos)': item.processos.arquivamento.sai.seconds - item.processos.arquivamento.ent.seconds,
+                'Tempo (segundos)': item.processos.arquivamento.ent ? item.processos.arquivamento.sai.seconds - item.processos.arquivamento.ent.seconds : 0,
                 'caixa': item.cx,
-                'user': item.processos.arquivamento.user,
-                'Data finalização': item.processos.arquivamento.sai.seconds
+                'user': item.processos.arquivamento.user ? item.processos.arquivamento.user : '-',
+                'Data finalização': item.processos.arquivamento.sai?.seconds ? item.processos.arquivamento.sai?.seconds : '-'
             }));
             setArrayDataProcess(arquivamentoData)
         }
-    }, [process, furoSelecionado]);
+    }, [process, furoSelecionado, chipBoxes]);
 
     function motionIcon() {
         return (
@@ -161,93 +163,101 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
         });
 
         setArrayDataProcessDateFilterDateFilter(filteredData);
-    }, [arrayDataProcess, selectedDateRange]);
+    }, [arrayDataProcess, selectedDateRange, chipBoxes]);
 
     const [countFinalizadosSelectedProcess, setCountFinalizadosSelectedProcess] = useState()
     const [countProcessingBoxesSelectedProcess, setCountProcessingBoxesSelectedProcess] = useState()
     const [countNotStartedBoxesSelectedProcess, setCountNotStartedBoxesSelectedProcess] = useState()
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        if(process==='Conferência'){
-            const arrayFinalizadoConferencia = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
-                    chipbox.processos.conferencia.sai && chipbox.processos.conferencia.ent !== null
-                )
-            setCountFinalizadosSelectedProcess(arrayFinalizadoConferencia.length)
-            
-            const arrayIniciadoConferencia = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
-                    chipbox.processos.conferencia.ent !== null && chipbox.processos.conferencia.sai === null
-                )
-            setCountProcessingBoxesSelectedProcess(arrayIniciadoConferencia.length)
-            
-            const arrayNotStartedConferencia = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+        if (process === 'Conferência') {
+            const arrayFinalizadoConferencia = chipBoxesInternos[furoSelecionado.index]?.filter(chipbox =>
+                chipbox.processos.conferencia.sai && chipbox.processos.conferencia.ent !== null
+            )
+            setCountFinalizadosSelectedProcess(arrayFinalizadoConferencia?.length)
+
+            const arrayIniciadoConferencia = chipBoxesInternos[furoSelecionado.index]?.filter(chipbox =>
+                chipbox.processos.conferencia.ent !== null && chipbox.processos.conferencia.sai === null
+            )
+            setCountProcessingBoxesSelectedProcess(arrayIniciadoConferencia?.length)
+
+            const arrayNotStartedConferencia = chipBoxesInternos[furoSelecionado.index]?.filter(chipbox =>
                 chipbox.processos.conferencia.sai && chipbox.processos.conferencia.ent == null
             )
-            setCountNotStartedBoxesSelectedProcess(arrayNotStartedConferencia.length)
-            
+            setCountNotStartedBoxesSelectedProcess(arrayNotStartedConferencia?.length)
+
         }
-        if(process==='Marcação'){
-            const arrayFinalizadomarcacao = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
-                    chipbox.processos.marcacao.sai && chipbox.processos.marcacao.ent !== null
-                )
-            setCountFinalizadosSelectedProcess(arrayFinalizadomarcacao.length)
-            
-            const arrayIniciadomarcacao = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
-                    chipbox.processos.marcacao.ent !== null && chipbox.processos.marcacao.sai === null
-                )
-            setCountProcessingBoxesSelectedProcess(arrayIniciadomarcacao.length)
-            
-            const arrayNotStartedmarcacao = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+        if (process === 'Marcação') {
+            const arrayFinalizadomarcacao = chipBoxesInternos[furoSelecionado.index]?.filter(chipbox =>
+                chipbox.processos.marcacao.sai && chipbox.processos.marcacao.ent !== null
+            )
+            setCountFinalizadosSelectedProcess(arrayFinalizadomarcacao?.length)
+
+            const arrayIniciadomarcacao = chipBoxesInternos[furoSelecionado.index]?.filter(chipbox =>
+                chipbox.processos.marcacao.ent !== null && chipbox.processos.marcacao.sai === null
+            )
+            setCountProcessingBoxesSelectedProcess(arrayIniciadomarcacao?.length)
+
+            const arrayNotStartedmarcacao = chipBoxesInternos[furoSelecionado.index]?.filter(chipbox =>
                 chipbox.processos.marcacao.sai && chipbox.processos.marcacao.ent == null
             )
-            setCountNotStartedBoxesSelectedProcess(arrayNotStartedmarcacao.length)
-            
+            setCountNotStartedBoxesSelectedProcess(arrayNotStartedmarcacao?.length)
+
         }
-        if(process==='Fotografia'){
-            const arrayFinalizadofotografia = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
-                    chipbox.processos.fotografia.sai && chipbox.processos.fotografia.ent !== null
-                )
-            setCountFinalizadosSelectedProcess(arrayFinalizadofotografia.length)
-            
-            const arrayIniciadofotografia = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
-                    chipbox.processos.fotografia.ent !== null && chipbox.processos.fotografia.sai === null
-                )
-            setCountProcessingBoxesSelectedProcess(arrayIniciadofotografia.length)
-            
-            const arrayNotStartedfotografia = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+        if (process === 'Fotografia') {
+            const arrayFinalizadofotografia = chipBoxesInternos[furoSelecionado.index]?.filter(chipbox =>
+                chipbox.processos.fotografia.sai && chipbox.processos.fotografia.ent !== null
+            )
+            setCountFinalizadosSelectedProcess(arrayFinalizadofotografia?.length)
+
+            const arrayIniciadofotografia = chipBoxesInternos[furoSelecionado.index]?.filter(chipbox =>
+                chipbox.processos.fotografia.ent !== null && chipbox.processos.fotografia.sai === null
+            )
+            setCountProcessingBoxesSelectedProcess(arrayIniciadofotografia?.length)
+
+            const arrayNotStartedfotografia = chipBoxesInternos[furoSelecionado.index]?.filter(chipbox =>
                 chipbox.processos.fotografia.sai && chipbox.processos.fotografia.ent == null
             )
-            setCountNotStartedBoxesSelectedProcess(arrayNotStartedfotografia.length)
-            
+            setCountNotStartedBoxesSelectedProcess(arrayNotStartedfotografia?.length)
+
         }
-        if(process==='Arquivamento'){
-            const arrayFinalizadoarquivamento = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
-                    chipbox.processos.arquivamento.sai && chipbox.processos.arquivamento.ent !== null
-                )
-            setCountFinalizadosSelectedProcess(arrayFinalizadoarquivamento.length)
-            
-            const arrayIniciadoarquivamento = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
-                    chipbox.processos.arquivamento.ent !== null && chipbox.processos.arquivamento.sai === null
-                )
-            setCountProcessingBoxesSelectedProcess(arrayIniciadoarquivamento.length)
-            
-            const arrayNotStartedarquivamento = chipBoxesInternos[furoSelecionado.index].filter(chipbox =>
+        if (process === 'Arquivamento') {
+            const arrayFinalizadoarquivamento = chipBoxesInternos[furoSelecionado.index]?.filter(chipbox =>
+                chipbox.processos.arquivamento.sai && chipbox.processos.arquivamento.ent !== null
+            )
+            setCountFinalizadosSelectedProcess(arrayFinalizadoarquivamento?.length)
+
+            const arrayIniciadoarquivamento = chipBoxesInternos[furoSelecionado.index]?.filter(chipbox =>
+                chipbox.processos.arquivamento.ent !== null && chipbox.processos.arquivamento.sai === null
+            )
+            setCountProcessingBoxesSelectedProcess(arrayIniciadoarquivamento?.length)
+
+            const arrayNotStartedarquivamento = chipBoxesInternos[furoSelecionado.index]?.filter(chipbox =>
                 chipbox.processos.arquivamento.sai && chipbox.processos.arquivamento.ent == null
             )
-            setCountNotStartedBoxesSelectedProcess(arrayNotStartedarquivamento.length)
-            
-        }
-        
+            setCountNotStartedBoxesSelectedProcess(arrayNotStartedarquivamento?.length)
 
-    },[process, chipBoxesInternos[furoSelecionado.index]])
+        }
+    }, [process, chipBoxesInternos[furoSelecionado.index]], chipBoxes)
 
     //console.log('total:', chipBoxesInternos[furoSelecionado.index].length)
     //console.log('iniciado:', countProcessingBoxesSelectedProcess)
     //console.log('finalizado:', countFinalizadosSelectedProcess)
 
+    //const [date1, setDate1] = useState()
+    //console.log(date1+':00.000Z')
+
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 5, flexDirection: 'column', width: '100%' }} >
-            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop: 5 }} >Selecione o processo para exibir o gráfico de tempo de processamento de cada caixa{motionIcon()} </text>
+            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop: 5 }} >
+                {
+                furoSelecionado.furo==='TODOS'?
+                'Selecione o processo para verificar o tempo de cada caixa processada (todos os furos)'
+                :
+                'Selecione o processo para exibir o gráfico de tempo de processamento de cada caixa do furo '+furoSelecionado.furo} {motionIcon()} 
+            
+            </text>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, marginLeft: 250 }} >
                 <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
                     {processos.map((furo, index) => (
@@ -278,11 +288,22 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
                                     inline
                                 />
                             </DatePickerWrapper>
-                            <InfoProcess total={chipBoxesInternos[furoSelecionado.index].length} 
-                                         iniciado={countProcessingBoxesSelectedProcess} 
-                                         finalizado={countFinalizadosSelectedProcess} 
-                                         naoIniciado={countNotStartedBoxesSelectedProcess}
-                            />
+                            {/* <input
+                                type='datetime-local'
+                                style={{ backgroundColor: 'white', width: 400, marginBottom: 15, height: 40, padding: 2, borderRadius: 5, borderWidth: 1, borderColor: 'black' }}
+                                onChange={(e) => setDate1(e.target.value)}
+                            /> */}
+                            {
+                                furoSelecionado.furo === 'TODOS' ?
+                                    <></>
+                                    :
+                                    <InfoProcess total={chipBoxesInternos[furoSelecionado.index]?.length}
+                                        iniciado={countProcessingBoxesSelectedProcess}
+                                        finalizado={countFinalizadosSelectedProcess}
+                                        naoIniciado={countNotStartedBoxesSelectedProcess}
+                                    />
+                            }
+
                         </div>
 
                     </div>

@@ -17,12 +17,13 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
     };
 
     function sett(selected, index) {
-        setFuroSelecionado({furo: selected, index: index})
+        setFuroSelecionado({ furo: selected, index: index })
         setSelectedItem(selected);
     }
+    console.log(selected)
 
     return (
-        <div style={{ display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, }} >
+        <div style={{ display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, }} >
             <BgIcon>
                 <ArrowBackCircleSharp
                     color={'#00000'}
@@ -34,8 +35,22 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
             </BgIcon>
 
             <ul id='furos-list' style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
+
+                {
+                    selected === 'Dashboard' ?
+                        <li style={{ marginLeft: 50, marginRight: 50, backgroundColor: 'TODOS' == selectedItem ? '#008f83' : 'white', padding: 8, borderRadius: 10 }}>
+                            <Button>
+                                <h1 style={{ color: 'TODOS' !== selectedItem ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett('TODOS', 99999999)} >
+                                    TODOS
+                                </h1>
+                            </Button>
+                        </li>
+                        :
+                        <></>
+                }
+
                 {furos.map((furo, index) => (
-                    <li style={{ marginLeft: 50, marginRight: 50, backgroundColor: furo.numero == selectedItem ? '#008f83' : 'white', padding:8, borderRadius:10 }} key={furo.id}>
+                    <li style={{ marginLeft: 50, marginRight: 50, backgroundColor: furo.numero == selectedItem ? '#008f83' : 'white', padding: 8, borderRadius: 10 }} key={furo.id}>
                         {furo.title}{" "}
                         <Button>
                             <h1 style={{ color: furo.numero !== selectedItem ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett(furo.numero, index)} >

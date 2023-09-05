@@ -104,352 +104,363 @@ export default function PrintLabelNovo({ furoSelecionado, chipBoxesInternos, fur
     const [selectedWhiteBox, setSelectedWhiteBox] = useState()
     const [selectedPalete, setSelectedPalete] = useState()
 
-    const {printer, BPrint} = useBroswerPrint();
+    const { printer, BPrint } = useBroswerPrint();
     const [availableDevices, setAvailableDevices] = useState([])
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         function onSuccess(devices) {
             //console.log("Dispositivos disponíveis:", devices.printer[0]);
             setAvailableDevices(devices.printer)
         }
-          
-          function onError(error) {
+
+        function onError(error) {
             console.error("Erro ao obter dispositivos:", error);
-          }
+        }
         BPrint.getLocalDevices(onSuccess, onError);
         //console.log('bpRINT',BPrint)
         //console.log('printer', printer)
         //console.log(printer.name)
         //printer.send(defaultLayout)
-    },[])
+    }, [])
 
 
-    async function handlePrintCaixaOuAmostra(){
+    async function handlePrintCaixaOuAmostra() {
         const zpl = await handlePrint(paramsPrint, furoSelecionado, chipBoxesInternos[furoSelecionado.index], selectedTipoImpressao);
         printer.send(zpl)
     }
-    async function handleCaixa(){
+    async function handleCaixa() {
         const zpl = await handlePrintWhiteBox(selectedWhiteBox);;
         printer.send(zpl)
     }
-    async function handlePalete(){
+    async function handlePalete() {
         const zpl = await handlePrintPalete(selectedPalete);
         printer.send(zpl)
     }
 
     return (
-
-        <Container>
+        <>
             {
-                selectedTipoImpressao.length>4 ?
-                    <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione
-                        {selectedTipoImpressao == 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
-                            ' ' + 'o intervalo da impressão de etiquetas de ' + selectedTipoImpressao + ' '
-                            :
-                            selectedTipoImpressao === 'Caixa (White_Box)' || selectedTipoImpressao === 'Palete' ?
-                                ' ' + `a etiqueta perdida do(a) ${selectedTipoImpressao}` + ' '
-                                :
-                                ''
-                        }
-                        do furo {furoSelecionado.furo}
-                    </TitleText>
-                    :
-                    <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione o tipo de etiqueta que se deseja imprimir</TitleText>
-
-            }
-            <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
-                {tipoImpressao.map((tipo, index) => (
-                    <li style={{ marginLeft: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 0, backgroundColor: tipo.tipo == selectedTipoImpressao ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={tipo.id}>
-                        <Button2>
-                            <h1 style={{ color: tipo.tipo !== selectedTipoImpressao ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett(tipo.tipo, index)} >
-                                {tipo.tipo}
-                            </h1>
-                        </Button2>
-                    </li>
-                ))}
-            </ul>
-            {
-                selectedTipoImpressao === 'Caixa (Chip_Box)' ?
-                    < div style={styles.etiquetaCard}>
-                        <div style={styles.contentEsquerda}>
-                            <TitleText style={styles.etiquetaTitle}>Cx: {String(chipBoxesInternos[furoSelecionado.index][0].cx).padStart(3, '0')}</TitleText>
-                            <QRCodeSVG value={chipBoxesInternos[furoSelecionado.index][0].qrcode} size={90} />
-                        </div>
-                        <div style={styles.contentDireita}>
-                            <div style={{ display: 'flex', flexDirection: 'column' }} >
-                                <TitleText style={styles.etiquetaTitle}>{chipBoxesInternos[furoSelecionado.index][0].furo.substring(0, 3)}</TitleText>
-                                <TitleText style={styles.etiquetaTitle}>{furoSelecionado.furo}</TitleText>
-                            </div>
-
-                            <div style={styles.etiquetaRodape}>
-                                <TitleText style={styles.subTitle}>De:{String(chipBoxesInternos[furoSelecionado.index][0].de.toFixed(2)).padStart(6, '0').replace('.', ',')} </TitleText>
-                                <TitleText style={styles.subTitle}>Até:{String(chipBoxesInternos[furoSelecionado.index][0].ate.toFixed(2)).padStart(6, '0').replace('.', ',')}</TitleText>
-                            </div>
-                        </div>
+                furoSelecionado.furo === 'TODOS' ?
+                    <div style={{ display: 'flex', justifyContent: 'center', padding: 5, fontWeight: 'bold', color: '#008F83', fontSize: 35 }} >
+                        <text>Selecione o furo acima</text>
                     </div>
                     :
-                    <></>
-            }
-            {
-                selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
-
-                    < div style={{ marginTop: 15, display: 'flex', flexDirection: 'column', alignItems: 'center', borderWidth: 1, borderColor: '#000', borderRadius: 7, padding: 8, paddingLeft: 16, paddingRight: 16 }}>
-                        <div style={{ display: 'flex', flexDirection: 'row' }} >
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }} >
-                                <TitleText style={styles.etiquetaTitle}>Furo: {furoSelecionado.furo}</TitleText>
-                                <TitleText style={styles.etiquetaTitle}>Projeto:{chipBoxesInternos[furoSelecionado.index][0].furo.substring(0, 3)}</TitleText>
-                                <TitleText style={styles.etiquetaTitle}>Amostra nº: {String(chipBoxesInternos[furoSelecionado.index][0].cx).padStart(3, '0')}</TitleText>
-                            </div>
-                            <QRCodeSVG style={{ margin: 10 }} value={chipBoxesInternos[furoSelecionado.index][0].qrcode} size={55} />
-                        </div>
-
-                        <div style={{ width: '70%', marginTop: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
-                            <TitleText style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Intervalo da Amostra</TitleText>
-                        </div>
-
-                        <div style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <TitleText style={styles.subTitle}>De:{String(chipBoxesInternos[furoSelecionado.index][0].de.toFixed(2)).padStart(6, '0').replace('.', ',')} </TitleText>
-                            <TitleText style={styles.subTitle}>Até:{String(chipBoxesInternos[furoSelecionado.index][0].ate.toFixed(2)).padStart(6, '0').replace('.', ',')}</TitleText>
-                        </div>
-                    </div>
-                    :
-                    <></>
-            }
-            {
-                selectedTipoImpressao === 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
-                    <>
-                        <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-around', marginBottom: -40 }} >
-                            {
-                                SelectedStart ?
-                                    <motion.div
-                                        style={{ marginLeft: 0 }}
-                                        initial={{ y: -10 }}
-                                        animate={{ y: 0 }}
-                                        transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="60"
-                                            height="60"
-                                            fill="white"
-                                            className="bi bi-chevron-down"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"
-                                            />
-                                        </svg>
-                                    </motion.div> :
-                                    <motion.div
-                                        style={{ marginLeft: 0 }}
-                                        initial={{ y: -10 }}
-                                        animate={{ y: 0 }}
-                                        transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="60"
-                                            height="60"
-                                            fill="currentColor"
-                                            className="bi bi-chevron-down"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"
-                                            />
-                                        </svg>
-                                    </motion.div>
-                            }
-                            {
-                                SelectedEnd ?
-                                    <div style={{ width: 60, heigth: 60, backgroundColor: 'white' }} ></div>
-                                    :
-                                    <motion.div
-                                        style={{ marginLeft: 0 }}
-                                        initial={{ y: -10 }}
-                                        animate={{ y: 0 }}
-                                        transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
-                                    >
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            width="60"
-                                            height="60"
-                                            fill="currentColor"
-                                            className="bi bi-chevron-down"
-                                            viewBox="0 0 16 16"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"
-                                            />
-                                        </svg>
-                                    </motion.div>
-                            }
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', width: '100%', marginTop: '3%' }} >
-                            <Select
-                                styles={{
-                                    control: (baseStyles, state) => ({
-                                        ...baseStyles,
-                                        borderColor: state.isFocused ? 'grey' : 'black',
-                                        width: 250
-                                    }),
-                                }}
-                                placeholder='Inicio'
-                                value={SelectedStart}
-                                onChange={handleBoxChangeStart}
-                                options={selectListStart}
-                            />
-                            <Select
-                                styles={{
-                                    control: (baseStyles, state) => ({
-                                        ...baseStyles,
-                                        borderColor: state.isFocused ? 'grey' : 'black',
-                                        width: 250
-                                    }),
-                                }}
-                                placeholder='Final'
-                                value={SelectedEnd}
-                                onChange={handleBoxChangeEnd}
-                                options={selectListEnd}
-                            />
-                        </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 10, marginBottom: 50 }} >
-                            <Checkbox
-                                checked={PrintAll}
-                                onChange={handleCheckboxChange}
-                                color="primary"
-                            />
-                            <TitleText style={{ fontSize: 30, }} >Impressão completa ({chipBoxesInternos[furoSelecionado.index].length} etiquetas)</TitleText>
-
-                        </div>
-                    </>
-                    :
-                    <></>
-            }
-            {
-                showAlert && selectedTipoImpressao === 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
-                    alert
-                    :
-                    <></>
-            }
-            {
-                selectedTipoImpressao === 'Caixa (White_Box)' || selectedTipoImpressao === 'Palete'
-                    ?
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <Container>
                         {
-                            selectedWhiteBox || selectedPalete ?
-                                <Alert style={{ marginBottom: 16, marginTop: 16, width: 300, fontWeight: 'bold' }} severity="success">Pronto para impressão!</Alert>
+                            selectedTipoImpressao.length > 4 ?
+                                <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione
+                                    {selectedTipoImpressao == 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
+                                        ' ' + 'o intervalo da impressão de etiquetas de ' + selectedTipoImpressao + ' '
+                                        :
+                                        selectedTipoImpressao === 'Caixa (White_Box)' || selectedTipoImpressao === 'Palete' ?
+                                            ' ' + `a etiqueta perdida do(a) ${selectedTipoImpressao}` + ' '
+                                            :
+                                            ''
+                                    }
+                                    do furo {furoSelecionado.furo}
+                                </TitleText>
                                 :
-                                <></>
-                        }
-                        {
-                            selectedTipoImpressao === 'Caixa (White_Box)' ?
-                                <div style={{ maxHeight: '400px', overflow: 'auto', width: '100%', marginTop: 15 }} className="itemListContainer">
-                                    {filteredWhiteBoxFuro.map((WhiteBoxFuro, index) => (
-                                        <Button2 onClick={() => setSelectedWhiteBox(WhiteBoxFuro)} >
-                                            <li style={{ marginBottom: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 10 }}>
-                                                <div style={{ display: 'flex', width: 300, backgroundColor: selectedWhiteBox?.id === WhiteBoxFuro?.id ? '#D9D9D9' : 'white', flexDirection: 'column', alignItems: 'center', borderWidth: 1, borderColor: '#000', borderRadius: 7, padding: 8, paddingLeft: 16, paddingRight: 16 }} >
+                                <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione o tipo de etiqueta que se deseja imprimir</TitleText>
 
-                                                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'end', width: '100%' }} >
-                                                        <text style={{ width: '100%', color: 'black', fontWeight: 'bold' }} >{WhiteBoxFuro?.furo}</text>
-                                                        <QRCodeSVG value={WhiteBoxFuro?.cx + ';' + WhiteBoxFuro?.furo + ';' + WhiteBoxFuro?.de + ';' + WhiteBoxFuro?.ate} size={50} />
-                                                    </div>
-                                                    <div style={{ display: 'flex', alignItems: 'start', width: '100%', marginTop: 15 }} >
-                                                        <text style={{ color: 'black', fontWeight: 'bold' }} >Caixa nº{WhiteBoxFuro?.cx.toString().padStart(3, '0')}</text>
-                                                    </div>
-                                                    <div style={{ width: '70%', marginTop: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
-                                                        <TitleText style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Intervalo da Amostra</TitleText>
-                                                    </div>
-                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: 5 }} >
-                                                        <text style={{ color: 'black', fontWeight: 'bold' }} >De: {WhiteBoxFuro?.de}</text>
-                                                        <text style={{ color: 'black', fontWeight: 'bold' }} >Até: {WhiteBoxFuro?.ate}</text>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </Button2>
-                                    ))}
+                        }
+                        <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
+                            {tipoImpressao.map((tipo, index) => (
+                                <li style={{ marginLeft: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 0, backgroundColor: tipo.tipo == selectedTipoImpressao ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={tipo.id}>
+                                    <Button2>
+                                        <h1 style={{ color: tipo.tipo !== selectedTipoImpressao ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett(tipo.tipo, index)} >
+                                            {tipo.tipo}
+                                        </h1>
+                                    </Button2>
+                                </li>
+                            ))}
+                        </ul>
+                        {
+                            selectedTipoImpressao === 'Caixa (Chip_Box)' ?
+                                < div style={styles.etiquetaCard}>
+                                    <div style={styles.contentEsquerda}>
+                                        <TitleText style={styles.etiquetaTitle}>Cx: {String(chipBoxesInternos[furoSelecionado.index][0].cx).padStart(3, '0')}</TitleText>
+                                        <QRCodeSVG value={chipBoxesInternos[furoSelecionado.index][0].qrcode} size={90} />
+                                    </div>
+                                    <div style={styles.contentDireita}>
+                                        <div style={{ display: 'flex', flexDirection: 'column' }} >
+                                            <TitleText style={styles.etiquetaTitle}>{chipBoxesInternos[furoSelecionado.index][0].furo.substring(0, 3)}</TitleText>
+                                            <TitleText style={styles.etiquetaTitle}>{furoSelecionado.furo}</TitleText>
+                                        </div>
+
+                                        <div style={styles.etiquetaRodape}>
+                                            <TitleText style={styles.subTitle}>De:{String(chipBoxesInternos[furoSelecionado.index][0].de.toFixed(2)).padStart(6, '0').replace('.', ',')} </TitleText>
+                                            <TitleText style={styles.subTitle}>Até:{String(chipBoxesInternos[furoSelecionado.index][0].ate.toFixed(2)).padStart(6, '0').replace('.', ',')}</TitleText>
+                                        </div>
+                                    </div>
                                 </div>
                                 :
                                 <></>
                         }
                         {
-                            selectedTipoImpressao === 'Palete' ?
+                            selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
 
-                                <div style={{ maxHeight: '400px', overflow: 'auto', width: '100%', marginTop: 15 }} className="itemListContainer">
-                                    {filteredPaleteFuro.map((PaleteFuro, index) => (
-                                        <Button2 onClick={() => setSelectedPalete(PaleteFuro)} >
-                                            <li style={{ marginBottom: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 10 }}>
-                                                <div style={{ display: 'flex', width: 300, backgroundColor: selectedPalete?.qrcode === PaleteFuro?.qrcode ? '#D9D9D9' : 'white', flexDirection: 'column', alignItems: 'center', borderWidth: 1, borderColor: '#000', borderRadius: 7, padding: 8, paddingLeft: 16, paddingRight: 16 }} >
+                                < div style={{ marginTop: 15, display: 'flex', flexDirection: 'column', alignItems: 'center', borderWidth: 1, borderColor: '#000', borderRadius: 7, padding: 8, paddingLeft: 16, paddingRight: 16 }}>
+                                    <div style={{ display: 'flex', flexDirection: 'row' }} >
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }} >
+                                            <TitleText style={styles.etiquetaTitle}>Furo: {furoSelecionado.furo}</TitleText>
+                                            <TitleText style={styles.etiquetaTitle}>Projeto:{chipBoxesInternos[furoSelecionado.index][0].furo.substring(0, 3)}</TitleText>
+                                            <TitleText style={styles.etiquetaTitle}>Amostra nº: {String(chipBoxesInternos[furoSelecionado.index][0].cx).padStart(3, '0')}</TitleText>
+                                        </div>
+                                        <QRCodeSVG style={{ margin: 10 }} value={chipBoxesInternos[furoSelecionado.index][0].qrcode} size={55} />
+                                    </div>
 
-                                                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'end', width: '100%' }} >
-                                                        <text style={{ width: '100%', color: 'black', fontWeight: 'bold' }} >{PaleteFuro?.furo}</text>
-                                                        <QRCodeSVG value={PaleteFuro?.qrcode} size={50} />
-                                                    </div>
-                                                    <div style={{ display: 'flex', alignItems: 'start', width: '100%', marginTop: 15 }} >
-                                                        <text style={{ color: 'black', fontWeight: 'bold' }} >Palete nº{PaleteFuro?.numero.toString().padStart(3, '0')}</text>
-                                                    </div>
-                                                    <div style={{ width: '70%', marginTop: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
-                                                        <TitleText style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Intervalo do Furo</TitleText>
-                                                    </div>
-                                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: 5 }} >
-                                                        <text style={{ color: 'black', fontWeight: 'bold' }} >De: {PaleteFuro?.de}</text>
-                                                        <text style={{ color: 'black', fontWeight: 'bold' }} >Até: {PaleteFuro?.ate}</text>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </Button2>
+                                    <div style={{ width: '70%', marginTop: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
+                                        <TitleText style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Intervalo da Amostra</TitleText>
+                                    </div>
 
-                                    ))}
+                                    <div style={{ width: '100%', display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                                        <TitleText style={styles.subTitle}>De:{String(chipBoxesInternos[furoSelecionado.index][0].de.toFixed(2)).padStart(6, '0').replace('.', ',')} </TitleText>
+                                        <TitleText style={styles.subTitle}>Até:{String(chipBoxesInternos[furoSelecionado.index][0].ate.toFixed(2)).padStart(6, '0').replace('.', ',')}</TitleText>
+                                    </div>
                                 </div>
                                 :
                                 <></>
                         }
-                        <Button onClick={() => {
-                            selectedTipoImpressao === 'Palete' ?
-                                //handlePrintPalete(selectedPalete) //funcao para imprimir palete
-                                handlePalete()
+                        {
+                            selectedTipoImpressao === 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
+                                <>
+                                    <div style={{ display: 'flex', flexDirection: 'row', width: '100%', justifyContent: 'space-around', marginBottom: -40 }} >
+                                        {
+                                            SelectedStart ?
+                                                <motion.div
+                                                    style={{ marginLeft: 0 }}
+                                                    initial={{ y: -10 }}
+                                                    animate={{ y: 0 }}
+                                                    transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="60"
+                                                        height="60"
+                                                        fill="white"
+                                                        className="bi bi-chevron-down"
+                                                        viewBox="0 0 16 16"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"
+                                                        />
+                                                    </svg>
+                                                </motion.div> :
+                                                <motion.div
+                                                    style={{ marginLeft: 0 }}
+                                                    initial={{ y: -10 }}
+                                                    animate={{ y: 0 }}
+                                                    transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="60"
+                                                        height="60"
+                                                        fill="currentColor"
+                                                        className="bi bi-chevron-down"
+                                                        viewBox="0 0 16 16"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"
+                                                        />
+                                                    </svg>
+                                                </motion.div>
+                                        }
+                                        {
+                                            SelectedEnd ?
+                                                <div style={{ width: 60, heigth: 60, backgroundColor: 'white' }} ></div>
+                                                :
+                                                <motion.div
+                                                    style={{ marginLeft: 0 }}
+                                                    initial={{ y: -10 }}
+                                                    animate={{ y: 0 }}
+                                                    transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="60"
+                                                        height="60"
+                                                        fill="currentColor"
+                                                        className="bi bi-chevron-down"
+                                                        viewBox="0 0 16 16"
+                                                    >
+                                                        <path
+                                                            fill-rule="evenodd"
+                                                            d="M4.646 5.646a.5.5 0 0 1 .708 0L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z"
+                                                        />
+                                                    </svg>
+                                                </motion.div>
+                                        }
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', width: '100%', marginTop: '3%' }} >
+                                        <Select
+                                            styles={{
+                                                control: (baseStyles, state) => ({
+                                                    ...baseStyles,
+                                                    borderColor: state.isFocused ? 'grey' : 'black',
+                                                    width: 250
+                                                }),
+                                            }}
+                                            placeholder='Inicio'
+                                            value={SelectedStart}
+                                            onChange={handleBoxChangeStart}
+                                            options={selectListStart}
+                                        />
+                                        <Select
+                                            styles={{
+                                                control: (baseStyles, state) => ({
+                                                    ...baseStyles,
+                                                    borderColor: state.isFocused ? 'grey' : 'black',
+                                                    width: 250
+                                                }),
+                                            }}
+                                            placeholder='Final'
+                                            value={SelectedEnd}
+                                            onChange={handleBoxChangeEnd}
+                                            options={selectListEnd}
+                                        />
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: 10, marginBottom: 50 }} >
+                                        <Checkbox
+                                            checked={PrintAll}
+                                            onChange={handleCheckboxChange}
+                                            color="primary"
+                                        />
+                                        <TitleText style={{ fontSize: 30, }} >Impressão completa ({chipBoxesInternos[furoSelecionado.index].length} etiquetas)</TitleText>
+
+                                    </div>
+                                </>
                                 :
-                                //handlePrintWhiteBox(selectedWhiteBox); //funcao para imprimir whitebox
-                                handleCaixa()
-                            setShowAlert(true)
-                        }} disabled={
-                            selectedTipoImpressao === 'Palete' && !selectedPalete
-                            ||
-                            selectedTipoImpressao === 'Caixa (White_Box)' && !selectedWhiteBox
+                                <></>
                         }
-                        >
-                            <TitleText style={{ color: 'white', fontSize: 26, fontWeight: 'bold' }} >
-                                {selectedTipoImpressao === 'Palete' && !selectedPalete
-                                    ||
-                                    selectedTipoImpressao === 'Caixa (White_Box)' && !selectedWhiteBox ?
-                                    'Selecione a etiqueta'
-                                    :
-                                    'Imprimir'
-                                }
-                            </TitleText>
-                        </Button>
-                    </div>
-                    :
-                    <></>
+                        {
+                            showAlert && selectedTipoImpressao === 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
+                                alert
+                                :
+                                <></>
+                        }
+                        {
+                            selectedTipoImpressao === 'Caixa (White_Box)' || selectedTipoImpressao === 'Palete'
+                                ?
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                    {
+                                        selectedWhiteBox || selectedPalete ?
+                                            <Alert style={{ marginBottom: 16, marginTop: 16, width: 300, fontWeight: 'bold' }} severity="success">Pronto para impressão!</Alert>
+                                            :
+                                            <></>
+                                    }
+                                    {
+                                        selectedTipoImpressao === 'Caixa (White_Box)' ?
+                                            <div style={{ maxHeight: '400px', overflow: 'auto', width: '100%', marginTop: 15 }} className="itemListContainer">
+                                                {filteredWhiteBoxFuro.map((WhiteBoxFuro, index) => (
+                                                    <Button2 onClick={() => setSelectedWhiteBox(WhiteBoxFuro)} >
+                                                        <li style={{ marginBottom: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 10 }}>
+                                                            <div style={{ display: 'flex', width: 300, backgroundColor: selectedWhiteBox?.id === WhiteBoxFuro?.id ? '#D9D9D9' : 'white', flexDirection: 'column', alignItems: 'center', borderWidth: 1, borderColor: '#000', borderRadius: 7, padding: 8, paddingLeft: 16, paddingRight: 16 }} >
+
+                                                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'end', width: '100%' }} >
+                                                                    <text style={{ width: '100%', color: 'black', fontWeight: 'bold' }} >{WhiteBoxFuro?.furo}</text>
+                                                                    <QRCodeSVG value={WhiteBoxFuro?.cx + ';' + WhiteBoxFuro?.furo + ';' + WhiteBoxFuro?.de + ';' + WhiteBoxFuro?.ate} size={50} />
+                                                                </div>
+                                                                <div style={{ display: 'flex', alignItems: 'start', width: '100%', marginTop: 15 }} >
+                                                                    <text style={{ color: 'black', fontWeight: 'bold' }} >Caixa nº{WhiteBoxFuro?.cx.toString().padStart(3, '0')}</text>
+                                                                </div>
+                                                                <div style={{ width: '70%', marginTop: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
+                                                                    <TitleText style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Intervalo da Amostra</TitleText>
+                                                                </div>
+                                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: 5 }} >
+                                                                    <text style={{ color: 'black', fontWeight: 'bold' }} >De: {WhiteBoxFuro?.de}</text>
+                                                                    <text style={{ color: 'black', fontWeight: 'bold' }} >Até: {WhiteBoxFuro?.ate}</text>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </Button2>
+                                                ))}
+                                            </div>
+                                            :
+                                            <></>
+                                    }
+                                    {
+                                        selectedTipoImpressao === 'Palete' ?
+
+                                            <div style={{ maxHeight: '400px', overflow: 'auto', width: '100%', marginTop: 15 }} className="itemListContainer">
+                                                {filteredPaleteFuro.map((PaleteFuro, index) => (
+                                                    <Button2 onClick={() => setSelectedPalete(PaleteFuro)} >
+                                                        <li style={{ marginBottom: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'white', borderRadius: 10 }}>
+                                                            <div style={{ display: 'flex', width: 300, backgroundColor: selectedPalete?.qrcode === PaleteFuro?.qrcode ? '#D9D9D9' : 'white', flexDirection: 'column', alignItems: 'center', borderWidth: 1, borderColor: '#000', borderRadius: 7, padding: 8, paddingLeft: 16, paddingRight: 16 }} >
+
+                                                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'end', width: '100%' }} >
+                                                                    <text style={{ width: '100%', color: 'black', fontWeight: 'bold' }} >{PaleteFuro?.furo}</text>
+                                                                    <QRCodeSVG value={PaleteFuro?.qrcode} size={50} />
+                                                                </div>
+                                                                <div style={{ display: 'flex', alignItems: 'start', width: '100%', marginTop: 15 }} >
+                                                                    <text style={{ color: 'black', fontWeight: 'bold' }} >Palete nº{PaleteFuro?.numero.toString().padStart(3, '0')}</text>
+                                                                </div>
+                                                                <div style={{ width: '70%', marginTop: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
+                                                                    <TitleText style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Intervalo do Furo</TitleText>
+                                                                </div>
+                                                                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: 5 }} >
+                                                                    <text style={{ color: 'black', fontWeight: 'bold' }} >De: {PaleteFuro?.de}</text>
+                                                                    <text style={{ color: 'black', fontWeight: 'bold' }} >Até: {PaleteFuro?.ate}</text>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </Button2>
+
+                                                ))}
+                                            </div>
+                                            :
+                                            <></>
+                                    }
+                                    <Button onClick={() => {
+                                        selectedTipoImpressao === 'Palete' ?
+                                            //handlePrintPalete(selectedPalete) //funcao para imprimir palete
+                                            handlePalete()
+                                            :
+                                            //handlePrintWhiteBox(selectedWhiteBox); //funcao para imprimir whitebox
+                                            handleCaixa()
+                                        setShowAlert(true)
+                                    }} disabled={
+                                        selectedTipoImpressao === 'Palete' && !selectedPalete
+                                        ||
+                                        selectedTipoImpressao === 'Caixa (White_Box)' && !selectedWhiteBox
+                                    }
+                                    >
+                                        <TitleText style={{ color: 'white', fontSize: 26, fontWeight: 'bold' }} >
+                                            {selectedTipoImpressao === 'Palete' && !selectedPalete
+                                                ||
+                                                selectedTipoImpressao === 'Caixa (White_Box)' && !selectedWhiteBox ?
+                                                'Selecione a etiqueta'
+                                                :
+                                                'Imprimir'
+                                            }
+                                        </TitleText>
+                                    </Button>
+                                </div>
+                                :
+                                <></>
+                        }
+                        {/*------------------------ botao impressao caixas chip e amostra */}
+                        {
+                            selectedTipoImpressao === 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
+                                <Button onClick={() => {
+                                    //handlePrint(paramsPrint, furoSelecionado, chipBoxesInternos[furoSelecionado.index], selectedTipoImpressao);
+                                    handlePrintCaixaOuAmostra(paramsPrint)
+                                    setShowAlert(true)
+                                }} disabled={!SelectedStart || !SelectedEnd}
+                                >
+                                    <TitleText style={{ color: 'white', fontSize: 26, fontWeight: 'bold' }} >{!SelectedStart || !SelectedEnd ? 'Selecione o intervalo' : 'Imprimir'}</TitleText>
+                                </Button>
+                                :
+                                <></>
+                        }
+                    </Container >
             }
-            {/*------------------------ botao impressao caixas chip e amostra */}
-            {
-                selectedTipoImpressao === 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
-                    <Button onClick={() => {
-                        //handlePrint(paramsPrint, furoSelecionado, chipBoxesInternos[furoSelecionado.index], selectedTipoImpressao);
-                        handlePrintCaixaOuAmostra(paramsPrint)
-                        setShowAlert(true)
-                    }} disabled={isLoading}
-                    >
-                        <TitleText style={{ color: 'white', fontSize: 26, fontWeight: 'bold' }} >{isLoading ? 'Enviando...' : 'Imprimir'}</TitleText>
-                    </Button>
-                    :
-                    <></>
-            }
-        </Container >
+
+
+        </>
+
     );
 };
 const Button = styled.button`

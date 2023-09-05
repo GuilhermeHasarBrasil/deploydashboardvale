@@ -163,14 +163,14 @@ export default function Home() {
             );
             setFiltroArquivamento(arraysFiltradosArquivamento)
         }
-    }, [chipBoxes])
+    }, [chipBoxes, furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem,])
 
     useEffect(() => {
         const quantidadeConferidos = furos.filter(furo => furo.conferido === true).length;
         const quantidadeFinalizado = furos.filter(furo => furo.finalizado === true).length;
         setQuantidadeConferidos(quantidadeConferidos);
         setQuantidadeFinalizados(quantidadeFinalizado);
-    }, [furos])
+    }, [furos, furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem,])
 
     const [dataBarChart, setDataBarChart] = useState([])
     useEffect(() => {
@@ -206,7 +206,7 @@ export default function Home() {
                 total: chipBoxesInternos[furoSelecionado?.index]?.length,
             },
         ]);
-    }, [furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem])
+    }, [furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem, chipBoxes])
 
     useEffect(() => {
         function getDayOfWeek(date) {
@@ -333,7 +333,7 @@ export default function Home() {
         processarDadosSerragem();
         processarDadosDespacho();
         processarDadosArquivamento();
-    }, [chipBoxes]);
+    }, [chipBoxes, furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem,]);
 
     const [value, setValue] = useState(0);
 
@@ -403,7 +403,7 @@ export default function Home() {
             );
             setFiltroArquivamentoEnt(arraysFiltradosArquivamento)
         }
-    }, [chipBoxes])
+    }, [chipBoxes, furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem,])
 
     return !authUser ? (
         <Loader />
