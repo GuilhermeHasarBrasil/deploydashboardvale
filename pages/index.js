@@ -64,7 +64,6 @@ export default function Home() {
         if (!isLoading && !authUser) {
             router.push("/login");
         }
-        console.log('rodei')
         if (!!authUser) {
             const unsubscribeFuros = onSnapshot(query(collection(db, "Furos"), orderBy('numero')), (snapshot) => {
                 const updatedFuros = snapshot.docs.map((doc) => ({
@@ -163,14 +162,14 @@ export default function Home() {
             );
             setFiltroArquivamento(arraysFiltradosArquivamento)
         }
-    }, [chipBoxes, furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem,])
+    }, [chipBoxes])
 
     useEffect(() => {
         const quantidadeConferidos = furos.filter(furo => furo.conferido === true).length;
         const quantidadeFinalizado = furos.filter(furo => furo.finalizado === true).length;
         setQuantidadeConferidos(quantidadeConferidos);
         setQuantidadeFinalizados(quantidadeFinalizado);
-    }, [furos, furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem,])
+    }, [furos])
 
     const [dataBarChart, setDataBarChart] = useState([])
     useEffect(() => {
@@ -206,7 +205,7 @@ export default function Home() {
                 total: chipBoxesInternos[furoSelecionado?.index]?.length,
             },
         ]);
-    }, [furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem, chipBoxes])
+    }, [furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem])
 
     useEffect(() => {
         function getDayOfWeek(date) {
@@ -333,7 +332,7 @@ export default function Home() {
         processarDadosSerragem();
         processarDadosDespacho();
         processarDadosArquivamento();
-    }, [chipBoxes, furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem,]);
+    }, [chipBoxes, furoSelecionado]);
 
     const [value, setValue] = useState(0);
 
@@ -403,7 +402,7 @@ export default function Home() {
             );
             setFiltroArquivamentoEnt(arraysFiltradosArquivamento)
         }
-    }, [chipBoxes, furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem,])
+    }, [chipBoxes])
 
     return !authUser ? (
         <Loader />

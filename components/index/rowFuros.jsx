@@ -20,7 +20,6 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
         setFuroSelecionado({ furo: selected, index: index })
         setSelectedItem(selected);
     }
-    console.log(selected)
 
     return (
         <div style={{ display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, }} >
