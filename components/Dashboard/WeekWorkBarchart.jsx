@@ -53,11 +53,26 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
         }
     }, [process, chipBoxes])
 
+    const [date1, setDate1] = useState()
+    const [date2, setDate2] = useState()
+
+    useEffect(() => {
+        const dataHoraObjeto1 = new Date(date1);
+        const dataHoraObjeto2 = new Date(date2);
+        // Converter milissegundos para segundos
+        const segundos1 = Math.floor(dataHoraObjeto1.getTime() / 1000);
+        const segundos2 = Math.floor(dataHoraObjeto1.getTime() / 1000);
+        // Obter milissegundos
+        const milissegundos = dataHoraObjeto1.getMilliseconds();
+        //console.log(`Segundos: ${segundos1}`);
+        //console.log(`Segundos: ${segundos2}`);
+        //console.log(`Milissegundos: ${milissegundos}`);
+    }, [date1, date2])
 
     return (
-        <div style={{marginTop:10, marginLeft:100}} >
-            <h1 style={{marginLeft:40, marginTop:10, marginBottom:5, fontSize:20, fontWeight:'bold'}} >Caixas processadas por dia da semana (por processo)</h1>
-            <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden', marginLeft:20, marginBottom:10 }} >
+        <div style={{ marginTop: 10, marginLeft: 100 }} >
+            <h1 style={{ marginLeft: 40, marginTop: 10, marginBottom: 5, fontSize: 20, fontWeight: 'bold' }} >Caixas processadas por dia da semana (por processo)</h1>
+            <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden', marginLeft: 20, marginBottom: 10 }} >
                 {processos.map((furo, index) => (
                     <li style={{ marginLeft: 15, marginRight: 0, backgroundColor: furo.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={furo.id}>
                         <Button>
@@ -68,14 +83,30 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
                     </li>
                 ))}
             </ul>
-            <BarChart width={900} height={550} style={{marginLeft:100}} data={arrayDiasProcesso}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="dia" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="Quantidade de caixas processadas" fill="#008F83" />
-            </BarChart>
+            <div style={{ display: 'flex', flexDirection: 'row' }} >
+                <BarChart width={900} height={550} style={{ marginLeft: 100 }} data={arrayDiasProcesso}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="dia" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="Quantidade de caixas processadas" fill="#008F83" />
+                </BarChart>
+                {/* <div style={{ display: 'flex', flexDirection: 'column' }} >
+                    <input
+                        type='datetime-local'
+                        style={{ backgroundColor: 'white', width: 400, marginBottom: 15, height: 40, padding: 2, borderRadius: 5, borderWidth: 1, borderColor: 'black' }}
+                        onChange={(e) => setDate1(e.target.value)}
+                    />
+                    <input
+                        type='datetime-local'
+                        style={{ backgroundColor: 'white', width: 400, marginBottom: 15, height: 40, padding: 2, borderRadius: 5, borderWidth: 1, borderColor: 'black' }}
+                        onChange={(e) => setDate2(e.target.value)}
+                    />
+                </div> */}
+
+            </div>
+
         </div>
     );
 }

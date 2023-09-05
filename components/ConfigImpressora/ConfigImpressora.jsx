@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components'
 import Alert from '@mui/material/Alert';
 import { useBroswerPrint } from '../../contexts/BrowserPrintContext';
+import ReactLoading from "react-loading";
 
 export default function PrinterSettings() {
 
@@ -59,7 +60,7 @@ export default function PrinterSettings() {
               ))}
             </div>
             :
-            <span>Carregando impressoras conectadas...</span>
+            <span style={{display:'flex', flexDirection:'row'}} ><ReactLoading width={100} height={50} type={"bubbles"} color="#008F83" /></span>
         }
 
       </div>

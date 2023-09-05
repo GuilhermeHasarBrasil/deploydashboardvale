@@ -104,7 +104,7 @@ export default function Home() {
                 unsubscribeWhiteBoxes();
                 unsubscribePaletes();
             };
-       }
+        }
     }, [authUser, isLoading]);
 
     useEffect(() => {
@@ -404,7 +404,7 @@ export default function Home() {
             setFiltroArquivamentoEnt(arraysFiltradosArquivamento)
         }
     }, [chipBoxes])
-   
+
     return !authUser ? (
         <Loader />
     ) : (
@@ -422,12 +422,20 @@ export default function Home() {
                                     <TopDashboard finalizados={quantidadeFinalizados} conferidos={quantidadeConferidos} furos={furos} />
                                     <Divider sx={{ borderWidth: '2px', backgroundColor: 'red', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
                                     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                                        <Tabs value={value} onChange={handleChange} centered>
-                                            <Tab label="Quantidade de caixas finalizadas (total do furo)" style={{ fontSize: 16, fontWeight: 'bold' }} />
-                                            <Tab label="Tempo de cada caixa por processo" style={{ fontSize: 16, fontWeight: 'bold' }} />
-                                            <Tab label="Dias de maior rendimento do processamento (todas as caixas)" style={{ fontSize: 16, fontWeight: 'bold' }} />
-                                            <Tab label="Processamento por periodo em metros (todas as caixas)" style={{ fontSize: 16, fontWeight: 'bold' }} />
-                                        </Tabs>
+                                        {
+                                            furoSelecionado ?
+                                                <Tabs value={value} onChange={handleChange} centered>
+                                                    <Tab label="Quantidade de caixas finalizadas (total do furo)" style={{ fontSize: 16, fontWeight: 'bold' }} />
+                                                    <Tab label="Tempo de processamento de cada caixa por processo" style={{ fontSize: 16, fontWeight: 'bold' }} />
+                                                    <Tab label="Dias de maior produtividade (KPI de finalização de caixas)" style={{ fontSize: 16, fontWeight: 'bold' }} />
+                                                    <Tab label="KPI de processamento em metros (todas as caixas)" style={{ fontSize: 16, fontWeight: 'bold' }} />
+                                                </Tabs>
+                                                :
+                                                <div style={{width:'100%', display:'flex', alignItems:'center', justifyContent:'center'}} >
+                                                    <text style={{fontSize:29, fontWeight:'bold'}} >Selecione o furo para vizualizar os gráficos</text>
+                                                </div>
+                                        }
+
                                     </Box>
                                     {
                                         furoSelecionado && value === 0 ?
@@ -472,7 +480,7 @@ export default function Home() {
                                     }
                                     {
                                         value === 3 ?
-                                            <CustomBarChartMes  
+                                            <CustomBarChartMes
                                                 chipBoxes={chipBoxes} furoSelecionado={furoSelecionado}
                                                 filtroConferencia={filtroConferencia} filtroMarcacao={filtroMarcacao}
                                                 filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade}

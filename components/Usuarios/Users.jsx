@@ -211,7 +211,6 @@ export default function Users() {
                         <div style={{ display: 'flex', flexDirection: 'column' }} >
                             <text style={{ fontSize: 20, color: 'black', fontWeight: 'bold' }} >Email:</text>
                             <input
-                                type="email"
                                 name="e-mail"
                                 style={{ backgroundColor: 'white', width: 400, marginBottom: 15, height: 40, padding: 2, borderRadius: 5, borderWidth: 1, borderColor: 'black' }}
                                 onChange={(e) => setEmail(e.target.value)}

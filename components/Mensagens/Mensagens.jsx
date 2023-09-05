@@ -272,7 +272,7 @@ export default function Mensagens({ chipBoxes, furos }) {
                 </Button>
 
             </div>
-            <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden', marginTop: '3%' }} >
+            <ul style={{ display: 'flex', flexDirection: 'row', flexWrap:'wrap', overflowX: 'auto', overflow: 'hidden', marginTop: '3%' }} >
                 {processos.map((processOption, index) => (
                     <Button>
                         <li style={{ marginLeft: 10, marginRight: 0, backgroundColor: processOption.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10, height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center' }} key={processOption.id}>
@@ -283,7 +283,7 @@ export default function Mensagens({ chipBoxes, furos }) {
                     </Button>
                 ))}
             </ul>
-            <ul style={{ display: 'flex', flexDirection: 'column', overflowY: 'auto', overflow: 'hidden', marginTop: 15 }} >
+            <ul style={{ display: 'flex', maxHeight:'550px', flexDirection: 'column', overflow: 'auto', overflow: 'hidden', marginTop: 25 }} >
                 {arrayRenderizado?.map((item, index) => (
                     <li style={{ marginLeft: 30, marginRight: 0, backgroundColor: '#074f92', padding: 18, borderRadius: 10, marginTop: 5, }} key={item.id}>
                         <div style={{ display: 'flex', flexDirection: 'column', width: 250, backgroundColor: 'white', padding: 3 }} >

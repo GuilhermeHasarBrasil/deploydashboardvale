@@ -92,7 +92,7 @@ export default function TableFuro({ furos }) {
         const seconds = timestamp.seconds;
         const nanoseconds = timestamp.nanoseconds;
         const date = new Date(seconds * 1000 + nanoseconds / 1000000); // Convertendo nanossegundos para milissegundos
-        const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} - ${date.getHours()}:${(date.getMinutes() < 10 ? '0' : '') + date.getMinutes()}`;
+        const formattedDate = `${parseInt(date.getDate())>10? date.getDate() : '0'+date.getDate() }/${parseInt(date.getMonth()+1)>10? (date.getMonth()+1) : '0'+(date.getMonth()+1)}/${date.getFullYear()}`;
         return formattedDate;
     }
 
@@ -142,7 +142,7 @@ export default function TableFuro({ furos }) {
                                     !row.conferido ?
                                         <CloseCircleSharp
                                             color={'red'}
-                                            title={'   aaaa'}
+                                            title={''}
                                             height="20px"
                                             width="20px"
                                             style={{ marginTop: -13, marginLeft: 20 }}
@@ -150,14 +150,14 @@ export default function TableFuro({ furos }) {
                                         :
                                         <CheckmarkCircleSharp
                                             color={'green'}
-                                            title={'asda'}
+                                            title={''}
                                             height="20px"
                                             width="20px"
                                             style={{ marginTop: -13, marginLeft: 20 }}
                                         />
                                 }
                             </TableCell>
-                            <TableCell>{dayjs(row.dt).utc().format("DD/MM/YYYY")}</TableCell>
+                            <TableCell>{<text style={{color:'white'}} >_.</text>}{formatTimestamp(row.createdAt)}</TableCell>
                             <TableCell>{<text style={{color:'white'}} >____</text>}{row.profundidade}</TableCell>
                         </TableRow>
                     ))}
