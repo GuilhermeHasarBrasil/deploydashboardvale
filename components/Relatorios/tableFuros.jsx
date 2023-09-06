@@ -92,21 +92,21 @@ export default function TableFuro({ furos }) {
         const seconds = timestamp.seconds;
         const nanoseconds = timestamp.nanoseconds;
         const date = new Date(seconds * 1000 + nanoseconds / 1000000); // Convertendo nanossegundos para milissegundos
-        const formattedDate = `${parseInt(date.getDate())>10? date.getDate() : '0'+date.getDate() }/${parseInt(date.getMonth()+1)>10? (date.getMonth()+1) : '0'+(date.getMonth()+1)}/${date.getFullYear()}`;
+        const formattedDate = `${parseInt(date.getDate()) > 10 ? date.getDate() : '0' + date.getDate()}/${parseInt(date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : '0' + (date.getMonth() + 1)}/${date.getFullYear()}`;
         return formattedDate;
     }
 
     return (
         <TableContainer sx={{ width: 900 }} component={Paper}>
-                        <Table sx={{ width: 900 }} aria-label="custom pagination table">
-                <TableHead style={{backgroundColor:'#D9D9D9'}} >
+            <Table sx={{ width: 900 }} aria-label="custom pagination table">
+                <TableHead style={{ backgroundColor: '#D9D9D9' }} >
                     <TableRow>
-                        <TableCell style={{ fontWeight: 'bold' }} >{<text style={{color:'#D9D9D9'}} >__</text>} Furo</TableCell>
+                        <TableCell style={{ fontWeight: 'bold' }} >{<text style={{ color: '#D9D9D9' }} >__</text>} Furo</TableCell>
                         <TableCell style={{ fontWeight: 'bold' }} >Projeto</TableCell>
                         <TableCell style={{ fontWeight: 'bold' }} >Finalizado</TableCell>
                         <TableCell style={{ fontWeight: 'bold' }} >Conferido</TableCell>
-                        <TableCell style={{ fontWeight: 'bold' }} > {<text style={{color:'#D9D9D9'}} >_</text>} Data de {<br/>} importação</TableCell>
-                        <TableCell style={{ fontWeight: 'bold' }} >Quantidade {<br/>}{<text style={{color:'#D9D9D9'}} >.</text>} de caixas</TableCell>
+                        <TableCell style={{ fontWeight: 'bold' }} > {<text style={{ color: '#D9D9D9' }} >_</text>} Data de {<br />} importação</TableCell>
+                        <TableCell style={{ fontWeight: 'bold' }} >Quantidade {<br />}{<text style={{ color: '#D9D9D9' }} >.</text>} de caixas</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -116,9 +116,9 @@ export default function TableFuro({ furos }) {
                     ).map((row) => (
                         <TableRow key={row.name}>
                             <TableCell>{row.numero}</TableCell>
-                            <TableCell> {<text style={{color:'white'}} >_</text>} {row.projeto}</TableCell>
-                            <TableCell> {<text style={{color:'white'}} >____</text>} 
-                            {
+                            <TableCell> {<text style={{ color: 'white' }} >_</text>} {row.projeto}</TableCell>
+                            <TableCell> {<text style={{ color: 'white' }} >____</text>}
+                                {
                                     !row.dataFinalizado ?
                                         <CloseCircleSharp
                                             color={'red'}
@@ -137,8 +137,8 @@ export default function TableFuro({ furos }) {
                                         />
                                 }
                             </TableCell>
-                            <TableCell> {<text style={{color:'white'}} >____</text>}
-                            {
+                            <TableCell> {<text style={{ color: 'white' }} >____</text>}
+                                {
                                     !row.conferido ?
                                         <CloseCircleSharp
                                             color={'red'}
@@ -157,8 +157,8 @@ export default function TableFuro({ furos }) {
                                         />
                                 }
                             </TableCell>
-                            <TableCell>{<text style={{color:'white'}} >_.</text>}{formatTimestamp(row.createdAt)}</TableCell>
-                            <TableCell>{<text style={{color:'white'}} >____</text>}{row.profundidade}</TableCell>
+                            <TableCell>{<text style={{ color: 'white' }} >_.</text>}{formatTimestamp(row.createdAt)}</TableCell>
+                            <TableCell>{<text style={{ color: 'white' }} >____</text>}{row.profundidade}</TableCell>
                         </TableRow>
                     ))}
                     {emptyRows > 0 && (

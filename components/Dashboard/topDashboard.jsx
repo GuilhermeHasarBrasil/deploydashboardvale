@@ -65,7 +65,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                             <div
                                 onMouseEnter={handleNumberMouseEnter}
                                 onMouseLeave={handleNumberMouseLeave}
-                                style={{marginLeft:20}}
+                                style={{ marginLeft: 20 }}
                             >
                                 <InformationCircleOutline
                                     color={'#00000'}
@@ -73,7 +73,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                     title={''}
                                     height="25px"
                                     width="25px"
-                                    style={{marginRight:100}}
+                                    style={{ marginRight: 100 }}
                                 />
                                 {hoveredFinalizados && (
                                     <ObjectList>
@@ -106,7 +106,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                             <div
                                 onMouseEnter={handleNumberMouseEnterNaoIniciados}
                                 onMouseLeave={handleNumberMouseLeaveNaoIniciados}
-                                            style={{marginLeft:20}}
+                                style={{ marginLeft: 20 }}
                             >
                                 <InformationCircleOutline
                                     color={'#00000'}
@@ -114,7 +114,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                     title={''}
                                     height="25px"
                                     width="25px"
-                                    style={{marginRight:100}}
+                                    style={{ marginRight: 100 }}
                                 />
                                 {hoveredNaoIniciados && (
                                     <ObjectListNaoIniciado>
@@ -146,7 +146,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                             <div
                                 onMouseEnter={handleNumberMouseEnterEmProcessamento}
                                 onMouseLeave={handleNumberMouseLeaveEmProcessamento}
-                                            style={{marginLeft:20}}
+                                style={{ marginLeft: 20 }}
                             >
                                 <InformationCircleOutline
                                     color={'#00000'}
@@ -154,7 +154,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                     title={''}
                                     height="25px"
                                     width="25px"
-                                    style={{marginRight:100}}
+                                    style={{ marginRight: 100 }}
                                 />
                                 {hoveredEmProcessamento && (
                                     <ObjectListProcessamento>
