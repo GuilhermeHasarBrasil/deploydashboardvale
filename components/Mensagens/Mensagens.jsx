@@ -283,7 +283,7 @@ export default function Mensagens({ chipBoxes, furos }) {
                     </Button>
                 ))}
             </ul>
-            <ul style={{ display: 'flex', maxHeight:'550px', flexDirection: 'column', overflow: 'auto', overflow: 'hidden', marginTop: 25 }} >
+            <ul style={{ display: 'flex', maxHeight:'550px', flexDirection: 'column', overflow: 'auto', overflow: 'auto', marginTop: 25 }} >
                 {arrayRenderizado?.map((item, index) => (
                     <li style={{ marginLeft: 30, marginRight: 0, backgroundColor: '#074f92', padding: 18, borderRadius: 10, marginTop: 5, }} key={item.id}>
                         <div style={{ display: 'flex', flexDirection: 'column', width: 250, backgroundColor: 'white', padding: 3 }} >
