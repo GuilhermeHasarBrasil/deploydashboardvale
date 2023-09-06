@@ -4,8 +4,6 @@ import styled from 'styled-components'
 
 export default function InfoProcess({ total, iniciado, finalizado, naoIniciado }) {
 
-    console.log(finalizado)
-
     return (
         <div style={{ display: 'flex', flexDirection: 'column', marginLeft:10, marginTop:0, }} >
             <Row>
@@ -26,7 +24,7 @@ export default function InfoProcess({ total, iniciado, finalizado, naoIniciado }
                 <div style={{ backgroundColor: '#307BF4', height: 55, width: 280 }} >
                     <Column>
                         <TitleBox>CAIXAS FINALIZADAS</TitleBox>
-                        <Number>{finalizado.length}</Number>
+                        <Number>{finalizado?.length}</Number>
                     </Column>
                 </div>
             </Row>
@@ -37,7 +35,7 @@ export default function InfoProcess({ total, iniciado, finalizado, naoIniciado }
                 <div style={{ backgroundColor: '#E89E0E', height: 55, width: 280 }} >
                     <Column>
                         <TitleBox>CAIXAS EM PROCESSAMENTO</TitleBox>
-                        <Number>{ iniciado.length }</Number>
+                        <Number>{ iniciado?.length }</Number>
                     </Column>
                 </div>
             </Row>
@@ -48,7 +46,7 @@ export default function InfoProcess({ total, iniciado, finalizado, naoIniciado }
                 <div style={{ backgroundColor: '#990113', height: 55, width: 280 }} >
                     <Column>
                         <TitleBox>CAIXAS NÃO INICIADAS</TitleBox>
-                        <Number>{naoIniciado.length}</Number>
+                        <Number>{naoIniciado?.length}</Number>
                     </Column>
                 </div>
             </Row>

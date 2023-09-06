@@ -42,7 +42,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
 
     useEffect(() => {
         console.log('rodei')
-        const array = furoSelecionado.furo === "TODOS" ? chipBoxes : chipBoxesInternos[furoSelecionado.index]
+        const array = furoSelecionado.furo === "TODOS" ? chipBoxes : chipBoxesInternos[furoSelecionado.index].sort((a, b) => a.caixa - b.caixa)
         if (process == 'Conferência') {
             const dataArray = array
             const conferenciaData = dataArray?.map(item => ({
@@ -52,7 +52,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
                 'user': item.processos.conferencia.user ? item.processos.conferencia.user : '-',
                 'Data finalização': item.processos.conferencia.sai?.seconds ? item.processos.conferencia.sai.seconds : '-'
             }));
-            setArrayDataProcess(conferenciaData.sort((a, b) => a.caixa - b.caixa))
+            setArrayDataProcess(conferenciaData)
         }
 
         if (process == 'Marcação') {
@@ -64,7 +64,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
                 'user': item.processos.marcacao.user ? item.processos.marcacao.user : '-',
                 'Data finalização': item.processos.marcacao.sai?.seconds ? item.processos.marcacao.sai?.seconds : '-'
             }));
-            setArrayDataProcess(marcacaoData.sort((a, b) => a.caixa - b.caixa))
+            setArrayDataProcess(marcacaoData)
         }
         if (process == 'Fotografia') {
             const dataArray = array
@@ -75,7 +75,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
                 'user': item.processos.fotografia.user ? item.processos.fotografia.user : '-',
                 'Data finalização': item.processos.fotografia.sai?.seconds ? item.processos.fotografia.sai?.seconds : '-'
             }));
-            setArrayDataProcess(fotografiaData.sort((a, b) => a.caixa - b.caixa))
+            setArrayDataProcess(fotografiaData)
         }
         // if (process == 'Densidade') {
         //     const dataArray = filtroDensidade[furoSelecionado?.index]
@@ -116,7 +116,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
                 'user': item.processos.arquivamento.user ? item.processos.arquivamento.user : '-',
                 'Data finalização': item.processos.arquivamento.sai?.seconds ? item.processos.arquivamento.sai?.seconds : '-'
             }));
-            setArrayDataProcess(arquivamentoData.sort((a, b) => a.caixa - b.caixa))
+            setArrayDataProcess(arquivamentoData)
         }
     }, [process, furoSelecionado, chipBoxes, chipBoxesInternos[furoSelecionado.index]]);
 
