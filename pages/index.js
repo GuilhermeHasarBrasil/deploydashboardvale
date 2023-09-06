@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, createContext } from "react";
 import { useAuth } from "../firebase/auth";
 import { useRouter } from "next/router";
 import Loader from "../components/Loader";
@@ -40,8 +40,11 @@ export default function Home() {
     const [chipBoxesInternos, setChipBoxesInternos] = useState([])
     const [selected, setSelected] = useState('Dashboard')
     const [furoSelecionado, setFuroSelecionado] = useState()
-    const [quantidadeConferidos, setQuantidadeConferidos] = useState(0);
-    const [quantidadeFinalizados, setQuantidadeFinalizados] = useState(0);
+    const [quantidadeConferidos, setQuantidadeConferidos] = useState();
+    const [quantidadeProcessamento, setQuantidadeProcessamento] = useState();
+    const [quantidadeNaoIniciado, setQuantidadeNaoIniciado] = useState()
+
+    const [quantidadeFinalizados, setQuantidadeFinalizados] = useState();
     const [filtroConferencia, setFiltroConferencia] = useState([])
     const [filtroMarcacao, setFiltroMarcacao] = useState([])
     const [filtroFotografia, setFiltroFotografia] = useState([])
@@ -165,10 +168,15 @@ export default function Home() {
     }, [chipBoxes])
 
     useEffect(() => {
-        const quantidadeConferidos = furos.filter(furo => furo.conferido === true).length;
-        const quantidadeFinalizado = furos.filter(furo => furo.finalizado === true).length;
+        const quantidadeConferidos = furos.filter(furo => furo.conferido === true)
+        const quantidadeFinalizado = furos.filter(furo => furo.finalizado === true)
+        const quantidadeEmProcessamento = furos.filter(furo => furo.conferido === true && !furo.finalizado)
+        const quantidadeDeNaoIniciado = furos.filter(furo => !furo.conferido && !furo.finalizado)
+
         setQuantidadeConferidos(quantidadeConferidos);
         setQuantidadeFinalizados(quantidadeFinalizado);
+        setQuantidadeProcessamento(quantidadeEmProcessamento)
+        setQuantidadeNaoIniciado(quantidadeDeNaoIniciado)
     }, [furos])
 
     const [dataBarChart, setDataBarChart] = useState([])
@@ -418,7 +426,7 @@ export default function Home() {
                             selected === 'Dashboard' ?
                                 <>
                                     <Divider sx={{ borderWidth: '1px', backgroundColor: 'grey', }} />
-                                    <TopDashboard finalizados={quantidadeFinalizados} conferidos={quantidadeConferidos} furos={furos} />
+                                    <TopDashboard finalizados={quantidadeFinalizados} conferidos={quantidadeConferidos} quantidadeDeNaoIniciado={quantidadeNaoIniciado} processamento={quantidadeProcessamento} furos={furos} />
                                     <Divider sx={{ borderWidth: '2px', backgroundColor: 'red', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
                                     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                                         {
@@ -430,8 +438,8 @@ export default function Home() {
                                                     <Tab label="KPI de processamento em metros (todas as caixas)" style={{ fontSize: 16, fontWeight: 'bold' }} />
                                                 </Tabs>
                                                 :
-                                                <div style={{width:'100%', display:'flex', alignItems:'center', justifyContent:'center'}} >
-                                                    <text style={{fontSize:29, fontWeight:'bold'}} >Selecione o furo para vizualizar os gráficos</text>
+                                                <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
+                                                    <text style={{ fontSize: 29, fontWeight: 'bold' }} >Selecione o furo para vizualizar os gráficos</text>
                                                 </div>
                                         }
 
@@ -459,6 +467,7 @@ export default function Home() {
                                                     chipBoxesInternos={chipBoxesInternos}
                                                     authUser={authUser}
                                                 />
+
                                             </div>
                                             :
                                             <></>

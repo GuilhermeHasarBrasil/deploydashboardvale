@@ -171,15 +171,31 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
         }
     }, [arrayDataProcessConferencia, arrayDataProcessMarcacao, arrayDataProcessFotografia, arrayDataProcessArquivamento])
 
-    useEffect(() => {
-        if (numberCarrousel < 1) {
-            setNumberCarrousel(4)
-        }
-        if (numberCarrousel > 4) {
-            setNumberCarrousel(1)
-        }
-    }, [numberCarrousel])
+    // useEffect(() => {
+    //     if (numberCarrousel < 1) {
+    //         setNumberCarrousel(4)
+    //     }
+    //     if (numberCarrousel > 4) {
+    //         setNumberCarrousel(1)
+    //     }
+    // }, [numberCarrousel])
 
+    useEffect(() => {
+        setTimeout(() => {
+            let numero = numberCarrousel + 1;
+            if (numero < 1) {
+                setNumberCarrousel(1)
+            }else{
+                setNumberCarrousel(numero)
+            }
+            if (numero > 4) {
+                setNumberCarrousel(1)
+            }else{
+                setNumberCarrousel(numero)
+            }
+            //setNumberCarrousel(numero)
+        }, 10000);
+    }, [numberCarrousel])
     //console.log(selectedDateRange.startDate?.toISOString().substr(0, 10))
 
     return (
@@ -280,9 +296,9 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
             }
             {
                 selectedDateRange.startDate ?
-                <></>
-                :
-                <text style={{fontSize:18, fontWeight:'bold', marginTop:15}} >Selecione o intervalo de datas para filtrar</text>
+                    <></>
+                    :
+                    <text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 15 }} >Selecione o intervalo de datas para filtrar</text>
             }
             <DatePickerWrapper>
                 <DatePicker
