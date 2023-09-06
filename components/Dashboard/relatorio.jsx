@@ -42,7 +42,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
 
     useEffect(() => {
         console.log('rodei')
-        const array = furoSelecionado.furo === "TODOS" ? chipBoxes : chipBoxesInternos[furoSelecionado.index].sort((a, b) => a.caixa - b.caixa)
+        const array = furoSelecionado.furo === "TODOS" ? chipBoxes : chipBoxesInternos[furoSelecionado.index].sort((a, b) => a.cx - b.cx)
         if (process == 'Conferência') {
             const dataArray = array
             const conferenciaData = dataArray?.map(item => ({
