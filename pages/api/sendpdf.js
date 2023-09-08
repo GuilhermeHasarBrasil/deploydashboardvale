@@ -9,6 +9,24 @@ const BOT_TOKEN = process.env.BOT_TOKEN;
 const CHAT_ID = '-707399392';
 const bot = new Telegraf(BOT_TOKEN);
 
+export default async function handler(req, res) {
+    
+    const {arquivo} = req.body
+    const {furo} = req.body
+    const {data} = req.body
+    const {processos} = req.body
+
+    const pdfFilePath = `C:\\Users\\MICRO\\Downloads\\${arquivo}.pdf`; 
+
+    try {
+        
+        await uploadPdfToStorage(pdfFilePath, arquivo, furo, data, processos);
+        res.status(200).json({ success: true });
+    } catch (error) {
+        res.status(500).json({ success: false, error: error.message });
+    }
+}
+
 // Fazer o upload do arquivo PDF para o Firebase Storage
 async function uploadPdfToStorage(pdfFilePath, arquivo,  furo, data, processos) {
  
@@ -34,23 +52,5 @@ async function sendFileLink(fileUrl, arquivo, furo, data, processos) {
         await bot.telegram.sendMessage(CHAT_ID, fileUrl);
     } catch (error) {
         console.error('Erro ao enviar mensagem:', error);
-    }
-}
-
-export default async function handler(req, res) {
-    
-    const {arquivo} = req.body
-    const {furo} = req.body
-    const {data} = req.body
-    const {processos} = req.body
-
-    const pdfFilePath = `C:\\Users\\Hasar\\Downloads\\${arquivo}.pdf`; 
-
-    try {
-        
-        await uploadPdfToStorage(pdfFilePath, arquivo, furo, data, processos);
-        res.status(200).json({ success: true });
-    } catch (error) {
-        res.status(500).json({ success: false, error: error.message });
     }
 }

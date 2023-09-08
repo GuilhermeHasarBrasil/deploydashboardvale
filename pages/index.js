@@ -5,10 +5,6 @@ import Loader from "../components/Loader";
 import styled from 'styled-components'
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/firebase";
-import * as furosmock from "../components/mockedContent/furos";
-import * as chipboxesmock from "../components/mockedContent/chipboxes";
-import * as paletesmock from "../components/mockedContent/paletes"
-import * as whiteBoxesmock from "../components/mockedContent/whiteboxes"
 import Header from "../components/Header";
 import RowFuros from "../components/index/rowFuros";
 import TableFuros from "../components/Relatorios/tableFuros";
@@ -60,8 +56,8 @@ export default function Home() {
     const [contagensPorDiaDespacho, setContagensPorDiaDespacho] = useState({});
     const [contagensPorDiaArquivamento, setContagensPorDiaArquivamento] = useState({});
 
-    const [whiteBoxes, setWhiteBoxes] = useState(whiteBoxesmock.whiteb)
-    const [paletes, setPaletes] = useState(paletesmock.paletes)
+    const [whiteBoxes, setWhiteBoxes] = useState([])
+    const [paletes, setPaletes] = useState([])
 
     useEffect(() => {
         if (!isLoading && !authUser) {
@@ -427,7 +423,7 @@ export default function Home() {
                                 <>
                                     <Divider sx={{ borderWidth: '1px', backgroundColor: 'grey', }} />
                                     <TopDashboard finalizados={quantidadeFinalizados} conferidos={quantidadeConferidos} quantidadeDeNaoIniciado={quantidadeNaoIniciado} processamento={quantidadeProcessamento} furos={furos} />
-                                    <Divider sx={{ borderWidth: '2px', backgroundColor: 'red', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
+                                    <Divider sx={{ borderWidth: '2px', backgroundColor: '#f3c108', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
                                     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                                         {
                                             furoSelecionado ?

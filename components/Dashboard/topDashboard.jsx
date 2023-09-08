@@ -221,7 +221,7 @@ const ObjectItem = styled.li`
   }
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #6af308;
   }
 `;
 
@@ -250,7 +250,7 @@ const ObjectItemProcessamento = styled.li`
   }
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #f3c108;
   }
 `;
 
@@ -279,6 +279,6 @@ const ObjectItemNaoIniciado = styled.li`
   }
 
   &:hover {
-    background-color: #f0f0f0;
+    background-color: #08a1f3;
   }
 `;
