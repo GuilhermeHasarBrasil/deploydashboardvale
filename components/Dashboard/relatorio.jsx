@@ -40,43 +40,55 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
         setProcess(selected);
     }
 
-    useEffect(() => {
-        console.log('rodei')
-        const array = furoSelecionado.furo === "TODOS" ? chipBoxes : chipBoxesInternos[furoSelecionado.index].sort((a, b) => a.cx - b.cx)
-        if (process == 'Conferência') {
-            const dataArray = array
-            const conferenciaData = dataArray?.map(item => ({
-                'id': item.id,
-                'Tempo (segundos)': item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds : 0,
-                'caixa': item.cx,
-                'user': item.processos.conferencia.user ? item.processos.conferencia.user : '-',
-                'Data finalização': item.processos.conferencia.sai?.seconds ? item.processos.conferencia.sai.seconds : '-'
-            }));
-            setArrayDataProcess(conferenciaData)
-        }
+    function segundosParaHHMMSS(segundos) {
+        const horas = Math.floor(segundos / 3600);
+        segundos %= 3600;
+        const minutos = Math.floor(segundos / 60);
+        segundos %= 60;
+        segundos = Math.floor(segundos);
+        return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+      }
 
-        if (process == 'Marcação') {
-            const dataArray = array
+    useEffect(() => {
+        const array = furoSelecionado.furo === "TODOS" ? chipBoxes : chipBoxesInternos[furoSelecionado.index].sort((a, b) => a.cx - b.cx)
+        if (process === 'Conferência') {
+            const dataArray = array;
+            const conferenciaData = dataArray?.map(item => ({
+              'id': item.id,
+              'Tempo (segundos)': item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? (item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds) / 1 : 0,
+              'Tempo': segundosParaHHMMSS(item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? (item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds) / 1 : 0),
+              'caixa': item.cx,
+              'user': item.processos.conferencia.user ? item.processos.conferencia.user : '-',
+              'Data finalização': item.processos.conferencia.sai?.seconds ? item.processos.conferencia.sai.seconds : '-'
+            }));
+            setArrayDataProcess(conferenciaData);
+          }
+
+        if (process === 'Marcação') {
+            const dataArray = array;
             const marcacaoData = dataArray?.map(item => ({
-                'id': item.id,
-                'Tempo (segundos)': item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds)/1 : 0,
-                'caixa': item.cx,
-                'user': item.processos.marcacao.user ? item.processos.marcacao.user : '-',
-                'Data finalização': item.processos.marcacao.sai?.seconds ? item.processos.marcacao.sai?.seconds : '-'
+              'id': item.id,
+              'Tempo (segundos)': item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds) / 1 : 0,
+              'Tempo': segundosParaHHMMSS(item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds) / 1 : 0),
+              'caixa': item.cx,
+              'user': item.processos.marcacao.user ? item.processos.marcacao.user : '-',
+              'Data finalização': item.processos.marcacao.sai?.seconds ? item.processos.marcacao.sai.seconds : '-'
             }));
-            setArrayDataProcess(marcacaoData)
-        }
-        if (process == 'Fotografia') {
-            const dataArray = array
+            setArrayDataProcess(marcacaoData);
+          }
+          
+          if (process === 'Fotografia') {
+            const dataArray = array;
             const fotografiaData = dataArray?.map(item => ({
-                'id': item.id,
-                'Tempo (segundos)': item.processos.fotografia.ent ? item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds : 0,
-                'caixa': item.cx,
-                'user': item.processos.fotografia.user ? item.processos.fotografia.user : '-',
-                'Data finalização': item.processos.fotografia.sai?.seconds ? item.processos.fotografia.sai?.seconds : '-'
+              'id': item.id,
+              'Tempo (segundos)': item.processos.fotografia.ent ? (item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds) / 1 : 0,
+              'Tempo': segundosParaHHMMSS(item.processos.fotografia.ent ? (item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds) / 1 : 0),
+              'caixa': item.cx,
+              'user': item.processos.fotografia.user ? item.processos.fotografia.user : '-',
+              'Data finalização': item.processos.fotografia.sai?.seconds ? item.processos.fotografia.sai.seconds : '-'
             }));
-            setArrayDataProcess(fotografiaData)
-        }
+            setArrayDataProcess(fotografiaData);
+          }
         // if (process == 'Densidade') {
         //     const dataArray = filtroDensidade[furoSelecionado?.index]
         //     const densidadeData = dataArray.map(item => ({
@@ -111,7 +123,8 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             const dataArray = array
             const arquivamentoData = dataArray?.map(item => ({
                 'id': item.id,
-                'Tempo (segundos)': item.processos.arquivamento.ent ? item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds : 0,
+                'Tempo (segundos)': item.processos.arquivamento.ent ? (item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds)/1 : 0,
+                'Tempo': segundosParaHHMMSS(item.processos.arquivamento.ent ? (item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds)/1 : 0),
                 'caixa': item.cx,
                 'user': item.processos.arquivamento.user ? item.processos.arquivamento.user : '-',
                 'Data finalização': item.processos.arquivamento.sai?.seconds ? item.processos.arquivamento.sai?.seconds : '-'

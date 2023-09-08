@@ -22,7 +22,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div style={{ background: 'white', border: '1px solid #ccc', padding: '10px', fontSize: '14px' }}>
         <p><strong>Furo-Caixa:</strong> {data.id}</p>
-        <p><strong>Tempo (segundos):</strong> {data['Tempo (segundos)']}</p>
+        <p><strong>Tempo:</strong> {data['Tempo']}</p>
         <p><strong>Caixa:</strong> {data.caixa}</p>
         <p><strong>Usuário:</strong> {data.user}</p> {/* Exibir o nome do usuário */}
       </div>
