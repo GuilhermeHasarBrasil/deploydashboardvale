@@ -35,7 +35,6 @@ export default function Users() {
     const [currentUser, setCurrentUser] = useState()
 
     useEffect(() => {
-        console.log('rodei')
         const unsubscribeUsers = onSnapshot(query(collection(db, "Users"), orderBy('email')), (snapshot) => {
             const updatedUsers = snapshot.docs.map((doc) => ({
                 id: doc.id,

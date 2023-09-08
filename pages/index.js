@@ -161,7 +161,7 @@ export default function Home() {
             );
             setFiltroArquivamento(arraysFiltradosArquivamento)
         }
-    }, [chipBoxes])
+    }, [chipBoxes, furoSelecionado])
 
     useEffect(() => {
         const quantidadeConferidos = furos.filter(furo => furo.conferido === true)
@@ -210,6 +210,58 @@ export default function Home() {
             },
         ]);
     }, [furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem])
+
+    const [dataBarChartTodos, setDataBarChartTodos] = useState()
+    useEffect(() => {
+        const AllChipBoxesFiltradosConferencia = chipBoxes.filter(chipbox =>
+            chipbox.processos.conferencia?.sai !== null
+        );
+
+        const AllChipBoxesFiltradosMarcacao = chipBoxes.filter(chipbox =>
+            chipbox.processos.marcacao?.sai !== null
+        );
+
+        const AllChipBoxesFiltradosFotografia = chipBoxes.filter(chipbox =>
+            chipbox.processos.fotografia?.sai !== null
+        );
+
+        const AllChipBoxesFiltradosArquivamento = chipBoxes.filter(chipbox =>
+            chipbox.processos.arquivamento?.sai !== null
+        );
+
+        setDataBarChartTodos([
+            {
+                name: 'Conferência',
+                processed: AllChipBoxesFiltradosConferencia?.length,
+                total: chipBoxes?.length,
+            },
+            {
+                name: 'Marcação',
+                processed: AllChipBoxesFiltradosMarcacao?.length,
+                total: chipBoxes?.length,
+            },
+            {
+                name: 'Fotografia',
+                processed: AllChipBoxesFiltradosFotografia?.length,
+                total: chipBoxes?.length,
+            },
+            {
+                name: 'Densidade',
+                processed: 0,
+                total: 0,
+            },
+            {
+                name: 'Serragem',
+                processed: 0,
+                total: 0,
+            },
+            {
+                name: 'Arquivamento',
+                processed: AllChipBoxesFiltradosArquivamento?.length,
+                total: chipBoxes?.length,
+            },
+        ]);
+    }, [chipBoxes, furoSelecionado])
 
     useEffect(() => {
         function getDayOfWeek(date) {
@@ -447,7 +499,7 @@ export default function Home() {
                                                 <text style={{ margin: 5, marginLeft: 55 }} >Total {<SquareIcon style={{ color: '#ef3a25' }} />} </text>
                                                 <text style={{ margin: 5 }} >Finalizadas {<SquareIcon style={{ color: '#008f83' }} />}   </text>
 
-                                                <CustomBarChart data={dataBarChart} maxValue={chipBoxesInternos[furoSelecionado?.index]?.length} />
+                                                <CustomBarChart data={furoSelecionado.furo === 'TODOS' ? dataBarChartTodos : dataBarChart} maxValue={furoSelecionado.furo === 'TODOS' ? chipBoxes?.length : chipBoxesInternos[furoSelecionado?.index]?.length} />
                                             </div>
                                             :
                                             <></>
