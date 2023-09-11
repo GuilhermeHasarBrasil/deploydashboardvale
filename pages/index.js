@@ -1,4 +1,4 @@
-import { useEffect, useState, createContext } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../firebase/auth";
 import { useRouter } from "next/router";
 import Loader from "../components/Loader";
@@ -7,13 +7,11 @@ import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import Header from "../components/Header";
 import RowFuros from "../components/index/rowFuros";
-import TableFuros from "../components/Relatorios/tableFuros";
 import MenuLeft from "../components/index/menuLeft";
 import TopDashboard from "../components/Dashboard/topDashboard";
 import { Divider } from '@mui/material';
 import Relatorio from "../components/Dashboard/relatorio";
 import DadosProcessamento from "../components/DadosProcessamento/dadosProcessamento";
-import PrintLabel from "../components/ImpressaoEtiquetas/impressao";
 import PrinterSettings from "../components/ConfigImpressora/ConfigImpressora";
 import CustomBarChart from "../components/Dashboard/CustomBarChartHorizontal";
 import SquareIcon from '@mui/icons-material/Square';
@@ -474,20 +472,36 @@ export default function Home() {
                             selected === 'Dashboard' ?
                                 <>
                                     <Divider sx={{ borderWidth: '1px', backgroundColor: 'grey', }} />
-                                    <TopDashboard finalizados={quantidadeFinalizados} conferidos={quantidadeConferidos} quantidadeDeNaoIniciado={quantidadeNaoIniciado} processamento={quantidadeProcessamento} furos={furos} />
+                                    <TopDashboard
+                                        finalizados={quantidadeFinalizados}
+                                        conferidos={quantidadeConferidos}
+                                        quantidadeDeNaoIniciado={quantidadeNaoIniciado}
+                                        processamento={quantidadeProcessamento}
+                                        furos={furos}
+                                    />
                                     <Divider sx={{ borderWidth: '2px', backgroundColor: '#f3c108', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
                                     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                                         {
                                             furoSelecionado ?
                                                 <Tabs value={value} onChange={handleChange} centered>
-                                                    <Tab label="Quantidade de caixas finalizadas (total do furo)" style={{ fontSize: 16, fontWeight: 'bold' }} />
-                                                    <Tab label="Tempo de processamento de cada caixa por processo" style={{ fontSize: 16, fontWeight: 'bold' }} />
-                                                    <Tab label="Dias de maior produtividade (KPI de finalização de caixas)" style={{ fontSize: 16, fontWeight: 'bold' }} />
-                                                    <Tab label="KPI de processamento em metros (todas as caixas)" style={{ fontSize: 16, fontWeight: 'bold' }} />
+                                                    <Tab label="Quantidade de caixas finalizadas (total do furo)"
+                                                        style={{ fontSize: 16, fontWeight: 'bold' }}
+                                                    />
+                                                    <Tab label="Tempo de processamento de cada caixa por processo"
+                                                        style={{ fontSize: 16, fontWeight: 'bold' }}
+                                                    />
+                                                    <Tab label="Dias de maior produtividade (KPI de finalização de caixas)"
+                                                        style={{ fontSize: 16, fontWeight: 'bold' }}
+                                                    />
+                                                    <Tab label="KPI de processamento em metros (todas as caixas)"
+                                                        style={{ fontSize: 16, fontWeight: 'bold' }}
+                                                    />
                                                 </Tabs>
                                                 :
                                                 <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
-                                                    <text style={{ fontSize: 29, fontWeight: 'bold' }} >Selecione o furo para vizualizar os gráficos</text>
+                                                    <text style={{ fontSize: 29, fontWeight: 'bold' }} >
+                                                        Selecione o furo para vizualizar os gráficos
+                                                    </text>
                                                 </div>
                                         }
 
@@ -495,11 +509,26 @@ export default function Home() {
                                     {
                                         furoSelecionado && value === 0 ?
                                             <div style={{ marginLeft: 100, marginTop: 20, display: 'flex', flexDirection: 'column' }} >
-                                                <text style={{ fontSize: 20, fontWeight: 'bold' }} >Quantidade de caixas finalizadas por processo</text>
-                                                <text style={{ margin: 5, marginLeft: 55 }} >Total {<SquareIcon style={{ color: '#ef3a25' }} />} </text>
-                                                <text style={{ margin: 5 }} >Finalizadas {<SquareIcon style={{ color: '#008f83' }} />}   </text>
-
-                                                <CustomBarChart data={furoSelecionado.furo === 'TODOS' ? dataBarChartTodos : dataBarChart} maxValue={furoSelecionado.furo === 'TODOS' ? chipBoxes?.length : chipBoxesInternos[furoSelecionado?.index]?.length} />
+                                                <text style={{ fontSize: 20, fontWeight: 'bold' }} >
+                                                    Quantidade de caixas finalizadas por processo
+                                                </text>
+                                                <text style={{ margin: 5, marginLeft: 55 }} >
+                                                    Total {<SquareIcon style={{ color: '#ef3a25' }} />}
+                                                </text>
+                                                <text style={{ margin: 5 }} >
+                                                    Finalizadas {<SquareIcon style={{ color: '#008f83' }} />}
+                                                </text>
+                                                <CustomBarChart
+                                                    data={furoSelecionado.furo === 'TODOS' ?
+                                                        dataBarChartTodos
+                                                        :
+                                                        dataBarChart
+                                                    }
+                                                    maxValue={furoSelecionado.furo === 'TODOS' ?
+                                                        chipBoxes?.length
+                                                        :
+                                                        chipBoxesInternos[furoSelecionado?.index]?.length}
+                                                />
                                             </div>
                                             :
                                             <></>
@@ -574,7 +603,12 @@ export default function Home() {
                         {
                             selected === 'Impressão Etiquetas' ?
                                 // <PrintLabel furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} whiteBoxes={whiteBoxes} paletes={paletes} />
-                                <PrintLabelNovo furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} whiteBoxes={whiteBoxes} paletes={paletes} />
+                                <PrintLabelNovo
+                                    furoSelecionado={furoSelecionado}
+                                    chipBoxesInternos={chipBoxesInternos}
+                                    furos={furos}
+                                    whiteBoxes={whiteBoxes}
+                                    paletes={paletes} />
                                 :
                                 <></>
                         }
