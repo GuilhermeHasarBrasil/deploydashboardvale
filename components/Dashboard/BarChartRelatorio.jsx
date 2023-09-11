@@ -3,18 +3,24 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Label } from 'recharts';
 
+function roundUp(value) {
+  const roundedValue = Math.ceil(value);
+  return Math.max(roundedValue, 1); // Garante que o mínimo seja 1
+}
+
 const CustomBarChart = ({ data }) => (
-  <BarChart width={1100} height={500} data={data}> {/* Aumente o valor de width */}
+  <BarChart width={1100} height={500} data={data}>
     <CartesianGrid strokeDasharray="3 3" />
     <XAxis dataKey="id" />
-    <YAxis>
-      <Label value="Segundos" angle={-90} position="insideLeft" style={{ textAnchor: 'middle', fontWeight:'bold', fontSize:20 }} />
+    <YAxis domain={[0, dataMax => roundUp(dataMax)]}>
+      <Label value="Tempo (minutos)" angle={-90} position="insideLeft" style={{ textAnchor: 'middle', fontWeight: 'bold', fontSize: 20 }} />
     </YAxis>
-    <Tooltip content={CustomTooltip} /> {/* Adicione o tooltip personalizado */}
-    <Legend />
+    <Tooltip content={CustomTooltip} />
+    {/* <Legend /> */}
     <Bar dataKey="Tempo (segundos)" fill="#008F83" />
   </BarChart>
 );
+
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {

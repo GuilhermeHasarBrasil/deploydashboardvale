@@ -55,7 +55,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             const dataArray = array;
             const conferenciaData = dataArray?.map(item => ({
               'id': item.id,
-              'Tempo (segundos)': item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? (item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds) / 1 : 0,
+              'Tempo (segundos)': item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? (item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds) / 60 : 0,
               'Tempo': segundosParaHHMMSS(item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? (item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds) / 1 : 0),
               'caixa': item.cx,
               'user': item.processos.conferencia.user ? item.processos.conferencia.user : '-',
@@ -68,7 +68,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             const dataArray = array;
             const marcacaoData = dataArray?.map(item => ({
               'id': item.id,
-              'Tempo (segundos)': item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds) / 1 : 0,
+              'Tempo (segundos)': item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds) / 60 : 0,
               'Tempo': segundosParaHHMMSS(item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds) / 1 : 0),
               'caixa': item.cx,
               'user': item.processos.marcacao.user ? item.processos.marcacao.user : '-',
@@ -81,7 +81,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             const dataArray = array;
             const fotografiaData = dataArray?.map(item => ({
               'id': item.id,
-              'Tempo (segundos)': item.processos.fotografia.ent ? (item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds) / 1 : 0,
+              'Tempo (segundos)': item.processos.fotografia.ent ? (item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds) / 60 : 0,
               'Tempo': segundosParaHHMMSS(item.processos.fotografia.ent ? (item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds) / 1 : 0),
               'caixa': item.cx,
               'user': item.processos.fotografia.user ? item.processos.fotografia.user : '-',
@@ -123,7 +123,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             const dataArray = array
             const arquivamentoData = dataArray?.map(item => ({
                 'id': item.id,
-                'Tempo (segundos)': item.processos.arquivamento.ent ? (item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds)/1 : 0,
+                'Tempo (segundos)': item.processos.arquivamento.ent ? (item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds)/60 : 0,
                 'Tempo': segundosParaHHMMSS(item.processos.arquivamento.ent ? (item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds)/1 : 0),
                 'caixa': item.cx,
                 'user': item.processos.arquivamento.user ? item.processos.arquivamento.user : '-',
@@ -261,6 +261,8 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
 
     //const [date1, setDate1] = useState()
     //console.log(date1+':00.000Z')
+
+    console.log(arrayDataProcess)
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 5, flexDirection: 'column', width: '100%' }} >
