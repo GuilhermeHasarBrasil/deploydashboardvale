@@ -48,11 +48,27 @@ export default function PrinterSettings() {
   useEffect(() => {
     setTimeout(() => {
       if (availableDevices?.length === 0) {
-        setShowInfo(true)
+        showInfoPrinter()
       }
     }, 10000);
-
   }, [availableDevices])
+
+  function showInfoPrinter(){
+    if (availableDevices?.length > 0) {
+      setShowInfo(false)
+    }
+    else{
+      setShowInfo(true)
+    }
+  }
+
+  useEffect(()=>{
+  
+    if(availableDevices.length > 1) {
+      setShowInfo(false)
+    }
+  
+    },[availableDevices])
 
   return (
     <div style={{ width: '80%', marginLeft: '10%', display: 'flex', flexDirection: 'column', marginTop: '3%', }} >
@@ -79,7 +95,7 @@ export default function PrinterSettings() {
         }
         {
           showInfo ?
-            <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginTop: 60, userSelect:'none' }} >Não foi possível encontrar nenhuma impressora conectada na rede. Clique no link abaixo para baixar o aplicativo de impressoras para windows da zebra:{<br></br>}
+            <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginTop: 60, userSelect:'none' }} >Não foi possível encontrar nenhuma impressora conectada na rede? Clique no link abaixo para baixar o aplicativo de impressoras da zebra:{<br></br>}
              {<a style={{color:'blue'}} href='https://www.zebra.com/content/dam/zebra_new_ia/en-us/solutions-verticals/product/Software/Printer%20Software/Link-OS/browser-print/zebra-browser-print-windows-v132489.exe' >Zebra Browser Print</a>} 
             </h1>
             :

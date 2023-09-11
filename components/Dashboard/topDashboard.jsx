@@ -50,15 +50,15 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                         justifyContent: 'center',
                         backgroundColor: '#206F0D',
                         width: 70,
-                        height: 70,
+                        height: 60,
                     }}
                 >
                     <img src="/assets/images/furoimg.png" />
                 </div>
-                <div style={{ backgroundColor: '#2FAB10', height: 70, width: 400 }}>
+                <div style={{ backgroundColor: '#2FAB10', height: 60, width: 400 }}>
                     <Column>
                         <TitleBox>FUROS PROCESSADOS</TitleBox>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} >
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop:-10 }} >
                             <Number>
                                 {finalizados?.length}
                             </Number>
@@ -93,13 +93,13 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                 </div>
             </Row>
             <Row>
-                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#2760BB', width: 70, height: 70 }} >
+                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#2760BB', width: 70, height: 60 }} >
                     <img src="/assets/images/furoimg.png" />
                 </div>
-                <div style={{ backgroundColor: '#307BF4', height: 70, width: 400 }} >
+                <div style={{ backgroundColor: '#307BF4', height: 60, width: 400 }} >
                     <Column>
                         <TitleBox>FUROS NÃO PROCESSADOS / INICIADOS</TitleBox>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} >
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop:-10 }} >
                             <Number>
                                 {quantidadeDeNaoIniciado?.length}
                             </Number>
@@ -133,13 +133,13 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                 </div>
             </Row>
             <Row>
-                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#996501', width: 70, height: 70 }} >
+                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#996501', width: 70, height: 60 }} >
                     <img src="/assets/images/furoimg.png" />
                 </div>
-                <div style={{ backgroundColor: '#E89E0E', height: 70, width: 400 }} >
+                <div style={{ backgroundColor: '#E89E0E', height: 60, width: 400 }} >
                     <Column>
                         <TitleBox>FUROS EM PROCESSAMENTO</TitleBox>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} >
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop:-10 }} >
                             <Number>
                                 {processamento?.length}
                             </Number>

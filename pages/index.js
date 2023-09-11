@@ -191,16 +191,16 @@ export default function Home() {
                 processed: filtroFotografia[furoSelecionado?.index]?.length,
                 total: chipBoxesInternos[furoSelecionado?.index]?.length,
             },
-            {
-                name: 'Densidade',
-                processed: filtroDensidade[furoSelecionado?.index]?.length,
-                total: chipBoxesInternos[furoSelecionado?.index]?.length,
-            },
-            {
-                name: 'Serragem',
-                processed: filtroSerragem[furoSelecionado?.index]?.length,
-                total: chipBoxesInternos[furoSelecionado?.index]?.length,
-            },
+            // {
+            //     name: 'Densidade',
+            //     processed: filtroDensidade[furoSelecionado?.index]?.length,
+            //     total: chipBoxesInternos[furoSelecionado?.index]?.length,
+            // },
+            // {
+            //     name: 'Serragem',
+            //     processed: filtroSerragem[furoSelecionado?.index]?.length,
+            //     total: chipBoxesInternos[furoSelecionado?.index]?.length,
+            // },
             {
                 name: 'Arquivamento',
                 processed: filtroArquivamento[furoSelecionado?.index]?.length,
@@ -243,16 +243,16 @@ export default function Home() {
                 processed: AllChipBoxesFiltradosFotografia?.length,
                 total: chipBoxes?.length,
             },
-            {
-                name: 'Densidade',
-                processed: 0,
-                total: 0,
-            },
-            {
-                name: 'Serragem',
-                processed: 0,
-                total: 0,
-            },
+            // {
+            //     name: 'Densidade',
+            //     processed: 0,
+            //     total: 0,
+            // },
+            // {
+            //     name: 'Serragem',
+            //     processed: 0,
+            //     total: 0,
+            // },
             {
                 name: 'Arquivamento',
                 processed: AllChipBoxesFiltradosArquivamento?.length,
@@ -493,7 +493,7 @@ export default function Home() {
                                                     <Tab label="Dias de maior produtividade (KPI de finalização de caixas)"
                                                         style={{ fontSize: 16, fontWeight: 'bold' }}
                                                     />
-                                                    <Tab label="KPI de processamento em metros (todas as caixas)"
+                                                    <Tab label="KPI de processamento em metros (todos os furos)"
                                                         style={{ fontSize: 16, fontWeight: 'bold' }}
                                                     />
                                                 </Tabs>
