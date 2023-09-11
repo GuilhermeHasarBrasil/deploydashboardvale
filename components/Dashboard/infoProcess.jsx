@@ -46,7 +46,7 @@ export default function InfoProcess({ total, iniciado, finalizado, naoIniciado }
                 <div style={{ backgroundColor: '#990113', height: 55, width: 280 }} >
                     <Column>
                         <TitleBox>CAIXAS NÃO INICIADAS</TitleBox>
-                        <Number>{naoIniciado?.length}</Number>
+                        <Number>{ total - iniciado?.length - finalizado.length}</Number>
                     </Column>
                 </div>
             </Row>
