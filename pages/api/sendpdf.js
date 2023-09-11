@@ -3,6 +3,7 @@ import { Telegraf } from 'telegraf';
 import dotenv from 'dotenv';
 import 'firebase/storage';
 import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import os from 'os'
 
 dotenv.config();
 const BOT_TOKEN = process.env.BOT_TOKEN;
@@ -10,16 +11,25 @@ const CHAT_ID = '-707399392';
 const bot = new Telegraf(BOT_TOKEN);
 
 export default async function handler(req, res) {
-    
-    const {arquivo} = req.body
-    const {furo} = req.body
-    const {data} = req.body
-    const {processos} = req.body
 
-    const pdfFilePath = `C:\\Users\\MICRO\\Downloads\\${arquivo}.pdf`; 
+    const { arquivo } = req.body
+    const { furo } = req.body
+    const { data } = req.body
+    const { processos } = req.body
+
+    let downloadsDirectory = '';
+    if (os.platform() === 'win32') {
+        // Caminho para Windows
+        downloadsDirectory = os.homedir() + '\\Downloads';
+    } else {
+        // Caminho para sistemas não-Windows (Linux, macOS, etc.)
+        downloadsDirectory = os.homedir() + '/Downloads';
+    }
+
+    const pdfFilePath = `${downloadsDirectory}/${arquivo}.pdf`;
 
     try {
-        
+
         await uploadPdfToStorage(pdfFilePath, arquivo, furo, data, processos);
         res.status(200).json({ success: true });
     } catch (error) {
@@ -28,12 +38,12 @@ export default async function handler(req, res) {
 }
 
 // Fazer o upload do arquivo PDF para o Firebase Storage
-async function uploadPdfToStorage(pdfFilePath, arquivo,  furo, data, processos) {
- 
+async function uploadPdfToStorage(pdfFilePath, arquivo, furo, data, processos) {
+
     const storage = getStorage();
     const storageRef = ref(storage, `pdfs/${arquivo}.pdf`); // Caminho no Storage
     const fileBlob = fs.readFileSync(pdfFilePath);
-    
+
     try {
         const snapshot = await uploadBytes(storageRef, fileBlob);
         const downloadToken = snapshot.metadata.downloadTokens;
