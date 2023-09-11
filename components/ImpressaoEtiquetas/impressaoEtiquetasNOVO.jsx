@@ -19,8 +19,7 @@ export default function PrintLabelNovo({ furoSelecionado, chipBoxesInternos, fur
             </div>
         )
 
-    const [selectedIndex, setSelectedIndex] = useState(0); // Adiciona esse estado
-    const [isLoading, setIsLoading] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState(0);
     useEffect(() => {
         if (furoSelecionado && chipBoxesInternos[furoSelecionado.index]) {
             const furoOptions = chipBoxesInternos[furoSelecionado.index].map((furo, index) => ({
@@ -53,13 +52,13 @@ export default function PrintLabelNovo({ furoSelecionado, chipBoxesInternos, fur
     useEffect(() => {
         if (!PrintAll) {
             setParamsPrint({
-                inicio: SelectedStart?.value,
-                fim: SelectedEnd?.value
+                inicio: parseInt(SelectedStart?.label.match(/\d+/)[0]),
+                fim: parseInt(SelectedEnd?.label.match(/\d+/)[0])
             })
         } else {
             setParamsPrint({
-                inicio: selectListStart[0].value,
-                fim: selectListStart[selectListStart.length - 1].value
+                inicio: parseInt(selectListStart[0].label.match(/\d+/)[0]),
+                fim: parseInt(selectListStart[selectListStart.length - 1].label.match(/\d+/)[0])
             })
             setSelectedStart(selectListStart[0])
             setSelectedEnd(selectListStart[selectListStart.length - 1])
@@ -125,7 +124,7 @@ export default function PrintLabelNovo({ furoSelecionado, chipBoxesInternos, fur
 
 
     async function handlePrintCaixaOuAmostra() {
-        const zpl = await handlePrint(paramsPrint, furoSelecionado, chipBoxesInternos[furoSelecionado.index], selectedTipoImpressao);
+        const zpl = await handlePrint(paramsPrint, furoSelecionado, chipBoxesInternos[furoSelecionado.index], selectedTipoImpressao);        
         printer.send(zpl)
     }
     async function handleCaixa() {

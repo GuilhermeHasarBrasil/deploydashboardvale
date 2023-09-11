@@ -2,15 +2,12 @@ import { defaultLayout } from "./defaultLayout";
 import { defaultLayoutAmostra } from './defaultLayoutBag'
 
 export default async function handlePrint(paramsPrint, furoSelecionado, chipBoxes, selectedTipoImpressao) {
-    const storedPrinter = JSON.parse(localStorage.getItem('printer'));
 
     if (paramsPrint.inicio == undefined || paramsPrint.fim == undefined) {
-        //console.log('digite inicio e fim')
         return
     } else {
-        const caixasNoIntervalo = chipBoxes.filter(caixa => paramsPrint.inicio <= caixa.cx && caixa.cx <= paramsPrint.fim);
+        const caixasNoIntervalo = chipBoxes.sort((a, b) => a.cx - b.cx).filter(caixa => paramsPrint.inicio <= caixa.cx && caixa.cx <= paramsPrint.fim);
         const etiquetas = await gerarEtiquetasParaImpressao(caixasNoIntervalo, paramsPrint, selectedTipoImpressao)
-        //Print(etiquetas)
 
         return etiquetas
     }
