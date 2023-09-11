@@ -43,15 +43,30 @@ export default function PrinterSettings() {
     });
   }, []);
 
+  const [showInfo, setShowInfo] = useState(false)
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (availableDevices?.length === 0) {
+        setShowInfo(true)
+      }
+    }, 10000);
+
+  }, [availableDevices])
+
   return (
     <div style={{ width: '80%', marginLeft: '10%', display: 'flex', flexDirection: 'column', marginTop: '3%', }} >
       <div style={{ width: '100%', display: 'flex', alignItems: 'start', justifyContent: 'center', }} >
         <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 20 }} >Configurações da Impressora</h1>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', marginTop: 40 }} >
-        <text style={{ fontSize: 25, fontWeight: 'bold', }}>Impressoras disponíveis na rede: </text>
         {
-          availableDevices.length > 0 ?
+          availableDevices?.length > 0 ?
+            <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 20 }} >Impressoras disponíveis na rede: </h1>
+            :
+            <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 20 }} >Buscando impressoras conectadas</h1>
+        }        {
+          availableDevices?.length > 0 ?
             <div style={{ display: 'flex', flexDirection: 'column', marginTop: 20 }} >
               {availableDevices.map((device) => (
                 <span style={{ fontSize: 18, marginTop: 8, fontWeight: 'bold', color: device.name == currentPrinter?.name ? 'green' : 'red' }} >
@@ -60,8 +75,17 @@ export default function PrinterSettings() {
               ))}
             </div>
             :
-            <span style={{display:'flex', flexDirection:'row'}} ><ReactLoading width={100} height={50} type={"bubbles"} color="#008F83" /></span>
+            <span style={{ display: 'flex', flexDirection: 'row' }} ><ReactLoading width={100} height={50} type={"bubbles"} color="#008F83" /></span>
         }
+        {
+          showInfo ?
+            <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginTop: 60 }} >Não foi possível encontrar nenhuma impressora conectada na rede. Clique no link abaixo para baixar o aplicativo de impressoras para windows da zebra:{<br></br>}
+             {<a style={{color:'blue'}} href='https://www.zebra.com/content/dam/zebra_new_ia/en-us/solutions-verticals/product/Software/Printer%20Software/Link-OS/browser-print/zebra-browser-print-windows-v132489.exe' >Zebra Browser Print</a>} 
+            </h1>
+            :
+            <></>
+        }
+
 
       </div>
     </div>
