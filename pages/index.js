@@ -159,7 +159,7 @@ export default function Home() {
             );
             setFiltroArquivamento(arraysFiltradosArquivamento)
         }
-    }, [chipBoxes, furoSelecionado])
+    }, [chipBoxes, furoSelecionado, furos])
 
     useEffect(() => {
         const quantidadeConferidos = furos.filter(furo => furo.conferido === true)
@@ -625,7 +625,7 @@ export default function Home() {
                                     filtroConferencia={filtroConferencia} filtroMarcacao={filtroMarcacao}
                                     filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade}
                                     filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
-                                    chipBoxesInternos={chipBoxesInternos}
+                                    chipBoxesInternos={chipBoxesInternos} furos={furos}
                                 />
                                 :
                                 <></>
