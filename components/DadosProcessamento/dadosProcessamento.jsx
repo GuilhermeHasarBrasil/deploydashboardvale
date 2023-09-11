@@ -64,7 +64,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                         </div>
                         <Row>
                             <Column>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }}>Conferência: {(filtroConferencia[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length) * 100}% </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold' }}>Conferência: {((filtroConferencia[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length).toFixed(3) * 100).toString().replace('.',',')}% </text>
                                 <PieChart width={320} height={320}>
                                     <Pie
                                         data={conferencia}
@@ -85,7 +85,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 </PieChart>
                             </Column>
                             <Column>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }}>Marcação: {(filtroMarcacao[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length) * 100}% </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold' }}>Marcação: {((filtroMarcacao[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length).toFixed(3) * 100).toString().replace('.',',')}% </text>
                                 <PieChart width={320} height={320}>
                                     <Pie
                                         data={marcacao}
@@ -106,7 +106,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 </PieChart>
                             </Column>
                             <Column>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }} >Fotografia: {(filtroFotografia[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length) * 100}% </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold' }} >Fotografia: {((filtroFotografia[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length).toFixed(3) * 100).toString().replace('.',',')}% </text>
                                 <PieChart width={320} height={320}>
                                     <Pie
                                         data={fotografia}
@@ -127,7 +127,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 </PieChart>
                             </Column>
                             <Column>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }} >Arquivamento: {(filtroArquivamento[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length) * 100}% </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold' }} >Arquivamento: {((filtroArquivamento[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length).toFixed(3) * 100).toString().replace('.',',')}% </text>
                                 <PieChart width={320} height={320}>
                                     <Pie
                                         data={arquivamento}

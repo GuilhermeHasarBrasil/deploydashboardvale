@@ -272,7 +272,7 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                                 style={{
                                     color: selectedProcesses.includes(furo.processo) ? '#f3c108' : 'black',
                                     width: 120,
-                                    fontWeight: 'bold'
+                                    fontWeight: 'bold', userSelect:'none'
                                 }}
                             >
                                 {furo.processo}
@@ -283,8 +283,8 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
             </ul>
             {furoSelecionado?.furo && (
                 <div style={{ marginTop: 40, alignItems: 'center', display: 'flex', flexDirection: 'column' }} >
-                    <p>Furo selecionado: {furoSelecionado.furo}</p>
-                    <p>Processos selecionados: {selectedProcesses.length > 0 ? selectedProcesses.join(', ') : 'Nenhum'}</p>
+                    <p style={{userSelect:'none'}} >Furo selecionado: {furoSelecionado.furo}</p>
+                    <p style={{ userSelect:'none'}} >Processos selecionados: {selectedProcesses.length > 0 ? selectedProcesses.join(', ') : 'Nenhum'}</p>
 
                     <div style={{ height: 50 }} />
 

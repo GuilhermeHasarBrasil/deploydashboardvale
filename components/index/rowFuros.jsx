@@ -39,7 +39,7 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
                     selected === 'Dashboard' ?
                         <li style={{ marginLeft: 50, marginRight: 50, backgroundColor: 'TODOS' == selectedItem ? '#008f83' : 'white', padding: 8, borderRadius: 10 }}>
                             <Button>
-                                <h1 style={{ color: 'TODOS' !== selectedItem ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett('TODOS', 99999999)} >
+                                <h1 style={{ color: 'TODOS' !== selectedItem ? 'black' : '#f3c108', userSelect:'none', width: 120, fontWeight: 'bold' }} onClick={() => sett('TODOS', 99999999)} >
                                     TODOS
                                 </h1>
                             </Button>
@@ -52,7 +52,7 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
                     <li style={{ marginLeft: 50, marginRight: 50, backgroundColor: furo.numero == selectedItem ? '#008f83' : 'white', padding: 8, borderRadius: 10 }} key={furo.id}>
                         {furo.title}{" "}
                         <Button>
-                            <h1 style={{ color: furo.numero !== selectedItem ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett(furo.numero, index)} >
+                            <h1 style={{ color: furo.numero !== selectedItem ? 'black' : '#f3c108', userSelect:'none', width: 120, fontWeight: 'bold' }} onClick={() => sett(furo.numero, index)} >
                                 {furo.numero}
                             </h1>
                         </Button>

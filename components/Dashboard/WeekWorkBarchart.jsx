@@ -71,12 +71,12 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
 
     return (
         <div style={{ marginTop: 10, marginLeft: 100 }} >
-            <h1 style={{ marginLeft: 40, marginTop: 10, marginBottom: 5, fontSize: 20, fontWeight: 'bold' }} >Caixas processadas por dia da semana (por processo)</h1>
+            <h1 style={{ marginLeft: 40, marginTop: 10, marginBottom: 5, fontSize: 20, fontWeight: 'bold', userSelect:'none' }} >Caixas processadas por dia da semana (por processo)</h1>
             <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden', marginLeft: 20, marginBottom: 10 }} >
                 {processos.map((furo, index) => (
                     <li style={{ marginLeft: 15, marginRight: 0, backgroundColor: furo.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={furo.id}>
                         <Button>
-                            <h1 style={{ color: furo.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett(furo.processo, index)} >
+                            <h1 style={{ color: furo.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold', userSelect:'none' }} onClick={() => sett(furo.processo, index)} >
                                 {furo.processo}
                             </h1>
                         </Button>

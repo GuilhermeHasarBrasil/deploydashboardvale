@@ -276,7 +276,7 @@ export default function Mensagens({ chipBoxes, furos }) {
                 {processos.map((processOption, index) => (
                     <Button>
                         <li style={{ marginLeft: 10, marginRight: 0, backgroundColor: processOption.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10, height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center' }} key={processOption.id}>
-                            <h1 style={{ color: processOption.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett(processOption.processo, index)} >
+                            <h1 style={{ color: processOption.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold', userSelect:'none' }} onClick={() => sett(processOption.processo, index)} >
                                 {processOption.processo}
                             </h1>
                         </li>
@@ -287,8 +287,8 @@ export default function Mensagens({ chipBoxes, furos }) {
                 {arrayRenderizado?.map((item, index) => (
                     <li style={{ marginLeft: 30, marginRight: 0, backgroundColor: '#074f92', padding: 18, borderRadius: 10, marginTop: 5, }} key={item.id}>
                         <div style={{ display: 'flex', flexDirection: 'column', width: 250, backgroundColor: 'white', padding: 3 }} >
-                            <text style={{ color: 'red', fontWeight: 'bold', fontSize: 18 }} >Aviso!</text>
-                            <text style={{ fontWeight: 'bold' }} >A caixa {item.cx} do furo {item.furo} levou ou está a mais de {label} em {process}</text>
+                            <text style={{ color: 'red', fontWeight: 'bold', fontSize: 18, userSelect:'none' }} >Aviso!</text>
+                            <text style={{ fontWeight: 'bold', userSelect:'none' }} >A caixa {item.cx} do furo {item.furo} levou ou está a mais de {label} em {process}</text>
                         </div>
                     </li>
                 ))}

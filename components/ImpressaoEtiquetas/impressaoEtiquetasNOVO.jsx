@@ -140,14 +140,14 @@ export default function PrintLabelNovo({ furoSelecionado, chipBoxesInternos, fur
         <>
             {
                 furoSelecionado.furo === 'TODOS' ?
-                    <div style={{ display: 'flex', justifyContent: 'center', padding: 5, fontWeight: 'bold', color: '#008F83', fontSize: 35 }} >
+                    <div style={{ display: 'flex', justifyContent: 'center', padding: 5, fontWeight: 'bold', color: '#008F83', fontSize: 35, userSelect:'none' }} >
                         <text>Selecione o furo acima</text>
                     </div>
                     :
                     <Container>
                         {
                             selectedTipoImpressao.length > 4 ?
-                                <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione
+                                <TitleText style={{ fontWeight: '700', fontSize: 25, userSelect:'none' }} >Selecione
                                     {selectedTipoImpressao == 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
                                         ' ' + 'o intervalo da impressão de etiquetas de ' + selectedTipoImpressao + ' '
                                         :
@@ -159,14 +159,14 @@ export default function PrintLabelNovo({ furoSelecionado, chipBoxesInternos, fur
                                     do furo {furoSelecionado.furo}
                                 </TitleText>
                                 :
-                                <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione o tipo de etiqueta que se deseja imprimir</TitleText>
+                                <TitleText style={{ fontWeight: '700', fontSize: 25, userSelect:'none' }} >Selecione o tipo de etiqueta que se deseja imprimir</TitleText>
 
                         }
                         <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
                             {tipoImpressao.map((tipo, index) => (
                                 <li style={{ marginLeft: 30, display: 'flex', alignItems: 'center', justifyContent: 'center', marginRight: 0, backgroundColor: tipo.tipo == selectedTipoImpressao ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={tipo.id}>
                                     <Button2>
-                                        <h1 style={{ color: tipo.tipo !== selectedTipoImpressao ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett(tipo.tipo, index)} >
+                                        <h1 style={{ color: tipo.tipo !== selectedTipoImpressao ? 'black' : '#f3c108', userSelect:'none', width: 120, fontWeight: 'bold' }} onClick={() => sett(tipo.tipo, index)} >
                                             {tipo.tipo}
                                         </h1>
                                     </Button2>
@@ -359,18 +359,18 @@ export default function PrintLabelNovo({ furoSelecionado, chipBoxesInternos, fur
                                                             <div style={{ display: 'flex', width: 300, backgroundColor: selectedWhiteBox?.id === WhiteBoxFuro?.id ? '#D9D9D9' : 'white', flexDirection: 'column', alignItems: 'center', borderWidth: 1, borderColor: '#000', borderRadius: 7, padding: 8, paddingLeft: 16, paddingRight: 16 }} >
 
                                                                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'end', width: '100%' }} >
-                                                                    <text style={{ width: '100%', color: 'black', fontWeight: 'bold' }} >{WhiteBoxFuro?.furo}</text>
+                                                                    <text style={{ width: '100%', color: 'black', fontWeight: 'bold', userSelect:'none' }} >{WhiteBoxFuro?.furo}</text>
                                                                     <QRCodeSVG value={WhiteBoxFuro?.cx + ';' + WhiteBoxFuro?.furo + ';' + WhiteBoxFuro?.de + ';' + WhiteBoxFuro?.ate} size={50} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', alignItems: 'start', width: '100%', marginTop: 15 }} >
-                                                                    <text style={{ color: 'black', fontWeight: 'bold' }} >Caixa nº{WhiteBoxFuro?.cx.toString().padStart(3, '0')}</text>
+                                                                    <text style={{ color: 'black', fontWeight: 'bold', userSelect:'none' }} >Caixa nº{WhiteBoxFuro?.cx.toString().padStart(3, '0')}</text>
                                                                 </div>
                                                                 <div style={{ width: '70%', marginTop: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
-                                                                    <TitleText style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Intervalo da Amostra</TitleText>
+                                                                    <TitleText style={{ color: 'white', fontSize: 16, userSelect:'none', fontWeight: 'bold' }}>Intervalo da Amostra</TitleText>
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: 5 }} >
-                                                                    <text style={{ color: 'black', fontWeight: 'bold' }} >De: {WhiteBoxFuro?.de}</text>
-                                                                    <text style={{ color: 'black', fontWeight: 'bold' }} >Até: {WhiteBoxFuro?.ate}</text>
+                                                                    <text style={{ color: 'black', fontWeight: 'bold', userSelect:'none' }} >De: {WhiteBoxFuro?.de}</text>
+                                                                    <text style={{ color: 'black', fontWeight: 'bold', userSelect:'none' }} >Até: {WhiteBoxFuro?.ate}</text>
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -390,18 +390,18 @@ export default function PrintLabelNovo({ furoSelecionado, chipBoxesInternos, fur
                                                             <div style={{ display: 'flex', width: 300, backgroundColor: selectedPalete?.qrcode === PaleteFuro?.qrcode ? '#D9D9D9' : 'white', flexDirection: 'column', alignItems: 'center', borderWidth: 1, borderColor: '#000', borderRadius: 7, padding: 8, paddingLeft: 16, paddingRight: 16 }} >
 
                                                                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'end', width: '100%' }} >
-                                                                    <text style={{ width: '100%', color: 'black', fontWeight: 'bold' }} >{PaleteFuro?.furo}</text>
+                                                                    <text style={{ width: '100%', color: 'black', userSelect:'none', fontWeight: 'bold' }} >{PaleteFuro?.furo}</text>
                                                                     <QRCodeSVG value={PaleteFuro?.qrcode} size={50} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', alignItems: 'start', width: '100%', marginTop: 15 }} >
-                                                                    <text style={{ color: 'black', fontWeight: 'bold' }} >Palete nº{PaleteFuro?.numero.toString().padStart(3, '0')}</text>
+                                                                    <text style={{ color: 'black', fontWeight: 'bold', userSelect:'none' }} >Palete nº{PaleteFuro?.numero.toString().padStart(3, '0')}</text>
                                                                 </div>
                                                                 <div style={{ width: '70%', marginTop: 15, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
-                                                                    <TitleText style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Intervalo do Furo</TitleText>
+                                                                    <TitleText style={{ color: 'white', fontSize: 16, fontWeight: 'bold', userSelect:'none' }}>Intervalo do Furo</TitleText>
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: 5 }} >
-                                                                    <text style={{ color: 'black', fontWeight: 'bold' }} >De: {PaleteFuro?.de}</text>
-                                                                    <text style={{ color: 'black', fontWeight: 'bold' }} >Até: {PaleteFuro?.ate}</text>
+                                                                    <text style={{ color: 'black', fontWeight: 'bold', userSelect:'none' }} >De: {PaleteFuro?.de}</text>
+                                                                    <text style={{ color: 'black', fontWeight: 'bold', userSelect:'none' }} >Até: {PaleteFuro?.ate}</text>
                                                                 </div>
                                                             </div>
                                                         </li>

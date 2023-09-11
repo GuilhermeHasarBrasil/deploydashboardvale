@@ -8,7 +8,7 @@ export default function InfoProcess({ total, iniciado, finalizado, naoIniciado }
         <div style={{ display: 'flex', flexDirection: 'column', marginLeft:10, marginTop:0, }} >
             <Row>
                 <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#206F0D', width: 55, height: 55 }} >
-                    <img src="/assets/images/furoimg.png" />
+                    <img src="/assets/images/furoimg.png" style={{userSelect:'none'}} />
                 </div>
                 <div style={{ backgroundColor: '#2FAB10', height: 55, width: 280 }} >
                     <Column>
@@ -19,7 +19,7 @@ export default function InfoProcess({ total, iniciado, finalizado, naoIniciado }
             </Row>
             <Row>
                 <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#2760BB', width: 55, height: 55 }} >
-                    <img src="/assets/images/furoimg.png" />
+                    <img src="/assets/images/furoimg.png" style={{userSelect:'none'}} />
                 </div>
                 <div style={{ backgroundColor: '#307BF4', height: 55, width: 280 }} >
                     <Column>
@@ -30,7 +30,7 @@ export default function InfoProcess({ total, iniciado, finalizado, naoIniciado }
             </Row>
             <Row>
                 <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#996501', width: 55, height: 55 }} >
-                    <img src="/assets/images/furoimg.png" />
+                    <img src="/assets/images/furoimg.png" style={{userSelect:'none'}} />
                 </div>
                 <div style={{ backgroundColor: '#E89E0E', height: 55, width: 280 }} >
                     <Column>
@@ -41,7 +41,7 @@ export default function InfoProcess({ total, iniciado, finalizado, naoIniciado }
             </Row>
             <Row>
                 <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#990113', width: 55, height: 55 }} >
-                    <img src="/assets/images/furoimg.png" />
+                    <img src="/assets/images/furoimg.png" style={{userSelect:'none'}} />
                 </div>
                 <div style={{ backgroundColor: '#990113', height: 55, width: 280 }} >
                     <Column>
@@ -67,10 +67,10 @@ const Column = styled.div({
 const TitleBox = styled.text({
     color: 'white',
     fontSize: 15,
-    fontWeight: '600'
+    fontWeight: '600', userSelect:'none'
 })
 const Number = styled.text({
     fontSize: 24,
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold', userSelect:'none'
 })

@@ -98,8 +98,9 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                     return false;
                 });
 
-                const sumMetragem = boxesOnDate.reduce((sum, caixa) => sum + (caixa.ate - caixa.de), 0);
-                dataForChart.push({ date: currentDate.toISOString().substr(0, 10), metragem: sumMetragem });
+                const sumMetragem = boxesOnDate.reduce((sum, caixa) => sum + (caixa.ate.toFixed(2) - caixa.de.toFixed(2)), 0);
+                const roundMetragem =  Math.round(sumMetragem * 100) / 100
+                dataForChart.push({ date: currentDate.toISOString().substr(0, 10), metragem: roundMetragem });
             }
             setConferenciaData(dataForChart);
         }
@@ -201,7 +202,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 5, flexDirection: 'column', alignItems: 'center', width: '100%' }}>
             {
                 selectedDateRange?.startDate ?
-                    <text style={{ color: 'black', fontSize: 18, fontWeight: 'bold' }}>
+                    <text style={{ color: 'black', fontSize: 18, fontWeight: 'bold', userSelect:'none' }}>
                         Processo de {
                             numberCarrousel === 1 ? 'conferência'
                                 :
@@ -297,7 +298,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                 selectedDateRange.startDate ?
                     <></>
                     :
-                    <text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 15 }} >Selecione o intervalo de datas para filtrar</text>
+                    <text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 15 , userSelect:'none'}} >Selecione o intervalo de datas para filtrar</text>
             }
             <DatePickerWrapper>
                 <DatePicker

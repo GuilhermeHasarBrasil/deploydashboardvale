@@ -189,12 +189,14 @@ const Column = styled.div({
 const TitleBox = styled.text({
     color: 'white',
     fontSize: 17,
-    fontWeight: '600'
+    fontWeight: '600',
+    userSelect:'none'
 })
 const Number = styled.text({
     fontSize: 35,
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    userSelect:'none'
 })
 const ObjectList = styled.ul`
   list-style-type: none;
@@ -214,7 +216,8 @@ const ObjectItem = styled.li`
   flex-direction: column;
   border-radius: 15;
 
-  cursor: pointer;
+  cursor: default;
+  user-select: none;
 
   &:last-child {
     border-bottom: none;
@@ -243,7 +246,8 @@ const ObjectItemProcessamento = styled.li`
   flex-direction: column;
   border-radius: 15;
 
-  cursor: pointer;
+  cursor: default;
+  user-selecnonet
 
   &:last-child {
     border-bottom: none;
@@ -272,7 +276,8 @@ const ObjectItemNaoIniciado = styled.li`
   flex-direction: column;
   border-radius: 15;
 
-  cursor: pointer;
+  cursor: default;
+  user-selecnonet
 
   &:last-child {
     border-bottom: none;

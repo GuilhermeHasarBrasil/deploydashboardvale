@@ -26,7 +26,7 @@ export const styles = ({
     fontSize: 24,
     fontWeight: 700,
     textAlign: 'center',
-    color: '#000',
+    color: '#000', userSelect:'none'
   },
 
   subTitle: {
@@ -34,7 +34,7 @@ export const styles = ({
     fontWeight: 700,
     textAlign: 'center',
     color: '#000',
-    letterSpacing:0.8
+    letterSpacing:0.8, userSelect:'none'
   },
 
   contentEsquerda: {

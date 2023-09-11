@@ -57,14 +57,14 @@ export default function PrinterSettings() {
   return (
     <div style={{ width: '80%', marginLeft: '10%', display: 'flex', flexDirection: 'column', marginTop: '3%', }} >
       <div style={{ width: '100%', display: 'flex', alignItems: 'start', justifyContent: 'center', }} >
-        <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 20 }} >Configurações da Impressora</h1>
+        <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 20 , userSelect:'none'}} >Configurações da Impressora</h1>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', marginTop: 40 }} >
         {
           availableDevices?.length > 0 ?
-            <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 20 }} >Impressoras disponíveis na rede: </h1>
+            <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 20, userSelect:'none' }} >Impressoras disponíveis na rede: </h1>
             :
-            <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 20 }} >Buscando impressoras conectadas</h1>
+            <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginBottom: 20, userSelect:'none' }} >Buscando impressoras conectadas</h1>
         }        {
           availableDevices?.length > 0 ?
             <div style={{ display: 'flex', flexDirection: 'column', marginTop: 20 }} >
@@ -79,7 +79,7 @@ export default function PrinterSettings() {
         }
         {
           showInfo ?
-            <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginTop: 60 }} >Não foi possível encontrar nenhuma impressora conectada na rede. Clique no link abaixo para baixar o aplicativo de impressoras para windows da zebra:{<br></br>}
+            <h1 style={{ color: 'black', fontSize: 25, fontWeight: 'bold', marginTop: 60, userSelect:'none' }} >Não foi possível encontrar nenhuma impressora conectada na rede. Clique no link abaixo para baixar o aplicativo de impressoras para windows da zebra:{<br></br>}
              {<a style={{color:'blue'}} href='https://www.zebra.com/content/dam/zebra_new_ia/en-us/solutions-verticals/product/Software/Printer%20Software/Link-OS/browser-print/zebra-browser-print-windows-v132489.exe' >Zebra Browser Print</a>} 
             </h1>
             :

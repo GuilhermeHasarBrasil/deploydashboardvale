@@ -266,7 +266,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 5, flexDirection: 'column', width: '100%' }} >
-            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop: 5 }} >
+            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop: 5, userSelect:'none' }} >
                 {
                     furoSelecionado.furo === 'TODOS' ?
                         'Selecione o processo para verificar o tempo de cada caixa processada (todos os furos)'
@@ -279,7 +279,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
                     {processos.map((furo, index) => (
                         <li style={{ marginLeft: 30, marginRight: 0, backgroundColor: furo.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={furo.id}>
                             <Button>
-                                <h1 style={{ color: furo.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold' }} onClick={() => sett(furo.processo, index)} >
+                                <h1 style={{ color: furo.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold', userSelect:'none' }} onClick={() => sett(furo.processo, index)} >
                                     {furo.processo}
                                 </h1>
                             </Button>
