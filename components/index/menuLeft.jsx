@@ -2,6 +2,9 @@
 import { useState } from "react";
 import styled from 'styled-components'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
+import { ListCircleOutline } from 'react-ionicons'
+import { SettingsOutline } from 'react-ionicons'
+import { WarningOutline } from 'react-ionicons'
 
 export default function MenuLeft({ setSelected, selected }) {
     const [menuVisible, setMenuVisible] = useState(false);
@@ -27,7 +30,7 @@ export default function MenuLeft({ setSelected, selected }) {
         >
             {menuVisible ? (
                 <div style={{ padding: 20 }}>
-                    <img style={{ userSelect: 'none', width: 220,}} src={logoSrc} width={50} height={50} />
+                    <img style={{ userSelect: 'none', width: 220, }} src={logoSrc} width={50} height={50} />
                 </div>
             ) : (
                 <div style={{ padding: 0 }}>
@@ -56,8 +59,25 @@ export default function MenuLeft({ setSelected, selected }) {
                     </Button>
                 </Row>
                 <Resources>
-                    <SwapHorizIcon style={{ color: 'white' }} />
-                    <TitleOption>RECURSOS</TitleOption>
+                    {
+                        menuVisible ?
+                            <SwapHorizIcon style={{ color: 'white' }} />
+                            :
+                            <></>
+                    }
+                    {
+                        menuVisible ?
+                            <TitleOption>RECURSOS</TitleOption>
+
+                            :
+                            <ListCircleOutline
+                                color={'#00000'}
+                                beat
+                                title={''}
+                                height="40px"
+                                width="40px"
+                            />
+                    }
                 </Resources>
                 <Row onClick={() => sett('Impressão Etiquetas')}>
                     <ImgContainer selected={selected === 'Impressão Etiquetas'} >
@@ -90,8 +110,25 @@ export default function MenuLeft({ setSelected, selected }) {
                     </Button>
                 </Row>
                 <Resources>
-                    <SwapHorizIcon style={{ color: 'white' }} />
-                    <TitleOption>CONFIGURAÇÃO</TitleOption>
+                    {
+                        menuVisible ?
+                            <SwapHorizIcon style={{ color: 'white' }} />
+                            :
+                            <></>
+                    }
+                    {
+                        menuVisible ?
+                            <TitleOption>CONFIGURAÇÃO</TitleOption>
+                            :
+                            <SettingsOutline
+                                color={'#00000'}
+                                rotate
+                                title={''}
+                                height="35px"
+                                width="35px"
+                            />
+                    }
+
                 </Resources>
                 <Row onClick={() => sett('Config. Impressora')}>
                     <ImgContainer selected={selected === 'Config. Impressora'} >
@@ -114,8 +151,25 @@ export default function MenuLeft({ setSelected, selected }) {
                     </Button>
                 </Row>
                 <Resources>
-                    <SwapHorizIcon style={{ color: 'white' }} />
-                    <TitleOption>ADMINISTRAÇÃO</TitleOption>
+                    {
+                        menuVisible ?
+                            <SwapHorizIcon style={{ color: 'white' }} />
+                            :
+                            <></>
+                    }
+                    {
+                        menuVisible ?
+                            <TitleOption>ADMINISTRAÇÃO</TitleOption>
+
+                            :
+                            <WarningOutline
+                                color={'#00000'}
+                                shake
+                                title={'' }
+                                height="35px"
+                                width="35px"
+                            />
+                    }
                 </Resources>
                 <Row onClick={() => sett('Usuário')}>
                     <ImgContainer selected={selected === 'Usuário'} >
@@ -182,7 +236,7 @@ const Row = styled.div({
     flexDirection: 'row',
     alignItems: 'center',
     marginLeft: 15,
-    marginTop: 12, padding:2
+    marginTop: 12, padding: 2
 })
 
 const Resources = styled.div({
