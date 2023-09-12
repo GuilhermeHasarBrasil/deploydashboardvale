@@ -58,7 +58,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                 <div style={{ backgroundColor: '#2FAB10', height: 60, width: 400 }}>
                     <Column>
                         <TitleBox>FUROS PROCESSADOS</TitleBox>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop:-10 }} >
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
                             <Number>
                                 {finalizados?.length}
                             </Number>
@@ -99,7 +99,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                 <div style={{ backgroundColor: '#307BF4', height: 60, width: 400 }} >
                     <Column>
                         <TitleBox>FUROS NÃO PROCESSADOS / INICIADOS</TitleBox>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop:-10 }} >
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
                             <Number>
                                 {quantidadeDeNaoIniciado?.length}
                             </Number>
@@ -139,7 +139,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                 <div style={{ backgroundColor: '#E89E0E', height: 60, width: 400 }} >
                     <Column>
                         <TitleBox>FUROS EM PROCESSAMENTO</TitleBox>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop:-10 }} >
+                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
                             <Number>
                                 {processamento?.length}
                             </Number>
@@ -190,13 +190,13 @@ const TitleBox = styled.text({
     color: 'white',
     fontSize: 17,
     fontWeight: '600',
-    userSelect:'none'
+    userSelect: 'none'
 })
 const Number = styled.text({
     fontSize: 35,
     color: 'white',
     fontWeight: 'bold',
-    userSelect:'none'
+    userSelect: 'none'
 })
 const ObjectList = styled.ul`
   list-style-type: none;
@@ -247,7 +247,7 @@ const ObjectItemProcessamento = styled.li`
   border-radius: 15;
 
   cursor: default;
-  user-selecnonet
+  user-select: none;
 
   &:last-child {
     border-bottom: none;
@@ -277,7 +277,7 @@ const ObjectItemNaoIniciado = styled.li`
   border-radius: 15;
 
   cursor: default;
-  user-selecnonet
+  user-select: none;
 
   &:last-child {
     border-bottom: none;
