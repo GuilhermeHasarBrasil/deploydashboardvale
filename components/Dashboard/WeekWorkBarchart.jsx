@@ -13,9 +13,9 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
         { 'processo': 'Conferência' },
         { 'processo': 'Marcação' },
         { 'processo': 'Fotografia' },
-        { 'processo': 'Densidade' },
-        { 'processo': 'Serragem' },
-        { 'processo': 'Despacho' },
+        // { 'processo': 'Densidade' },
+        // { 'processo': 'Serragem' },
+        // { 'processo': 'Despacho' },
         { 'processo': 'Arquivamento' },
     ]
     function sett(selected) {
@@ -71,7 +71,7 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
 
     return (
         <div style={{ marginTop: 10, marginLeft: 100 }} >
-            <h1 style={{ marginLeft: 40, marginTop: 10, marginBottom: 5, fontSize: 20, fontWeight: 'bold', userSelect:'none' }} >Caixas processadas por dia da semana (por processo)</h1>
+            <h1 style={{ marginLeft: 40, marginTop: 10, marginBottom: 5, fontSize: 20, fontWeight: 'bold', userSelect:'none' }} >Caixas finalizadas por dia da semana (por processo)</h1>
             <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden', marginLeft: 20, marginBottom: 10 }} >
                 {processos.map((furo, index) => (
                     <li style={{ marginLeft: 15, marginRight: 0, backgroundColor: furo.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={furo.id}>
