@@ -185,21 +185,21 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                     {
                                         furos[furoSelecionado?.index].processos?.geologia?.descGeologica?.ent &&
                                             furos[furoSelecionado?.index].processos?.geologia?.descEstrutural?.sai ?
-                                            'Finalizado!'
+                                            'Geologia Finalizado!'
                                             :
                                             ''
                                     }
                                     {
                                         furos[furoSelecionado?.index].processos?.geologia?.descGeologica?.ent &&
                                             !furos[furoSelecionado?.index].processos?.geologia?.descEstrutural?.sai ?
-                                            'Em andamento'
+                                            'Geologia Em andamento'
                                             :
                                             ''
                                     }
                                     {
                                         !furos[furoSelecionado?.index].processos?.geologia?.descGeologica?.ent &&
                                             !furos[furoSelecionado?.index].processos?.geologia?.descEstrutural?.sai ?
-                                            'Em andamento'
+                                            'Geologia Em andamento'
                                             :
                                             ''
                                     }
@@ -330,10 +330,10 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 <Button aria-describedby={idDensidade} onClick={handleClickDensidade} style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#008F83', height: 220, width: 220, marginTop: 30, fontWeight: 'bold', color: 'white' }} variant="contained" >
                                     {
                                         furos[furoSelecionado?.index].processos?.densidade?.sai?.seconds ?
-                                            'Finalizado!'
+                                            'Densidade Finalizado!'
                                             :
                                             furos[furoSelecionado?.index].processos?.densidade?.ent?.seconds ?
-                                                'Em andamento' : 'Não iniciado!'
+                                                'Densidade Em andamento' : 'Densidade Não iniciado!'
                                     }
 
                                     <br></br>
@@ -397,10 +397,10 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 <Button aria-describedby={idSerragem} onClick={handleClickSerragem} style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#008F83', height: 220, width: 220, marginTop: 30, fontWeight: 'bold', color: 'white' }} variant="contained" >
                                     {
                                         furos[furoSelecionado?.index].processos?.serragem?.sai?.seconds ?
-                                            'Finalizado!'
+                                            'Serragem Finalizado!'
                                             :
                                             furos[furoSelecionado?.index].processos?.serragem?.ent?.seconds ?
-                                                'Em andamento' : 'Não iniciado!'
+                                                'Serragem Em andamento' : 'Serragem Não iniciado!'
                                     }
 
                                     <br></br>
@@ -464,10 +464,10 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 <Button aria-describedby={idAmostragem} onClick={handleClickAmostragem} style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#008F83', height: 220, width: 220, marginTop: 30, fontWeight: 'bold', color: 'white' }} variant="contained" >
                                     {
                                         furos[furoSelecionado?.index].processos?.amostragem?.sai?.seconds ?
-                                            'Finalizado!'
+                                            'Amostragem Finalizado!'
                                             :
                                             furos[furoSelecionado?.index].processos?.amostragem?.ent?.seconds ?
-                                                'Em andamento' : 'Não iniciado!'
+                                                'Amostragem Em andamento' : 'Amostragem Não iniciado!'
                                     }
 
                                     <br></br>
@@ -532,10 +532,10 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 <Button aria-describedby={idDespacho} onClick={handleClickDespacho} style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#008F83', height: 220, width: 220, marginTop: 30, fontWeight: 'bold', color: 'white' }} variant="contained" >
                                     {
                                         furos[furoSelecionado?.index].processos?.despacho?.sai?.seconds ?
-                                            'Finalizado!'
+                                            'Despacho Finalizado!'
                                             :
                                             furos[furoSelecionado?.index].processos?.despacho?.ent?.seconds ?
-                                                'Em andamento' : 'Não iniciado!'
+                                                'Despacho Em andamento' : 'Despacho Não iniciado!'
                                     }
 
                                     <br></br>
