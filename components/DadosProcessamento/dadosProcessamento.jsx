@@ -9,20 +9,20 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
 
     const COLORS = ['#008F83', '#ef3a25 '];
     const conferencia = [
-        { name: 'Executada', value: filtroConferencia[furoSelecionado?.index]?.length },
-        { name: 'Restante', value: chipBoxesInternos[furoSelecionado?.index]?.length - filtroConferencia[furoSelecionado?.index]?.length }
+        { name: 'Processadas', value: filtroConferencia[furoSelecionado?.index]?.length },
+        { name: 'Não processadas', value: chipBoxesInternos[furoSelecionado?.index]?.length - filtroConferencia[furoSelecionado?.index]?.length }
     ];
     const marcacao = [
-        { name: 'Executada', value: filtroMarcacao[furoSelecionado?.index]?.length },
-        { name: 'Restante', value: chipBoxesInternos[furoSelecionado?.index]?.length - filtroMarcacao[furoSelecionado?.index]?.length }
+        { name: 'Processadas', value: filtroMarcacao[furoSelecionado?.index]?.length },
+        { name: 'Não processadas', value: chipBoxesInternos[furoSelecionado?.index]?.length - filtroMarcacao[furoSelecionado?.index]?.length }
     ];
     const fotografia = [
-        { name: 'Executada', value: filtroFotografia[furoSelecionado?.index]?.length },
-        { name: 'Restante', value: chipBoxesInternos[furoSelecionado?.index]?.length - filtroFotografia[furoSelecionado?.index]?.length }
+        { name: 'Processadas', value: filtroFotografia[furoSelecionado?.index]?.length },
+        { name: 'Não processadas', value: chipBoxesInternos[furoSelecionado?.index]?.length - filtroFotografia[furoSelecionado?.index]?.length }
     ];
     const arquivamento = [
-        { name: 'Executada', value: filtroArquivamento[furoSelecionado?.index]?.length },
-        { name: 'Restante', value: chipBoxesInternos[furoSelecionado?.index]?.length - filtroArquivamento[furoSelecionado?.index]?.length }
+        { name: 'Processadas', value: filtroArquivamento[furoSelecionado?.index]?.length },
+        { name: 'Não processadas', value: chipBoxesInternos[furoSelecionado?.index]?.length - filtroArquivamento[furoSelecionado?.index]?.length }
     ];
 
     if (!furoSelecionado)
@@ -115,7 +115,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                         </div>
                         <Row>
                             <Column>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }}>Conferência: {((filtroConferencia[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length).toFixed(3) * 100).toString().replace('.', ',')}% </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }}>Conferência: {((filtroConferencia[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length).toFixed(3) * 100).toString().replace('.', ',')}% </text>
                                 <PieChart width={320} height={320}>
                                     <Pie
                                         data={conferencia}
@@ -136,7 +136,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 </PieChart>
                             </Column>
                             <Column>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }}>Marcação: {((filtroMarcacao[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length).toFixed(3) * 100).toString().replace('.', ',')}% </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }}>Marcação: {((filtroMarcacao[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length).toFixed(3) * 100).toString().replace('.', ',')}% </text>
                                 <PieChart width={320} height={320} >
                                     <Pie
                                         data={marcacao}
@@ -157,7 +157,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 </PieChart>
                             </Column>
                             <Column>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }} >Fotografia: {((filtroFotografia[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length).toFixed(3) * 100).toString().replace('.', ',')}% </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} >Fotografia: {((filtroFotografia[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length).toFixed(3) * 100).toString().replace('.', ',')}% </text>
                                 <PieChart width={320} height={320}>
                                     <Pie
                                         data={fotografia}
@@ -180,7 +180,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
 
                             {/* geologia */}
                             <Column3>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }} >Geologia: </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} >Geologia: </text>
                                 <Button aria-describedby={id} style={{ backgroundColor: '#008F83', height: 220, width: 220, marginTop: 30, fontWeight: 'bold' }} variant="contained" onClick={handleClick}>
                                     {
                                         furos[furoSelecionado?.index].processos?.geologia?.descGeologica?.ent &&
@@ -219,7 +219,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 >
                                     <Column2>
                                         <Column>
-                                            <text style={{ marginRight: 15, fontWeight: 'bold' }} > Descrição Geológica: {<br></br>}
+                                            <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} > Descrição Geológica: {<br></br>}
                                                 {
                                                     furos[furoSelecionado?.index].processos?.geologia?.descGeologica?.sai ?
 
@@ -253,7 +253,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                             </text>
                                         </Column>
                                         <Column>
-                                            <text style={{ marginRight: 15, fontWeight: 'bold' }} > Descrição Geotécnica: {<br></br>}
+                                            <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} > Descrição Geotécnica: {<br></br>}
                                                 {
                                                     furos[furoSelecionado?.index].processos?.geologia?.descGeotecnica?.sai ?
 
@@ -287,7 +287,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                             </text>
                                         </Column>
                                         <Column>
-                                            <text style={{ marginRight: 15, fontWeight: 'bold' }} > Descrição Estrutural: {<br></br>}
+                                            <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} > Descrição Estrutural: {<br></br>}
                                                 {
                                                     furos[furoSelecionado?.index].processos?.geologia?.descEstrutural?.sai ?
 
@@ -326,7 +326,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
 
                             {/* densidade */}
                             <Column3>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }} >Densidade: </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} >Densidade: </text>
                                 <Button aria-describedby={idDensidade} onClick={handleClickDensidade} style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#008F83', height: 220, width: 220, marginTop: 30, fontWeight: 'bold', color: 'white' }} variant="contained" >
                                     {
                                         furos[furoSelecionado?.index].processos?.densidade?.sai?.seconds ?
@@ -352,7 +352,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 >
                                     <Column2>
                                         <Column>
-                                            <text style={{ marginRight: 15, fontWeight: 'bold' }} > Dados do procesos de densidade: {<br></br>}
+                                            <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} > Dados do procesos de densidade: {<br></br>}
                                                 {
                                                     furos[furoSelecionado?.index].processos?.densidade?.sai ?
 
@@ -393,7 +393,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
 
                             {/* serragem */}
                             <Column3>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }} >Serragem: </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} >Serragem: </text>
                                 <Button aria-describedby={idSerragem} onClick={handleClickSerragem} style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#008F83', height: 220, width: 220, marginTop: 30, fontWeight: 'bold', color: 'white' }} variant="contained" >
                                     {
                                         furos[furoSelecionado?.index].processos?.serragem?.sai?.seconds ?
@@ -419,7 +419,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 >
                                     <Column2>
                                         <Column>
-                                            <text style={{ marginRight: 15, fontWeight: 'bold' }} > Dados do procesos de serragem: {<br></br>}
+                                            <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} > Dados do procesos de serragem: {<br></br>}
                                                 {
                                                     furos[furoSelecionado?.index].processos?.serragem?.sai ?
 
@@ -460,7 +460,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
 
                             {/* amostragem */}
                             <Column3>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }} >Amostragem: </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} >Amostragem: </text>
                                 <Button aria-describedby={idAmostragem} onClick={handleClickAmostragem} style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#008F83', height: 220, width: 220, marginTop: 30, fontWeight: 'bold', color: 'white' }} variant="contained" >
                                     {
                                         furos[furoSelecionado?.index].processos?.amostragem?.sai?.seconds ?
@@ -486,7 +486,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 >
                                     <Column2>
                                         <Column>
-                                            <text style={{ marginRight: 15, fontWeight: 'bold' }} > Dados do procesos de amostragem: {<br></br>}
+                                            <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} > Dados do procesos de amostragem: {<br></br>}
                                                 {
                                                     furos[furoSelecionado?.index].processos?.amostragem?.sai ?
 
@@ -528,7 +528,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
 
                             {/* despacho */}
                             <Column3>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }} >Despacho: </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} >Despacho: </text>
                                 <Button aria-describedby={idDespacho} onClick={handleClickDespacho} style={{ display: 'flex', flexDirection: 'column', backgroundColor: '#008F83', height: 220, width: 220, marginTop: 30, fontWeight: 'bold', color: 'white' }} variant="contained" >
                                     {
                                         furos[furoSelecionado?.index].processos?.despacho?.sai?.seconds ?
@@ -554,7 +554,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                 >
                                     <Column2>
                                         <Column>
-                                            <text style={{ marginRight: 15, fontWeight: 'bold' }} > Dados do procesos de despacho: {<br></br>}
+                                            <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} > Dados do procesos de despacho: {<br></br>}
                                                 {
                                                     furos[furoSelecionado?.index].processos?.despacho?.sai ?
 
@@ -594,7 +594,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                             </Column3>
 
                             <Column>
-                                <text style={{ marginRight: 15, fontWeight: 'bold' }} >Arquivamento: {((filtroArquivamento[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length).toFixed(3) * 100).toString().replace('.', ',')}% </text>
+                                <text style={{ marginRight: 15, fontWeight: 'bold', fontSize:22 }} >Arquivamento: {((filtroArquivamento[furoSelecionado.index]?.length / chipBoxesInternos[furoSelecionado.index]?.length).toFixed(3) * 100).toString().replace('.', ',')}% </text>
                                 <PieChart width={320} height={320}>
                                     <Pie
                                         data={arquivamento}
