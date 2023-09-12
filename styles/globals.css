@@ -18,3 +18,17 @@
     margin: 0;
     padding: 0;
 }
+.transition-opacity {
+    transition: opacity 0.3s;
+}
+.resources-transition {
+    max-height: 100px; /* Altura máxima do elemento quando visível */
+    opacity: 1; /* Opacidade total quando visível */
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+  
+  .resources-hidden {
+    max-height: 50; /* Altura zero quando oculto */
+    opacity: 1; /* Opacidade zero quando oculto */
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }

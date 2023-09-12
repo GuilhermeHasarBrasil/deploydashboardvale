@@ -58,16 +58,16 @@ export default function MenuLeft({ setSelected, selected }) {
                         )}
                     </Button>
                 </Row>
-                <Resources>
+                <Resources className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
                     {
                         menuVisible ?
-                            <SwapHorizIcon style={{ color: 'white' }} />
+                            <SwapHorizIcon style={{ color: 'white' }} className={menuVisible ? 'transition-opacity' : ''} />
                             :
                             <></>
                     }
                     {
                         menuVisible ?
-                            <TitleOption>RECURSOS</TitleOption>
+                            <TitleOption className={menuVisible ? 'transition-opacity' : ''}>RECURSOS</TitleOption>
 
                             :
                             <ListCircleOutline
@@ -109,16 +109,16 @@ export default function MenuLeft({ setSelected, selected }) {
                         )}
                     </Button>
                 </Row>
-                <Resources>
+                <Resources className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
                     {
                         menuVisible ?
-                            <SwapHorizIcon style={{ color: 'white' }} />
+                            <SwapHorizIcon style={{ color: 'white' }} className={menuVisible ? 'transition-opacity' : ''} />
                             :
                             <></>
                     }
                     {
                         menuVisible ?
-                            <TitleOption>CONFIGURAÇÃO</TitleOption>
+                            <TitleOption className={menuVisible ? 'transition-opacity' : ''}>CONFIGURAÇÃO</TitleOption>
                             :
                             <SettingsOutline
                                 color={'#00000'}
@@ -150,22 +150,22 @@ export default function MenuLeft({ setSelected, selected }) {
                         )}
                     </Button>
                 </Row>
-                <Resources>
+                <Resources className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
                     {
                         menuVisible ?
-                            <SwapHorizIcon style={{ color: 'white' }} />
+                            <SwapHorizIcon style={{ color: 'white' }} className={menuVisible ? 'transition-opacity' : ''} />
                             :
                             <></>
                     }
                     {
                         menuVisible ?
-                            <TitleOption>ADMINISTRAÇÃO</TitleOption>
+                            <TitleOption className={menuVisible ? 'transition-opacity' : ''}>ADMINISTRAÇÃO</TitleOption>
 
                             :
                             <WarningOutline
                                 color={'#00000'}
                                 shake
-                                title={'' }
+                                title={''}
                                 height="35px"
                                 width="35px"
                             />
