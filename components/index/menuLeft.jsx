@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from 'styled-components'
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { ListCircleOutline } from 'react-ionicons'
@@ -11,11 +11,26 @@ export default function MenuLeft({ setSelected, selected }) {
     const [menuWidth, setMenuWidth] = useState("3%");
     const [logoSrc, setLogoSrc] = useState('/assets/logovale.png'); // Inicialmente, use logovale.png
 
+    let timer; // Variável para armazenar o timer
+
     function toggleMenuVisibility() {
-        setMenuVisible(!menuVisible);
-        setMenuWidth(menuVisible ? "3%" : "14%"); // Alterna entre 15% e 4%
-        setLogoSrc(!menuVisible ? '/assets/logovale.png' : '/assets/logovaleminimalist.png');
+        setMenuVisible(true); // Sempre torna o menu visível ao passar o mouse
+        setMenuWidth("14%"); // Define a largura para 14%
+        setLogoSrc('/assets/logovale.png');
     }
+
+    function hideMenuWithDelay() {
+        timer = setTimeout(() => {
+            setMenuVisible(false); // Torna o menu invisível após 3 segundos
+            setMenuWidth("3%"); // Define a largura de volta para 3%
+            setLogoSrc('/assets/logovaleminimalist.png');
+        }, 3000);
+    }
+
+    useEffect(() => {
+        // Limpa o timer quando o componente é desmontado
+        return () => clearTimeout(timer);
+    }, []);
 
 
     function sett(selected) {
@@ -25,7 +40,7 @@ export default function MenuLeft({ setSelected, selected }) {
     return (
         <MenuHamburguer
             onMouseEnter={toggleMenuVisibility}
-            onMouseLeave={toggleMenuVisibility}
+            onMouseLeave={hideMenuWithDelay}
             style={{ width: menuWidth }}
         >
             {menuVisible ? (
