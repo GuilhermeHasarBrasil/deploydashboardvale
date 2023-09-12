@@ -9,7 +9,7 @@ import { WarningOutline } from 'react-ionicons'
 export default function MenuLeft({ setSelected, selected }) {
     const [menuVisible, setMenuVisible] = useState(false);
     const [menuWidth, setMenuWidth] = useState("3%");
-    const [logoSrc, setLogoSrc] = useState('/assets/logovale.png'); // Inicialmente, use logovale.png
+    const [logoSrc, setLogoSrc] = useState('/assets/logovaleminimalist.png'); // Inicialmente, use logovale.png
 
     let timer; // Variável para armazenar o timer
 
