@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br'; // localização
 dayjs.locale('pt-br'); //localização
 import { imageB64 } from "./image";
+import { DownloadOutline } from 'react-ionicons'
 
 export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos, setFuroSelecionado, authUser }) {
     function sett(selected, index, selectedInicio, selectedFim, quantidadeCaixas) {
@@ -272,7 +273,7 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                                 style={{
                                     color: selectedProcesses.includes(furo.processo) ? '#f3c108' : 'black',
                                     width: 120,
-                                    fontWeight: 'bold', userSelect:'none'
+                                    fontWeight: 'bold', userSelect: 'none'
                                 }}
                             >
                                 {furo.processo}
@@ -283,8 +284,8 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
             </ul>
             {furoSelecionado?.furo && (
                 <div style={{ marginTop: 40, alignItems: 'center', display: 'flex', flexDirection: 'column' }} >
-                    <p style={{userSelect:'none'}} >Furo selecionado: {furoSelecionado.furo}</p>
-                    <p style={{ userSelect:'none'}} >Processos selecionados: {selectedProcesses.length > 0 ? selectedProcesses.join(', ') : 'Nenhum'}</p>
+                    <p style={{ userSelect: 'none' }} >Furo selecionado: {furoSelecionado.furo}</p>
+                    <p style={{ userSelect: 'none' }} >Processos selecionados: {selectedProcesses.length > 0 ? selectedProcesses.join(', ') : 'Nenhum'}</p>
 
                     <div style={{ height: 50 }} />
 
@@ -292,8 +293,14 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                         onClick={() => { generatePDF(chipBoxesInternos[furoSelecionado?.index]); }}
                         disabled={!furoSelecionado}
                     >
-                        <h1 style={{ padding: 15, fontSize: 18, fontWeight: 'bold', color: 'white', backgroundColor: '#074F92', borderRadius: 10 }} >
-                            Enviar PDF
+                        <h1 style={{ display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between', width:200, padding: 15, fontSize: 18, fontWeight: 'bold', color: 'white', backgroundColor: '#074F92', borderRadius: 10 }} >
+                            Baixar PDF 
+                            <DownloadOutline
+                                color={'#00000'}
+                                title={''}
+                                height="40px"
+                                width="40px"
+                            />
                         </h1>
                     </Button>
 
