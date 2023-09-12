@@ -199,7 +199,7 @@ export default function DadosProcessamento({ chipBoxes, furoSelecionado, filtroC
                                     {
                                         !furos[furoSelecionado?.index].processos?.geologia?.descGeologica?.ent &&
                                             !furos[furoSelecionado?.index].processos?.geologia?.descEstrutural?.sai ?
-                                            'Geologia Em andamento'
+                                            'Geologia Não iniciado'
                                             :
                                             ''
                                     }
