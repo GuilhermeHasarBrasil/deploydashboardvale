@@ -499,7 +499,7 @@ export default function Home() {
                                                 </Tabs>
                                                 :
                                                 <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
-                                                    <text style={{ fontSize: 29, fontWeight: 'bold', userSelect:'none' }} >
+                                                    <text style={{ fontSize: 29, fontWeight: 'bold', userSelect: 'none' }} >
                                                         Selecione o furo para vizualizar os gráficos
                                                     </text>
                                                 </div>
@@ -509,14 +509,14 @@ export default function Home() {
                                     {
                                         furoSelecionado && value === 0 ?
                                             <div style={{ marginLeft: 100, marginTop: 20, display: 'flex', flexDirection: 'column' }} >
-                                                <text style={{ fontSize: 20, fontWeight: 'bold', userSelect:'none' }} >
+                                                <text style={{ fontSize: 20, fontWeight: 'bold', userSelect: 'none' }} >
                                                     Quantidade de caixas finalizadas por processo
                                                 </text>
-                                                <text style={{ margin: 5, marginLeft: 55, userSelect:'none' }} >
-                                                    Total {<SquareIcon style={{ color: '#ef3a25', userSelect:'none' }} />}
+                                                <text style={{ margin: 5, marginLeft: 55, userSelect: 'none' }} >
+                                                    Total {<SquareIcon style={{ color: '#ef3a25', userSelect: 'none' }} />}
                                                 </text>
-                                                <text style={{ margin: 5, userSelect:'none' }} >
-                                                    Finalizadas {<SquareIcon style={{ color: '#008f83', userSelect:'none' }} />}
+                                                <text style={{ margin: 5, userSelect: 'none' }} >
+                                                    Finalizadas {<SquareIcon style={{ color: '#008f83', userSelect: 'none' }} />}
                                                 </text>
                                                 <CustomBarChart
                                                     data={furoSelecionado.furo === 'TODOS' ?
@@ -595,6 +595,8 @@ export default function Home() {
                                         chipBoxesInternos={chipBoxesInternos}
                                         setFuroSelecionado={setFuroSelecionado}
                                         authUser={authUser}
+                                        whiteBoxes={whiteBoxes}
+                                        paletes={paletes}
                                     />
                                 </div>
                                 :

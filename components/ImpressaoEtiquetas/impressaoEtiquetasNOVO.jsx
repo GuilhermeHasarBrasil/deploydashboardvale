@@ -93,8 +93,8 @@ export default function PrintLabelNovo({ furoSelecionado, chipBoxesInternos, fur
     const [filteredPaleteFuro, setFilteredPaleteFuro] = useState([])
 
     useEffect(() => {
-        const filterWhiteBox = whiteBoxes.filter(whiteBox => whiteBox.furo === furoSelecionado.furo);
-        const filterPaletes = paletes.filter(palete => palete.furo === furoSelecionado.furo);
+        const filterWhiteBox = whiteBoxes?.filter(whiteBox => whiteBox?.furo === furoSelecionado?.furo);
+        const filterPaletes = paletes?.filter(palete => palete?.furo === furoSelecionado?.furo);
 
         setFilteredWhiteBoxFuro(filterWhiteBox)
         setFilteredPaleteFuro(filterPaletes)

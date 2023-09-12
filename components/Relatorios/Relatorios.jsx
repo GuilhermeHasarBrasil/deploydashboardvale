@@ -1,5 +1,5 @@
 import TableFuros from "./tableFuros"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from 'styled-components'
 import Dropdown from 'react-dropdown-select';
 import { jsPDF } from 'jspdf';
@@ -10,7 +10,7 @@ dayjs.locale('pt-br'); //localização
 import { imageB64 } from "./image";
 import { DownloadOutline } from 'react-ionicons'
 
-export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos, setFuroSelecionado, authUser }) {
+export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos, setFuroSelecionado, authUser, whiteBoxes, paletes }) {
     function sett(selected, index, selectedInicio, selectedFim, quantidadeCaixas) {
         const inicio = dayjs.unix(selectedInicio?.seconds);
         const fim = dayjs.unix(selectedFim?.seconds);
@@ -34,8 +34,27 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
         const minutes = Math.floor((seconds % 3600) / 60);
         const remainingSeconds = seconds % 60;
 
-        return `${hours}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+        return `${hours}:${minutes.toString().padStart(2, '0')}:${Math.round(remainingSeconds).toString().padStart(2, '0')}`;
     }
+
+    function formatTimestamp(timestamp) {
+        const seconds = timestamp.seconds;
+        const nanoseconds = timestamp.nanoseconds;
+        const date = new Date(seconds * 1000 + nanoseconds / 1000000); // Convertendo nanossegundos para milissegundos
+        const formattedDate = `${parseInt(date.getDate()) > 10 ? date.getDate() : '0' + date.getDate()}/${parseInt(date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : '0' + (date.getMonth() + 1)}/${date.getFullYear()}`;
+        return formattedDate;
+    }
+
+    const [filteredWhiteBoxFuro, setFilteredWhiteBoxFuro] = useState([])
+    const [filteredPaleteFuro, setFilteredPaleteFuro] = useState([])
+
+    useEffect(() => {
+        const filterWhiteBox = whiteBoxes?.filter(whiteBox => whiteBox?.furo === furoSelecionado?.furo);
+        const filterPaletes = paletes?.filter(palete => palete?.furo === furoSelecionado?.furo);
+
+        setFilteredWhiteBoxFuro(filterWhiteBox)
+        setFilteredPaleteFuro(filterPaletes)
+    }, [furoSelecionado, whiteBoxes, paletes])
 
     function generatePDF(data) {
         const sortedChipBoxes = chipBoxesInternos[furoSelecionado?.index].slice().sort((a, b) => a.cx - b.cx);
@@ -151,7 +170,155 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                 body: tableData.slice(1),
             });
         }
-        //add outros processos que são por furo
+        if (selectedProcesses.includes('Geologia')) {
+            doc.addPage();
+            doc.text('Processo de Geologia:', 10, 9);
+
+            let startY1 = 40;
+
+
+            doc.text('Descrição Geológica:', 10, startY1);
+            const data1 = [
+                ['Usuário', 'Furo', 'Tempo em processamento', 'Início', 'Fim'],
+                [
+                    furos[furoSelecionado.index]?.processos?.geologia?.descGeologica?.user,
+                    furoSelecionado.furo,
+                    secondsToHMS(furos[furoSelecionado.index]?.processos?.geologia?.descGeologica?.sai - furos[furoSelecionado.index]?.processos?.geologia?.descGeologica?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.geologia?.descGeologica?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.geologia?.descGeologica?.sai)
+                ],
+            ];
+
+            doc.autoTable({
+                head: [data1[0]],
+                body: data1.slice(1),
+                startY: startY1 + 10, // Define uma posição de início para a próxima tabela
+            });
+
+            let startY2 = doc.autoTable.previous.finalY + 10;
+
+            doc.text('Descrição Geotécnica:', 10, startY2);
+            const data2 = [
+                ['Usuário', 'Furo', 'Tempo em processamento', 'Início', 'Fim'],
+                [
+                    furos[furoSelecionado.index]?.processos?.geologia?.descGeotecnica?.user,
+                    furoSelecionado.furo,
+                    secondsToHMS(furos[furoSelecionado.index]?.processos?.geologia?.descGeotecnica?.sai - furos[furoSelecionado.index]?.processos?.geologia?.descGeotecnica?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.geologia?.descGeotecnica?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.geologia?.descGeotecnica?.sai)
+                ],
+            ];
+            doc.autoTable({
+                head: [data2[0]],
+                body: data2.slice(1),
+                startY: startY2 + 10, // Define uma posição de início para a próxima tabela
+            });
+
+
+            let startY3 = doc.autoTable.previous.finalY + 10;
+            doc.text('Descrição Estrutural:', 10, startY3);
+            const data3 = [
+                ['Usuário', 'Furo', 'Tempo em processamento', 'Início', 'Fim'],
+                [
+                    furos[furoSelecionado.index]?.processos?.geologia?.descEstrutural?.user,
+                    furoSelecionado.furo,
+                    secondsToHMS(furos[furoSelecionado.index]?.processos?.geologia?.descEstrutural?.sai - furos[furoSelecionado.index]?.processos?.geologia?.descEstrutural?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.geologia?.descEstrutural?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.geologia?.descEstrutural?.sai)
+                ],
+            ];
+
+            doc.autoTable({
+                head: [data3[0]],
+                body: data3.slice(1),
+                startY: startY3 + 10, // Define uma posição de início para a próxima tabela
+            });
+        }
+        if (selectedProcesses.includes('Densidade')) {
+            doc.addPage();
+            doc.text('Processo de Densidade:', 10, 9);
+
+            const data1 = [
+                ['Usuário', 'Furo', 'Tempo em processamento', 'Início', 'Fim'],
+                [
+                    furos[furoSelecionado.index]?.processos?.densidade?.user,
+                    furoSelecionado.furo,
+                    secondsToHMS(furos[furoSelecionado.index]?.processos?.densidade?.sai - furos[furoSelecionado.index]?.processos?.densidade?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.densidade?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.densidade?.sai)
+                ],
+            ];
+
+            doc.autoTable({
+                head: [data1[0]],
+                body: data1.slice(1),
+            });
+        }
+        if (selectedProcesses.includes('Serragem')) {
+            doc.addPage();
+            doc.text('Processo de Serragem:', 10, 9);
+
+            const data1 = [
+                ['Usuário', 'Furo', 'Tempo em processamento', 'Início', 'Fim'],
+                [
+                    furos[furoSelecionado.index]?.processos?.serragem?.user,
+                    furoSelecionado.furo,
+                    secondsToHMS(furos[furoSelecionado.index]?.processos?.serragem?.sai - furos[furoSelecionado.index]?.processos?.serragem?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.serragem?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.serragem?.sai)
+                ],
+            ];
+
+            doc.autoTable({
+                head: [data1[0]],
+                body: data1.slice(1),
+            });
+        }
+        if (selectedProcesses.includes('Amostragem')) {
+            doc.addPage();
+            doc.text('Processo de Amostragem:', 10, 9);
+
+            const data1 = [
+                ['Usuário', 'Furo', 'Tempo em processamento', 'Início', 'Fim'],
+                [
+                    furos[furoSelecionado.index]?.processos?.amostragem?.user,
+                    furoSelecionado.furo,
+                    secondsToHMS(furos[furoSelecionado.index]?.processos?.amostragem?.sai - furos[furoSelecionado.index]?.processos?.amostragem?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.amostragem?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.amostragem?.sai)
+                ],
+            ];
+
+            doc.autoTable({
+                head: [data1[0]],
+                body: data1.slice(1),
+            });
+        }
+        if (selectedProcesses.includes('Despacho')) {
+            doc.addPage();
+            doc.text('Processo de Despacho:', 10, 9);
+            const data1 = [
+                ['Usuário', 'Furo', 'Tempo em processamento', 'Início', 'Fim'],
+                [
+                    furos[furoSelecionado.index]?.processos?.despacho?.user,
+                    furoSelecionado.furo,
+                    secondsToHMS(furos[furoSelecionado.index]?.processos?.despacho?.sai - furos[furoSelecionado.index]?.processos?.despacho?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.despacho?.ent),
+                    formatTimestamp(furos[furoSelecionado.index]?.processos?.despacho?.sai)
+                ],
+            ];
+            doc.autoTable({
+                head: [data1[0]],
+                body: data1.slice(1),
+            });
+            for (let i = 0; i < filteredWhiteBoxFuro.length; i++) {
+                const spacing = 20; // Ajuste este valor para o espaçamento desejado
+                const startY = 40 + (spacing * i);
+
+                doc.text(`Usuário: ${filteredWhiteBoxFuro[i].user} - WhiteBox ${filteredWhiteBoxFuro[i].cx}:`, 10, startY);
+                doc.text(`Caixas inseridas: ${filteredWhiteBoxFuro[i].chipboxes}; De: ${filteredWhiteBoxFuro[i].de}; Até: ${filteredWhiteBoxFuro[i].ate}`, 10, startY + 7);
+            }
+        }
         if (selectedProcesses.includes('Arquivamento')) {
             doc.addPage();
             doc.text('Tabela de Arquivamento:', 10, 9);
@@ -177,6 +344,19 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                 head: [tableData[0]],
                 body: tableData.slice(1),
             });
+
+            doc.text(`Paletes criados:`, 10, doc.autoTable.previous.finalY + 15);
+
+
+            for (let i = 0; i < filteredPaleteFuro.length; i++) {
+                const spacing = 25; // Ajuste este valor para o espaçamento desejado
+                const startY = doc.autoTable.previous.finalY + 30 + (spacing * i);
+
+                doc.text(`Usuário: ${filteredPaleteFuro[i].user} - Palete ${filteredPaleteFuro[i].numero}:`, 10, startY);
+                doc.text(`Caixas inseridas: ${filteredPaleteFuro[i].caixas}; `, 10, startY + 7);
+                doc.text(`Intervalo presente: De: ${filteredPaleteFuro[i].de} - Até: ${filteredPaleteFuro[i].ate}`, 10, startY + 13);
+
+            }
         }
 
         const dataNow = new Date()
@@ -221,8 +401,10 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
         { 'processo': 'Conferência' },
         { 'processo': 'Marcação' },
         { 'processo': 'Fotografia' },
+        { 'processo': 'Geologia' },
         { 'processo': 'Densidade' },
         { 'processo': 'Serragem' },
+        { 'processo': 'Amostragem' },
         { 'processo': 'Despacho' },
         { 'processo': 'Arquivamento' },
 
@@ -293,8 +475,8 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                         onClick={() => { generatePDF(chipBoxesInternos[furoSelecionado?.index]); }}
                         disabled={!furoSelecionado}
                     >
-                        <h1 style={{ display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between', width:200, padding: 15, fontSize: 18, fontWeight: 'bold', color: 'white', backgroundColor: '#074F92', borderRadius: 10 }} >
-                            Baixar PDF 
+                        <h1 style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: 200, padding: 15, fontSize: 18, fontWeight: 'bold', color: 'white', backgroundColor: '#074F92', borderRadius: 10 }} >
+                            Baixar PDF
                             <DownloadOutline
                                 color={'#00000'}
                                 title={''}
