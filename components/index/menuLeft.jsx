@@ -6,12 +6,16 @@ import { ListCircleOutline } from 'react-ionicons'
 import { SettingsOutline } from 'react-ionicons'
 import { WarningOutline } from 'react-ionicons'
 
-export default function MenuLeft({ setSelected, selected }) {
+export default function MenuLeft({ setSelected, selected, setMenuBig }) {
     const [menuVisible, setMenuVisible] = useState(false);
     const [menuWidth, setMenuWidth] = useState("3%");
     const [logoSrc, setLogoSrc] = useState('/assets/logovaleminimalist.png'); // Inicialmente, use logovale.png
 
     let timer; // Variável para armazenar o timer
+
+    useEffect(()=>{
+        setMenuBig(menuVisible)
+    },[menuVisible])
 
     function toggleMenuVisibility() {
         setMenuVisible(true); // Sempre torna o menu visível ao passar o mouse

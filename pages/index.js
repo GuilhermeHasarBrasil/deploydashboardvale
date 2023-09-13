@@ -390,8 +390,8 @@ export default function Home() {
 
     const [value, setValue] = useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+    const handleChange = (option) => {
+        setValue(option);
     };
 
     const [filtroConferenciaEnt, setFiltroConferenciaEnt] = useState([])
@@ -458,6 +458,8 @@ export default function Home() {
         }
     }, [chipBoxes])
 
+    const [menuBig, setMenuBig] = useState(false)
+
     return !authUser ? (
         <Loader />
     ) : (
@@ -465,7 +467,7 @@ export default function Home() {
             <Container>
                 <Header onClick={signOut} authUser={authUser} />
                 <RenderFunctions>
-                    <MenuLeft setSelected={setSelected} selected={selected} />
+                    <MenuLeft setSelected={setSelected} selected={selected} setMenuBig={setMenuBig} />
                     <Content>
                         <TopDashboard
                             finalizados={quantidadeFinalizados}
@@ -484,20 +486,56 @@ export default function Home() {
                                     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                                         {
                                             furoSelecionado ?
-                                                <Tabs value={value} onChange={handleChange} centered>
-                                                    <Tab label="Quantidade de caixas finalizadas (total do furo)"
-                                                        style={{ fontSize: 16, fontWeight: 'bold' }}
-                                                    />
-                                                    <Tab label="Tempo de processamento de cada caixa por processo"
-                                                        style={{ fontSize: 16, fontWeight: 'bold' }}
-                                                    />
-                                                    <Tab label="Dias de maior produtividade (KPI de finalização de caixas)"
-                                                        style={{ fontSize: 16, fontWeight: 'bold' }}
-                                                    />
-                                                    <Tab label="KPI de processamento em metros (todos os furos)"
-                                                        style={{ fontSize: 16, fontWeight: 'bold' }}
-                                                    />
-                                                </Tabs>
+                                                <div style={{display:'flex', flexDirection:'row', alignItems:'center', width:'100%'}} >
+                                                    <text style={{fontSize:20, fontWeight:'bold', color:"#000f000", marginLeft:10,display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex',}} >Filtros: </text>
+                                                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', width:'100%' }} >
+                                                        <FilterOption opcao={value === 0} onClick={() => handleChange(0)} >
+                                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
+                                                                <div style={{backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
+                                                                    <img src="assets/value1.png" width={50} style={{ marginRight: 4 }} />
+                                                                </div>
+                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
+                                                                    <text style={{fontWeight:'bold', margin:4}} >QUANTIDADE DE CAIXAS FINALIZADAS</text>
+                                                                    <text style={{fontWeight:'bold'}} >(TOTAL DE FUROS)</text>
+                                                                </div>
+                                                            </div>
+                                                        </FilterOption>
+                                                        <FilterOption opcao={value === 1} onClick={() => handleChange(1)}>
+                                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
+                                                                <div style={{backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
+                                                                    <img src="assets/value2.png" width={50} style={{ marginRight: 4 }} />
+                                                                </div>
+                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
+                                                                    <text style={{fontWeight:'bold', margin:4}} >TEMPO DE PROCESSAMENTO DE CADA</text>
+                                                                    <text style={{fontWeight:'bold'}} >CAIXA POR PROCESSO</text>
+                                                                </div>
+                                                            </div>
+                                                        </FilterOption>
+                                                        <FilterOption opcao={value === 2} onClick={() => handleChange(2)}>
+                                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
+                                                                <div style={{backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
+                                                                    <img src="assets/value3.png" width={50} style={{ marginRight: 4 }} />
+                                                                </div>
+                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
+                                                                    <text style={{fontWeight:'bold', margin:4}} >CAIXAS PROCESSADAS POR DIA</text>
+                                                                    <text style={{fontWeight:'bold'}} >NA SEMANA</text>
+                                                                </div>
+                                                            </div>
+                                                        </FilterOption>
+                                                        <FilterOption opcao={value === 3} onClick={() => handleChange(3)}>
+                                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
+                                                                <div style={{backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
+                                                                    <img src="assets/value4.png" width={50} style={{ marginRight: 4, borderBottomWidth: 2, borderColor: '#008f83' }} />
+                                                                </div>
+                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
+                                                                    <text style={{fontWeight:'bold', margin:4}} >PROCESSAMENTO POR PERÍODO EM</text>
+                                                                    <text style={{fontWeight:'bold'}} >METROS (TODAS AS CAIXAS)</text>
+                                                                </div>
+                                                            </div>
+                                                        </FilterOption>
+                                                    </div>
+                                                </div>
+
                                                 :
                                                 <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }} >
                                                     <text style={{ fontSize: 29, fontWeight: 'bold', userSelect: 'none' }} >
@@ -505,6 +543,7 @@ export default function Home() {
                                                     </text>
                                                 </div>
                                         }
+                                    <Divider sx={{ borderWidth: '2px', backgroundColor: '#008F83', marginTop: 0.7, boxShadow: '10px 4px 4px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
 
                                     </Box>
                                     {
@@ -543,7 +582,7 @@ export default function Home() {
                                                     filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade}
                                                     filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
                                                     chipBoxesInternos={chipBoxesInternos}
-                                                    authUser={authUser}
+                                                    authUser={authUser} menuBig={menuBig}
                                                 />
 
                                             </div>
@@ -677,3 +716,13 @@ const RenderFunctions = styled.div({
     flexDirection: 'row',
     flex: 1,
 })
+
+const FilterOption = styled.button`
+    background-color: ${props => (props.opcao ? '#fbca4d' : 'whitesmoke')};
+    transition: opacity 0.3s;
+    user-select: none;
+    border-radius: 10px;
+    &:hover {
+        opacity: 0.7;
+    }
+`;

@@ -8,8 +8,8 @@ function roundUp(value) {
   return Math.max(roundedValue, 1); // Garante que o mínimo seja 1
 }
 
-const CustomBarChart = ({ data }) => (
-  <BarChart width={1100} height={500} data={data}>
+const CustomBarChart = ({ data, menuBig }) => (
+  <BarChart width={menuBig? 1100 : 1300} height={450} data={data}>
     <CartesianGrid strokeDasharray="3 3" />
     <XAxis dataKey="id" />
     <YAxis domain={[0, dataMax => roundUp(dataMax)]}>

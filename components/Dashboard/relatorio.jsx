@@ -12,7 +12,7 @@ registerLocale('pt-BR', ptBR);
 import 'dayjs/locale/pt-br';
 import InfoProcess from './infoProcess';
 
-export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos }) {
+export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferencia, filtroMarcacao, filtroFotografia, filtroDensidade, filtroSerragem, filtroArquivamento, chipBoxesInternos, menuBig }) {
 
     if (!furoSelecionado)
         return (
@@ -136,15 +136,15 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
     function motionIcon() {
         return (
             <motion.div
-                style={{ marginLeft: 525, marginBottom: -20 }}
-                initial={{ y: -10 }}
+                style={{ marginLeft: 525, marginBottom: -20, marginTop:-10 }}
+                initial={{ y: -5 }}
                 animate={{ y: 0 }}
                 transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="60"
-                    height="60"
+                    width="55"
+                    height="55"
                     fill="currentColor"
                     className="bi bi-chevron-down"
                     viewBox="0 0 16 16"
@@ -265,8 +265,8 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
     console.log(arrayDataProcess)
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between', padding: 5, flexDirection: 'column', width: '100%' }} >
-            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop: 5, userSelect:'none' }} >
+        <div style={{ display: 'flex', justifyContent: 'space-between', padding: 0, flexDirection: 'column', width: '100%' }} >
+            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop: 0, userSelect:'none' }} >
                 {
                     furoSelecionado.furo === 'TODOS' ?
                         'Selecione o processo para verificar o tempo de cada caixa processada (todos os furos)'
@@ -290,7 +290,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             {
                 arrayDataProcess ?
                     <div style={{ marginLeft: '-2%', display: 'flex', flexDirection: 'row' }} >
-                        <CustomBarChart data={selectedDateRange ? arrayDataProcessDateFilter : arrayDataProcess} />
+                        <CustomBarChart data={selectedDateRange ? arrayDataProcessDateFilter : arrayDataProcess} menuBig={menuBig} />
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                             <text style={{ marginLeft: 15, fontWeight: 'bold' }} >Filtrar por data</text>
                             <DatePickerWrapper>
