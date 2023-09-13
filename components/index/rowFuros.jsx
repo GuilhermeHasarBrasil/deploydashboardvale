@@ -22,55 +22,60 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
     }
 
     return (
-        <div style={{ display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, }} >
-            <BgIcon>
-                <ArrowBackCircleSharp
-                    color={'#00000'}
-                    title={'voltar'}
-                    height="40px"
-                    width="40px"
-                    onClick={() => scrollList('left')}
-                />
-            </BgIcon>
 
-            <ul id='furos-list' style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', }} >
+            <text style={{fontSize:20, fontWeight:'bold', color:"#000f000", marginLeft:10,display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex',}} >Furos: </text>
+            <div style={{ maxWidth:'95%', display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 0, }} >
+                <BgIcon>
+                    <ArrowBackCircleSharp
+                        color={'#00000'}
+                        title={'voltar'}
+                        height="40px"
+                        width="40px"
+                        onClick={() => scrollList('left')}
+                    />
+                </BgIcon>
 
-                {
-                    selected === 'Dashboard' ?
-                        <li style={{ marginLeft: 50, marginRight: 50, backgroundColor: 'TODOS' == selectedItem ? '#008f83' : 'white', padding: 8, borderRadius: 10 }}>
+                <ul id='furos-list' style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
+
+                    {
+                        selected === 'Dashboard' ?
+                            <li style={{ marginLeft: 50, marginRight: 50, backgroundColor: 'TODOS' == selectedItem ? '#008f83' : 'white', padding: 8, borderRadius: 10 }}>
+                                <Button>
+                                    <h1 style={{ color: 'TODOS' !== selectedItem ? 'black' : '#f3c108', userSelect: 'none', width: 120, fontWeight: 'bold' }} onClick={() => sett('TODOS', 99999999)} >
+                                        TODOS
+                                    </h1>
+                                </Button>
+                            </li>
+                            :
+                            <></>
+                    }
+
+                    {furos.map((furo, index) => (
+                        <li style={{ marginLeft: 50, marginRight: 50, backgroundColor: furo.numero == selectedItem ? '#008f83' : 'white', padding: 8, borderRadius: 10 }} key={furo.id}>
+                            {furo.title}{" "}
                             <Button>
-                                <h1 style={{ color: 'TODOS' !== selectedItem ? 'black' : '#f3c108', userSelect:'none', width: 120, fontWeight: 'bold' }} onClick={() => sett('TODOS', 99999999)} >
-                                    TODOS
+                                <h1 style={{ color: furo.numero !== selectedItem ? 'black' : '#f3c108', userSelect: 'none', width: 120, fontWeight: 'bold' }} onClick={() => sett(furo.numero, index)} >
+                                    {furo.numero}
                                 </h1>
                             </Button>
+
                         </li>
-                        :
-                        <></>
-                }
+                    ))}
+                </ul>
+                <BgIcon>
+                    <ArrowForwardCircleSharp
+                        color={'#00000'}
+                        title={'avançar'}
+                        height="40px"
+                        width="40px"
+                        onClick={() => scrollList('right')}
+                    />
+                </BgIcon>
 
-                {furos.map((furo, index) => (
-                    <li style={{ marginLeft: 50, marginRight: 50, backgroundColor: furo.numero == selectedItem ? '#008f83' : 'white', padding: 8, borderRadius: 10 }} key={furo.id}>
-                        {furo.title}{" "}
-                        <Button>
-                            <h1 style={{ color: furo.numero !== selectedItem ? 'black' : '#f3c108', userSelect:'none', width: 120, fontWeight: 'bold' }} onClick={() => sett(furo.numero, index)} >
-                                {furo.numero}
-                            </h1>
-                        </Button>
-
-                    </li>
-                ))}
-            </ul>
-            <BgIcon>
-                <ArrowForwardCircleSharp
-                    color={'#00000'}
-                    title={'avançar'}
-                    height="40px"
-                    width="40px"
-                    onClick={() => scrollList('right')}
-                />
-            </BgIcon>
-
+            </div>
         </div>
+
     )
 }
 

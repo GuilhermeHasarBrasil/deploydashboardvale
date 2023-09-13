@@ -467,19 +467,20 @@ export default function Home() {
                 <RenderFunctions>
                     <MenuLeft setSelected={setSelected} selected={selected} />
                     <Content>
+                        <TopDashboard
+                            finalizados={quantidadeFinalizados}
+                            conferidos={quantidadeConferidos}
+                            quantidadeDeNaoIniciado={quantidadeNaoIniciado}
+                            processamento={quantidadeProcessamento}
+                            furos={furos}
+                            selected={selected}
+                        />
+                        <Divider sx={{ display: selected === 'Dashoard' ? 'flex' : 'none', borderWidth: '2px', backgroundColor: '#008F83', marginTop: 1, boxShadow: '10px 4px 4px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
                         <RowFuros furos={furos} setFuroSelecionado={setFuroSelecionado} selected={selected} />
                         {
                             selected === 'Dashboard' ?
                                 <>
-                                    <Divider sx={{ borderWidth: '1px', backgroundColor: 'grey', }} />
-                                    <TopDashboard
-                                        finalizados={quantidadeFinalizados}
-                                        conferidos={quantidadeConferidos}
-                                        quantidadeDeNaoIniciado={quantidadeNaoIniciado}
-                                        processamento={quantidadeProcessamento}
-                                        furos={furos}
-                                    />
-                                    <Divider sx={{ borderWidth: '2px', backgroundColor: '#f3c108', marginTop: 1, boxShadow: '10px 6px 6px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
+                                    <Divider sx={{ borderWidth: '2px', backgroundColor: '#008F83', marginTop: 1, boxShadow: '10px 4px 4px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
                                     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                                         {
                                             furoSelecionado ?

@@ -76,7 +76,13 @@ export default function MenuLeft({ setSelected, selected }) {
                 <Resources className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
                     {
                         menuVisible ?
-                            <SwapHorizIcon style={{ color: 'white' }} className={menuVisible ? 'transition-opacity' : ''} />
+                            <ListCircleOutline
+                                color={'whitesmoke'}
+                                //beat
+                                title={''}
+                                height="30px"
+                                width="30px"
+                            />
                             :
                             <></>
                     }
@@ -127,8 +133,13 @@ export default function MenuLeft({ setSelected, selected }) {
                 <Resources className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
                     {
                         menuVisible ?
-                            <SwapHorizIcon style={{ color: 'white' }} className={menuVisible ? 'transition-opacity' : ''} />
-                            :
+                            <SettingsOutline
+                                color={'whitesmoke'}
+                                rotate
+                                title={''}
+                                height="30px"
+                                width="30px"
+                            /> :
                             <></>
                     }
                     {
@@ -168,8 +179,13 @@ export default function MenuLeft({ setSelected, selected }) {
                 <Resources className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
                     {
                         menuVisible ?
-                            <SwapHorizIcon style={{ color: 'white' }} className={menuVisible ? 'transition-opacity' : ''} />
-                            :
+                            <WarningOutline
+                                color={'whitesmoke'}
+                                shake
+                                title={''}
+                                height="30px"
+                                width="30px"
+                            /> :
                             <></>
                     }
                     {

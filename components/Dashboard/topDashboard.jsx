@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components'
 import { InformationCircleOutline } from 'react-ionicons'
 
-export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoIniciado, processamento, furos }) {
+export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoIniciado, processamento, furos, selected }) {
     const [hoveredFinalizados, setHoveredFinalizados] = useState(false);
     const [hoveredNaoIniciados, setHoveredNaoIniciados] = useState(false);
     const [hoveredEmProcessamento, setHoveredEmProcessamento] = useState(false);
@@ -41,7 +41,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'row', marginLeft: 10, marginTop: 10, }} >
+        <div style={{ display: selected !== 'Dashboard' ? 'none' : 'flex', flexDirection: 'row', marginLeft: 10, marginTop: 10, }} >
             <Row>
                 <div
                     style={{
