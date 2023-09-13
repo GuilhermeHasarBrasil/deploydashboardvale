@@ -64,7 +64,7 @@ export default function PrinterSettings() {
 
   useEffect(()=>{
   
-    if(availableDevices.length > 1) {
+    if(availableDevices?.length > 1) {
       setShowInfo(false)
     }
   
