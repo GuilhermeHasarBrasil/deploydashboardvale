@@ -13,7 +13,7 @@ import { Divider } from '@mui/material';
 import Relatorio from "../components/Dashboard/relatorio";
 import DadosProcessamento from "../components/DadosProcessamento/dadosProcessamento";
 import PrinterSettings from "../components/ConfigImpressora/ConfigImpressora";
-import CustomBarChart from "../components/Dashboard/CustomBarChartHorizontal";
+import CustomHorizontalBarChart from "../components/Dashboard/CustomBarChartHorizontal";
 import SquareIcon from '@mui/icons-material/Square';
 import BarChartWeek from "../components/Dashboard/WeekWorkBarchart";
 import Mensagens from "../components/Mensagens/Mensagens";
@@ -550,7 +550,7 @@ export default function Home() {
                                     </Box>
                                     {
                                         furoSelecionado && value === 0 ?
-                                            <div style={{ marginLeft: 100, marginTop: 20, display: 'flex', flexDirection: 'column' }} >
+                                            <div style={{ marginLeft: 30, marginTop: 20, display: 'flex', flexDirection: 'column' }} >
                                                 <text style={{ fontSize: 20, fontWeight: 'bold', userSelect: 'none' }} >
                                                     Quantidade de caixas finalizadas por processo
                                                 </text>
@@ -560,7 +560,7 @@ export default function Home() {
                                                 <text style={{ margin: 5, userSelect: 'none' }} >
                                                     Finalizadas {<SquareIcon style={{ color: '#008f83', userSelect: 'none' }} />}
                                                 </text>
-                                                <CustomBarChart
+                                                <CustomHorizontalBarChart
                                                     data={furoSelecionado.furo === 'TODOS' ?
                                                         dataBarChartTodos
                                                         :
@@ -570,6 +570,7 @@ export default function Home() {
                                                         chipBoxes?.length
                                                         :
                                                         chipBoxesInternos[furoSelecionado?.index]?.length}
+                                                    menuBig={menuBig}
                                                 />
                                             </div>
                                             :
