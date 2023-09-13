@@ -36,13 +36,18 @@ const LoginForm = () => {
     ) : (
 
         <Container>
-            <div className="w-full lg:w-[100%] p-8 md:p-14 flex items-center justify-center lg:justify-start">
-                <img src='/assets/hasarlogin.png' style={{width:600}} />
-                
-                <div style={{marginLeft:'30%', width:600}} >
+            <Bg />
+            <div style={{ position: 'absolute', zIndex: 5 }} className="w-full lg:w-[100%] p-8 md:p-14 flex items-center justify-center lg:justify-start">
+
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
+                    <img src='/assets/valelogin.png' style={{ width: 600 }} />
+                    <text style={{ color: '#12969E', fontSize: 36, fontWeight: 'bold', textShadow: '3px 3px #000', marginLeft: 20 }} >HSD - HASAR Sample Data</text>
+                </div>
+
+                <div style={{ marginLeft: '25%', width: 600, display:'flex', flexDirection:'column', alignItems:'center' }} >
                     <form onSubmit={(e) => e.preventDefault()}>
                         <div className="mt-10 pl-1 flex flex-col">
-                            <label style={{ color: '#00359B', fontWeight: 'bold', fontSize: 18, textShadow: '0 0 6px rgba(255, 255, 255, 0.9)'}} >LOGIN</label>
+                            <label style={{ color: '#12969E', fontWeight: 'bold', fontSize: 24, textShadow: '2px 2px #000', letterSpacing: 2 }} >LOGIN</label>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} >
                                 <input
                                     type="email"
@@ -61,7 +66,7 @@ const LoginForm = () => {
                             </div>
                         </div>
                         <div className="mt-10 pl-1 flex flex-col">
-                            <label style={{ color: '#00359B', fontWeight: 'bold', fontSize: 18, textShadow: '0 0 6px rgba(255, 255, 255, 0.9)' }} >SENHA</label>
+                            <label style={{ color: '#12969E', fontWeight: 'bold', fontSize: 24, textShadow: '2px 2px #000', letterSpacing: 2 }} >SENHA</label>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} >
                                 <input
                                     type="password"
@@ -80,9 +85,11 @@ const LoginForm = () => {
                             </div>
                         </div>
                         <StyledButton onClick={loginHandler}>
-                            <h3 style={{ color: 'white', fontSize: 18, fontWeight: 'bold', textShadow: '0 0 6px rgba(255, 255, 255, 0.6)' }} >Entrar</h3>
+                            <h3 style={{ color: 'white', fontSize: 22, fontWeight: 'bold', textShadow: '0 0 6px rgba(255, 255, 255, 0.6)' }} >Entrar</h3>
                         </StyledButton>
                     </form>
+                    <img src='/assets/hasarbrasillogin.png' style={{ width: 250, marginTop:40 }} />
+
                 </div>
             </div>
         </Container>
@@ -96,7 +103,7 @@ const StyledButton = styled.button`
     margin-left: 5px;
     margin-top: 20px;
     height: 50px;
-    width: 50%;
+    width: 450px;
     border-radius: 20px;
     &:hover {
         opacity: 0.8;
@@ -105,10 +112,22 @@ const StyledButton = styled.button`
 const Container = styled.div({
     width: '100vw', // Usar a largura total da viewport
     height: '100vh', // Usar a altura total da viewport
-    backgroundImage: `url(${'/assets/backgroundimage.png'})`,
-    backgroundRepeat: 'no-repeat',
-    backgroundSize: 'cover', // Para cobrir toda a área disponível
+    // backgroundImage: `url(${'/assets/backgroundimage.png'})`,
+    // backgroundRepeat: 'no-repeat',
+    // backgroundSize: 'cover', // Para cobrir toda a área disponível
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+})
+
+const Bg = styled.div({
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundImage: `url(${'/assets/backgroundimage.png'})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    opacity: 0.57, // Ajuste a opacidade conforme desejado
 })
