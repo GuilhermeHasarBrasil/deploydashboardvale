@@ -492,7 +492,7 @@ export default function Home() {
                                                         <FilterOption opcao={value === 0} onClick={() => handleChange(0)} >
                                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
                                                                 <div style={{backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
-                                                                    <img src="assets/value1.png" width={50} style={{ marginRight: 4 }} />
+                                                                    <img src="assets/value1.png" style={{ marginRight: 4, width:50, height:'auto' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                                                                     <text style={{fontWeight:'bold', margin:4}} >QUANTIDADE DE CAIXAS FINALIZADAS</text>
@@ -503,7 +503,7 @@ export default function Home() {
                                                         <FilterOption opcao={value === 1} onClick={() => handleChange(1)}>
                                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
                                                                 <div style={{backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
-                                                                    <img src="assets/value2.png" width={50} style={{ marginRight: 4 }} />
+                                                                    <img src="assets/value2.png" style={{ marginRight: 4, width:50, height:'auto' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                                                                     <text style={{fontWeight:'bold', margin:4}} >TEMPO DE PROCESSAMENTO DE CADA</text>
@@ -514,7 +514,7 @@ export default function Home() {
                                                         <FilterOption opcao={value === 2} onClick={() => handleChange(2)}>
                                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
                                                                 <div style={{backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
-                                                                    <img src="assets/value3.png" width={50} style={{ marginRight: 4 }} />
+                                                                    <img src="assets/value3.png" style={{ marginRight: 4, width:50, height:'auto' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                                                                     <text style={{fontWeight:'bold', margin:4}} >CAIXAS PROCESSADAS POR DIA</text>
@@ -525,7 +525,7 @@ export default function Home() {
                                                         <FilterOption opcao={value === 3} onClick={() => handleChange(3)}>
                                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
                                                                 <div style={{backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
-                                                                    <img src="assets/value4.png" width={50} style={{ marginRight: 4, borderBottomWidth: 2, borderColor: '#008f83' }} />
+                                                                    <img src="assets/value4.png" style={{ marginRight: 4, width:50, height:'auto', borderBottomWidth: 2, borderColor: '#008f83' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                                                                     <text style={{fontWeight:'bold', margin:4}} >PROCESSAMENTO POR PERÍODO EM</text>
