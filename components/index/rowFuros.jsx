@@ -28,7 +28,7 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
             <div style={{ maxWidth:'95%', display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 0, }} >
                 <BgIcon>
                     <ArrowBackCircleSharp
-                        color={'#00000'}
+                        color={'#6b6b6b'}
                         title={'voltar'}
                         height="40px"
                         width="40px"
@@ -65,7 +65,7 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
                 </ul>
                 <BgIcon>
                     <ArrowForwardCircleSharp
-                        color={'#00000'}
+                        color={'#6b6b6b'}
                         title={'avançar'}
                         height="40px"
                         width="40px"

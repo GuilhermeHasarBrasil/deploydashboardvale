@@ -79,7 +79,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                     <ObjectList>
                                         {finalizados?.map((item, index) => (
                                             <ObjectItem key={index}>
-                                                <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Furo: {item?.numero}</text>
+                                                <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18, }} >Furo: {item?.numero}</text>
                                                 <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Finalizado em: {formatTimestamp(item?.dataFinalizado)}</text>
                                             </ObjectItem>
                                         ))}
@@ -189,14 +189,19 @@ const Column = styled.div({
 const TitleBox = styled.text({
     color: 'white',
     fontSize: 17,
-    fontWeight: '600',
-    userSelect: 'none'
+    fontWeight: 'bold',
+    userSelect: 'none',
+    
+    WebkitTextStrokeWidth:0.1,
+    WebkitTextStrokeColor:'black'
 })
 const Number = styled.text({
     fontSize: 35,
     color: 'white',
     fontWeight: 'bold',
-    userSelect: 'none'
+    userSelect: 'none',
+    WebkitTextStrokeWidth:1.5,
+    WebkitTextStrokeColor:'black'
 })
 const ObjectList = styled.ul`
   list-style-type: none;
