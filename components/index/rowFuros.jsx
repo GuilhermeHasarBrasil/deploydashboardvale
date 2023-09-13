@@ -23,7 +23,7 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
 
     return (
 
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', }} >
+        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', alignItems:'center' }} >
             <text style={{fontSize:20, fontWeight:'bold', color:"#000f000", marginLeft:10,display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex',}} >Furos: </text>
             <div style={{ maxWidth:'95%', display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 0, }} >
                 <BgIcon>
