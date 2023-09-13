@@ -10,8 +10,6 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
     const [hoveredComObservacao, setHoveredComObservacao] = useState(false);
     const [furosWithObs, setFurosWithObs] = useState([])
 
-    console.log(menuBig)
-
     useEffect(() => {
         let arrayFurosWithObs = []
 
@@ -147,185 +145,189 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
     }
 
     return (
-        <div style={{ display: selected !== 'Dashboard' ? 'none' : 'flex', flexDirection: 'row', marginLeft: 10, justifyContent:'space-around', marginTop: 10, }} >
-            <Row  >
-                <div
-                    style={{
-                        alignItems: 'center',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        backgroundColor: '#206F0D',
-                        width: 70,
-                        height: 60,
-                    }}
-                >
-                    <img src="/assets/images/furoimg.png" />
-                </div>
-                <div style={{ backgroundColor: '#2FAB10', height: 60, paddingRight:20 }}>
-                    <Column grande={menuBig}>
-                        <TitleBox>FUROS PROCESSADOS</TitleBox>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
-                            <Number>
-                                {finalizados?.length}
-                            </Number>
-                            <div
-                                onMouseEnter={handleNumberMouseEnter}
-                                onMouseLeave={handleNumberMouseLeave}
-                                style={{ marginLeft: 20 }}
-                            >
-                                <InformationCircleOutline
-                                    color={'#00000'}
-                                    beat
-                                    title={''}
-                                    height="25px"
-                                    width="25px"
-                                    style={{ marginRight: menuBig ? 0 : 0}}
-                                />
-                                {hoveredFinalizados && (
-                                    <ObjectList>
-                                        {finalizados?.map((item, index) => (
-                                            <ObjectItem key={index}>
-                                                <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18, }} >Furo: {item?.numero}</text>
-                                                <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Finalizado em: {formatTimestamp(item?.dataFinalizado)}</text>
-                                            </ObjectItem>
-                                        ))}
-                                    </ObjectList>
-                                )}
+        <div style={{ display: 'flex', flexDirection: 'column' }} >
+            <text style={{ fontSize: 20, marginRight: 40, fontWeight: 'bold', color: "#000f000", marginLeft: 10 }} >Painel de informações: </text>
+            <div style={{ display: selected !== 'Dashboard' ? 'none' : 'flex', flexDirection: 'row', marginLeft: 10, justifyContent: 'space-between', marginTop: 0, }} >
+                <Row  >
+                    <div
+                        style={{
+                            alignItems: 'center',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            backgroundColor: '#206F0D',
+                            width: 70,
+                            height: 60,
+                        }}
+                    >
+                        <img src="/assets/images/furoimg.png" />
+                    </div>
+                    <div style={{ backgroundColor: '#2FAB10', height: 60, paddingRight: 20 }}>
+                        <Column grande={menuBig}>
+                            <TitleBox>FUROS PROCESSADOS</TitleBox>
+                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
+                                <Number>
+                                    {finalizados?.length}
+                                </Number>
+                                <div
+                                    onMouseEnter={handleNumberMouseEnter}
+                                    onMouseLeave={handleNumberMouseLeave}
+                                    style={{ marginLeft: 20 }}
+                                >
+                                    <InformationCircleOutline
+                                        color={'#00000'}
+                                        beat
+                                        title={''}
+                                        height="25px"
+                                        width="25px"
+                                        style={{ marginRight: menuBig ? 0 : 0 }}
+                                    />
+                                    {hoveredFinalizados && (
+                                        <ObjectList>
+                                            {finalizados?.map((item, index) => (
+                                                <ObjectItem key={index}>
+                                                    <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18, }} >Furo: {item?.numero}</text>
+                                                    <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Finalizado em: {formatTimestamp(item?.dataFinalizado)}</text>
+                                                </ObjectItem>
+                                            ))}
+                                        </ObjectList>
+                                    )}
+                                </div>
+
                             </div>
 
-                        </div>
+                        </Column>
+                    </div>
+                </Row>
+                <Row  >
+                    <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#2760BB', width: 70, height: 60 }} >
+                        <img src="/assets/images/furoimg.png" />
+                    </div>
+                    <div style={{ backgroundColor: '#307BF4', height: 60, paddingRight: 20 }} >
+                        <Column grande={menuBig}>
+                            <TitleBox>FUROS NÃO INICIADOS</TitleBox>
+                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
+                                <Number>
+                                    {quantidadeDeNaoIniciado?.length}
+                                </Number>
+                                <div
+                                    onMouseEnter={handleNumberMouseEnterNaoIniciados}
+                                    onMouseLeave={handleNumberMouseLeaveNaoIniciados}
+                                    style={{ marginLeft: 20 }}
+                                >
+                                    <InformationCircleOutline
+                                        color={'#00000'}
+                                        beat
+                                        title={''}
+                                        height="25px"
+                                        width="25px"
+                                        style={{ marginRight: menuBig ? 0 : 0 }}
+                                    />
+                                    {hoveredNaoIniciados && (
+                                        <ObjectListNaoIniciado>
+                                            {quantidadeDeNaoIniciado?.map((item, index) => (
+                                                <ObjectItemNaoIniciado key={index}>
+                                                    <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Furo: {item?.numero}</text>
+                                                    <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Importado em: {formatTimestamp(item?.createdAt)}</text>
+                                                </ObjectItemNaoIniciado>
+                                            ))}
+                                        </ObjectListNaoIniciado>
+                                    )}
+                                </div>
 
-                    </Column>
-                </div>
-            </Row>
-            <Row  >
-                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#2760BB', width: 70, height: 60 }} >
-                    <img src="/assets/images/furoimg.png" />
-                </div>
-                <div style={{ backgroundColor: '#307BF4', height: 60, paddingRight:20 }} >
-                    <Column grande={menuBig}>
-                        <TitleBox>FUROS NÃO INICIADOS</TitleBox>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
-                            <Number>
-                                {quantidadeDeNaoIniciado?.length}
-                            </Number>
-                            <div
-                                onMouseEnter={handleNumberMouseEnterNaoIniciados}
-                                onMouseLeave={handleNumberMouseLeaveNaoIniciados}
-                                style={{ marginLeft: 20 }}
-                            >
-                                <InformationCircleOutline
-                                    color={'#00000'}
-                                    beat
-                                    title={''}
-                                    height="25px"
-                                    width="25px"
-                                    style={{ marginRight: menuBig ? 0 : 0}}
-                                />
-                                {hoveredNaoIniciados && (
-                                    <ObjectListNaoIniciado>
-                                        {quantidadeDeNaoIniciado?.map((item, index) => (
-                                            <ObjectItemNaoIniciado key={index}>
-                                                <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Furo: {item?.numero}</text>
-                                                <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Importado em: {formatTimestamp(item?.createdAt)}</text>
-                                            </ObjectItemNaoIniciado>
-                                        ))}
-                                    </ObjectListNaoIniciado>
-                                )}
                             </div>
+                        </Column>
+                    </div>
+                </Row>
+                <Row  >
+                    <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#996501', width: 70, height: 60 }} >
+                        <img src="/assets/images/furoimg.png" />
+                    </div>
+                    <div style={{ backgroundColor: '#E89E0E', height: 60, paddingRight: 20 }} >
+                        <Column grande={menuBig}>
+                            <TitleBox>FUROS EM PROCESSAMENTO</TitleBox>
+                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
+                                <Number>
+                                    {processamento?.length}
+                                </Number>
+                                <div
+                                    onMouseEnter={handleNumberMouseEnterEmProcessamento}
+                                    onMouseLeave={handleNumberMouseLeaveEmProcessamento}
+                                    style={{ marginLeft: 20 }}
+                                >
+                                    <InformationCircleOutline
+                                        color={'#00000'}
+                                        beat
+                                        title={''}
+                                        height="25px"
+                                        width="25px"
+                                        style={{ marginRight: menuBig ? 0 : 0 }}
+                                    />
+                                    {hoveredEmProcessamento && (
+                                        <ObjectListProcessamento>
+                                            {processamento?.map((item, index) => (
+                                                <ObjectItemProcessamento key={index}>
+                                                    <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Furo: {item?.numero}</text>
+                                                    <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Importado em: {formatTimestamp(item?.createdAt)}</text>
+                                                </ObjectItemProcessamento>
+                                            ))}
+                                        </ObjectListProcessamento>
+                                    )}
+                                </div>
 
-                        </div>
-                    </Column>
-                </div>
-            </Row>
-            <Row  >
-                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#996501', width: 70, height: 60 }} >
-                    <img src="/assets/images/furoimg.png" />
-                </div>
-                <div style={{ backgroundColor: '#E89E0E', height: 60, paddingRight:20 }} >
-                    <Column grande={menuBig}>
-                        <TitleBox>FUROS EM PROCESSAMENTO</TitleBox>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
-                            <Number>
-                                {processamento?.length}
-                            </Number>
-                            <div
-                                onMouseEnter={handleNumberMouseEnterEmProcessamento}
-                                onMouseLeave={handleNumberMouseLeaveEmProcessamento}
-                                style={{ marginLeft: 20 }}
-                            >
-                                <InformationCircleOutline
-                                    color={'#00000'}
-                                    beat
-                                    title={''}
-                                    height="25px"
-                                    width="25px"
-                                    style={{ marginRight: menuBig ? 0 : 0}}
-                                />
-                                {hoveredEmProcessamento && (
-                                    <ObjectListProcessamento>
-                                        {processamento?.map((item, index) => (
-                                            <ObjectItemProcessamento key={index}>
-                                                <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Furo: {item?.numero}</text>
-                                                <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Importado em: {formatTimestamp(item?.createdAt)}</text>
-                                            </ObjectItemProcessamento>
-                                        ))}
-                                    </ObjectListProcessamento>
-                                )}
                             </div>
+                        </Column>
+                    </div>
+                </Row>
+                <Row  >
 
-                        </div>
-                    </Column>
-                </div>
-            </Row>
-            <Row  >
+                    <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#990101', width: 70, height: 60, padding:9 }} >
+                        <img src="/assets/alertImage.png" />
+                    </div>
+                    <div style={{ backgroundColor: '#e8410e', height: 60, paddingRight: 20 }} >
+                        <Column grande={menuBig}>
+                            <TitleBox>FUROS COM OBSERVAÇÃO</TitleBox>
+                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
+                                <Number>
+                                    {furosWithObs?.length}
+                                </Number>
+                                <div
+                                    onMouseEnter={handleNumberMouseEnterComObservacao}
+                                    onMouseLeave={handleNumberMouseLeaveComObservacao}
+                                    style={{ marginLeft: 20 }}
+                                >
+                                    <InformationCircleOutline
+                                        color={'#00000'}
+                                        beat
+                                        title={''}
+                                        height="25px"
+                                        width="25px"
+                                        style={{ marginRight: menuBig ? 0 : 0 }}
+                                    />
+                                    {hoveredComObservacao && (
+                                        <ObjectListObservacao>
+                                            {furosWithObs?.map((item, index) => (
+                                                <ObjectItemObservacao key={index}>
+                                                    <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Furo: {item}</text>
+                                                </ObjectItemObservacao>
+                                            ))}
+                                        </ObjectListObservacao>
+                                    )}
+                                </div>
 
-                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#990101', width: 70, height: 60 }} >
-                    <img src="/assets/images/furoimg.png" />
-                </div>
-                <div style={{ backgroundColor: '#e8410e', height: 60,paddingRight:20 }} >
-                    <Column grande={menuBig}>
-                        <TitleBox>FUROS COM OBSERVAÇÃO</TitleBox>
-                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
-                            <Number>
-                                {furosWithObs?.length}
-                            </Number>
-                            <div
-                                onMouseEnter={handleNumberMouseEnterComObservacao}
-                                onMouseLeave={handleNumberMouseLeaveComObservacao}
-                                style={{ marginLeft: 20 }}
-                            >
-                                <InformationCircleOutline
-                                    color={'#00000'}
-                                    beat
-                                    title={''}
-                                    height="25px"
-                                    width="25px"
-                                    style={{ marginRight: menuBig ? 0 : 0}}
-                                />
-                                {hoveredComObservacao && (
-                                    <ObjectListObservacao>
-                                        {furosWithObs?.map((item, index) => (
-                                            <ObjectItemObservacao key={index}>
-                                                <text style={{ color: 'white', fontWeight: 'bold', fontSize: 18 }} >Furo: {item}</text>
-                                            </ObjectItemObservacao>
-                                        ))}
-                                    </ObjectListObservacao>
-                                )}
                             </div>
-
-                        </div>
-                    </Column>
-                </div>
-            </Row>
+                        </Column>
+                    </div>
+                </Row>
+            </div>
         </div>
+
     )
 }
 const Row = styled.div`
     display: flex;
     flex-direction: row; 
     //margin-left : 25px;
-    //margin-right: 25px;
+    margin-right: 25px;
 `
 const Column = styled.div`
     display: flex;

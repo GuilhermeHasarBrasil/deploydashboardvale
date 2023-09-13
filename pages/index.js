@@ -25,6 +25,7 @@ import Import from "../components/ImportarArquivo/importar";
 import CustomBarChartMes from "../components/Dashboard/BarChartMes";
 import PrintLabelNovo from "../components/ImpressaoEtiquetas/impressaoEtiquetasNOVO";
 import Users from "../components/Usuarios/Users";
+import InfoBarChartHorizontal from "../components/Dashboard/InfoBarChartHorizontal";
 
 export default function Home() {
     const { signOut, authUser, isLoading } = useAuth();
@@ -488,50 +489,50 @@ export default function Home() {
                                     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                                         {
                                             furoSelecionado ?
-                                                <div style={{display:'flex', flexDirection:'row', alignItems:'center', width:'100%'}} >
-                                                    <text style={{fontSize:20, fontWeight:'bold', color:"#000f000", marginLeft:10,display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex',}} >Filtros: </text>
-                                                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', width:'100%' }} >
+                                                <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%' }} >
+                                                    <text style={{ fontSize: 20, fontWeight: 'bold', color: "#000f000", marginLeft: 10, display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', }} >Filtros: </text>
+                                                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', width: '100%' }} >
                                                         <FilterOption opcao={value === 0} onClick={() => handleChange(0)} >
                                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
-                                                                <div style={{backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
-                                                                    <img src="assets/value1.png" style={{ marginRight: 4, width:50, height:'auto' }} />
+                                                                <div style={{ backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
+                                                                    <img src="assets/value1.png" style={{ marginRight: 4, width: 50, height: 'auto' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <text style={{fontWeight:'bold', margin:4}} >QUANTIDADE DE CAIXAS FINALIZADAS</text>
-                                                                    <text style={{fontWeight:'bold'}} >(TOTAL DE FUROS)</text>
+                                                                    <text style={{ fontWeight: 'bold', margin: 4 }} >QUANTIDADE DE CAIXAS FINALIZADAS</text>
+                                                                    <text style={{ fontWeight: 'bold' }} >(TOTAL DE FUROS)</text>
                                                                 </div>
                                                             </div>
                                                         </FilterOption>
                                                         <FilterOption opcao={value === 1} onClick={() => handleChange(1)}>
                                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
-                                                                <div style={{backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
-                                                                    <img src="assets/value2.png" style={{ marginRight: 4, width:50, height:'auto' }} />
+                                                                <div style={{ backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
+                                                                    <img src="assets/value2.png" style={{ marginRight: 4, width: 50, height: 'auto' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <text style={{fontWeight:'bold', margin:4}} >TEMPO DE PROCESSAMENTO DE CADA</text>
-                                                                    <text style={{fontWeight:'bold'}} >CAIXA POR PROCESSO</text>
+                                                                    <text style={{ fontWeight: 'bold', margin: 4 }} >TEMPO DE PROCESSAMENTO DE CADA</text>
+                                                                    <text style={{ fontWeight: 'bold' }} >CAIXA POR PROCESSO</text>
                                                                 </div>
                                                             </div>
                                                         </FilterOption>
                                                         <FilterOption opcao={value === 2} onClick={() => handleChange(2)}>
                                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
-                                                                <div style={{backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
-                                                                    <img src="assets/value3.png" style={{ marginRight: 4, width:50, height:'auto' }} />
+                                                                <div style={{ backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
+                                                                    <img src="assets/value3.png" style={{ marginRight: 4, width: 50, height: 'auto' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <text style={{fontWeight:'bold', margin:4}} >CAIXAS PROCESSADAS POR DIA</text>
-                                                                    <text style={{fontWeight:'bold'}} >NA SEMANA</text>
+                                                                    <text style={{ fontWeight: 'bold', margin: 4 }} >CAIXAS PROCESSADAS POR DIA</text>
+                                                                    <text style={{ fontWeight: 'bold' }} >NA SEMANA</text>
                                                                 </div>
                                                             </div>
                                                         </FilterOption>
                                                         <FilterOption opcao={value === 3} onClick={() => handleChange(3)}>
                                                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
-                                                                <div style={{backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
-                                                                    <img src="assets/value4.png" style={{ marginRight: 4, width:50, height:'auto', borderBottomWidth: 2, borderColor: '#008f83' }} />
+                                                                <div style={{ backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
+                                                                    <img src="assets/value4.png" style={{ marginRight: 4, width: 50, height: 'auto', borderBottomWidth: 2, borderColor: '#008f83' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <text style={{fontWeight:'bold', margin:4}} >PROCESSAMENTO POR PERÍODO EM</text>
-                                                                    <text style={{fontWeight:'bold'}} >METROS (TODAS AS CAIXAS)</text>
+                                                                    <text style={{ fontWeight: 'bold', margin: 4 }} >PROCESSAMENTO POR PERÍODO EM</text>
+                                                                    <text style={{ fontWeight: 'bold' }} >METROS (TODAS AS CAIXAS)</text>
                                                                 </div>
                                                             </div>
                                                         </FilterOption>
@@ -545,34 +546,47 @@ export default function Home() {
                                                     </text>
                                                 </div>
                                         }
-                                    <Divider sx={{ borderWidth: '2px', backgroundColor: '#008F83', marginTop: 0.7, boxShadow: '10px 4px 4px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
+                                        <Divider sx={{ borderWidth: '2px', backgroundColor: '#008F83', marginTop: 0.7, boxShadow: '10px 4px 4px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
 
                                     </Box>
                                     {
                                         furoSelecionado && value === 0 ?
-                                            <div style={{ marginLeft: 30, marginTop: 20, display: 'flex', flexDirection: 'column' }} >
-                                                <text style={{ fontSize: 20, fontWeight: 'bold', userSelect: 'none' }} >
-                                                    Quantidade de caixas finalizadas por processo
-                                                </text>
-                                                <text style={{ margin: 5, marginLeft: 55, userSelect: 'none' }} >
-                                                    Total {<SquareIcon style={{ color: '#ef3a25', userSelect: 'none' }} />}
-                                                </text>
-                                                <text style={{ margin: 5, userSelect: 'none' }} >
-                                                    Finalizadas {<SquareIcon style={{ color: '#008f83', userSelect: 'none' }} />}
-                                                </text>
-                                                <CustomHorizontalBarChart
-                                                    data={furoSelecionado.furo === 'TODOS' ?
+                                            <div style={{ display: 'flex', flexDirection: 'row' }} >
+                                                <div style={{ marginLeft: 30, marginTop: 7, display: 'flex', flexDirection: 'column' }} >
+                                                    <text style={{ fontSize: 20, fontWeight: 'bold', userSelect: 'none' }} >
+                                                        Quantidade de caixas finalizadas por processo
+                                                    </text>
+                                                    <text style={{ margin: 5, marginLeft: 55, userSelect: 'none' }} >
+                                                        Total {<SquareIcon style={{ color: '#ef3a25', userSelect: 'none' }} />}
+                                                    </text>
+                                                    <text style={{ margin: 5, userSelect: 'none' }} >
+                                                        Finalizadas {<SquareIcon style={{ color: '#008f83', userSelect: 'none' }} />}
+                                                    </text>
+                                                    <CustomHorizontalBarChart
+                                                        data={furoSelecionado.furo === 'TODOS' ?
+                                                            dataBarChartTodos
+                                                            :
+                                                            dataBarChart
+                                                        }
+                                                        maxValue={furoSelecionado.furo === 'TODOS' ?
+                                                            chipBoxes?.length
+                                                            :
+                                                            chipBoxesInternos[furoSelecionado?.index]?.length}
+                                                        menuBig={menuBig}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <InfoBarChartHorizontal data={furoSelecionado.furo === 'TODOS' ?
                                                         dataBarChartTodos
                                                         :
                                                         dataBarChart
-                                                    }
-                                                    maxValue={furoSelecionado.furo === 'TODOS' ?
-                                                        chipBoxes?.length
-                                                        :
-                                                        chipBoxesInternos[furoSelecionado?.index]?.length}
+                                                        
+                                                    } 
                                                     menuBig={menuBig}
-                                                />
+                                                    />
+                                                </div>
                                             </div>
+
                                             :
                                             <></>
                                     }
@@ -713,6 +727,7 @@ const Container = styled.div({
 const Content = styled.div({
     flex: 1,
     width: '80%',
+    //paddingLeft:20, paddingRight:20
 })
 const RenderFunctions = styled.div({
     display: 'flex',
