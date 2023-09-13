@@ -476,6 +476,8 @@ export default function Home() {
                             processamento={quantidadeProcessamento}
                             furos={furos}
                             selected={selected}
+                            chipBoxes={chipBoxes}
+                            menuBig={menuBig}
                         />
                         <Divider sx={{ display: selected === 'Dashboard' ? 'flex' : 'none', borderWidth: '2px', backgroundColor: '#008F83', marginTop: 1, boxShadow: '10px 4px 4px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
                         <RowFuros furos={furos} setFuroSelecionado={setFuroSelecionado} selected={selected} />
