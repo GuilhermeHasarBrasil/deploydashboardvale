@@ -495,9 +495,10 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 70vw;
-    margin-left: 10vw;
-    margin-right: 10vw;
+    justify-content: center;
+    width: 95vw;
+    //margin-left: 10vw;
+    //margin-right: 10vw;
     margin-top: 6vh;
     
 `
