@@ -11,13 +11,13 @@ export default function App({ Component, pageProps }) {
             <Head>
                 <title>Dashboards - Vale</title>
             </Head>
-            <PauseProvider>
-                <BrowserPrintProvider>
-                    <AuthUserProvider>
+            <BrowserPrintProvider>
+                <AuthUserProvider>
+                    <PauseProvider>
                         <Component {...pageProps} />
-                    </AuthUserProvider>
-                </BrowserPrintProvider>
-            </PauseProvider>
+                    </PauseProvider>
+                </AuthUserProvider>
+            </BrowserPrintProvider>
         </>
     );
 }

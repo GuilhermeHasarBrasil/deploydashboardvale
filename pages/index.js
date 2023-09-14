@@ -164,11 +164,11 @@ export default function Home() {
     }, [chipBoxes, furoSelecionado, furos])
 
     useEffect(() => {
-        const quantidadeConferidos = furos.filter(furo => furo.conferido === true)
-        const quantidadeFinalizado = furos.filter(furo => furo.finalizado === true)
-        const quantidadeEmProcessamento = furos.filter(furo => furo.conferido === true && furo.finalizado == false)
-        const quantidadeDeNaoIniciado = furos.filter(furo => !furo.conferido && !furo.finalizado)
-
+        const quantidadeConferidos = furos.filter(furo => furo?.conferido === true)
+        const quantidadeFinalizado = furos.filter(furo => furo?.finalizado === true)
+        const quantidadeEmProcessamento = furos.filter(furo => furo?.conferido === true && !furo?.finalizado)
+        const quantidadeDeNaoIniciado = furos.filter(furo => !furo?.conferido && !furo?.finalizado)
+        console.log(quantidadeEmProcessamento)
         setQuantidadeConferidos(quantidadeConferidos);
         setQuantidadeFinalizados(quantidadeFinalizado);
         setQuantidadeProcessamento(quantidadeEmProcessamento)
