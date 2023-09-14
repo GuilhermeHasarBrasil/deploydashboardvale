@@ -14,8 +14,6 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
     const [caixasObs, setCaixasObs] = useState()
     const [hoveredCaixaNaoIniciada, setHoveredCaixaNaoIniciada] = useState(false);
 
-
-
     useEffect(() => {
         let arrayFurosWithObs = []
         let arrayCaixasWithObs = []
@@ -181,9 +179,15 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
         setOptionsCaixa(!optionsCaixa)
     }
 
+    useEffect(()=>{
+        setTimeout(() => {
+            setOptionsCaixa(!optionsCaixa)
+        }, 15000);
+    },[optionsCaixa])
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }} >
-            <text style={{ fontSize: 20, marginRight: 40, fontWeight: 'bold', color: "#000f000", marginLeft: 10 }} >Painel de informações: </text>
+            <text style={{ fontSize: 20, marginRight: 40, fontWeight: 'bold', color: "#000f000", marginLeft: 10 }} >Painel de informações {optionsCaixa? 'das caixas' : 'dos furos'}: </text>
             <div style={{ display: selected !== 'Dashboard' ? 'none' : 'flex', flexDirection: 'row', marginLeft: 10, justifyContent: 'space-between', marginTop: 0, }} >
                 {
                     optionsCaixa ?
@@ -206,7 +210,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                         <TitleBox>CAIXAS PROCESSADAS</TitleBox>
                                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
                                             <Number>
-                                                {dataBarChartTodos[3]?.processed}
+                                                {dataBarChartTodos[3]?.processed+' de ' + chipBoxes?.length}
                                             </Number>
                                             <div
                                                 onMouseEnter={handleNumberMouseEnter}
@@ -534,6 +538,8 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                         </>
                 }
                 <Button onClick={handleOptionChange} >
+                    <div style={{display:'flex', flexDirection:'row', alignItems:'center'}} >
+                    <text>Alternar<br></br>para {!optionsCaixa? 'caixa' : 'furo'}</text>
                     <SwapVerticalOutline
                         color={'#00000'}
                         title={''}
@@ -541,8 +547,9 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                         width="45px"
                         style={{ marginRight: 20 }}
                     />
+                    </div>
+                    
                 </Button>
-
             </div>
         </div>
 
@@ -569,12 +576,10 @@ const TitleBox = styled.text({
     WebkitTextStrokeColor: 'black'
 })
 const Number = styled.text({
-    fontSize: 35,
+    fontSize: 32,
     color: 'white',
     fontWeight: 'bold',
     userSelect: 'none',
-    WebkitTextStrokeWidth: 1.5,
-    WebkitTextStrokeColor: 'black'
 })
 const Button = styled.button`
     transition: opacity 0.3s;

@@ -165,7 +165,7 @@ export default function Home() {
     useEffect(() => {
         const quantidadeConferidos = furos.filter(furo => furo.conferido === true)
         const quantidadeFinalizado = furos.filter(furo => furo.finalizado === true)
-        const quantidadeEmProcessamento = furos.filter(furo => furo.conferido === true && !furo.finalizado)
+        const quantidadeEmProcessamento = furos.filter(furo => furo.conferido === true && furo.finalizado == false)
         const quantidadeDeNaoIniciado = furos.filter(furo => !furo.conferido && !furo.finalizado)
 
         setQuantidadeConferidos(quantidadeConferidos);

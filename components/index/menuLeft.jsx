@@ -281,7 +281,8 @@ const Resources = styled.div({
     marginTop: 10,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    //justifyContent: 'center',
+    paddingLeft:9
 })
 
 const Button = styled.button`
