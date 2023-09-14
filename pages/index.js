@@ -18,8 +18,6 @@ import SquareIcon from '@mui/icons-material/Square';
 import BarChartWeek from "../components/Dashboard/WeekWorkBarchart";
 import Mensagens from "../components/Mensagens/Mensagens";
 import Box from '@mui/material/Box';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
 import Relatorios from "../components/Relatorios/Relatorios";
 import Import from "../components/ImportarArquivo/importar";
 import CustomBarChartMes from "../components/Dashboard/BarChartMes";
@@ -168,7 +166,6 @@ export default function Home() {
         const quantidadeFinalizado = furos.filter(furo => furo?.finalizado === true)
         const quantidadeEmProcessamento = furos.filter(furo => furo?.conferido === true && !furo?.finalizado)
         const quantidadeDeNaoIniciado = furos.filter(furo => !furo?.conferido && !furo?.finalizado)
-        console.log(quantidadeEmProcessamento)
         setQuantidadeConferidos(quantidadeConferidos);
         setQuantidadeFinalizados(quantidadeFinalizado);
         setQuantidadeProcessamento(quantidadeEmProcessamento)
@@ -596,7 +593,7 @@ export default function Home() {
             <Container>
                 <Header onClick={signOut} authUser={authUser} />
                 <RenderFunctions>
-                    <MenuLeft setSelected={setSelected} selected={selected} setMenuBig={setMenuBig} />
+                    <MenuLeft setSelected={setSelected} selected={selected} setMenuBig={setMenuBig} onClick={signOut} />
                     <Content>
                         <TopDashboard
                             finalizados={quantidadeFinalizados}

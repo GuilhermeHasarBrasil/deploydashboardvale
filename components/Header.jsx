@@ -7,19 +7,19 @@ export default function Header({ onClick, authUser }) {
 
     return (
         <Cont>
-            <h1 style={{ color: 'white', marginLeft: 10 }} >Bem-vindo(a), {authUser.email}</h1>
+            <h1 style={{ color: 'white', marginLeft: 10, marginRight:30 }} >Bem-vindo(a), {authUser.email}</h1>
             <Title>
                 <BarChartSharp
                     color={'#fff'}
                     title={'iconapp'}
-                    height="32px"
-                    width="32px"
+                    height="27px"
+                    width="27px"
                 />
-                <h1 style={{ color: 'white', fontSize: 30, marginLeft: 10, marginRight: 200 }} >
+                <h1 style={{ color: 'white', fontSize: 30, marginLeft: 10, marginRight: 200, fontWeight:'bold' }} >
                     HSD - HASAR Sample Data
                 </h1>
             </Title>
-            <ButtonIcon>
+            {/* <ButtonIcon>
                 <LogOutSharp
                     color={'#ffff'}
                     title={'deslogar'}
@@ -27,7 +27,7 @@ export default function Header({ onClick, authUser }) {
                     width="40px"
                     onClick={onClick}
                 />
-            </ButtonIcon>
+            </ButtonIcon> */}
         </Cont>
     )
 }
@@ -44,7 +44,7 @@ const Cont = styled.div({
     backgroundColor: '#074F92',
     display: 'flex', flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    //justifyContent: 'space-between'
 })
 const ButtonIcon = styled.button`
     background-color: #074F92;

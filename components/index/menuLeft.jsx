@@ -5,17 +5,18 @@ import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { ListCircleOutline } from 'react-ionicons'
 import { SettingsOutline } from 'react-ionicons'
 import { WarningOutline } from 'react-ionicons'
+import { LogOutSharp } from 'react-ionicons'
 
-export default function MenuLeft({ setSelected, selected, setMenuBig }) {
+export default function MenuLeft({ setSelected, selected, setMenuBig, onClick }) {
     const [menuVisible, setMenuVisible] = useState(false);
     const [menuWidth, setMenuWidth] = useState("3%");
     const [logoSrc, setLogoSrc] = useState('/assets/logovaleminimalist.png'); // Inicialmente, use logovale.png
 
     let timer; // Variável para armazenar o timer
 
-    useEffect(()=>{
+    useEffect(() => {
         setMenuBig(menuVisible)
-    },[menuVisible])
+    }, [menuVisible])
 
     function toggleMenuVisibility() {
         setMenuVisible(true); // Sempre torna o menu visível ao passar o mouse
@@ -226,6 +227,24 @@ export default function MenuLeft({ setSelected, selected, setMenuBig }) {
                         )}
                     </Button>
                 </Row>
+                <Row onClick={onClick}>
+                    <ImgContainer>
+                        <LogOutSharp
+                            color={'#ffff'}
+                            title={'deslogar'}
+                            height="35px"
+                            width="35px"
+                            style={{marginRight: menuVisible? -8 : 0}}
+                        />
+                    </ImgContainer>
+                    <Button>
+                        {menuVisible && (
+                            <TitleOption>Sair</TitleOption>
+                        )}
+                    </Button>
+                </Row>
+                <text style={{color:'white', paddingTop:menuVisible? 40 : 60, marginLeft: menuVisible? 20 : 0}} >V. 1.0.0</text>
+                
             </Content>
         </MenuHamburguer>
     )
@@ -282,7 +301,7 @@ const Resources = styled.div({
     display: 'flex',
     alignItems: 'center',
     //justifyContent: 'center',
-    paddingLeft:9
+    paddingLeft: 9
 })
 
 const Button = styled.button`
