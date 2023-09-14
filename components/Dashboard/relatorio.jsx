@@ -47,84 +47,55 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
         segundos %= 60;
         segundos = Math.floor(segundos);
         return `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
-      }
+    }
 
     useEffect(() => {
         const array = furoSelecionado.furo === "TODOS" ? chipBoxes : chipBoxesInternos[furoSelecionado.index].sort((a, b) => a.cx - b.cx)
         if (process === 'Conferência') {
             const dataArray = array;
             const conferenciaData = dataArray?.map(item => ({
-              'id': item.id,
-              'Tempo (segundos)': item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? (item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds) / 60 : 0,
-              'Tempo': segundosParaHHMMSS(item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? (item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds) / 1 : 0),
-              'caixa': item.cx,
-              'user': item.processos.conferencia.user ? item.processos.conferencia.user : '-',
-              'Data finalização': item.processos.conferencia.sai?.seconds ? item.processos.conferencia.sai.seconds : '-'
+                'id': item.id,
+                'Tempo (segundos)': item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? (item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds) / 60 : 0,
+                'Tempo': segundosParaHHMMSS(item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? (item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds) / 1 : 0),
+                'caixa': item.cx,
+                'user': item.processos.conferencia.user ? item.processos.conferencia.user : '-',
+                'Data finalização': item.processos.conferencia.sai?.seconds ? item.processos.conferencia.sai.seconds : '-'
             }));
             setArrayDataProcess(conferenciaData);
-          }
+        }
 
         if (process === 'Marcação') {
             const dataArray = array;
             const marcacaoData = dataArray?.map(item => ({
-              'id': item.id,
-              'Tempo (segundos)': item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds) / 60 : 0,
-              'Tempo': segundosParaHHMMSS(item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds) / 1 : 0),
-              'caixa': item.cx,
-              'user': item.processos.marcacao.user ? item.processos.marcacao.user : '-',
-              'Data finalização': item.processos.marcacao.sai?.seconds ? item.processos.marcacao.sai.seconds : '-'
+                'id': item.id,
+                'Tempo (segundos)': item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds) / 60 : 0,
+                'Tempo': segundosParaHHMMSS(item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds) / 1 : 0),
+                'caixa': item.cx,
+                'user': item.processos.marcacao.user ? item.processos.marcacao.user : '-',
+                'Data finalização': item.processos.marcacao.sai?.seconds ? item.processos.marcacao.sai.seconds : '-'
             }));
             setArrayDataProcess(marcacaoData);
-          }
-          
-          if (process === 'Fotografia') {
+        }
+
+        if (process === 'Fotografia') {
             const dataArray = array;
             const fotografiaData = dataArray?.map(item => ({
-              'id': item.id,
-              'Tempo (segundos)': item.processos.fotografia.ent ? (item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds) / 60 : 0,
-              'Tempo': segundosParaHHMMSS(item.processos.fotografia.ent ? (item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds) / 1 : 0),
-              'caixa': item.cx,
-              'user': item.processos.fotografia.user ? item.processos.fotografia.user : '-',
-              'Data finalização': item.processos.fotografia.sai?.seconds ? item.processos.fotografia.sai.seconds : '-'
+                'id': item.id,
+                'Tempo (segundos)': item.processos.fotografia.ent ? (item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds) / 60 : 0,
+                'Tempo': segundosParaHHMMSS(item.processos.fotografia.ent ? (item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds) / 1 : 0),
+                'caixa': item.cx,
+                'user': item.processos.fotografia.user ? item.processos.fotografia.user : '-',
+                'Data finalização': item.processos.fotografia.sai?.seconds ? item.processos.fotografia.sai.seconds : '-'
             }));
             setArrayDataProcess(fotografiaData);
-          }
-        // if (process == 'Densidade') {
-        //     const dataArray = filtroDensidade[furoSelecionado?.index]
-        //     const densidadeData = dataArray.map(item => ({
-        //         'id': item.id,
-        //         'Tempo (segundos)': item.processos.densidade.sai.seconds - item.processos.densidade.ent.seconds,
-        //         'caixa': item.cx,
-        //         'user': item.processos.densidade.user
-        //     }));
-        //     setArrayDataProcess(densidadeData)
-        // }
-        // if (process == 'Serragem') {
-        //     const dataArray = filtroSerragem[furoSelecionado?.index]
-        //     const serragemData = dataArray.map(item => ({
-        //         'id': item.id,
-        //         'Tempo (segundos)': item.processos.serragem.sai.seconds - item.processos.serragem.ent.seconds,
-        //         'caixa': item.cx,
-        //         'user': item.processos.serragem.user
-        //     }));
-        //     setArrayDataProcess(serragemData)
-        // }
-        // if (process == 'Despacho') {
-        //     const dataArray = filtroFotografia[furoSelecionado?.index]
-        //     const despachoData = dataArray.map(item => ({
-        //         'id': item.id,
-        //         'Tempo (segundos)': item.processos.despacho.sai.seconds - item.processos.despacho.ent.seconds,
-        //         'caixa': item.cx,
-        //         'user': item.processos.despacho.user
-        //     }));
-        //     setArrayDataProcess(despachoData)
-        // }
+        }
+       
         if (process == 'Arquivamento') {
             const dataArray = array
             const arquivamentoData = dataArray?.map(item => ({
                 'id': item.id,
-                'Tempo (segundos)': item.processos.arquivamento.ent ? (item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds)/60 : 0,
-                'Tempo': segundosParaHHMMSS(item.processos.arquivamento.ent ? (item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds)/1 : 0),
+                'Tempo (segundos)': item.processos.arquivamento.ent ? (item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds) / 60 : 0,
+                'Tempo': segundosParaHHMMSS(item.processos.arquivamento.ent ? (item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds) / 1 : 0),
                 'caixa': item.cx,
                 'user': item.processos.arquivamento.user ? item.processos.arquivamento.user : '-',
                 'Data finalização': item.processos.arquivamento.sai?.seconds ? item.processos.arquivamento.sai?.seconds : '-'
@@ -136,7 +107,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
     function motionIcon() {
         return (
             <motion.div
-                style={{ marginLeft: 525, marginBottom: -20, marginTop:-10 }}
+                style={{ marginLeft: 525, marginBottom: -20, marginTop: -10 }}
                 initial={{ y: -5 }}
                 animate={{ y: 0 }}
                 transition={{ repeat: Infinity, duration: 1, repeatType: 'reverse' }}
@@ -266,7 +237,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 0, flexDirection: 'column', width: '100%' }} >
-            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop: 0, userSelect:'none' }} >
+            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop: 0, userSelect: 'none' }} >
                 {
                     furoSelecionado.furo === 'TODOS' ?
                         'Selecione o processo para verificar o tempo de cada caixa processada (todos os furos)'
@@ -279,7 +250,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
                     {processos.map((furo, index) => (
                         <li style={{ marginLeft: 30, marginRight: 0, backgroundColor: furo.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={furo.id}>
                             <Button>
-                                <h1 style={{ color: furo.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold', userSelect:'none' }} onClick={() => sett(furo.processo, index)} >
+                                <h1 style={{ color: furo.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold', userSelect: 'none' }} onClick={() => sett(furo.processo, index)} >
                                     {furo.processo}
                                 </h1>
                             </Button>
@@ -290,7 +261,10 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             {
                 arrayDataProcess ?
                     <div style={{ marginLeft: '-2%', display: 'flex', flexDirection: 'row' }} >
-                        <CustomBarChart data={selectedDateRange ? arrayDataProcessDateFilter : arrayDataProcess} menuBig={menuBig} />
+                        <div>
+                            <CustomBarChart data={selectedDateRange ? arrayDataProcessDateFilter : arrayDataProcess} menuBig={menuBig} />
+                            <text style={{ color: "#777777", fontSize: 20, fontWeight: 'bold', marginLeft:30,  }} >Caixas</text>
+                        </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                             <text style={{ marginLeft: 15, fontWeight: 'bold' }} >Filtrar por data</text>
                             <DatePickerWrapper>

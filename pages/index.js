@@ -219,45 +219,125 @@ export default function Home() {
 
     useEffect(() => {
 
-        const AllChipBoxesFiltradosConferencia = chipBoxes.filter(chipbox =>
+        const AllChipBoxesFiltradosConferencia = chipBoxes.sort((a, b) => {
+            // Ordenar pelo campo 'furo' em ordem alfabética
+            if (a.furo < b.furo) return -1;
+            if (a.furo > b.furo) return 1;
+            // Se 'furo' for igual, ordenar pelo campo 'cx' em ordem alfabética
+            if (a.cx < b.cx) return -1;
+            if (a.cx > b.cx) return 1;
+            return 0;
+        }).filter(chipbox =>
             chipbox.processos.conferencia?.sai !== null
         );
 
-        const AllChipBoxesFiltradosConferenciaAndamentoTopDashboard = chipBoxes.filter(chipbox =>
+        const AllChipBoxesFiltradosConferenciaAndamentoTopDashboard = chipBoxes.sort((a, b) => {
+            // Ordenar pelo campo 'furo' em ordem alfabética
+            if (a.furo < b.furo) return -1;
+            if (a.furo > b.furo) return 1;
+            // Se 'furo' for igual, ordenar pelo campo 'cx' em ordem alfabética
+            if (a.cx < b.cx) return -1;
+            if (a.cx > b.cx) return 1;
+            return 0;
+        }).filter(chipbox =>
             chipbox.processos.conferencia?.ent !== null && chipbox.processos.conferencia?.sai == null
         );
 
-        const AllChipBoxesFiltradosMarcacao = chipBoxes.filter(chipbox =>
+        const AllChipBoxesFiltradosMarcacao = chipBoxes.sort((a, b) => {
+            // Ordenar pelo campo 'furo' em ordem alfabética
+            if (a.furo < b.furo) return -1;
+            if (a.furo > b.furo) return 1;
+            // Se 'furo' for igual, ordenar pelo campo 'cx' em ordem alfabética
+            if (a.cx < b.cx) return -1;
+            if (a.cx > b.cx) return 1;
+            return 0;
+        }).filter(chipbox =>
             chipbox.processos.marcacao?.sai !== null
         );
 
-        const AllChipBoxesFiltradosMarcacaoAndamentoTopDashboard = chipBoxes.filter(chipbox =>
+        const AllChipBoxesFiltradosMarcacaoAndamentoTopDashboard = chipBoxes.sort((a, b) => {
+            // Ordenar pelo campo 'furo' em ordem alfabética
+            if (a.furo < b.furo) return -1;
+            if (a.furo > b.furo) return 1;
+            // Se 'furo' for igual, ordenar pelo campo 'cx' em ordem alfabética
+            if (a.cx < b.cx) return -1;
+            if (a.cx > b.cx) return 1;
+            return 0;
+        }).filter(chipbox =>
             chipbox.processos.marcacao?.ent !== null && chipbox.processos.marcacao?.sai == null
         );
 
-        const AllChipBoxesFiltradosFotografia = chipBoxes.filter(chipbox =>
+        const AllChipBoxesFiltradosFotografia = chipBoxes.sort((a, b) => {
+            // Ordenar pelo campo 'furo' em ordem alfabética
+            if (a.furo < b.furo) return -1;
+            if (a.furo > b.furo) return 1;
+            // Se 'furo' for igual, ordenar pelo campo 'cx' em ordem alfabética
+            if (a.cx < b.cx) return -1;
+            if (a.cx > b.cx) return 1;
+            return 0;
+        }).filter(chipbox =>
             chipbox.processos.fotografia?.sai !== null
         );
 
-        const AllChipBoxesFiltradosFotografiaAndamentoTopDashboard = chipBoxes.filter(chipbox =>
+        const AllChipBoxesFiltradosFotografiaAndamentoTopDashboard = chipBoxes.sort((a, b) => {
+            // Ordenar pelo campo 'furo' em ordem alfabética
+            if (a.furo < b.furo) return -1;
+            if (a.furo > b.furo) return 1;
+            // Se 'furo' for igual, ordenar pelo campo 'cx' em ordem alfabética
+            if (a.cx < b.cx) return -1;
+            if (a.cx > b.cx) return 1;
+            return 0;
+        }).filter(chipbox =>
             chipbox.processos.fotografia?.ent !== null && chipbox.processos.fotografia?.sai == null
         );
 
-        const AllChipBoxesFiltradosArquivamento = chipBoxes.filter(chipbox =>
+        const AllChipBoxesFiltradosArquivamento = chipBoxes.sort((a, b) => {
+            // Ordenar pelo campo 'furo' em ordem alfabética
+            if (a.furo < b.furo) return -1;
+            if (a.furo > b.furo) return 1;
+            // Se 'furo' for igual, ordenar pelo campo 'cx' em ordem alfabética
+            if (a.cx < b.cx) return -1;
+            if (a.cx > b.cx) return 1;
+            return 0;
+        }).filter(chipbox =>
             chipbox.processos.arquivamento?.sai !== null
         );
         setCaixasFinalizadas(AllChipBoxesFiltradosArquivamento)
 
-        const AllChipBoxesEmProcessamento = chipBoxes.filter(chipbox =>
+        const AllChipBoxesEmProcessamento = chipBoxes.sort((a, b) => {
+            // Ordenar pelo campo 'furo' em ordem alfabética
+            if (a.furo < b.furo) return -1;
+            if (a.furo > b.furo) return 1;
+            // Se 'furo' for igual, ordenar pelo campo 'cx' em ordem alfabética
+            if (a.cx < b.cx) return -1;
+            if (a.cx > b.cx) return 1;
+            return 0;
+        }).filter(chipbox =>
             chipbox.processos?.conferencia?.ent !== null && chipbox.processos?.arquivamento?.sai == null
         );
         setCaixasEmAndamento(AllChipBoxesEmProcessamento)
 
-        const AllChipBoxesFiltradosArquivamentoAndamentoTopDashboard = chipBoxes.filter(chipbox =>
+        const AllChipBoxesFiltradosArquivamentoAndamentoTopDashboard = chipBoxes.sort((a, b) => {
+            // Ordenar pelo campo 'furo' em ordem alfabética
+            if (a.furo < b.furo) return -1;
+            if (a.furo > b.furo) return 1;
+            // Se 'furo' for igual, ordenar pelo campo 'cx' em ordem alfabética
+            if (a.cx < b.cx) return -1;
+            if (a.cx > b.cx) return 1;
+            return 0;
+        }).filter(chipbox =>
             chipbox.processos.arquivamento?.ent !== null && chipbox.processos.arquivamento?.sai == null
         );
 
-        const AllChipBoxesNaoIniciadas = chipBoxes.filter(chipbox =>
+        const AllChipBoxesNaoIniciadas = chipBoxes.sort((a, b) => {
+            // Ordenar pelo campo 'furo' em ordem alfabética
+            if (a.furo < b.furo) return -1;
+            if (a.furo > b.furo) return 1;
+            // Se 'furo' for igual, ordenar pelo campo 'cx' em ordem alfabética
+            if (a.cx < b.cx) return -1;
+            if (a.cx > b.cx) return 1;
+            return 0;
+        }).filter(chipbox =>
             chipbox.processos.conferencia?.ent == null
         );
         setCaixasNaoIniciadas(AllChipBoxesNaoIniciadas)

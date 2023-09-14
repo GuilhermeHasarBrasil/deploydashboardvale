@@ -25,7 +25,15 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
         let arrayFurosWithObs = []
         let arrayCaixasWithObs = []
 
-        const itensFiltradosmarcacao = chipBoxes.filter(item => {
+        const itensFiltradosmarcacao = chipBoxes.sort((a, b) => {
+            // Ordenar pelo campo 'furo' em ordem alfabética
+            if (a.furo < b.furo) return -1;
+            if (a.furo > b.furo) return 1;
+            // Se 'furo' for igual, ordenar pelo campo 'cx' em ordem alfabética
+            if (a.cx < b.cx) return -1;
+            if (a.cx > b.cx) return 1;
+            return 0;
+        }).filter(item => {
             // Normaliza e converte para minúsculas ambas as strings antes de comparar
             const obs = item.processos?.marcacao?.obs;
             return (
@@ -37,7 +45,15 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
         arrayCaixasWithObs.push(...itensFiltradosmarcacao.map(item => ({ caixa: item.furo + '-' + item.cx, cx: item.cx, furo: item.furo, processo: 'Marcação', obs: item?.processos?.marcacao?.obs })));
         arrayFurosWithObs.push(...itensFiltradosmarcacao.map(item => ({ numero: item.furo })));
 
-        const itensFiltradosFotografia = chipBoxes.filter(item => {
+        const itensFiltradosFotografia = chipBoxes.sort((a, b) => {
+            // Ordenar pelo campo 'furo' em ordem alfabética
+            if (a.furo < b.furo) return -1;
+            if (a.furo > b.furo) return 1;
+            // Se 'furo' for igual, ordenar pelo campo 'cx' em ordem alfabética
+            if (a.cx < b.cx) return -1;
+            if (a.cx > b.cx) return 1;
+            return 0;
+        }).filter(item => {
             // Normaliza e converte para minúsculas ambas as strings antes de comparar
             const obs = item.processos?.fotografia?.obs;
             return (
@@ -185,13 +201,12 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
     const handleOptionChange = () => {
         setOptionsCaixa(!optionsCaixa)
     }
-    console.log(isPaused)
 
     useEffect(() => {
         if (!isPaused) {
             setTimeout(() => {
                 setOptionsCaixa(!optionsCaixa)
-            }, 4000);
+            }, 30000);
         }
     }, [optionsCaixa, paused])
 
