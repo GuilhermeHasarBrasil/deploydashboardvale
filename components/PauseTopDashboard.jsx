@@ -71,7 +71,7 @@ const PauseButton = () => {
         </div>
         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
           <text style={{ fontSize: 25, fontWeight: 'bold', marginTop: 20, marginRight: 20, userSelect:'none' }} >Tempo de transição</text>
-          <select style={{ marginTop: 20, borderRadius: 5, paddingLeft: 8, backgroundColor: '#008F83', color: 'white', width: 280, height: 50, fontSize: 21, fontWeight: 'bold' }} value={selectedTempo.value} onChange={handleTempoChange}>
+          <select style={{ marginTop: 20, borderRadius: 5, paddingLeft: 8, backgroundColor: '#074f92', color: 'white', width: 280, height: 50, fontSize: 21, fontWeight: 'bold' }} value={selectedTempo.value} onChange={handleTempoChange}>
             {temposOptions.map((option) => (
               <option key={option.value} value={option.value}>{option.label}</option>
             ))}
