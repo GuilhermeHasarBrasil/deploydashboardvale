@@ -112,6 +112,6 @@ const Number = styled.text({
     color: 'white',
     fontWeight: 'bold',
     userSelect: 'none',
-    WebkitTextStrokeWidth: 1.5,
-    WebkitTextStrokeColor: 'black', marginTop:5
+    WebkitTextStrokeWidth: 0.2,
+    WebkitTextStrokeColor: 'white', marginTop:5
 })

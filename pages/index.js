@@ -211,22 +211,56 @@ export default function Home() {
     }, [furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem])
 
     const [dataBarChartTodos, setDataBarChartTodos] = useState()
+    const [dataTopDashboard, setDataTopDashboard] = useState()
+    const [caixasFinalizadas, setCaixasFinalizadas] = useState()
+    const [caixasEmAndamento, setCaixasEmAndamento] = useState()
+    const [caixasNaoIniciadas, setCaixasNaoIniciadas] = useState()
+
     useEffect(() => {
+        
         const AllChipBoxesFiltradosConferencia = chipBoxes.filter(chipbox =>
             chipbox.processos.conferencia?.sai !== null
+        );
+
+        const AllChipBoxesFiltradosConferenciaAndamentoTopDashboard = chipBoxes.filter(chipbox =>
+            chipbox.processos.conferencia?.ent !== null && chipbox.processos.conferencia?.sai == null
         );
 
         const AllChipBoxesFiltradosMarcacao = chipBoxes.filter(chipbox =>
             chipbox.processos.marcacao?.sai !== null
         );
 
+        const AllChipBoxesFiltradosMarcacaoAndamentoTopDashboard = chipBoxes.filter(chipbox =>
+            chipbox.processos.marcacao?.ent !== null && chipbox.processos.marcacao?.sai == null
+        );
+
         const AllChipBoxesFiltradosFotografia = chipBoxes.filter(chipbox =>
             chipbox.processos.fotografia?.sai !== null
+        );
+
+        const AllChipBoxesFiltradosFotografiaAndamentoTopDashboard = chipBoxes.filter(chipbox =>
+            chipbox.processos.fotografia?.ent !== null && chipbox.processos.fotografia?.sai == null
         );
 
         const AllChipBoxesFiltradosArquivamento = chipBoxes.filter(chipbox =>
             chipbox.processos.arquivamento?.sai !== null
         );
+        setCaixasFinalizadas(AllChipBoxesFiltradosArquivamento)
+
+        const AllChipBoxesEmProcessamento = chipBoxes.filter(chipbox =>
+            chipbox.processos?.conferencia?.ent !== null && chipbox.processos?.arquivamento?.sai == null
+        );
+        setCaixasEmAndamento(AllChipBoxesEmProcessamento)
+
+        const AllChipBoxesFiltradosArquivamentoAndamentoTopDashboard = chipBoxes.filter(chipbox =>
+            chipbox.processos.arquivamento?.ent !== null && chipbox.processos.arquivamento?.sai == null
+        );
+
+        const AllChipBoxesNaoIniciadas = chipBoxes.filter(chipbox =>
+            chipbox.processos.conferencia?.ent == null
+        );
+        setCaixasNaoIniciadas(AllChipBoxesNaoIniciadas)
+
 
         setDataBarChartTodos([
             {
@@ -244,22 +278,35 @@ export default function Home() {
                 processed: AllChipBoxesFiltradosFotografia?.length,
                 total: chipBoxes?.length,
             },
-            // {
-            //     name: 'Densidade',
-            //     processed: 0,
-            //     total: 0,
-            // },
-            // {
-            //     name: 'Serragem',
-            //     processed: 0,
-            //     total: 0,
-            // },
             {
                 name: 'Arquivamento',
                 processed: AllChipBoxesFiltradosArquivamento?.length,
                 total: chipBoxes?.length,
             },
         ]);
+
+        setDataTopDashboard([
+            {
+                name: 'Conferência',
+                andamento: AllChipBoxesFiltradosConferenciaAndamentoTopDashboard?.length
+            },
+
+            {
+                name: 'Marcação',
+                andamento: AllChipBoxesFiltradosMarcacaoAndamentoTopDashboard?.length
+            },
+
+            {
+                name: 'Fotografia',
+                andamento: AllChipBoxesFiltradosFotografiaAndamentoTopDashboard?.length
+            },
+
+            {
+                name: 'Arquivamento',
+                andamento: AllChipBoxesFiltradosArquivamentoAndamentoTopDashboard?.length
+            }
+        ]);
+
     }, [chipBoxes, furoSelecionado])
 
     useEffect(() => {
@@ -479,6 +526,11 @@ export default function Home() {
                             selected={selected}
                             chipBoxes={chipBoxes}
                             menuBig={menuBig}
+                            dataTopDashboard={dataTopDashboard}
+                            dataBarChartTodos={dataBarChartTodos}
+                            caixasFinalizadas={caixasFinalizadas}
+                            caixasEmAndamento={caixasEmAndamento}
+                            caixasNaoIniciadas={caixasNaoIniciadas}
                         />
                         <Divider sx={{ display: selected === 'Dashboard' ? 'flex' : 'none', borderWidth: '2px', backgroundColor: '#008F83', marginTop: 1, boxShadow: '10px 4px 4px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
                         <RowFuros furos={furos} setFuroSelecionado={setFuroSelecionado} selected={selected} />
