@@ -247,10 +247,14 @@ export default function Mensagens({ chipBoxes, furos }) {
 
     }, [process, selectedTempo, filteredChipBoxesTempoProcessoConferencia, filteredChipBoxesTempoProcessoMarcacao, filteredChipBoxesTempoProcessoFotografia, filteredChipBoxesTempoProcessoDensidade, filteredChipBoxesTempoProcessoSerragem, filteredChipBoxesTempoProcessoAmostragem])
 
-    console.log(process)
-
     useEffect(() => {
         let formattedString = "Aviso:\n";
+        (process === 'Desc. Geológica' || process === 'Desc. Geotécnica' || process === 'Desc. Estrutural' || process === 'Densidade' || process === 'Serragem' || process === 'Amostragem' || process === 'Despacho')?
+        arrayRenderizado?.forEach(item => {
+            let formattedLine = `O Furo ${item.numero} está a mais de ${label} em ${process}\n`;
+            formattedString += formattedLine;
+        })
+        :
         arrayRenderizado?.forEach(item => {
             let formattedLine = `A caixa ${item.cx} do furo ${item.furo} está a mais de ${label} em ${process}\n`;
             formattedString += formattedLine;
