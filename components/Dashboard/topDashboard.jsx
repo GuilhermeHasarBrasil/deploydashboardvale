@@ -14,11 +14,14 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
     const [caixasWithObs, setCaixasWithObs] = useState()
     const [caixasObs, setCaixasObs] = useState()
     const [hoveredCaixaNaoIniciada, setHoveredCaixaNaoIniciada] = useState(false);
-    const { isPaused } = usePauseContext();
+    const { isPaused, timePlay } = usePauseContext();
+
     const [paused, setPaused] = useState(isPaused)
+    const [time, setTime] = useState(timePlay)
 
     useEffect(()=>{
         setPaused(isPaused)
+        setTime(timePlay)
     },[selected])
 
     useEffect(() => {
@@ -206,10 +209,10 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
         if (!isPaused) {
             setTimeout(() => {
                 setOptionsCaixa(!optionsCaixa)
-            }, 30000);
+            }, time);
         }
     }, [optionsCaixa, paused])
-
+ 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }} >
             <text style={{ fontSize: 20, marginRight: 40, fontWeight: 'bold', color: "#000f000", marginLeft: 10, display: selected !== 'Dashboard' ? 'none' : 'flex' }} >Painel de informações {optionsCaixa ? 'das caixas' : 'dos furos'}: </text>
