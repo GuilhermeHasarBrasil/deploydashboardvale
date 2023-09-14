@@ -26,6 +26,7 @@ import CustomBarChartMes from "../components/Dashboard/BarChartMes";
 import PrintLabelNovo from "../components/ImpressaoEtiquetas/impressaoEtiquetasNOVO";
 import Users from "../components/Usuarios/Users";
 import InfoBarChartHorizontal from "../components/Dashboard/InfoBarChartHorizontal";
+import PauseTopDashboard from "../components/PauseTopDashboard";
 
 export default function Home() {
     const { signOut, authUser, isLoading } = useAuth();
@@ -217,7 +218,7 @@ export default function Home() {
     const [caixasNaoIniciadas, setCaixasNaoIniciadas] = useState()
 
     useEffect(() => {
-        
+
         const AllChipBoxesFiltradosConferencia = chipBoxes.filter(chipbox =>
             chipbox.processos.conferencia?.sai !== null
         );
@@ -632,9 +633,9 @@ export default function Home() {
                                                         dataBarChartTodos
                                                         :
                                                         dataBarChart
-                                                        
-                                                    } 
-                                                    menuBig={menuBig}
+
+                                                    }
+                                                        menuBig={menuBig}
                                                     />
                                                 </div>
                                             </div>
@@ -744,6 +745,12 @@ export default function Home() {
                         {
                             selected === 'Config. Impressora' ?
                                 <PrinterSettings />
+                                :
+                                <></>
+                        }
+                        {
+                            selected === 'Parâmetros' ?
+                                <PauseTopDashboard />
                                 :
                                 <></>
                         }

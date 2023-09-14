@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import { InformationCircleOutline } from 'react-ionicons'
 import { SwapVerticalOutline } from 'react-ionicons'
+import { usePauseContext } from '../../contexts/PauseContext';
 
 export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoIniciado, processamento, furos, selected, chipBoxes, menuBig, dataTopDashboard, dataBarChartTodos, caixasFinalizadas, caixasEmAndamento, caixasNaoIniciadas }) {
     const [hoveredFinalizados, setHoveredFinalizados] = useState(false);
@@ -13,6 +14,12 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
     const [caixasWithObs, setCaixasWithObs] = useState()
     const [caixasObs, setCaixasObs] = useState()
     const [hoveredCaixaNaoIniciada, setHoveredCaixaNaoIniciada] = useState(false);
+    const { isPaused } = usePauseContext();
+    const [paused, setPaused] = useState(isPaused)
+
+    useEffect(()=>{
+        setPaused(isPaused)
+    },[selected])
 
     useEffect(() => {
         let arrayFurosWithObs = []
@@ -178,16 +185,19 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
     const handleOptionChange = () => {
         setOptionsCaixa(!optionsCaixa)
     }
+    console.log(isPaused)
 
-    useEffect(()=>{
-        setTimeout(() => {
-            setOptionsCaixa(!optionsCaixa)
-        }, 15000);
-    },[optionsCaixa])
+    useEffect(() => {
+        if (!isPaused) {
+            setTimeout(() => {
+                setOptionsCaixa(!optionsCaixa)
+            }, 4000);
+        }
+    }, [optionsCaixa, paused])
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }} >
-            <text style={{ fontSize: 20, marginRight: 40, fontWeight: 'bold', color: "#000f000", marginLeft: 10 }} >Painel de informações {optionsCaixa? 'das caixas' : 'dos furos'}: </text>
+            <text style={{ fontSize: 20, marginRight: 40, fontWeight: 'bold', color: "#000f000", marginLeft: 10, display: selected !== 'Dashboard' ? 'none' : 'flex' }} >Painel de informações {optionsCaixa ? 'das caixas' : 'dos furos'}: </text>
             <div style={{ display: selected !== 'Dashboard' ? 'none' : 'flex', flexDirection: 'row', marginLeft: 10, justifyContent: 'space-between', marginTop: 0, }} >
                 {
                     optionsCaixa ?
@@ -210,7 +220,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                         <TitleBox>CAIXAS PROCESSADAS</TitleBox>
                                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
                                             <Number>
-                                                {dataBarChartTodos[3]?.processed+' de ' + chipBoxes?.length}
+                                                {dataBarChartTodos[3]?.processed + ' de ' + chipBoxes?.length}
                                             </Number>
                                             <div
                                                 onMouseEnter={handleNumberMouseEnter}
@@ -538,17 +548,17 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                         </>
                 }
                 <Button onClick={handleOptionChange} >
-                    <div style={{display:'flex', flexDirection:'row', alignItems:'center'}} >
-                    <text>Alternar<br></br>para {!optionsCaixa? 'caixa' : 'furo'}</text>
-                    <SwapVerticalOutline
-                        color={'#00000'}
-                        title={''}
-                        height="45px"
-                        width="45px"
-                        style={{ marginRight: 20 }}
-                    />
+                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} >
+                        <text>Alternar<br></br>para {!optionsCaixa ? 'caixa' : 'furo'}</text>
+                        <SwapVerticalOutline
+                            color={'#00000'}
+                            title={''}
+                            height="45px"
+                            width="45px"
+                            style={{ marginRight: 20 }}
+                        />
                     </div>
-                    
+
                 </Button>
             </div>
         </div>

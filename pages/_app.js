@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import Head from "next/head";
 import { AuthUserProvider } from "../firebase/auth";
 import BrowserPrintProvider from '../contexts/BrowserPrintContext'
+import { PauseProvider } from '../contexts/PauseContext'
 
 
 export default function App({ Component, pageProps }) {
@@ -10,12 +11,13 @@ export default function App({ Component, pageProps }) {
             <Head>
                 <title>Dashboards - Vale</title>
             </Head>
-            <BrowserPrintProvider>
-                <AuthUserProvider>
-                    <Component {...pageProps} />
-                </AuthUserProvider>
-            </BrowserPrintProvider>
-
+            <PauseProvider>
+                <BrowserPrintProvider>
+                    <AuthUserProvider>
+                        <Component {...pageProps} />
+                    </AuthUserProvider>
+                </BrowserPrintProvider>
+            </PauseProvider>
         </>
     );
 }
