@@ -175,7 +175,7 @@ export default function Mensagens({ chipBoxes, furos }) {
             const arquivamentosaida = arquivamento.sai ? arquivamento.sai : timestamp
             if (arquivamentosaida && arquivamento?.ent) {
                 const difference = getSecondsDifference(arquivamento.ent, arquivamentosaida);
-                return difference > selectedTempo? selectedTempo : 0;
+                return difference > selectedTempo ? selectedTempo : 0;
             }
             return false;
         });
@@ -247,6 +247,7 @@ export default function Mensagens({ chipBoxes, furos }) {
 
     }, [process, selectedTempo, filteredChipBoxesTempoProcessoConferencia, filteredChipBoxesTempoProcessoMarcacao, filteredChipBoxesTempoProcessoFotografia, filteredChipBoxesTempoProcessoDensidade, filteredChipBoxesTempoProcessoSerragem, filteredChipBoxesTempoProcessoAmostragem])
 
+    console.log(process)
 
     useEffect(() => {
         let formattedString = "Aviso:\n";
@@ -272,23 +273,34 @@ export default function Mensagens({ chipBoxes, furos }) {
                 </Button>
 
             </div>
-            <ul style={{ display: 'flex', flexDirection: 'row', flexWrap:'wrap', overflowX: 'auto', overflow: 'hidden', marginTop: '3%' }} >
+            <ul style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', overflowX: 'auto', overflow: 'hidden', marginTop: '3%' }} >
                 {processos.map((processOption, index) => (
                     <Button>
                         <li style={{ marginLeft: 10, marginRight: 0, backgroundColor: processOption.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10, height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center' }} key={processOption.id}>
-                            <h1 style={{ color: processOption.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold', userSelect:'none' }} onClick={() => sett(processOption.processo, index)} >
+                            <h1 style={{ color: processOption.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold', userSelect: 'none' }} onClick={() => sett(processOption.processo, index)} >
                                 {processOption.processo}
                             </h1>
                         </li>
                     </Button>
                 ))}
             </ul>
-            <ul style={{ display: 'flex', maxHeight:'550px', flexDirection: 'column', overflow: 'auto', overflow: 'auto', marginTop: 25 }} >
+            <ul style={{ display: 'flex', maxHeight: '550px', flexDirection: 'column', overflow: 'auto', overflow: 'auto', marginTop: 25 }} >
                 {arrayRenderizado?.map((item, index) => (
                     <li style={{ marginLeft: 30, marginRight: 0, backgroundColor: '#074f92', padding: 18, borderRadius: 10, marginTop: 5, }} key={item.id}>
                         <div style={{ display: 'flex', flexDirection: 'column', width: 250, backgroundColor: 'white', padding: 3 }} >
-                            <text style={{ color: 'red', fontWeight: 'bold', fontSize: 18, userSelect:'none' }} >Aviso!</text>
-                            <text style={{ fontWeight: 'bold', userSelect:'none' }} >A caixa {item.cx} do furo {item.furo} levou ou está a mais de {label} em {process}</text>
+                            <text style={{ color: 'red', fontWeight: 'bold', fontSize: 18, userSelect: 'none' }} >Aviso!</text>
+                            {
+
+                                (process === 'Desc. Geológica' || process === 'Desc. Geotécnica' || process === 'Desc. Estrutural' || process === 'Densidade' || process === 'Serragem' || process === 'Amostragem' || process === 'Despacho')
+                                    ?
+                                    <text style={{ fontWeight: 'bold', userSelect: 'none' }} >
+                                        O furo {item.numero} levou ou está a mais de {label} em {process}
+                                    </text>
+                                    :
+                                    <text style={{ fontWeight: 'bold', userSelect: 'none' }} >
+                                        A caixa {item.cx} do furo {item.furo} levou ou está a mais de {label} em {process}
+                                    </text>
+                            }
                         </div>
                     </li>
                 ))}
