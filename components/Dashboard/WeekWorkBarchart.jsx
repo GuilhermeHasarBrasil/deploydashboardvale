@@ -100,7 +100,7 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
                 ))}
             </ul>
             <div style={{ display: 'flex', flexDirection: 'row' }} >
-                <BarChart width={ window.screen.width === 1920 && !menuBig ? chartWidth*2.8 : chartWidth*2.5} height={window.screen.height!==1080 ? chartHeight +100 : chartHeight+100} style={{ marginLeft: 100 }} data={arrayDiasProcesso}>
+                <BarChart width={ window.screen.width === 1920 && !menuBig ? chartWidth*2.8 : chartWidth*2} height={window.screen.height!==1080 ? chartHeight-30 : chartHeight} style={{ marginLeft: 100 }} data={arrayDiasProcesso}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="dia" />
                     <YAxis />
