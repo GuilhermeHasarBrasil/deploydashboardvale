@@ -45,7 +45,7 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                 <BgImageCardItem BgColor= {'#206F0D'}>
                     <img src="/assets/images/furoimg.png" />
                 </BgImageCardItem>
-                <div style={{ backgroundColor: '#2FAB10', height: 90, paddingRight: 20, width: 350 }}>
+                <CardItem BgColor={'#2FAB10'}>
                     <Column grande={menuBig}>
                         <TitleBox>ETAPAS CONCLUÍDAS (PROCESSADAS)</TitleBox>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
@@ -54,13 +54,13 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                             </Number>
                         </div>
                     </Column>
-                </div>
+                </CardItem>
             </Row>
             <Row  >
                 <BgImageCardItem BgColor= {'#2760BB'} >
                     <img src="/assets/images/furoimg.png" />
                 </BgImageCardItem>
-                <div style={{ backgroundColor: '#307BF4', height: 90, paddingRight: 20, width: 350 }} >
+                <CardItem BgColor={'#307BF4'} >
                     <Column grande={menuBig}>
                         <TitleBox>ETAPAS NÃO INICIADAS (TOTAL)</TitleBox>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
@@ -69,13 +69,13 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                             </Number>
                         </div>
                     </Column>
-                </div>
+                </CardItem>
             </Row>
             <Row  >
                 <BgImageCardItem BgColor= {'#996501'} >
                     <img src="/assets/images/furoimg.png" />
                 </BgImageCardItem>
-                <div style={{ backgroundColor: '#E89E0E', height: 90, paddingRight: 20, width: 350 }} >
+                <CardItem BgColor={'#E89E0E'} >
                     <Column grande={menuBig}>
                         <TitleBox>ETAPAS EM ANDAMENTO APÓS CONFERÊNCIA</TitleBox>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
@@ -84,13 +84,13 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                             </Number>
                         </div>
                     </Column>
-                </div>
+                </CardItem>
             </Row>
             <Row  >
                 <BgImageCardItem BgColor= {'#990101'} >
                     <img src="/assets/images/furoimg.png" />
                 </BgImageCardItem>
-                <div style={{ backgroundColor: '#e8410e', height: 90, paddingRight: 20, width: 350 }} >
+                <CardItem BgColor={'#e8410e'} >
                     <Column grande={menuBig}>
                         <TitleBox>TOTAL DE ETAPAS DO FURO</TitleBox>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
@@ -99,12 +99,17 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                             </Number>
                         </div>
                     </Column>
-                </div>
+                </CardItem>
             </Row>
         </Container>
     )
 }
-
+const CardItem = styled.div`
+    height: 90px;
+    width: 350px;
+    padding-right: 20px;
+    background-color: ${props=>props.BgColor};
+`
 const Container = styled.div`
     display: flex;
     flex-direction: column;
