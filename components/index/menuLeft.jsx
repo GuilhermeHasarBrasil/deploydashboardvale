@@ -223,8 +223,8 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                         <LogOutSharp
                             color={'#ffff'}
                             title={'deslogar'}
-                            height="35px"
-                            width="35px"
+                            height="32px"
+                            width="32px"
                             style={{ marginRight: menuVisible ? -8 : 0 }}
                         />
                     </ImgContainer>
@@ -260,6 +260,10 @@ const ImgContainer = styled.div`
     border-radius: 10px;
     margin-left: -5px;
     background-color: ${props => (props.selected ? '#3699FF' : '')};
+    @media only screen and (max-device-width: 1679px) {
+        width: 30px;
+        height: 30px;
+    }
 
 `
 const TitleOption = styled.text`
@@ -274,15 +278,25 @@ const TitleOption = styled.text`
     &:hover {
         opacity: 0.7;
     }
+    @media only screen and (max-device-width: 1679px) {
+        font-size:14px;
+        margin-left: 4px;
+        letter-spacing: 0px;
+    }
 `;
 
-const Row = styled.div({
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 15,
-    marginTop: 12, padding: 2
-})
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 15px;
+    margin-top: 12px;
+    padding: 2;
+    @media only screen and (max-device-width: 1679px) {
+        margin-top: 8px;
+        margin-left: 8px;
+    }
+`
 
 const Resources = styled.div({
     backgroundColor: '#6D6262',
