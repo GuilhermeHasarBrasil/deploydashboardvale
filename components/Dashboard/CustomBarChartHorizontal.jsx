@@ -41,7 +41,7 @@ const CustomHorizontalBarChart = ({ data, maxValue, menuBig }) => {
         window.screen.width>1900?
          menuBig ? chartWidth - 850 : chartWidth - 600
         :
-         menuBig ? chartWidth - 800 : chartWidth - 600
+         menuBig ? chartWidth - 700 : chartWidth - 600
       }
       height={ window.screen.width>1900? data.length * 50 + 250 :  data.length * 50 + 250} data={data} layout="vertical"
     >
