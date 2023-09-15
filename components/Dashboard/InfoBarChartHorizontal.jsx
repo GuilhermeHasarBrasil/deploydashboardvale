@@ -130,6 +130,7 @@ const Column = styled.div`
     display: flex;
     flex-direction:  ${props => (props.grande ? 'column' : 'column')};
     margin-left: 15px;
+    
 `
 const TitleBox = styled.text({
     color: 'white',
@@ -138,7 +139,7 @@ const TitleBox = styled.text({
     userSelect: 'none',
 
     WebkitTextStrokeWidth: 0.1,
-    WebkitTextStrokeColor: 'black'
+    WebkitTextStrokeColor: 'black',
 })
 const Number = styled.text({
     fontSize: 35,
@@ -146,5 +147,6 @@ const Number = styled.text({
     fontWeight: 'bold',
     userSelect: 'none',
     WebkitTextStrokeWidth: 0.2,
-    WebkitTextStrokeColor: 'white', marginTop: 5
+    WebkitTextStrokeColor: 'white',
+    display:'flex'
 })
