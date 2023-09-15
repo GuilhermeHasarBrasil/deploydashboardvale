@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import * as XLSX from 'xlsx'
 const ExcelJS = require('exceljs');
 import {
@@ -344,6 +344,16 @@ export default function Import() {
 
     const [sincro, setSincro] = useState(false)
 
+    useEffect(()=>{
+        if(sincro){
+            setTimeout(() => {
+                setSincro(false)
+                setChipBoxes()
+                setFuro()
+            }, 10000);
+        }
+    },[sincro])
+
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '3%' }}>
             <input
@@ -372,7 +382,7 @@ export default function Import() {
             </label>
             {
                 furo && chipBoxes.length > 2 ?
-                    <Button disabled={!sincro ? false : true} onClick={() => inserirFuroECaixasNoBanco(furo, chipBoxes)} >
+                    <Button BgColor={!sincro ? '#074F92' : 'green'} disabled={!sincro ? false : true} onClick={() => inserirFuroECaixasNoBanco(furo, chipBoxes)} >
                         <text style={{ color: 'white', fontSize: 18, fontWeight: 'bold' }} >{!sincro ? 'Sincronizar planilha no banco de dados' : 'Sincronizado!'}</text>
                     </Button>
                     :
@@ -380,21 +390,20 @@ export default function Import() {
             }
             {
                 furo && chipBoxes.length > 0 ?
-                !sincro ? 
-                <Alert style={{marginTop:15, width:600, marginBottom: 12}} severity="warning">Ao pressionar o botão acima, você enviará todas as caixas ao banco de dados!</Alert>
-                :
-                <Alert style={{marginTop:15, marginBottom:12, width:600}} severity="success">Sincronizado com sucesso! As caixas foram enviadas ao banco com sucesso.</Alert>
-                
-                :
-                <Alert style={{marginTop:15, width:600}} severity="info">Após importar, você deve sincronizar a planilha!</Alert>
+                    !sincro ?
+                        <Alert style={{ marginTop: 15, width: 600, marginBottom: 12 }} severity="warning">Ao pressionar o botão acima, você enviará todas as caixas ao banco de dados!</Alert>
+                        :
+                        <Alert style={{ marginTop: 15, marginBottom: 12, width: 500 }} severity="success">Sincronizado com sucesso! As caixas foram enviadas ao banco.</Alert>
+
+                    :
+                    <Alert style={{ marginTop: 15, width: 600 }} severity="info">Após importar, você deve sincronizar a planilha!</Alert>
             }
             {
-                chipBoxes.length > 0 ?
+                chipBoxes?.length > 0 ?
                     <TableFuro furo={furo} caixas={chipBoxes} />
                     :
                     <></>
             }
-            
         </div>
     );
 }
@@ -403,7 +412,7 @@ const Button = styled.button`
 
     margin-top: 15px;
     margin-bottom: 15px;
-    background-color: #074F92;
+    background-color: ${props => props.BgColor};
     transition: opacity 0.3s;
     height: 80px;
     width: 260px;
