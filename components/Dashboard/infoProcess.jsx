@@ -1,63 +1,82 @@
 /* eslint-disable */
-
 import styled from 'styled-components'
 
 export default function InfoProcess({ total, iniciado, finalizado, naoIniciado }) {
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', marginLeft:10, marginTop:0, }} >
+        <Container>
             <Row>
-                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#206F0D', width: 55, height: 55 }} >
-                    <img src="/assets/images/furoimg.png" style={{userSelect:'none'}} />
-                </div>
-                <div style={{ backgroundColor: '#2FAB10', height: 55, width: 280 }} >
+                <BgImageCard BgImage={'#206F0D'}>
+                    <img src="/assets/images/furoimg.png" style={{ userSelect: 'none' }} />
+                </BgImageCard>
+                <Card BgImage={'#2FAB10'}>
                     <Column>
                         <TitleBox>TOTAL DE CAIXAS</TitleBox>
                         <Number>{total}</Number>
                     </Column>
-                </div>
+                </Card>
             </Row>
             <Row>
-                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#2760BB', width: 55, height: 55 }} >
-                    <img src="/assets/images/furoimg.png" style={{userSelect:'none'}} />
-                </div>
-                <div style={{ backgroundColor: '#307BF4', height: 55, width: 280 }} >
+                <BgImageCard BgImage={'#2760BB'} >
+                    <img src="/assets/images/furoimg.png" style={{ userSelect: 'none' }} />
+                </BgImageCard>
+                <Card BgImage={'#307BF4'}>
                     <Column>
                         <TitleBox>CAIXAS FINALIZADAS</TitleBox>
                         <Number>{finalizado?.length}</Number>
                     </Column>
-                </div>
+                </Card>
             </Row>
             <Row>
-                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#996501', width: 55, height: 55 }} >
-                    <img src="/assets/images/furoimg.png" style={{userSelect:'none'}} />
-                </div>
-                <div style={{ backgroundColor: '#E89E0E', height: 55, width: 280 }} >
+                <BgImageCard BgImage={'#996501'}>
+                    <img src="/assets/images/furoimg.png" style={{ userSelect: 'none' }} />
+                </BgImageCard>
+                <Card BgImage={'#E89E0E'} >
                     <Column>
                         <TitleBox>CAIXAS EM PROCESSAMENTO</TitleBox>
-                        <Number>{ iniciado?.length }</Number>
+                        <Number>{iniciado?.length}</Number>
                     </Column>
-                </div>
+                </Card>
             </Row>
             <Row>
-                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#990113', width: 55, height: 55 }} >
-                    <img src="/assets/images/furoimg.png" style={{userSelect:'none'}} />
-                </div>
-                <div style={{ backgroundColor: '#990113', height: 55, width: 280 }} >
+                <BgImageCard BgImage={'#990113'}>
+                    <img src="/assets/images/furoimg.png" style={{ userSelect: 'none' }} />
+                </BgImageCard>
+                <Card BgImage={'#990113'}>
                     <Column>
                         <TitleBox>CAIXAS NÃO INICIADAS</TitleBox>
-                        <Number>{ total - iniciado?.length - finalizado?.length}</Number>
+                        <Number>{total - iniciado?.length - finalizado?.length}</Number>
                     </Column>
-                </div>
+                </Card>
             </Row>
-        </div>
-
-
+        </Container>
     )
 }
+
+const Container = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    margin-top: 0px;
+`
+
+const BgImageCard = styled.div`
+    background-color: ${props => props.BgImage} ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 55px;
+`
+const Card = styled.div`
+    background-color: ${props => props.BgImage};
+    height: 55px;
+    width: 280px;
+`
+
 const Row = styled.div({
     display: 'flex',
-    flexDirection: 'row', marginLeft:25, marginRight:25
+    flexDirection: 'row', marginLeft: 25, marginRight: 25
 })
 const Column = styled.div({
     display: 'flex',
@@ -67,10 +86,10 @@ const Column = styled.div({
 const TitleBox = styled.text({
     color: 'white',
     fontSize: 15,
-    fontWeight: '600', userSelect:'none'
+    fontWeight: '600', userSelect: 'none'
 })
 const Number = styled.text({
     fontSize: 24,
     color: 'white',
-    fontWeight: 'bold', userSelect:'none'
+    fontWeight: 'bold', userSelect: 'none'
 })
