@@ -214,29 +214,20 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
     }, [optionsCaixa, paused])
  
     return (
-        <div style={{ display: 'flex', flexDirection: 'column' }} >
+        <Column notMargin = {true} >
             <text style={{ fontSize: 20, marginRight: 40, fontWeight: 'bold', color: "#000f000", marginLeft: 10, display: selected !== 'Dashboard' ? 'none' : 'flex' }} >Painel de informações {optionsCaixa ? 'das caixas' : 'dos furos'}: </text>
             <div style={{ display: selected !== 'Dashboard' ? 'none' : 'flex', flexDirection: 'row', marginLeft: 10, justifyContent: 'space-between', marginTop: 0, }} >
                 {
                     optionsCaixa ?
                         <>
                             <Row  >
-                                <div
-                                    style={{
-                                        alignItems: 'center',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        backgroundColor: '#206F0D',
-                                        width: 70,
-                                        height: 60,
-                                    }}
-                                >
+                                <BgImageCards BgColor= {'#206F0D'} Padding={0}>
                                     <img src="/assets/images/furoimg.png" />
-                                </div>
-                                <div style={{ backgroundColor: '#2FAB10', height: 60, paddingRight: 20 }}>
+                                </BgImageCards>
+                                <CardInfos BgColor = {'#2FAB10'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>CAIXAS PROCESSADAS</TitleBox>
-                                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
+                                        <RowIconsCards >
                                             <Number>
                                                 {dataBarChartTodos[3]?.processed + ' de ' + chipBoxes?.length}
                                             </Number>
@@ -265,19 +256,19 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                                 )}
                                             </div>
 
-                                        </div>
+                                        </RowIconsCards>
 
                                     </Column>
-                                </div>
+                                </CardInfos>
                             </Row>
                             <Row  >
-                                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#2760BB', width: 70, height: 60 }} >
+                                <BgImageCards BgColor= {'#2760BB'} Padding={0} >
                                     <img src="/assets/images/furoimg.png" />
-                                </div>
-                                <div style={{ backgroundColor: '#307BF4', height: 60, paddingRight: 20 }} >
+                                </BgImageCards>
+                                <CardInfos BgColor={ '#307BF4'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>CAIXAS NÃO INICIADAS</TitleBox>
-                                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
+                                        <RowIconsCards >
                                             <Number>
                                                 {chipBoxes?.length - dataBarChartTodos[0]?.processed}
                                             </Number>
@@ -304,18 +295,18 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                                     </ObjectListNaoIniciado>
                                                 )}
                                             </div>
-                                        </div>
+                                        </RowIconsCards>
                                     </Column>
-                                </div>
+                                </CardInfos>
                             </Row>
                             <Row  >
-                                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#996501', width: 70, height: 60 }} >
+                                <BgImageCards BgColor= {'#996501'} Padding={0} >
                                     <img src="/assets/images/furoimg.png" />
-                                </div>
-                                <div style={{ backgroundColor: '#E89E0E', height: 60, paddingRight: 20 }} >
+                                </BgImageCards>
+                                <CardInfos BgColor={'#E89E0E'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>CAIXAS EM PROCESSAMENTO</TitleBox>
-                                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
+                                        <RowIconsCards >
                                             <Number>
                                                 {dataBarChartTodos[0]?.processed - dataBarChartTodos[3]?.processed}
                                             </Number>
@@ -344,19 +335,18 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                                 )}
                                             </div>
 
-                                        </div>
+                                        </RowIconsCards>
                                     </Column>
-                                </div>
+                                </CardInfos>
                             </Row>
                             <Row  >
-
-                                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#990101', width: 70, height: 60, padding: 9 }} >
+                                <BgImageCards BgColor= {'#990101'} Padding={9} >
                                     <img src="/assets/alertImage.png" />
-                                </div>
-                                <div style={{ backgroundColor: '#e8410e', height: 60, paddingRight: 20 }} >
+                                </BgImageCards>
+                                <CardInfos BgColor={'#e8410e'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>CAIXAS COM OBSERVAÇÃO</TitleBox>
-                                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
+                                        <RowIconsCards >
                                             <Number>
                                                 {caixasWithObs?.length}
                                             </Number>
@@ -386,30 +376,21 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                                 )}
                                             </div>
 
-                                        </div>
+                                        </RowIconsCards>
                                     </Column>
-                                </div>
+                                </CardInfos>
                             </Row>
                         </>
                         :
                         <>
                             <Row  >
-                                <div
-                                    style={{
-                                        alignItems: 'center',
-                                        display: 'flex',
-                                        justifyContent: 'center',
-                                        backgroundColor: '#206F0D',
-                                        width: 70,
-                                        height: 60,
-                                    }}
-                                >
+                                <BgImageCards BgColor={'#206F0D'} Padding={0}>
                                     <img src="/assets/images/furoimg.png" />
-                                </div>
-                                <div style={{ backgroundColor: '#2FAB10', height: 60, paddingRight: 20 }}>
+                                </BgImageCards>
+                                <CardInfos BgColor= {'#2FAB10'}>
                                     <Column grande={menuBig}>
                                         <TitleBox>FUROS PROCESSADOS</TitleBox>
-                                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
+                                        <RowIconsCards >
                                             <Number>
                                                 {finalizados?.length}
                                             </Number>
@@ -438,19 +419,19 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                                 )}
                                             </div>
 
-                                        </div>
+                                        </RowIconsCards>
 
                                     </Column>
-                                </div>
+                                </CardInfos>
                             </Row>
                             <Row  >
-                                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#2760BB', width: 70, height: 60 }} >
+                                <BgImageCards BgColor= {'#2760BB'} Padding={0} >
                                     <img src="/assets/images/furoimg.png" />
-                                </div>
-                                <div style={{ backgroundColor: '#307BF4', height: 60, paddingRight: 20 }} >
+                                </BgImageCards>
+                                <CardInfos BgColor= {'#307BF4'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>FUROS NÃO INICIADOS</TitleBox>
-                                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
+                                        <RowIconsCards >
                                             <Number>
                                                 {quantidadeDeNaoIniciado?.length}
                                             </Number>
@@ -479,18 +460,18 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                                 )}
                                             </div>
 
-                                        </div>
+                                        </RowIconsCards>
                                     </Column>
-                                </div>
+                                </CardInfos>
                             </Row>
                             <Row  >
-                                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#996501', width: 70, height: 60 }} >
+                                <BgImageCards BgColor= {'#996501'} Padding={0} >
                                     <img src="/assets/images/furoimg.png" />
-                                </div>
-                                <div style={{ backgroundColor: '#E89E0E', height: 60, paddingRight: 20 }} >
+                                </BgImageCards>
+                                <CardInfos BgColor= {'#E89E0E'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>FUROS EM PROCESSAMENTO</TitleBox>
-                                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
+                                        <RowIconsCards >
                                             <Number>
                                                 {processamento?.length}
                                             </Number>
@@ -519,19 +500,19 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                                 )}
                                             </div>
 
-                                        </div>
+                                        </RowIconsCards>
                                     </Column>
-                                </div>
+                                </CardInfos>
                             </Row>
                             <Row  >
 
-                                <div style={{ alignItems: 'center', display: 'flex', justifyContent: 'center', backgroundColor: '#990101', width: 70, height: 60, padding: 9 }} >
+                                <BgImageCards BgColor= {'#990101'} Padding={9} >
                                     <img src="/assets/alertImage.png" />
-                                </div>
-                                <div style={{ backgroundColor: '#e8410e', height: 60, paddingRight: 20 }} >
+                                </BgImageCards>
+                                <CardInfos BgColor= {'#e8410e'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>FUROS COM OBSERVAÇÃO</TitleBox>
-                                        <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
+                                        <RowIconsCards >
                                             <Number>
                                                 {furosWithObs?.length}
                                             </Number>
@@ -559,9 +540,9 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                                 )}
                                             </div>
 
-                                        </div>
+                                        </RowIconsCards>
                                     </Column>
-                                </div>
+                                </CardInfos>
                             </Row>
                         </>
                 }
@@ -579,10 +560,30 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
 
                 </Button>
             </div>
-        </div>
+        </Column>
 
     )
 }
+const RowIconsCards = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: -10px;
+`
+const CardInfos = styled.div`
+    height: 60px;
+    padding-right: 20px;
+    background-color: ${props=>(props.BgColor)};
+`
+const BgImageCards = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: ${props=>props.BgColor};
+    width: 70px;
+    height: 60px;
+    padding: ${props=>props.Padding+'px'} ;
+`
 const Row = styled.div`
     display: flex;
     flex-direction: row; 
@@ -592,7 +593,8 @@ const Row = styled.div`
 const Column = styled.div`
     display: flex;
     flex-direction:  ${props => (props.grande ? 'column' : 'column')};
-    margin-left: 15px;
+    
+    margin-left: ${props=> (props.notMargin ? 0 : '15px')};
 `
 const TitleBox = styled.text({
     color: 'white',
