@@ -56,7 +56,7 @@ const CustomBarChart = ({ data, menuBig }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setChartWidth(menuBig ? window.screen.width-820 : window.screen.width+200); // Ajuste o tamanho conforme necessário
+      setChartWidth(menuBig ? window.screen.width - 820 : window.screen.width + 200); // Ajuste o tamanho conforme necessário
     };
 
     const handleResizeHeights = () => {
@@ -73,7 +73,15 @@ const CustomBarChart = ({ data, menuBig }) => {
   }, [menuBig]);
 
   return (
-    <BarChart width={ window.screen.width === 1920 && !menuBig? chartWidth+400 : chartWidth+80} height={chartHeight+100} data={data}>
+    <BarChart
+      width={window.screen.width < 1920 ?
+        menuBig? 700 : 900
+        :
+        menuBig? 1100 : 1250
+      }
+      height={window.screen.width < 1900 ? 350 : 400}
+      data={data}
+    >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="caixa" />
       <YAxis domain={[0, dataMax => roundUp(dataMax)]}>

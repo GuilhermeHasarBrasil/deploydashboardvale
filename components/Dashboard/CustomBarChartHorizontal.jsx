@@ -43,7 +43,7 @@ const CustomHorizontalBarChart = ({ data, maxValue, menuBig }) => {
         :
          menuBig ? chartWidth - 800 : chartWidth - 600
       }
-      height={data.length * 50 + 350} data={data} layout="vertical"
+      height={ window.screen.width>1900? data.length * 50 + 250 :  data.length * 50 + 250} data={data} layout="vertical"
     >
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis type="number" domain={[0, maxValue]} /> {/* Defina o domínio do eixo X */}
