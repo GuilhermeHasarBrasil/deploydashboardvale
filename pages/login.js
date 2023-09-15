@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { auth } from "../firebase/firebase";
 import {
-    signInWithEmailAndPassword,
+    signInWithEmailAndPassword, sendPasswordResetEmail
 } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useAuth } from "../firebase/auth";
@@ -22,14 +22,29 @@ const LoginForm = () => {
         }
     }, [authUser, isLoading]);
 
+    const [erroRecoverPassword, setErroRecoverPassword] = useState(false);
     const loginHandler = async () => {
         if (!email || !password) return;
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            setErroRecoverPassword(false)
+            await signInWithEmailAndPassword(auth, email.trim().toLowerCase(), password);
         } catch (error) {
+            setErroRecoverPassword(true)
             console.error("An error occured", error);
         }
     };
+
+    useEffect(() => {
+        if (erroRecoverPassword == true) {
+            setTimeout(() => {
+                setErroRecoverPassword(false)
+            }, 5000);
+        }
+    }, [erroRecoverPassword])
+
+    const triggerResetEmail = async () => {
+        await sendPasswordResetEmail(auth, email);
+    }
 
     return isLoading || (!isLoading && !!authUser) ? (
         <Loader />
@@ -44,10 +59,10 @@ const LoginForm = () => {
                     <text style={{ color: '#12969E', fontSize: 36, fontWeight: 'bold', textShadow: '3px 3px #000', marginLeft: 20 }} >HSD - HASAR Sample Data</text>
                 </div>
 
-                <div style={{ marginLeft: '25%', width: 600, display:'flex', flexDirection:'column', alignItems:'center' }} >
+                <div style={{ marginLeft: '25%', width: 600, display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                     <form onSubmit={(e) => e.preventDefault()}>
                         <div className="mt-10 pl-1 flex flex-col">
-                            <label style={{ color: '#12969E', fontWeight: 'bold', fontSize: 24, textShadow: '2px 2px #000', letterSpacing: 2 }} >LOGIN</label>
+                            <label style={{ color: '#12969E', fontWeight: 'bold', fontSize: 24, textShadow: '1px 1px #000',WebkitTextStroke: '0.5px  #000', letterSpacing: 2 }} >LOGIN</label>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} >
                                 <input
                                     type="email"
@@ -66,7 +81,7 @@ const LoginForm = () => {
                             </div>
                         </div>
                         <div className="mt-10 pl-1 flex flex-col">
-                            <label style={{ color: '#12969E', fontWeight: 'bold', fontSize: 24, textShadow: '2px 2px #000', letterSpacing: 2 }} >SENHA</label>
+                            <label style={{ color: '#12969E', fontWeight: 'bold', fontSize: 24, textShadow: '1px 1px #000',WebkitTextStroke: '0.5px  #000', letterSpacing: 2 }} >SENHA</label>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} >
                                 <input
                                     type="password"
@@ -85,10 +100,20 @@ const LoginForm = () => {
                             </div>
                         </div>
                         <StyledButton onClick={loginHandler}>
-                            <h3 style={{ color: 'white', fontSize: 22, fontWeight: 'bold', textShadow: '0 0 6px rgba(255, 255, 255, 0.6)' }} >Entrar</h3>
+                            <h3 style={{ color: 'white', fontSize: 25, fontWeight: 'bold', textShadow: '0 0 6px rgba(255, 255, 255, 0.6)' }} >Entrar</h3>
                         </StyledButton>
                     </form>
-                    <img src='/assets/hasarbrasillogin.png' style={{ width: 250, marginTop:40 }} />
+
+                    <button style={{ marginTop: 20 }} type="button" onClick={triggerResetEmail}>
+                        <text style={{ color: '#12969E', fontSize: 22, fontWeight: 'bold', WebkitTextStroke: '0.5px  #000', marginLeft: 0, marginTop: 40 }}>Esqueceu sua senha? Clique para recuperar</text>
+                    </button>
+                    {
+                        erroRecoverPassword ?
+                            <div style={{ backgroundColor: "#074F92", padding: 10, borderRadius: 5 }} ><text style={{ color: 'white', fontWeight: 'bold' }} >O email não está cadastrado! Verifique o email inserido.</text></div>
+                            :
+                            <></>
+                    }
+                    <img src='/assets/hasarbrasillogin.png' style={{ width: 250, marginTop: 40 }} />
 
                 </div>
             </div>
