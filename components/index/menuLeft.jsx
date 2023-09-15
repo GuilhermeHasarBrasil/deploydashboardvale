@@ -82,7 +82,7 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                     {
                         menuVisible ?
                             <ListCircleOutline
-                                color={'whitesmoke'}
+                                color={'white'}
                                 //beat
                                 title={''}
                                 height="30px"
@@ -97,7 +97,7 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
 
                             :
                             <ListCircleOutline
-                                color={'#00000'}
+                                color={'white'}
                                 beat
                                 title={''}
                                 height="40px"
@@ -139,7 +139,7 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                     {
                         menuVisible ?
                             <SettingsOutline
-                                color={'whitesmoke'}
+                                color={'white'}
                                 rotate
                                 title={''}
                                 height="30px"
@@ -152,7 +152,7 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                             <TitleOption className={menuVisible ? 'transition-opacity' : ''}>CONFIGURAÇÃO</TitleOption>
                             :
                             <SettingsOutline
-                                color={'#00000'}
+                                color={'white'}
                                 rotate
                                 title={''}
                                 height="35px"
@@ -184,13 +184,9 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                 <Resources className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
                     {
                         menuVisible ?
-                            <WarningOutline
-                                color={'whitesmoke'}
-                                shake
-                                title={''}
-                                height="30px"
-                                width="30px"
-                            /> :
+                            <img style={{ userSelect: 'none' }} src='/assets/iconuserconfig.png' />
+
+                            :
                             <></>
                     }
                     {
@@ -198,13 +194,8 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                             <TitleOption className={menuVisible ? 'transition-opacity' : ''}>ADMINISTRAÇÃO</TitleOption>
 
                             :
-                            <WarningOutline
-                                color={'#00000'}
-                                shake
-                                title={''}
-                                height="35px"
-                                width="35px"
-                            />
+                            <img style={{ userSelect: 'none' }} src='/assets/iconuserconfig.png' />
+
                     }
                 </Resources>
                 <Row onClick={() => sett('Usuário')}>
@@ -234,7 +225,7 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                             title={'deslogar'}
                             height="35px"
                             width="35px"
-                            style={{marginRight: menuVisible? -8 : 0}}
+                            style={{ marginRight: menuVisible ? -8 : 0 }}
                         />
                     </ImgContainer>
                     <Button>
@@ -243,8 +234,8 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                         )}
                     </Button>
                 </Row>
-                <text style={{color:'white', paddingTop:menuVisible? 40 : 60, marginLeft: menuVisible? 20 : 0}} >V. 1.0.0</text>
-                
+                <text style={{ color: 'white', paddingTop: menuVisible ? 40 : 60, marginLeft: menuVisible ? 20 : 0 }} >V. 1.0.0</text>
+
             </Content>
         </MenuHamburguer>
     )

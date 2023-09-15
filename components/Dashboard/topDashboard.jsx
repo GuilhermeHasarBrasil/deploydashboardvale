@@ -735,6 +735,6 @@ const ObjectItemObservacao = styled.li`
   }
 
   &:hover {
-    background-color: #08a1f3;
+    background-color: #f30808;
   }
 `;
