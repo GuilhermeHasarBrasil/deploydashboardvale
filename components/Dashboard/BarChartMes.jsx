@@ -181,25 +181,8 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
         }
     }, [numberCarrousel])
 
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         let numero = numberCarrousel + 1;
-    //         if (numero < 1) {
-    //             setNumberCarrousel(1)
-    //         }else{
-    //             setNumberCarrousel(numero)
-    //         }
-    //         if (numero > 4) {
-    //             setNumberCarrousel(1)
-    //         }else{
-    //             setNumberCarrousel(numero)
-    //         }
-    //         //setNumberCarrousel(numero)
-    //     }, 10000);
-    // }, [numberCarrousel])
-
     return (
-        <div style={{ display: 'flex', justifyContent: 'space-between', padding: 5, flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+        <Container >
             {
                 selectedDateRange?.startDate ?
                     <text style={{ color: 'black', fontSize: 18, fontWeight: 'bold', userSelect:'none' }}>
@@ -311,9 +294,18 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                     inline
                 />
             </DatePickerWrapper>
-        </div>
+        </Container>
     );
 }
+
+const Container = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+`
 
 const DatePickerWrapper = styled.div`
     display: flex;

@@ -713,6 +713,9 @@ export default function Home() {
 
                                                     }
                                                         menuBig={menuBig}
+                                                        caixasEmAndamento={caixasEmAndamento}
+                                                        caixasNaoIniciadas={caixasNaoIniciadas}
+                                                        furoSelecionado={furoSelecionado}
                                                     />
                                                 </div>
                                             </div>
