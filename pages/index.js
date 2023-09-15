@@ -628,8 +628,8 @@ export default function Home() {
                                                                     <img src="assets/value1.png" style={{ marginRight: 4, width: 50, height: 'auto' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <text style={{ fontWeight: 'bold', margin: 4 }} >QUANTIDADE DE CAIXAS FINALIZADAS</text>
-                                                                    <text style={{ fontWeight: 'bold' }} >(TOTAL DE FUROS)</text>
+                                                                    <TextFilterOption style={{ fontWeight: 'bold', margin: 4 }} >QUANTIDADE DE CAIXAS FINALIZADAS</TextFilterOption>
+                                                                    <TextFilterOption style={{ fontWeight: 'bold' }} >(TOTAL DE FUROS)</TextFilterOption>
                                                                 </div>
                                                             </div>
                                                         </FilterOption>
@@ -639,8 +639,8 @@ export default function Home() {
                                                                     <img src="assets/value2.png" style={{ marginRight: 4, width: 50, height: 'auto' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <text style={{ fontWeight: 'bold', margin: 4 }} >TEMPO DE PROCESSAMENTO DE CADA</text>
-                                                                    <text style={{ fontWeight: 'bold' }} >CAIXA POR PROCESSO</text>
+                                                                    <TextFilterOption style={{ fontWeight: 'bold', margin:4 }} >TEMPO DE PROCESSAMENTO DE CADA</TextFilterOption>
+                                                                    <TextFilterOption style={{ fontWeight: 'bold' }} >CAIXA POR PROCESSO</TextFilterOption>
                                                                 </div>
                                                             </div>
                                                         </FilterOption>
@@ -650,8 +650,8 @@ export default function Home() {
                                                                     <img src="assets/value3.png" style={{ marginRight: 4, width: 50, height: 'auto' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <text style={{ fontWeight: 'bold', margin: 4 }} >CAIXAS PROCESSADAS POR DIA</text>
-                                                                    <text style={{ fontWeight: 'bold' }} >NA SEMANA</text>
+                                                                    <TextFilterOption style={{ fontWeight: 'bold', margin: 4 }} >CAIXAS PROCESSADAS POR DIA</TextFilterOption>
+                                                                    <TextFilterOption style={{ fontWeight: 'bold' }} >NA SEMANA</TextFilterOption>
                                                                 </div>
                                                             </div>
                                                         </FilterOption>
@@ -661,8 +661,8 @@ export default function Home() {
                                                                     <img src="assets/value4.png" style={{ marginRight: 4, width: 50, height: 'auto', borderBottomWidth: 2, borderColor: '#008f83' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <text style={{ fontWeight: 'bold', margin: 4 }} >PROCESSAMENTO POR PERÍODO EM</text>
-                                                                    <text style={{ fontWeight: 'bold' }} >METROS (TODAS AS CAIXAS)</text>
+                                                                    <TextFilterOption style={{ fontWeight: 'bold', margin: 4 }} >PROCESSAMENTO POR PERÍODO EM</TextFilterOption>
+                                                                    <TextFilterOption style={{ fontWeight: 'bold' }} >METROS (TODAS AS CAIXAS)</TextFilterOption>
                                                                 </div>
                                                             </div>
                                                         </FilterOption>
@@ -681,7 +681,8 @@ export default function Home() {
                                     </Box>
                                     {
                                         furoSelecionado && value === 0 ?
-                                            <div style={{ display: 'flex', flexDirection: 'row' }} >
+                                            //aqqqqqq
+                                            <QtdCxFinalizadasContainer >
                                                 <div style={{ marginLeft: 30, marginTop: 7, display: 'flex', flexDirection: 'column' }} >
                                                     <text style={{ fontSize: 20, fontWeight: 'bold', userSelect: 'none' }} >
                                                         Quantidade de caixas finalizadas por processo
@@ -718,7 +719,7 @@ export default function Home() {
                                                         furoSelecionado={furoSelecionado}
                                                     />
                                                 </div>
-                                            </div>
+                                            </QtdCxFinalizadasContainer>
 
                                             :
                                             <></>
@@ -749,6 +750,7 @@ export default function Home() {
                                                 contagensPorDiaDespacho={contagensPorDiaDespacho}
                                                 contagensPorDiaArquivamento={contagensPorDiaArquivamento}
                                                 chipBoxes={chipBoxes}
+                                                menuBig={menuBig}
                                             />
                                             :
                                             <></>
@@ -856,6 +858,13 @@ export default function Home() {
         </main>
     );
 }
+const QtdCxFinalizadasContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    @media only screen and (max-device-width: 1679px) {
+            flex-direction: row;
+        }
+`
 
 const Container = styled.div({
     display: 'flex',
@@ -883,3 +892,10 @@ const FilterOption = styled.button`
         opacity: 0.7;
     }
 `;
+const TextFilterOption = styled.text`
+    font-size: 16px;
+    font-weight: bold;
+    @media only screen and (max-device-width: 1679px) {
+            font-size: 12px;
+        }
+`

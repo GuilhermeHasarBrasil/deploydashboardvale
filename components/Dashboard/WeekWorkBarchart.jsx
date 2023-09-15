@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import styled from 'styled-components'
 
-export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorDiaMarcacao, contagensPorDiaFotografia, contagensPorDiaDensidade, contagensPorDiaSerragem, contagensPorDiaDespacho, contagensPorDiaArquivamento, chipBoxes }) {
+export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorDiaMarcacao, contagensPorDiaFotografia, contagensPorDiaDensidade, contagensPorDiaSerragem, contagensPorDiaDespacho, contagensPorDiaArquivamento, chipBoxes, menuBig }) {
 
     const diasDaSemana = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira'];
     const [arrayDiasProcesso, setArrayDiasProcesso] = useState()
@@ -69,14 +69,30 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
         //console.log(`Milissegundos: ${milissegundos}`);
     }, [date1, date2])
 
+    const [chartHeight, setChartHeight] = useState(menuBig? 500 : 500)
+    const [chartWidth, setChartWidth] = useState(menuBig ? 500 : 500);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setChartHeight(window.screen.height); // Ajuste o tamanho conforme necessário
+            setChartWidth(window.screen.width); // Ajuste o tamanho conforme necessário
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, [menuBig]);
+
     return (
-        <div style={{ marginTop: 10, marginLeft: 100 }} >
-            <h1 style={{ marginLeft: 40, marginTop: 10, marginBottom: 5, fontSize: 20, fontWeight: 'bold', userSelect:'none' }} >Caixas finalizadas por dia da semana (por processo)</h1>
-            <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden', marginLeft: 20, marginBottom: 10 }} >
+        <div style={{ marginTop: 10, marginLeft: 40 }} >
+            <h1 style={{ marginLeft: 30, marginTop: 10, marginBottom: 5, fontSize: 20, fontWeight: 'bold', userSelect: 'none' }} >Caixas finalizadas por dia da semana (por processo)</h1>
+            <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden', marginLeft: 120, marginBottom: 10 }} >
                 {processos.map((furo, index) => (
                     <li style={{ marginLeft: 15, marginRight: 0, backgroundColor: furo.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={furo.id}>
                         <Button>
-                            <h1 style={{ color: furo.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold', userSelect:'none' }} onClick={() => sett(furo.processo, index)} >
+                            <h1 style={{ color: furo.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold', userSelect: 'none' }} onClick={() => sett(furo.processo, index)} >
                                 {furo.processo}
                             </h1>
                         </Button>
@@ -84,7 +100,7 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
                 ))}
             </ul>
             <div style={{ display: 'flex', flexDirection: 'row' }} >
-                <BarChart width={900} height={500} style={{ marginLeft: 100 }} data={arrayDiasProcesso}>
+                <BarChart width={ window.screen.width === 1920 && !menuBig ? chartWidth*2.8 : chartWidth*2.5} height={window.screen.height!==1080 ? chartHeight +100 : chartHeight+100} style={{ marginLeft: 100 }} data={arrayDiasProcesso}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="dia" />
                     <YAxis />

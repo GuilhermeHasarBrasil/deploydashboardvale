@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { InformationCircleOutline } from 'react-ionicons'
 import { SwapVerticalOutline } from 'react-ionicons'
 import { usePauseContext } from '../../contexts/PauseContext';
+import { size } from '../deviceWindow'
 
 export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoIniciado, processamento, furos, selected, chipBoxes, menuBig, dataTopDashboard, dataBarChartTodos, caixasFinalizadas, caixasEmAndamento, caixasNaoIniciadas }) {
     const [hoveredFinalizados, setHoveredFinalizados] = useState(false);
@@ -19,10 +20,10 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
     const [paused, setPaused] = useState(isPaused)
     const [time, setTime] = useState(timePlay)
 
-    useEffect(()=>{
+    useEffect(() => {
         setPaused(isPaused)
         setTime(timePlay)
-    },[selected])
+    }, [selected])
 
     useEffect(() => {
         let arrayFurosWithObs = []
@@ -212,29 +213,29 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
             }, time);
         }
     }, [optionsCaixa, paused])
- 
+
     return (
-        <Column notMargin = {true} >
-            <text style={{ fontSize: 20, marginRight: 40, fontWeight: 'bold', color: "#000f000", marginLeft: 10, display: selected !== 'Dashboard' ? 'none' : 'flex' }} >Painel de informações {optionsCaixa ? 'das caixas' : 'dos furos'}: </text>
+        <Column notMargin={true} >
+            <TitleTopDashboard selected={selected !== 'Dashboard' ? 'none' : 'flex'} >Painel de informações {optionsCaixa ? 'das caixas' : 'dos furos'}: </TitleTopDashboard>
             <div style={{ display: selected !== 'Dashboard' ? 'none' : 'flex', flexDirection: 'row', marginLeft: 10, justifyContent: 'space-between', marginTop: 0, }} >
                 {
                     optionsCaixa ?
                         <>
                             <Row  >
-                                <BgImageCards BgColor= {'#206F0D'} Padding={0}>
+                                <BgImageCards BgColor={'#206F0D'} Padding={0}>
                                     <img src="/assets/images/furoimg.png" />
                                 </BgImageCards>
-                                <CardInfos BgColor = {'#2FAB10'} >
+                                <CardInfos BgColor={'#2FAB10'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>CAIXAS PROCESSADAS</TitleBox>
                                         <RowIconsCards >
                                             <Number>
-                                                {dataBarChartTodos[3]?.processed + ' de ' + chipBoxes?.length}
+                                                {dataBarChartTodos[3]?.processed + '/' + chipBoxes?.length}
                                             </Number>
                                             <div
                                                 onMouseEnter={handleNumberMouseEnter}
                                                 onMouseLeave={handleNumberMouseLeave}
-                                                style={{ marginLeft: 20 }}
+                                                style={{ marginLeft: 0 }}
                                             >
                                                 <InformationCircleOutline
                                                     color={'#00000'}
@@ -262,10 +263,10 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                 </CardInfos>
                             </Row>
                             <Row  >
-                                <BgImageCards BgColor= {'#2760BB'} Padding={0} >
+                                <BgImageCards BgColor={'#2760BB'} Padding={0} >
                                     <img src="/assets/images/furoimg.png" />
                                 </BgImageCards>
-                                <CardInfos BgColor={ '#307BF4'} >
+                                <CardInfos BgColor={'#307BF4'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>CAIXAS NÃO INICIADAS</TitleBox>
                                         <RowIconsCards >
@@ -275,7 +276,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                             <div
                                                 onMouseEnter={handleNumberMouseEnterCaixaNaoIniciada}
                                                 onMouseLeave={handleNumberMouseLeaveCaixaNaoIniciada}
-                                                style={{ marginLeft: 20 }}
+                                                style={{ marginLeft: 0 }}
                                             >
                                                 <InformationCircleOutline
                                                     color={'#00000'}
@@ -300,7 +301,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                 </CardInfos>
                             </Row>
                             <Row  >
-                                <BgImageCards BgColor= {'#996501'} Padding={0} >
+                                <BgImageCards BgColor={'#996501'} Padding={0} >
                                     <img src="/assets/images/furoimg.png" />
                                 </BgImageCards>
                                 <CardInfos BgColor={'#E89E0E'} >
@@ -313,7 +314,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                             <div
                                                 onMouseEnter={handleNumberMouseEnterEmProcessamento}
                                                 onMouseLeave={handleNumberMouseLeaveEmProcessamento}
-                                                style={{ marginLeft: 20 }}
+                                                style={{ marginLeft: 0 }}
                                             >
                                                 <InformationCircleOutline
                                                     color={'#00000'}
@@ -340,7 +341,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                 </CardInfos>
                             </Row>
                             <Row  >
-                                <BgImageCards BgColor= {'#990101'} Padding={9} >
+                                <BgImageCards BgColor={'#990101'} Padding={9} >
                                     <img src="/assets/alertImage.png" />
                                 </BgImageCards>
                                 <CardInfos BgColor={'#e8410e'} >
@@ -353,7 +354,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                             <div
                                                 onMouseEnter={handleNumberMouseEnterComObservacao}
                                                 onMouseLeave={handleNumberMouseLeaveComObservacao}
-                                                style={{ marginLeft: 20 }}
+                                                style={{ marginLeft: 0 }}
                                             >
                                                 <InformationCircleOutline
                                                     color={'#00000'}
@@ -387,7 +388,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                 <BgImageCards BgColor={'#206F0D'} Padding={0}>
                                     <img src="/assets/images/furoimg.png" />
                                 </BgImageCards>
-                                <CardInfos BgColor= {'#2FAB10'}>
+                                <CardInfos BgColor={'#2FAB10'}>
                                     <Column grande={menuBig}>
                                         <TitleBox>FUROS PROCESSADOS</TitleBox>
                                         <RowIconsCards >
@@ -397,7 +398,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                             <div
                                                 onMouseEnter={handleNumberMouseEnter}
                                                 onMouseLeave={handleNumberMouseLeave}
-                                                style={{ marginLeft: 20 }}
+                                                style={{ marginLeft: 0 }}
                                             >
                                                 <InformationCircleOutline
                                                     color={'#00000'}
@@ -425,10 +426,10 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                 </CardInfos>
                             </Row>
                             <Row  >
-                                <BgImageCards BgColor= {'#2760BB'} Padding={0} >
+                                <BgImageCards BgColor={'#2760BB'} Padding={0} >
                                     <img src="/assets/images/furoimg.png" />
                                 </BgImageCards>
-                                <CardInfos BgColor= {'#307BF4'} >
+                                <CardInfos BgColor={'#307BF4'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>FUROS NÃO INICIADOS</TitleBox>
                                         <RowIconsCards >
@@ -438,7 +439,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                             <div
                                                 onMouseEnter={handleNumberMouseEnterNaoIniciados}
                                                 onMouseLeave={handleNumberMouseLeaveNaoIniciados}
-                                                style={{ marginLeft: 20 }}
+                                                style={{ marginLeft: 0 }}
                                             >
                                                 <InformationCircleOutline
                                                     color={'#00000'}
@@ -465,10 +466,10 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                 </CardInfos>
                             </Row>
                             <Row  >
-                                <BgImageCards BgColor= {'#996501'} Padding={0} >
+                                <BgImageCards BgColor={'#996501'} Padding={0} >
                                     <img src="/assets/images/furoimg.png" />
                                 </BgImageCards>
-                                <CardInfos BgColor= {'#E89E0E'} >
+                                <CardInfos BgColor={'#E89E0E'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>FUROS EM PROCESSAMENTO</TitleBox>
                                         <RowIconsCards >
@@ -478,7 +479,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                             <div
                                                 onMouseEnter={handleNumberMouseEnterEmProcessamento}
                                                 onMouseLeave={handleNumberMouseLeaveEmProcessamento}
-                                                style={{ marginLeft: 20 }}
+                                                style={{ marginLeft: 0 }}
                                             >
                                                 <InformationCircleOutline
                                                     color={'#00000'}
@@ -506,10 +507,10 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                             </Row>
                             <Row  >
 
-                                <BgImageCards BgColor= {'#990101'} Padding={9} >
+                                <BgImageCards BgColor={'#990101'} Padding={9} >
                                     <img src="/assets/alertImage.png" />
                                 </BgImageCards>
-                                <CardInfos BgColor= {'#e8410e'} >
+                                <CardInfos BgColor={'#e8410e'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>FUROS COM OBSERVAÇÃO</TitleBox>
                                         <RowIconsCards >
@@ -519,7 +520,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                             <div
                                                 onMouseEnter={handleNumberMouseEnterComObservacao}
                                                 onMouseLeave={handleNumberMouseLeaveComObservacao}
-                                                style={{ marginLeft: 20 }}
+                                                style={{ marginLeft: 0 }}
                                             >
                                                 <InformationCircleOutline
                                                     color={'#00000'}
@@ -548,13 +549,13 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                 }
                 <Button onClick={handleOptionChange} >
                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} >
-                        <text>Alternar<br></br>para {!optionsCaixa ? 'caixa' : 'furo'}</text>
+                        <TextButtonSwap>Alternar<br></br>para {!optionsCaixa ? 'caixa' : 'furo'}</TextButtonSwap>
                         <SwapVerticalOutline
                             color={'#00000'}
                             title={''}
-                            height="45px"
-                            width="45px"
-                            style={{ marginRight: 20 }}
+                            height="40px"
+                            width="40px"
+                            style={{ marginRight: 0 }}
                         />
                     </div>
 
@@ -564,6 +565,29 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
 
     )
 }
+const TextButtonSwap = styled.text`
+    display: flex;
+    font-weight: 600;
+    @media only screen and (max-device-width: 1679px) {
+        display: none;
+    }
+`
+
+const TitleTopDashboard = styled.text`
+    
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+    margin-right: 40px;
+    margin-left: 10px;
+    display: ${props => props.selected};
+    @media only screen and (max-device-width: 1679px) {
+        font-size:17px;
+        margin-right:-30px;
+        margin-left: 10px;
+    }
+`
+
 const RowIconsCards = styled.div`
     display: flex;
     flex-direction: row;
@@ -573,28 +597,36 @@ const RowIconsCards = styled.div`
 const CardInfos = styled.div`
     height: 60px;
     padding-right: 20px;
-    background-color: ${props=>(props.BgColor)};
+    background-color: ${props => (props.BgColor)};
 `
 const BgImageCards = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: ${props=>props.BgColor};
+    background-color: ${props => props.BgColor};
     width: 70px;
     height: 60px;
-    padding: ${props=>props.Padding+'px'} ;
+    padding: ${props => props.Padding + 'px'} ;
 `
 const Row = styled.div`
     display: flex;
     flex-direction: row; 
     //margin-left : 25px;
     margin-right: 25px;
+    @media only screen and (max-device-width: 1679px) {
+        margin-right: 2px;
+    }
 `
 const Column = styled.div`
     display: flex;
     flex-direction:  ${props => (props.grande ? 'column' : 'column')};
+    margin-left: ${props => (props.notMargin ? 0 : '15px')};
+    @media only screen and (max-device-width: 1679px) {
+            flex-direction: row;
+            margin-bottom: -6px;
+            margin-top: 2px;
+    }
     
-    margin-left: ${props=> (props.notMargin ? 0 : '15px')};
 `
 const TitleBox = styled.text({
     color: 'white',
@@ -605,20 +637,30 @@ const TitleBox = styled.text({
     WebkitTextStrokeWidth: 0.1,
     WebkitTextStrokeColor: 'black'
 })
-const Number = styled.text({
-    fontSize: 32,
-    color: 'white',
-    fontWeight: 'bold',
-    userSelect: 'none',
-})
+const Number = styled.text`
+    font-size: 32px;
+    color: white;
+    font-weight: bold;
+    user-select: none;
+    margin-right: 20px;
+    @media only screen and (max-device-width: 1679px) {
+        font-size:20px;
+        user-select: none;
+    }
+`
 const Button = styled.button`
     transition: opacity 0.3s;
     align-items: center;
     justify-content: center;
+    margin-right: 20px;
     &:hover {
         opacity: 0.2;
     }
-
+    @media only screen and (max-device-width: 1679px) {
+        width: 50px;
+        height: 50px;
+        margin-right: 0px;
+    }
 `
 const ObjectList = styled.ul`
   list-style-type: none;
@@ -660,6 +702,7 @@ height: auto; /* Defina a altura como "auto" */
   max-height: 300px; /* Defina a altura máxima desejada */  overflow-y: auto; /* Habilita a rolagem vertical se o conteúdo ultrapassar a altura */
   /* Resto do estilo... */
   border-radius: 15px; /* Adicione "px" ao valor do border-radius */
+  
 `;
 const ObjectItemProcessamento = styled.li`
   padding: 8px;

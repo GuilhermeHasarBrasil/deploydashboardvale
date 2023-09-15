@@ -233,8 +233,6 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
     //const [date1, setDate1] = useState()
     //console.log(date1+':00.000Z')
 
-    console.log(arrayDataProcess)
-
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 0, flexDirection: 'column', width: '100%' }} >
             <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop: 0, userSelect: 'none' }} >

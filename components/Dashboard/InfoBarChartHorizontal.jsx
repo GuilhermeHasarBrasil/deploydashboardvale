@@ -116,6 +116,10 @@ const Container = styled.div`
     justify-content: space-between;
     margin-top: 110px;
     margin-left: 50px;
+    @media only screen and (max-device-width: 1679px) {
+            margin-top: 30px;
+            margin-left: 50px;
+        }
 `
 const BgImageCardItem = styled.div`
     display: flex;
