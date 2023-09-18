@@ -1,7 +1,5 @@
-/* eslint-disable */
-
 import React, { useEffect, useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList } from 'recharts';
 import styled from 'styled-components'
 
 export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorDiaMarcacao, contagensPorDiaFotografia, contagensPorDiaDensidade, contagensPorDiaSerragem, contagensPorDiaDespacho, contagensPorDiaArquivamento, chipBoxes, menuBig }) {
@@ -85,6 +83,19 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
         };
     }, [menuBig]);
 
+    const renderCustomizedLabel = (props) => {
+        const { x, y, width, height, value } = props;
+        const radius = 10;
+      
+        return (
+          <g>
+            <text style={{fontWeight:'bold', fontSize:20}} x={x + width / 2} y={y - radius} fill="#008F83" textAnchor="middle" dominantBaseline="middle">
+              {value+' caixas'}
+            </text>
+          </g>
+        );
+      };
+
     return (
         <div style={{ marginTop: 10, marginLeft: 40 }} >
             <h1 style={{ marginLeft: 30, marginTop: 10, marginBottom: 5, fontSize: 20, fontWeight: 'bold', userSelect: 'none' }} >Caixas finalizadas por dia da semana (por processo)</h1>
@@ -103,10 +114,12 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
                 <BarChart width={ window.screen.width === 1920 && !menuBig ? chartWidth*2.8 : chartWidth*2} height={window.screen.height!==1080 ? chartHeight-30 : chartHeight} style={{ marginLeft: 100 }} data={arrayDiasProcesso}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="dia" />
-                    <YAxis />
+                    <YAxis type="number" domain={[0, dataMax=>dataMax+2]} />
                     <Tooltip />
                     <Legend />
-                    <Bar dataKey="Quantidade de caixas processadas" fill="#008F83" />
+                    <Bar dataKey="Quantidade de caixas processadas" fill="#008F83" >
+                        <LabelList dataKey="Quantidade de caixas processadas" content={renderCustomizedLabel} />
+                    </Bar>
                 </BarChart>
                 {/* <div style={{ display: 'flex', flexDirection: 'column' }} >
                     <input
@@ -131,20 +144,6 @@ const Button = styled.button`
     transition: opacity 0.3s;
     align-items: center;
     justify-content: center;
-    &:hover {
-        opacity: 0.2;
-    }
-
-`
-
-const BgIcon = styled.button`
-    transition: opacity 0.3s;
-    height: 45px;
-    width: 45px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background-color:'white';
     &:hover {
         opacity: 0.2;
     }
