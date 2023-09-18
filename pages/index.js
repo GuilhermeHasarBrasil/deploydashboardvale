@@ -176,6 +176,7 @@ export default function Home() {
         }
     }, [chipBoxes, furoSelecionado, furos])
 
+    // info furos top dashboard
     useEffect(() => {
         const quantidadeConferidos = furos.filter(furo => furo?.conferido === true)
         const quantidadeFinalizado = furos.filter(furo => furo?.finalizado === true)
@@ -347,25 +348,25 @@ export default function Home() {
                 name: 'Conferência',
                 processed: AllChipBoxesFiltradosConferencia?.length,
                 total: chipBoxes?.length,
-                totalteste: AllChipBoxesFiltradosConferencia?.length / chipBoxes?.length * 100
+                totalteste: AllChipBoxesFiltradosConferencia?.length / chipBoxes?.length
             },
             {
                 name: 'Marcação',
                 processed: AllChipBoxesFiltradosMarcacao?.length,
                 total: chipBoxes?.length,
-                totalteste: AllChipBoxesFiltradosMarcacao?.length / chipBoxes?.length * 100
+                totalteste: AllChipBoxesFiltradosMarcacao?.length / chipBoxes?.length
             },
             {
                 name: 'Fotografia',
                 processed: AllChipBoxesFiltradosFotografia?.length,
                 total: chipBoxes?.length,
-                totalteste: AllChipBoxesFiltradosFotografia?.length / chipBoxes?.length * 100
+                totalteste: AllChipBoxesFiltradosFotografia?.length / chipBoxes?.length
             },
             {
                 name: 'Arquivamento',
                 processed: AllChipBoxesFiltradosArquivamento?.length,
                 total: chipBoxes?.length,
-                totalteste: AllChipBoxesFiltradosArquivamento?.length / chipBoxes?.length * 100
+                totalteste: AllChipBoxesFiltradosArquivamento?.length / chipBoxes?.length
             },
         ]);
 
