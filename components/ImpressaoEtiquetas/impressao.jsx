@@ -106,17 +106,17 @@ export default function PrintLabel({ furoSelecionado, chipBoxesInternos, furos, 
         <Container>
             {
                 selectedTipoImpressao.length>4 ?
-                    <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione
+                    <text >Selecione
                         {selectedTipoImpressao == 'Caixa (Chip_Box)' || selectedTipoImpressao === 'Amostra (Sample_Bag)' ?
                             ' ' + 'o intervalo da impressão de etiquetas de ' + selectedTipoImpressao + ' '
                             :
                             selectedTipoImpressao === 'Caixa (White_Box)' || selectedTipoImpressao === 'Palete' ?
-                                ' ' + `a etiqueta perdida do(a) ${selectedTipoImpressao}` + ' '
+                                ' ' + `a etiqueta do(a) ${selectedTipoImpressao}` + ' '
                                 :
                                 ''
                         }
                         do furo {furoSelecionado.furo}
-                    </TitleText>
+                    </text>
                     :
                     <TitleText style={{ fontWeight: '700', fontSize: 25 }} >Selecione o tipo de etiqueta que se deseja imprimir</TitleText>
 
@@ -252,7 +252,7 @@ export default function PrintLabel({ furoSelecionado, chipBoxesInternos, furos, 
                                     </motion.div>
                             }
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', width: '100%', marginTop: '3%' }} >
+                        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', width: '80%', marginTop: '3%' }} >
                             <Select
                                 styles={{
                                     control: (baseStyles, state) => ({
@@ -439,16 +439,16 @@ const Button2 = styled.button`
 `
 
 const TitleText = styled.text`
-    
-
+    font-weight: 700;
+    font-size: 16px;
 `
 const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 70vw;
-    margin-left: 10vw;
-    margin-right: 10vw;
+    width: 70%;
+    //margin-left: 10vw;
+    //margin-right: 10vw;
     margin-top: 6vh;
     
 `

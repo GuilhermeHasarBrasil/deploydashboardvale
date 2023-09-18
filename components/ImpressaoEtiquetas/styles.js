@@ -1,7 +1,7 @@
 
 export const styles = ({
   etiquetaContainer: {
-    width: '100%',
+    width: '90%',
     display: 'flex',
     alignItems: 'center',
     

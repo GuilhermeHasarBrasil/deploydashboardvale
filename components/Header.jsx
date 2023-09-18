@@ -15,7 +15,7 @@ export default function Header({ onClick, authUser }) {
                     height="27px"
                     width="27px"
                 />
-                <h1 style={{ color: 'white', fontSize: 30, marginLeft: 10, marginRight: 200, fontWeight:'bold' }} >
+                <h1 style={{ color: 'white', fontSize: 30, marginLeft: 10, marginRight: 200, fontWeight:'normal' }} >
                     HSD - HASAR Sample Data
                 </h1>
             </Title>

@@ -438,7 +438,7 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                 multi={false}
             />
 
-            <ul style={{ display: 'flex', flexDirection: 'row', marginTop: '2%' }}>
+            <ul style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' , marginTop: '2%' }}>
                 {processos.map((furo, index) => (
                     <li
                         style={{
@@ -446,7 +446,8 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
                             marginRight: 0,
                             backgroundColor: selectedProcesses.includes(furo.processo) ? '#008f83' : '#c4c4c4',
                             padding: 8,
-                            borderRadius: 10
+                            borderRadius: 10,
+                            marginTop:10
                         }}
                         key={index}
                     >

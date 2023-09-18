@@ -50,7 +50,7 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
         >
             {menuVisible ? (
                 <div style={{ padding: 20 }}>
-                    <img style={{ userSelect: 'none', width: 220, }} src={logoSrc} width={50} height={50} />
+                    <img style={{ userSelect: 'none', width: window.screen.width<1900? 180 : 220, }} src={logoSrc} width={50} height={50} />
                 </div>
             ) : (
                 <div style={{ padding: 0 }}>
@@ -85,8 +85,8 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                                 color={'white'}
                                 //beat
                                 title={''}
-                                height="30px"
-                                width="30px"
+                                height= { window.screen.width<1900? '30px' : "30px"}
+                                width= { window.screen.width<1900? '30px' : "30px"}
                             />
                             :
                             <></>
@@ -100,8 +100,8 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                                 color={'white'}
                                 beat
                                 title={''}
-                                height="40px"
-                                width="40px"
+                                height= { window.screen.width<1900? '30px' : "35px"}
+                                width= { window.screen.width<1900? '30px' : "35px"}
                             />
                     }
                 </Resources>
@@ -142,8 +142,8 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                                 color={'white'}
                                 rotate
                                 title={''}
-                                height="30px"
-                                width="30px"
+                                height= { window.screen.width<1900? '25px' : "30px"}
+                                width= { window.screen.width<1900? '25px' : "30px"}
                             /> :
                             <></>
                     }
@@ -155,8 +155,8 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                                 color={'white'}
                                 rotate
                                 title={''}
-                                height="35px"
-                                width="35px"
+                                height= { window.screen.width<1900? '28px' : "35px"}
+                                width= { window.screen.width<1900? '28px' : "35px"}
                             />
                     }
 
@@ -250,15 +250,14 @@ const MenuHamburguer = styled.div`
 const Content = styled.div({
     display: 'flex',
     flexDirection: 'column',
-    marginTop: 2
+    marginTop: 2,
 })
 
 const ImgContainer = styled.div`
-    width: 35;
-    height: 35;
+    width: 30px;
+    height: 30px;
     padding: 4px; 
     border-radius: 10px;
-    margin-left: -5px;
     background-color: ${props => (props.selected ? '#3699FF' : '')};
     @media only screen and (max-device-width: 1679px) {
         width: 30px;

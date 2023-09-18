@@ -277,10 +277,10 @@ export default function Mensagens({ chipBoxes, furos }) {
                 </Button>
 
             </div>
-            <ul style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', overflowX: 'auto', overflow: 'hidden', marginTop: '3%' }} >
+            <ul style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', overflowX: 'auto', overflow: 'hidden', marginTop: '2%' }} >
                 {processos.map((processOption, index) => (
                     <Button>
-                        <li style={{ marginLeft: 10, marginRight: 0, backgroundColor: processOption.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10, height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center' }} key={processOption.id}>
+                        <li style={{ marginLeft: 10, marginRight: 0, marginTop:10, backgroundColor: processOption.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10, height: 60, display: 'flex', alignItems: 'center', justifyContent: 'center' }} key={processOption.id}>
                             <h1 style={{ color: processOption.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold', userSelect: 'none' }} onClick={() => sett(processOption.processo, index)} >
                                 {processOption.processo}
                             </h1>

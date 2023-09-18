@@ -25,7 +25,7 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
 
         <div style={{ marginTop: selected === 'Impressão Etiquetas' || selected === 'Dados Processamento' ? 20 : 0 , display: 'flex', flexDirection: 'row', display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' || selected == 'Parâmetros' ? 'none' : 'flex', alignItems:'center' }} >
             <text style={{fontSize:20, marginRight:40, fontWeight:'bold', color:"#000f000", marginLeft:10,display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex',}} >Furos: </text>
-            <div style={{ maxWidth:'95%', display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 0, }} >
+            <div style={{ maxWidth:'90%', display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 0, }} >
                 <BgIcon>
                     <ArrowBackCircleSharp
                         color={'#6b6b6b'}
@@ -40,7 +40,7 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
 
                     {
                         selected === 'Dashboard' ?
-                            <li style={{ marginLeft: 50, marginRight: 50, backgroundColor: 'TODOS' == selectedItem ? '#008f83' : 'white', padding: 8, borderRadius: 10 }}>
+                            <li style={{ marginLeft: 40, marginRight: 40, backgroundColor: 'TODOS' == selectedItem ? '#008f83' : 'white', padding: 8, borderRadius: 10 }}>
                                 <Button>
                                     <h1 style={{ color: 'TODOS' !== selectedItem ? 'black' : '#f3c108', userSelect: 'none', width: 120, fontWeight: 'bold' }} onClick={() => sett('TODOS', 99999999)} >
                                         TODOS

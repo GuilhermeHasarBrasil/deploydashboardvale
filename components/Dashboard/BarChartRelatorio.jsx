@@ -75,9 +75,9 @@ const CustomBarChart = ({ data, menuBig }) => {
   return (
     <BarChart
       width={window.screen.width < 1920 ?
-        menuBig? 700 : 900
+        menuBig? 800 : 1000
         :
-        menuBig? 1100 : 1250
+        menuBig? 1150 : 1350
       }
       height={window.screen.width < 1900 ? 350 : 400}
       data={data}

@@ -216,8 +216,8 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
 
     return (
         <Column notMargin={true} >
-            <TitleTopDashboard selected={selected !== 'Dashboard' ? 'none' : 'flex'} >Painel de informações {optionsCaixa ? 'das caixas' : 'dos furos'}: </TitleTopDashboard>
-            <div style={{ display: selected !== 'Dashboard' ? 'none' : 'flex', flexDirection: 'row', marginLeft: 10, justifyContent: 'space-between', marginTop: 0, }} >
+            <TitleTopDashboard selected={selected !== 'Dashboard' ? 'none' : 'flex'} >{ window.screen.width<1900? 'Informações' : 'Painel de informações '} {optionsCaixa ? 'das caixas' : 'dos furos'}: </TitleTopDashboard>
+            <div style={{ display: selected !== 'Dashboard' ? 'none' : 'flex', flexDirection: 'row', marginLeft: window.screen.width< 1900? -10 : 10, justifyContent: 'space-between', marginTop: 0, }} >
                 {
                     optionsCaixa ?
                         <>
@@ -567,7 +567,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
 }
 const TextButtonSwap = styled.text`
     display: flex;
-    font-weight: 600;
+    font-weight: 700;
     @media only screen and (max-device-width: 1679px) {
         display: none;
     }
@@ -583,7 +583,7 @@ const TitleTopDashboard = styled.text`
     display: ${props => props.selected};
     @media only screen and (max-device-width: 1679px) {
         font-size:17px;
-        margin-right:-30px;
+       // margin-right:-30px;
         margin-left: 10px;
     }
 `
@@ -593,11 +593,17 @@ const RowIconsCards = styled.div`
     flex-direction: row;
     align-items: center;
     margin-top: -10px;
+    @media only screen and (max-device-width: 1679px) {
+        flex-direction: row;
+    }
 `
 const CardInfos = styled.div`
     height: 60px;
     padding-right: 20px;
     background-color: ${props => (props.BgColor)};
+    @media only screen and (max-device-width: 1679px) {
+        height: 50px;
+    }
 `
 const BgImageCards = styled.div`
     display: flex;
@@ -607,6 +613,10 @@ const BgImageCards = styled.div`
     width: 70px;
     height: 60px;
     padding: ${props => props.Padding + 'px'} ;
+    @media only screen and (max-device-width: 1679px) {
+        width: 60px;
+        height: 50px;
+    }
 `
 const Row = styled.div`
     display: flex;
@@ -620,23 +630,24 @@ const Row = styled.div`
 const Column = styled.div`
     display: flex;
     flex-direction:  ${props => (props.grande ? 'column' : 'column')};
-    margin-left: ${props => (props.notMargin ? 0 : '15px')};
+    margin-left: ${props => (props.notMargin ? '15px' : '15px')};
     @media only screen and (max-device-width: 1679px) {
-            flex-direction: row;
+            flex-direction: column;
             margin-bottom: -6px;
             margin-top: 2px;
     }
     
 `
-const TitleBox = styled.text({
-    color: 'white',
-    fontSize: 17,
-    fontWeight: 'bold',
-    userSelect: 'none',
+const TitleBox = styled.div`
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    user-select: none;
+    @media only screen and (max-device-width: 1679px) {
+        font-size: 15px;
+    }
+`
 
-    WebkitTextStrokeWidth: 0.1,
-    WebkitTextStrokeColor: 'black'
-})
 const Number = styled.text`
     font-size: 32px;
     color: white;
@@ -644,8 +655,10 @@ const Number = styled.text`
     user-select: none;
     margin-right: 20px;
     @media only screen and (max-device-width: 1679px) {
-        font-size:20px;
+        font-size:19px;
         user-select: none;
+        margin-right: 0px;
+        margin-top: 10px;
     }
 `
 const Button = styled.button`
