@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Dashboard VALE
+# Dashboard VALE
 
 Modo de desenvolvimento:
 
@@ -14,7 +14,7 @@ pnpm dev
 
 Acesse [http://localhost:3000](http://localhost:3000) no navegador.
 
-## FIGMA
+# FIGMA
 
 Acesso ao [figma](https://www.figma.com/file/akb9vQu9u5KiPGZHzR6kUI/Tablet%2FWEB---HSD?type=design&node-id=53-2&mode=design&t=VUxVzj41KPM4hlFF-0)
 
@@ -28,9 +28,9 @@ Na página "Index", são feitos buscas por ordem alfabética dos *furos* (orderb
 
 Ainda na página "Index", são feitos filtros de informações para alguns componentes da aplicação. Outros filtros também foram feitos em componentes individualmente, mas os principais estão presentes na page index (/).
 
-## Estrutura do código:
+# Estrutura do código:
 
-## Componentes: 
+# Componentes: 
 
 ### Todas as opções do menu lateral são nomeadas em pastas levando o nome da opção. O mesmo acontece na seleção dessa opção ao ser visualizada no index. Abaixo, eles são listados:
 
@@ -88,13 +88,13 @@ Permite verificar quais caixas passaram do tempo de execução determinado. Esse
 
 desabilitado, ignorar.
 
-## Contextos
+# Contextos
 
 ### contexts/BrowserPrintContext.jsx e PauseContext.js
 
 Contexto da impressora (impressora conectada e função de impressão) e contexto do pause (usado em parâmetros para controlar a alternância entre as informações de furo e caixas no topDashboard). Permite acesso a essas funções e variáveis por toda a aplicação.
 
-## Configuração do banco de dados firebase firestore
+# Configuração do banco de dados firebase firestore
 
 ### firebase/auth.s: 
 
@@ -104,17 +104,17 @@ Arquivo para configuração do usuário logado.
 
 Arquivo para configuração do banco de dados, não alterar.
 
-## hooks/sendMessage.js
+# hooks/sendMessage.js
 
 SendMessage.js -> Por enquanto, o único hook é para o envio de mensagens do componente MensagensAvisos. Faz a comunicação com a api /api/message.js
 
-## Comunicação socket para impressão
+# Comunicação socket para impressão
 
 ### impressao/printModule.ts: 
 
 Arquivo antigo para impressão por websocket. Desabilitado por agora, pois optou-se pela impressão com o [Zebra Browser Printer](https://www.zebra.com/content/dam/zebra_new_ia/en-us/solutions-verticals/product/Software/Printer%20Software/Link-OS/browser-print/zebra-browser-print-windows-v132489.exe).
 
-## API
+# API
 
 ### pages/api : 
 
