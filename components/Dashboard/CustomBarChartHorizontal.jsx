@@ -23,7 +23,7 @@ const CustomHorizontalBarChart = ({ data, maxValue, menuBig }) => {
     return (
       <g>
         <text style={{fontWeight:'bold', fontSize:20}} x={x + width / 2} y={y - radius} fill="#131212" >
-          { value === 1 ? '100% concluído' : 'Percentual concluído: '+Math.round(value)+'%'}
+          { value === 1 ? '100% concluído' : 'Percentual concluído: '+Math.round(value.toFixed(2)*100)+'%'}
         </text>
       </g>
     );
