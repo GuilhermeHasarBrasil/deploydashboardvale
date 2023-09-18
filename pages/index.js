@@ -179,31 +179,25 @@ export default function Home() {
                 name: 'Conferência',
                 processed: filtroConferencia[furoSelecionado?.index]?.length,
                 total: chipBoxesInternos[furoSelecionado?.index]?.length,
+                totalteste: filtroConferencia[furoSelecionado?.index]?.length /chipBoxesInternos[furoSelecionado?.index]?.length
             },
             {
                 name: 'Marcação',
                 processed: filtroMarcacao[furoSelecionado?.index]?.length,
                 total: chipBoxesInternos[furoSelecionado?.index]?.length,
+                totalteste: filtroMarcacao[furoSelecionado?.index]?.length/chipBoxesInternos[furoSelecionado?.index]?.length
             },
             {
                 name: 'Fotografia',
                 processed: filtroFotografia[furoSelecionado?.index]?.length,
                 total: chipBoxesInternos[furoSelecionado?.index]?.length,
+                totalteste: filtroFotografia[furoSelecionado?.index]?.length /chipBoxesInternos[furoSelecionado?.index]?.length
             },
-            // {
-            //     name: 'Densidade',
-            //     processed: filtroDensidade[furoSelecionado?.index]?.length,
-            //     total: chipBoxesInternos[furoSelecionado?.index]?.length,
-            // },
-            // {
-            //     name: 'Serragem',
-            //     processed: filtroSerragem[furoSelecionado?.index]?.length,
-            //     total: chipBoxesInternos[furoSelecionado?.index]?.length,
-            // },
             {
                 name: 'Arquivamento',
                 processed: filtroArquivamento[furoSelecionado?.index]?.length,
                 total: chipBoxesInternos[furoSelecionado?.index]?.length,
+                totalteste: filtroArquivamento[furoSelecionado?.index]?.length/chipBoxesInternos[furoSelecionado?.index]?.length
             },
         ]);
     }, [furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem])
@@ -345,21 +339,25 @@ export default function Home() {
                 name: 'Conferência',
                 processed: AllChipBoxesFiltradosConferencia?.length,
                 total: chipBoxes?.length,
+                totalteste: AllChipBoxesFiltradosConferencia?.length /chipBoxes?.length *100
             },
             {
                 name: 'Marcação',
                 processed: AllChipBoxesFiltradosMarcacao?.length,
                 total: chipBoxes?.length,
+                totalteste: AllChipBoxesFiltradosMarcacao?.length /chipBoxes?.length *100
             },
             {
                 name: 'Fotografia',
                 processed: AllChipBoxesFiltradosFotografia?.length,
                 total: chipBoxes?.length,
+                totalteste: AllChipBoxesFiltradosFotografia?.length /chipBoxes?.length *100
             },
             {
                 name: 'Arquivamento',
                 processed: AllChipBoxesFiltradosArquivamento?.length,
                 total: chipBoxes?.length,
+                totalteste:  AllChipBoxesFiltradosArquivamento?.length /chipBoxes?.length *100
             },
         ]);
 
@@ -683,14 +681,14 @@ export default function Home() {
                                         furoSelecionado && value === 0 ?
                                             //aqqqqqq
                                             <QtdCxFinalizadasContainer >
-                                                <div style={{ marginLeft: 30, marginTop: 7, display: 'flex', flexDirection: 'column' }} >
+                                                <div style={{ marginLeft: 20, marginTop: 7, display: 'flex', flexDirection: 'column' }} >
                                                     <text style={{ fontSize: 20, fontWeight: 'bold', userSelect: 'none' }} >
                                                         Quantidade de caixas finalizadas por processo
                                                     </text>
-                                                    <text style={{ margin: 5, marginLeft: 55, userSelect: 'none' }} >
+                                                    <text style={{ margin: 5, fontWeight:'bold', marginLeft: 55, userSelect: 'none' }} >
                                                         Total {<SquareIcon style={{ color: '#ef3a25', userSelect: 'none' }} />}
                                                     </text>
-                                                    <text style={{ margin: 5, userSelect: 'none' }} >
+                                                    <text style={{ margin: 5, fontWeight:'bold', userSelect: 'none' }} >
                                                         Finalizadas {<SquareIcon style={{ color: '#008f83', userSelect: 'none' }} />}
                                                     </text>
                                                     <CustomHorizontalBarChart

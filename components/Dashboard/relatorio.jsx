@@ -55,7 +55,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             const dataArray = array;
             const conferenciaData = dataArray?.map(item => ({
                 'id': item.id,
-                'Tempo (segundos)': item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? (item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds) / 60 : 0,
+                'Tempo ': item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? (item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds) / 60 : 0,
                 'Tempo': segundosParaHHMMSS(item.processos.conferencia.ent && item.processos.conferencia.sai?.seconds ? (item.processos.conferencia.sai.seconds - item.processos.conferencia.ent?.seconds) / 1 : 0),
                 'caixa': item.cx,
                 'user': item.processos.conferencia.user ? item.processos.conferencia.user : '-',
@@ -68,7 +68,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             const dataArray = array;
             const marcacaoData = dataArray?.map(item => ({
                 'id': item.id,
-                'Tempo (segundos)': item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds) / 60 : 0,
+                'Tempo ': item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds) / 60 : 0,
                 'Tempo': segundosParaHHMMSS(item.processos.marcacao.ent ? (item.processos.marcacao.sai?.seconds - item.processos.marcacao.ent.seconds) / 1 : 0),
                 'caixa': item.cx,
                 'user': item.processos.marcacao.user ? item.processos.marcacao.user : '-',
@@ -81,7 +81,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             const dataArray = array;
             const fotografiaData = dataArray?.map(item => ({
                 'id': item.id,
-                'Tempo (segundos)': item.processos.fotografia.ent ? (item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds) / 60 : 0,
+                'Tempo ': item.processos.fotografia.ent ? (item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds) / 60 : 0,
                 'Tempo': segundosParaHHMMSS(item.processos.fotografia.ent ? (item.processos.fotografia.sai?.seconds - item.processos.fotografia.ent.seconds) / 1 : 0),
                 'caixa': item.cx,
                 'user': item.processos.fotografia.user ? item.processos.fotografia.user : '-',
@@ -94,7 +94,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             const dataArray = array
             const arquivamentoData = dataArray?.map(item => ({
                 'id': item.id,
-                'Tempo (segundos)': item.processos.arquivamento.ent ? (item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds) / 60 : 0,
+                'Tempo ': item.processos.arquivamento.ent ? (item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds) / 60 : 0,
                 'Tempo': segundosParaHHMMSS(item.processos.arquivamento.ent ? (item.processos.arquivamento.sai?.seconds - item.processos.arquivamento.ent.seconds) / 1 : 0),
                 'caixa': item.cx,
                 'user': item.processos.arquivamento.user ? item.processos.arquivamento.user : '-',
@@ -261,7 +261,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
                     <div style={{ marginLeft: '-2%', display: 'flex', flexDirection: 'row' }} >
                         <div>
                             <CustomBarChart data={selectedDateRange ? arrayDataProcessDateFilter : arrayDataProcess} menuBig={menuBig} />
-                            <text style={{ color: "#777777", fontSize: 20, fontWeight: 'bold', marginLeft:30,  }} >Caixas</text>
+                            {/* <text style={{ color: "#777777", fontSize: 20, fontWeight: 'bold', marginLeft:30,  }} >Caixas</text> */}
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                             <text style={{ marginLeft: 15, fontWeight: 'bold' }} >Filtrar por data</text>
