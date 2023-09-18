@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import { InformationCircleOutline } from 'react-ionicons'
 import { SwapVerticalOutline } from 'react-ionicons'
 import { usePauseContext } from '../../contexts/PauseContext';
-import { size } from '../deviceWindow'
 
 export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoIniciado, processamento, furos, selected, chipBoxes, menuBig, dataTopDashboard, dataBarChartTodos, caixasFinalizadas, caixasEmAndamento, caixasNaoIniciadas }) {
     const [hoveredFinalizados, setHoveredFinalizados] = useState(false);

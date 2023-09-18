@@ -31,6 +31,9 @@ export default function Home() {
     const router = useRouter();
     const [furos, setFuros] = useState([])
     const [chipBoxes, setChipBoxes] = useState([])
+    const [whiteBoxes, setWhiteBoxes] = useState([])
+    const [paletes, setPaletes] = useState([])
+
     const [chipBoxesInternos, setChipBoxesInternos] = useState([])
     const [selected, setSelected] = useState('Dashboard')
     const [furoSelecionado, setFuroSelecionado] = useState()
@@ -54,8 +57,20 @@ export default function Home() {
     const [contagensPorDiaDespacho, setContagensPorDiaDespacho] = useState({});
     const [contagensPorDiaArquivamento, setContagensPorDiaArquivamento] = useState({});
 
-    const [whiteBoxes, setWhiteBoxes] = useState([])
-    const [paletes, setPaletes] = useState([])
+    const [dataBarChartTodos, setDataBarChartTodos] = useState()
+    const [dataTopDashboard, setDataTopDashboard] = useState()
+    const [caixasFinalizadas, setCaixasFinalizadas] = useState()
+    const [caixasEmAndamento, setCaixasEmAndamento] = useState()
+    const [caixasNaoIniciadas, setCaixasNaoIniciadas] = useState()
+
+    const [dataBarChart, setDataBarChart] = useState([])
+
+    const [filtroConferenciaEnt, setFiltroConferenciaEnt] = useState([])
+    const [filtroMarcacaoEnt, setFiltroMarcacaoEnt] = useState([])
+    const [filtroFotografiaEnt, setFiltroFotografiaEnt] = useState([])
+    const [filtroDensidadeEnt, setFiltroDensidadeEnt] = useState([])
+    const [filtroSerragemEnt, setFiltroSerragemEnt] = useState([])
+    const [filtroArquivamentoEnt, setFiltroArquivamentoEnt] = useState([])
 
     useEffect(() => {
         if (!isLoading && !authUser) {
@@ -172,41 +187,34 @@ export default function Home() {
         setQuantidadeNaoIniciado(quantidadeDeNaoIniciado)
     }, [furos])
 
-    const [dataBarChart, setDataBarChart] = useState([])
     useEffect(() => {
         setDataBarChart([
             {
                 name: 'Conferência',
                 processed: filtroConferencia[furoSelecionado?.index]?.length,
                 total: chipBoxesInternos[furoSelecionado?.index]?.length,
-                totalteste: filtroConferencia[furoSelecionado?.index]?.length /chipBoxesInternos[furoSelecionado?.index]?.length
+                totalteste: filtroConferencia[furoSelecionado?.index]?.length / chipBoxesInternos[furoSelecionado?.index]?.length
             },
             {
                 name: 'Marcação',
                 processed: filtroMarcacao[furoSelecionado?.index]?.length,
                 total: chipBoxesInternos[furoSelecionado?.index]?.length,
-                totalteste: filtroMarcacao[furoSelecionado?.index]?.length/chipBoxesInternos[furoSelecionado?.index]?.length
+                totalteste: filtroMarcacao[furoSelecionado?.index]?.length / chipBoxesInternos[furoSelecionado?.index]?.length
             },
             {
                 name: 'Fotografia',
                 processed: filtroFotografia[furoSelecionado?.index]?.length,
                 total: chipBoxesInternos[furoSelecionado?.index]?.length,
-                totalteste: filtroFotografia[furoSelecionado?.index]?.length /chipBoxesInternos[furoSelecionado?.index]?.length
+                totalteste: filtroFotografia[furoSelecionado?.index]?.length / chipBoxesInternos[furoSelecionado?.index]?.length
             },
             {
                 name: 'Arquivamento',
                 processed: filtroArquivamento[furoSelecionado?.index]?.length,
                 total: chipBoxesInternos[furoSelecionado?.index]?.length,
-                totalteste: filtroArquivamento[furoSelecionado?.index]?.length/chipBoxesInternos[furoSelecionado?.index]?.length
+                totalteste: filtroArquivamento[furoSelecionado?.index]?.length / chipBoxesInternos[furoSelecionado?.index]?.length
             },
         ]);
     }, [furoSelecionado, filtroArquivamento, filtroConferencia, filtroDensidade, filtroFotografia, filtroMarcacao, filtroSerragem])
-
-    const [dataBarChartTodos, setDataBarChartTodos] = useState()
-    const [dataTopDashboard, setDataTopDashboard] = useState()
-    const [caixasFinalizadas, setCaixasFinalizadas] = useState()
-    const [caixasEmAndamento, setCaixasEmAndamento] = useState()
-    const [caixasNaoIniciadas, setCaixasNaoIniciadas] = useState()
 
     useEffect(() => {
 
@@ -339,25 +347,25 @@ export default function Home() {
                 name: 'Conferência',
                 processed: AllChipBoxesFiltradosConferencia?.length,
                 total: chipBoxes?.length,
-                totalteste: AllChipBoxesFiltradosConferencia?.length /chipBoxes?.length *100
+                totalteste: AllChipBoxesFiltradosConferencia?.length / chipBoxes?.length * 100
             },
             {
                 name: 'Marcação',
                 processed: AllChipBoxesFiltradosMarcacao?.length,
                 total: chipBoxes?.length,
-                totalteste: AllChipBoxesFiltradosMarcacao?.length /chipBoxes?.length *100
+                totalteste: AllChipBoxesFiltradosMarcacao?.length / chipBoxes?.length * 100
             },
             {
                 name: 'Fotografia',
                 processed: AllChipBoxesFiltradosFotografia?.length,
                 total: chipBoxes?.length,
-                totalteste: AllChipBoxesFiltradosFotografia?.length /chipBoxes?.length *100
+                totalteste: AllChipBoxesFiltradosFotografia?.length / chipBoxes?.length * 100
             },
             {
                 name: 'Arquivamento',
                 processed: AllChipBoxesFiltradosArquivamento?.length,
                 total: chipBoxes?.length,
-                totalteste:  AllChipBoxesFiltradosArquivamento?.length /chipBoxes?.length *100
+                totalteste: AllChipBoxesFiltradosArquivamento?.length / chipBoxes?.length * 100
             },
         ]);
 
@@ -518,13 +526,6 @@ export default function Home() {
         setValue(option);
     };
 
-    const [filtroConferenciaEnt, setFiltroConferenciaEnt] = useState([])
-    const [filtroMarcacaoEnt, setFiltroMarcacaoEnt] = useState([])
-    const [filtroFotografiaEnt, setFiltroFotografiaEnt] = useState([])
-    const [filtroDensidadeEnt, setFiltroDensidadeEnt] = useState([])
-    const [filtroSerragemEnt, setFiltroSerragemEnt] = useState([])
-    const [filtroArquivamentoEnt, setFiltroArquivamentoEnt] = useState([])
-
     useEffect(() => {
         if (chipBoxes) {
             const chipboxesPorFuro = {};
@@ -637,7 +638,7 @@ export default function Home() {
                                                                     <img src="assets/value2.png" style={{ marginRight: 4, width: 50, height: 'auto' }} />
                                                                 </div>
                                                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <TextFilterOption style={{ fontWeight: 'bold', margin:4 }} >TEMPO DE PROCESSAMENTO DE CADA</TextFilterOption>
+                                                                    <TextFilterOption style={{ fontWeight: 'bold', margin: 4 }} >TEMPO DE PROCESSAMENTO DE CADA</TextFilterOption>
                                                                     <TextFilterOption style={{ fontWeight: 'bold' }} >CAIXA POR PROCESSO</TextFilterOption>
                                                                 </div>
                                                             </div>
@@ -685,10 +686,10 @@ export default function Home() {
                                                     <text style={{ fontSize: 20, fontWeight: 'bold', userSelect: 'none' }} >
                                                         Quantidade de caixas finalizadas por processo
                                                     </text>
-                                                    <text style={{ margin: 5, fontWeight:'bold', marginLeft: 55, userSelect: 'none' }} >
+                                                    <text style={{ margin: 5, fontWeight: 'bold', marginLeft: 55, userSelect: 'none' }} >
                                                         Total {<SquareIcon style={{ color: '#ef3a25', userSelect: 'none' }} />}
                                                     </text>
-                                                    <text style={{ margin: 5, fontWeight:'bold', userSelect: 'none' }} >
+                                                    <text style={{ margin: 5, fontWeight: 'bold', userSelect: 'none' }} >
                                                         Finalizadas {<SquareIcon style={{ color: '#008f83', userSelect: 'none' }} />}
                                                     </text>
                                                     <CustomHorizontalBarChart
@@ -718,7 +719,6 @@ export default function Home() {
                                                     />
                                                 </div>
                                             </QtdCxFinalizadasContainer>
-
                                             :
                                             <></>
                                     }
@@ -733,7 +733,6 @@ export default function Home() {
                                                     chipBoxesInternos={chipBoxesInternos}
                                                     authUser={authUser} menuBig={menuBig}
                                                 />
-
                                             </div>
                                             :
                                             <></>
@@ -794,7 +793,6 @@ export default function Home() {
                         }
                         {
                             selected === 'Impressão Etiquetas' ?
-                                // <PrintLabel furoSelecionado={furoSelecionado} chipBoxesInternos={chipBoxesInternos} furos={furos} whiteBoxes={whiteBoxes} paletes={paletes} />
                                 <PrintLabelNovo
                                     furoSelecionado={furoSelecionado}
                                     chipBoxesInternos={chipBoxesInternos}
@@ -849,7 +847,6 @@ export default function Home() {
                                 :
                                 <></>
                         }
-
                     </Content>
                 </RenderFunctions>
             </Container>
@@ -863,7 +860,6 @@ const QtdCxFinalizadasContainer = styled.div`
             flex-direction: row;
         }
 `
-
 const Container = styled.div({
     display: 'flex',
     flexDirection: 'column',
@@ -880,7 +876,6 @@ const RenderFunctions = styled.div({
     flexDirection: 'row',
     flex: 1,
 })
-
 const FilterOption = styled.button`
     background-color: ${props => (props.opcao ? '#fbca4d' : 'whitesmoke')};
     transition: opacity 0.3s;
