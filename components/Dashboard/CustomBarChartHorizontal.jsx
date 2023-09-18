@@ -22,8 +22,8 @@ const CustomHorizontalBarChart = ({ data, maxValue, menuBig }) => {
   
     return (
       <g>
-        <text style={{fontWeight:'bold', fontSize:20}} x={x + width / 2} y={y - radius} fill="#131212" textAnchor="middle" dominantBaseline="middle">
-          {'Percentual concluído: '+Math.round(value)+'%'}
+        <text style={{fontWeight:'bold', fontSize:20}} x={x + width / 2} y={y - radius} fill="#131212" >
+          { value === 1 ? '100% concluído' : 'Percentual concluído: '+Math.round(value)+'%'}
         </text>
       </g>
     );
@@ -44,11 +44,11 @@ const CustomHorizontalBarChart = ({ data, maxValue, menuBig }) => {
         {data.map((entry, index) => (
           <text
             key={index}
-            x={entry.processed > 0 ? entry.processed + 5 : 5} // Adjust the position of the value within the bar
-            y={index * 50 + 25} // Adjust the vertical position of the value within the bar
-            fill="#fff" // Text color
-            textAnchor={entry.processed > 0 ? "start" : "middle"} // Text alignment
-            dy={-5} // Adjust vertical position
+            x={entry.processed > 0 ? entry.processed + 5 : 5} 
+            y={index * 50 + 25} 
+            fill="#fff" 
+            textAnchor={entry.processed > 0 ? "start" : "middle"} 
+            dy={-5}
             style={{color:'white'}}
           >
             {entry.processed}
