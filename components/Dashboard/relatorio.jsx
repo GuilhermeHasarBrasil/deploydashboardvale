@@ -235,7 +235,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 0, flexDirection: 'column', width: '100%' }} >
-            <text style={{ fontSize: 25, fontWeight: 'bold', marginLeft: 50, marginTop: 0, userSelect: 'none' }} >
+            <text style={{ fontSize: window.screen.width<1900? 20 : 25, fontWeight: 'bold', marginLeft: menuBig? -50 : 50, marginTop: 0, userSelect: 'none' }} >
                 {
                     furoSelecionado.furo === 'TODOS' ?
                         'Selecione o processo para verificar o tempo de cada caixa processada (todos os furos)'

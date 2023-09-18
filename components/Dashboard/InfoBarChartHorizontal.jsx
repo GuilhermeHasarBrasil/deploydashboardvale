@@ -47,7 +47,7 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                 </BgImageCardItem>
                 <CardItem BgColor={'#2FAB10'}>
                     <Column grande={menuBig}>
-                        <TitleBox>ETAPAS CONCLUÍDAS (PROCESSADAS)</TitleBox>
+                        <TitleBox>ETAPAS CONCLUÍDAS POR CAIXA (ARQUIVADAS)</TitleBox>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
                             <Number>
                                 {somaProcessado ? somaProcessado : 0}
@@ -62,7 +62,7 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                 </BgImageCardItem>
                 <CardItem BgColor={'#307BF4'} >
                     <Column grande={menuBig}>
-                        <TitleBox>ETAPAS NÃO INICIADAS (TOTAL)</TitleBox>
+                        <TitleBox>ETAPAS POR CAIXA NÃO INICIADAS</TitleBox>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
                             <Number>
                                 {conferenciaNaoIniciada.length+marcacaoNaoIniciada.length+fotogafiaNaoIniciada.length+arquivamentoNaoIniciada.length}
@@ -92,7 +92,7 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                 </BgImageCardItem>
                 <CardItem BgColor={'#e8410e'} >
                     <Column grande={menuBig}>
-                        <TitleBox>TOTAL DE ETAPAS DO FURO</TitleBox>
+                        <TitleBox>TOTAL DE ETAPAS POR CAIXA DO FURO</TitleBox>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
                             <Number>
                                 {somaTotal}
@@ -109,6 +109,9 @@ const CardItem = styled.div`
     width: 350px;
     padding-right: 20px;
     background-color: ${props=>props.BgColor};
+    @media only screen and (max-device-width: 1679px) {
+            width: 300px;
+        }
 `
 const Container = styled.div`
     display: flex;
@@ -132,8 +135,6 @@ const BgImageCardItem = styled.div`
 const Row = styled.div`
     display: flex;
     flex-direction: row; 
-    //margin-left : 25px;
-    margin-right: 25px;
 `
 const Column = styled.div`
     display: flex;
@@ -141,15 +142,14 @@ const Column = styled.div`
     margin-left: 15px;
     
 `
-const TitleBox = styled.text({
-    color: 'white',
-    fontSize: 17,
-    fontWeight: 'bold',
-    userSelect: 'none',
+const TitleBox = styled.text`
+    color: white;
+    font-size: 17;
+    font-weight: bold;
+    user-select: none;
+    letter-spacing: 0.5px;
 
-    WebkitTextStrokeWidth: 0.1,
-    WebkitTextStrokeColor: 'black',
-})
+`
 const Number = styled.text({
     fontSize: 35,
     color: 'white',
