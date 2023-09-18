@@ -12,7 +12,7 @@ import { ArrowBackCircleSharp, ArrowForwardCircleSharp } from 'react-ionicons'
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 
-export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
+export default function CustomBarChartMes({ chipBoxes, furoSelecionado, menuBig }) {
     const [selectedDateRange, setSelectedDateRange] = useState({ startDate: null, endDate: null });
     const [numberCarrousel, setNumberCarrousel] = useState(1)
     const [arrayDataProcessConferencia, setArrayDataProcessConferencia] = useState([]);
@@ -99,7 +99,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                 });
 
                 const sumMetragem = boxesOnDate.reduce((sum, caixa) => sum + (caixa.ate.toFixed(2) - caixa.de.toFixed(2)), 0);
-                const roundMetragem =  Math.round(sumMetragem * 100) / 100
+                const roundMetragem = Math.round(sumMetragem * 100) / 100
                 dataForChart.push({ date: currentDate.toISOString().substr(0, 10), metragem: roundMetragem });
             }
             setConferenciaData(dataForChart);
@@ -122,7 +122,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                 });
 
                 const sumMetragem = boxesOnDate.reduce((sum, caixa) => sum + (caixa.ate - caixa.de), 0);
-                const roundMetragem =  Math.round(sumMetragem * 100) / 100
+                const roundMetragem = Math.round(sumMetragem * 100) / 100
                 dataForChart.push({ date: currentDate.toISOString().substr(0, 10), metragem: roundMetragem });
             }
             setMarcacaoData(dataForChart);
@@ -145,7 +145,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                 });
 
                 const sumMetragem = boxesOnDate.reduce((sum, caixa) => sum + (caixa.ate - caixa.de), 0);
-                const roundMetragem =  Math.round(sumMetragem * 100) / 100
+                const roundMetragem = Math.round(sumMetragem * 100) / 100
                 dataForChart.push({ date: currentDate.toISOString().substr(0, 10), metragem: roundMetragem });
             }
             setFotografiaData(dataForChart);
@@ -168,7 +168,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                 });
 
                 const sumMetragem = boxesOnDate.reduce((sum, caixa) => sum + (caixa.ate - caixa.de), 0);
-                const roundMetragem =  Math.round(sumMetragem * 100) / 100
+                const roundMetragem = Math.round(sumMetragem * 100) / 100
                 dataForChart.push({ date: currentDate.toISOString().substr(0, 10), metragem: roundMetragem });
             }
             setArquivamentoData(dataForChart);
@@ -188,7 +188,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
         <Container >
             {
                 selectedDateRange?.startDate ?
-                    <text style={{ color: 'black', fontSize: 18, fontWeight: 'bold', userSelect:'none' }}>
+                    <text style={{ color: 'black', fontSize: 18, fontWeight: 'bold', userSelect: 'none' }}>
                         Processo de {
                             numberCarrousel === 1 ? 'conferência'
                                 :
@@ -231,7 +231,20 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                                 />
                             </BgIcon>
                         </div>
-                        <BarChart style={{ backgroundColor: '#D9D9D9' }} width={1200} height={345}
+                        <BarChart
+                            style={{ backgroundColor: '#D9D9D9' }}
+                            width={
+
+                                window.screen.width > 1900 ?
+                                    menuBig ?
+                                        1200
+                                        :
+                                        1450
+                                    :
+                                    //logica para outras tamanhos de tela
+                                    1100
+                            }
+                            height={345}
                             data={
                                 numberCarrousel === 1 ? conferenciaData
                                     :
@@ -248,7 +261,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                             }}
                                 label={{ fontWeight: 'bold', fontSize: 18 }}
                             />
-                            <YAxis type="number" domain={[0, dataMax=>Math.round(dataMax)+3]} label={{ value: 'Metros', angle: -90, position: 'insideLeft', fontWeight: 'bold', fontSize: 18 }} />
+                            <YAxis type="number" domain={[0, dataMax => Math.round(dataMax) + 3]} label={{ value: 'Metros', angle: -90, position: 'insideLeft', fontWeight: 'bold', fontSize: 18 }} />
                             <Tooltip />
                             <CartesianGrid stroke="#f5f5f5" />
                             <Bar dataKey="metragem" fill="#008F83" />
@@ -284,7 +297,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                 selectedDateRange.startDate ?
                     <></>
                     :
-                    <text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 15 , userSelect:'none'}} >Selecione o intervalo de datas para filtrar</text>
+                    <text style={{ fontSize: 18, fontWeight: 'bold', marginTop: 15, userSelect: 'none' }} >Selecione o intervalo de datas para filtrar</text>
             }
             <DatePickerWrapper>
                 <DatePicker
