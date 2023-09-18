@@ -82,14 +82,38 @@ Permite verificar quais caixas passaram do tempo de execução determinado. Esse
 
 desabilitado, ignorar.
 
-### Context
+## Context
 
-**contexts, os Contextos**: Contexto da impressora (impressora conectada e função de impressão) e contexto do pause (usado em parâmetros para controlar a alternância entre as informações de furo e caixas no topDashboard). Permite acesso a essas funções e variáveis por toda a aplicação.
+### contexts, os Contextos: 
 
-**firebase**: Arquivo para configuração do banco de dados, não alterar.
+Contexto da impressora (impressora conectada e função de impressão) e contexto do pause (usado em parâmetros para controlar a alternância entre as informações de furo e caixas no topDashboard). Permite acesso a essas funções e variáveis por toda a aplicação.
 
-**hooks**: Por enquanto, o único hook é para o envio de mensagens do componente MensagensAvisos. Faz a comunicação com a api /api/message.js
+## Configuração do banco de dados firebase firestore
 
-**impressao**: Arquivo antigo para impressão por websocket. Desabilitado por agora, pois optou-se pela impressão com o [Zebra Browser Printer](https://www.zebra.com/content/dam/zebra_new_ia/en-us/solutions-verticals/product/Software/Printer%20Software/Link-OS/browser-print/zebra-browser-print-windows-v132489.exe).
+### firebase: 
 
-**pages/api**: imprimir.ts possui apenas uma camada para tratamento de erro de impressões, fazendo a comunicação da impressão pelo socket. Por enquanto não é mais usado.  message.js é a rota da api que realiza o envio de mensagem pelo bot do telegram para o grupo do telegram (chat ID).  sendPdf rota da api que realiza o envio de mensagem pelo bot do telegram, onde é buscado o pdf salvo no storage do firebase e enviado para o grupo do telegram (chat ID).  telegram.js é a rota da api que realiza o envio de mensagem pelo bot do telegram, mas por enquanto foi apenas para teste. Não remover, é útil para testar novas funções do bot.
+Arquivo para configuração do banco de dados, não alterar.
+
+## Hooks
+
+### hooks: 
+
+SendMessage.js -> Por enquanto, o único hook é para o envio de mensagens do componente MensagensAvisos. Faz a comunicação com a api /api/message.js
+
+## Comunicação socket para impressão
+
+### impressao: 
+
+Arquivo antigo para impressão por websocket. Desabilitado por agora, pois optou-se pela impressão com o [Zebra Browser Printer](https://www.zebra.com/content/dam/zebra_new_ia/en-us/solutions-verticals/product/Software/Printer%20Software/Link-OS/browser-print/zebra-browser-print-windows-v132489.exe).
+
+## API
+
+### pages/api : 
+
+imprimir.ts possui apenas uma camada para tratamento de erro de impressões, fazendo a comunicação da impressão pelo socket. Por enquanto não é mais usado.  
+
+message.js é a rota da api que realiza o envio de mensagem pelo bot do telegram para o grupo do telegram (chat ID).  
+
+sendPdf rota da api que realiza o envio de mensagem pelo bot do telegram, onde é buscado o pdf salvo no storage do firebase e enviado para o grupo do telegram (chat ID).  
+
+telegram.js é a rota da api que realiza o envio de mensagem pelo bot do telegram, mas por enquanto foi apenas para teste. Não remover, é útil para testar novas funções do bot.
