@@ -28,9 +28,9 @@ Na página "Index", são feitos buscas por ordem alfabética dos *furos* (orderb
 
 Ainda na página "Index", são feitos filtros de informações para alguns componentes da aplicação. Outros filtros também foram feitos em componentes individualmente, mas os principais estão presentes na page index (/).
 
-Estrutura do código:
+## Estrutura do código:
 
-Componentes: Todas as opções do menu lateral são nomeadas em pastas levando o nome da opção. O mesmo acontece na seleção dessa opção ao ser visualizada no index. Abaixo, eles são listados:
+### Componentes: Todas as opções do menu lateral são nomeadas em pastas levando o nome da opção. O mesmo acontece na seleção dessa opção ao ser visualizada no index. Abaixo, eles são listados:
 
 **index**:  Na página index, estão componentes que são usados em praticamente todas as outras "páginas", como o menu de navegação lateral e o rowFuros, que permite selecionar o furo que se deseja filtrar as informações (variável furoSelecionado, que possui o furo.furo e o furo.index, onde o index é usado para filtrar o array de array de *chipBoxes*);
 
