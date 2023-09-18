@@ -474,7 +474,7 @@ export default function Relatorios({ furos, chipBoxes, furoSelecionado, filtroCo
 
                     <Button
                         onClick={() => { generatePDF(chipBoxesInternos[furoSelecionado?.index]); }}
-                        disabled={!furoSelecionado}
+                        disabled={!furoSelecionado || selectedProcesses.length<1}
                     >
                         <h1 style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: 200, padding: 15, fontSize: 18, fontWeight: 'bold', color: 'white', backgroundColor: '#074F92', borderRadius: 10 }} >
                             Baixar PDF
