@@ -44,7 +44,13 @@ Principal "página" da aplicação, o componente concentra os gráficos que most
 
 Possui um componente denominado "topDashboard.jsx", que de 30 em 30 segundos (configurável em parâmetros) alterna entre informações sobre furos e caixas "processados(as)", "não iniciados(as)", "em processamento", e "com observação". No ícone de informação "(i)", é possível verificar a lista de furos ou caixas contidos nos números demonstrados.
 
-Possui uma aba de rolagem denomidada filtros (feita no index.js). Lá, se pode alternar entre a opção "Quantidade de caixas finalizadas (total de furos)" que contém o gráfico horizontal (CustomBarChartHorizontal.jsx e infoBarCharHorizontal.jsx).  Na opção "Tempo de processamento de cada caixa por processo" têm-se o gráfico vertical de tempo de cada caixa nos processo de conferencia, marcação, fotografia e arquivamento (que pode ser filtrado por data, selecionando a data de início e fim do filtro no calendar disponível).  Possui ainda a opção de "Caixas processadas por dia na semana", onde ao selecionar os processos de conferencia, marcação, fotografia ou arquivamento, pode-se verificar quantas caixas foram finalizadas nas segundas-feiras, terças-feiras, quartas-feiras, quintas-feiras ou sextas-feiras.  A última opção, "Processamento por período em metros (todas as caixas)", é possível filtrar o período entre datas e verificar quantos metros foram processados no total nos dias filtrados, e filtrar pelos processos de conferencia, marcação, fotografia ou arquivamento.
+Possui uma aba de rolagem denomidada filtros (feita no index.js). Lá, se pode alternar entre a opção "Quantidade de caixas finalizadas (total de furos)" que contém o gráfico horizontal (CustomBarChartHorizontal.jsx e infoBarCharHorizontal.jsx).
+
+Na opção "Tempo de processamento de cada caixa por processo" (relatorio.jsx) têm-se o gráfico vertical (BarChartRelatório.jsx) que mostra o tempo de cada caixa nos processo de conferencia, marcação, fotografia e arquivamento (que pode ser filtrado por data, selecionando a data de início e fim do filtro no calendar disponível).  
+
+Possui ainda a opção de "Caixas processadas por dia na semana", onde ao selecionar os processos de conferencia, marcação, fotografia ou arquivamento, pode-se verificar quantas caixas foram finalizadas nas segundas-feiras, terças-feiras, quartas-feiras, quintas-feiras ou sextas-feiras (WeekWorkBarChart.jsx).  
+
+A última opção, "Processamento por período em metros (todas as caixas)", é possível filtrar o período entre datas e verificar quantos metros foram processados no total nos dias filtrados (BarChartMes.jsx), e filtrar pelos processos de conferencia, marcação, fotografia ou arquivamento.
 
 ### Relatorios (opção 'Relatórios'): 
 
@@ -82,27 +88,29 @@ Permite verificar quais caixas passaram do tempo de execução determinado. Esse
 
 desabilitado, ignorar.
 
-## Context
+## Contextos
 
-### contexts, os Contextos: 
+### contexts/BrowserPrintContext.jsx e PauseContext.js
 
 Contexto da impressora (impressora conectada e função de impressão) e contexto do pause (usado em parâmetros para controlar a alternância entre as informações de furo e caixas no topDashboard). Permite acesso a essas funções e variáveis por toda a aplicação.
 
 ## Configuração do banco de dados firebase firestore
 
-### firebase: 
+### firebase/auth.s: 
+
+Arquivo para configuração do usuário logado.
+
+### firebase/firebase.js: 
 
 Arquivo para configuração do banco de dados, não alterar.
 
-## Hooks
-
-### hooks: 
+## hooks/sendMessage.js
 
 SendMessage.js -> Por enquanto, o único hook é para o envio de mensagens do componente MensagensAvisos. Faz a comunicação com a api /api/message.js
 
 ## Comunicação socket para impressão
 
-### impressao: 
+### impressao/printModule.ts: 
 
 Arquivo antigo para impressão por websocket. Desabilitado por agora, pois optou-se pela impressão com o [Zebra Browser Printer](https://www.zebra.com/content/dam/zebra_new_ia/en-us/solutions-verticals/product/Software/Printer%20Software/Link-OS/browser-print/zebra-browser-print-windows-v132489.exe).
 
@@ -110,10 +118,10 @@ Arquivo antigo para impressão por websocket. Desabilitado por agora, pois optou
 
 ### pages/api : 
 
-imprimir.ts possui apenas uma camada para tratamento de erro de impressões, fazendo a comunicação da impressão pelo socket. Por enquanto não é mais usado.  
+/imprimir.ts possui apenas uma camada para tratamento de erro de impressões, fazendo a comunicação da impressão pelo socket. Por enquanto não é mais usado.  
 
-message.js é a rota da api que realiza o envio de mensagem pelo bot do telegram para o grupo do telegram (chat ID).  
+/message.js é a rota da api que realiza o envio de mensagem pelo bot do telegram para o grupo do telegram (chat ID).  
 
-sendPdf rota da api que realiza o envio de mensagem pelo bot do telegram, onde é buscado o pdf salvo no storage do firebase e enviado para o grupo do telegram (chat ID).  
+/sendPdf rota da api que realiza o envio de mensagem pelo bot do telegram, onde é buscado o pdf salvo no storage do firebase e enviado para o grupo do telegram (chat ID).  
 
-telegram.js é a rota da api que realiza o envio de mensagem pelo bot do telegram, mas por enquanto foi apenas para teste. Não remover, é útil para testar novas funções do bot.
+/telegram.js é a rota da api que realiza o envio de mensagem pelo bot do telegram, mas por enquanto foi apenas para teste. Não remover, é útil para testar novas funções do bot.
