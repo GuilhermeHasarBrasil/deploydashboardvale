@@ -761,7 +761,7 @@ export default function Home() {
                                                 filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade}
                                                 filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
                                                 chipBoxesInternos={chipBoxesInternos}
-                                                authUser={authUser}
+                                                authUser={authUser} menuBig={menuBig}
                                             />
                                             :
                                             <></>

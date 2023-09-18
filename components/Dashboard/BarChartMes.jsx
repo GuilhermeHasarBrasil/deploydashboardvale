@@ -122,7 +122,8 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                 });
 
                 const sumMetragem = boxesOnDate.reduce((sum, caixa) => sum + (caixa.ate - caixa.de), 0);
-                dataForChart.push({ date: currentDate.toISOString().substr(0, 10), metragem: sumMetragem });
+                const roundMetragem =  Math.round(sumMetragem * 100) / 100
+                dataForChart.push({ date: currentDate.toISOString().substr(0, 10), metragem: roundMetragem });
             }
             setMarcacaoData(dataForChart);
         }
@@ -144,7 +145,8 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                 });
 
                 const sumMetragem = boxesOnDate.reduce((sum, caixa) => sum + (caixa.ate - caixa.de), 0);
-                dataForChart.push({ date: currentDate.toISOString().substr(0, 10), metragem: sumMetragem });
+                const roundMetragem =  Math.round(sumMetragem * 100) / 100
+                dataForChart.push({ date: currentDate.toISOString().substr(0, 10), metragem: roundMetragem });
             }
             setFotografiaData(dataForChart);
         }
@@ -166,7 +168,8 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                 });
 
                 const sumMetragem = boxesOnDate.reduce((sum, caixa) => sum + (caixa.ate - caixa.de), 0);
-                dataForChart.push({ date: currentDate.toISOString().substr(0, 10), metragem: sumMetragem });
+                const roundMetragem =  Math.round(sumMetragem * 100) / 100
+                dataForChart.push({ date: currentDate.toISOString().substr(0, 10), metragem: roundMetragem });
             }
             setArquivamentoData(dataForChart);
         }
@@ -245,7 +248,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado }) {
                             }}
                                 label={{ fontWeight: 'bold', fontSize: 18 }}
                             />
-                            <YAxis label={{ value: 'Metros', angle: -90, position: 'insideLeft', fontWeight: 'bold', fontSize: 18 }} />
+                            <YAxis type="number" domain={[0, dataMax=>Math.round(dataMax)+3]} label={{ value: 'Metros', angle: -90, position: 'insideLeft', fontWeight: 'bold', fontSize: 18 }} />
                             <Tooltip />
                             <CartesianGrid stroke="#f5f5f5" />
                             <Bar dataKey="metragem" fill="#008F83" />
