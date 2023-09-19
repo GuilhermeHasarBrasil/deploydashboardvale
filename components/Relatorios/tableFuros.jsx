@@ -97,7 +97,7 @@ export default function TableFuro({ furos }) {
     }
 
     return (
-        <TableContainer sx={{ width: 900 }} component={Paper}>
+        <TableContainer sx={{ width: 900, marginTop:5 }} component={Paper}>
             <Table sx={{ width: 900 }} aria-label="custom pagination table">
                 <TableHead style={{ backgroundColor: '#D9D9D9' }} >
                     <TableRow>
