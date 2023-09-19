@@ -246,7 +246,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado, menuBig 
                                     :
                                     menuBig ? 800 : 1000
                             }
-                            height={345}
+                            height={300}
                             data={
                                 numberCarrousel === 1 ? conferenciaData
                                     :

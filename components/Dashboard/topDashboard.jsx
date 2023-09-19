@@ -604,14 +604,14 @@ const TextButtonSwap = styled.text`
 
 const TitleTopDashboard = styled.text`
     
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     color: #000000;
     margin-right: 40px;
     margin-left: 10px;
     display: ${props => props.selected};
     @media only screen and (max-device-width: 1679px) {
-        font-size:17px;
+        font-size:15px;
         margin-left: 10px;
     }
     @media only screen and (max-device-width: 1370px) {

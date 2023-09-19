@@ -26,6 +26,7 @@ import Users from "../components/Usuarios/Users";
 import InfoBarChartHorizontal from "../components/Dashboard/InfoBarChartHorizontal";
 import PauseTopDashboard from "../components/PauseTopDashboard";
 import MetragensProcessadas from "../components/Dashboard/MetragensProcessadas";
+import Footer from "../components/Footer";
 
 export default function Home() {
     const { signOut, authUser, isLoading } = useAuth();
@@ -970,8 +971,11 @@ export default function Home() {
                                 :
                                 <></>
                         }
+                                        <Footer/>
+
                     </Content>
                 </RenderFunctions>
+
             </Container>
         </main>
     );
