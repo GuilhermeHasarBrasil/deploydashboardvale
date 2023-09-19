@@ -610,61 +610,133 @@ export default function Home() {
                             caixasEmAndamento={caixasEmAndamento}
                             caixasNaoIniciadas={caixasNaoIniciadas}
                         />
-                        <Divider sx={{ display: selected === 'Dashboard' ? 'flex' : 'none', borderWidth: '2px', backgroundColor: '#008F83', marginTop: 1, boxShadow: '10px 4px 4px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
+                        <Divider
+                            sx={{
+                                display: selected === 'Dashboard' ? 'flex' : 'none',
+                                borderWidth: window.screen.width > 1900 ?
+                                    '1px' :
+                                    window.screen.width > 1600 ? '0.8px' :
+                                        window.screen.width < 1370 ? '0.5px' : '0.5px',
+                                backgroundColor: '#008F83',
+                                marginTop: 1,
+                                boxShadow: window.screen.width > 1900 ?
+                                    '10px 4px 4px rgba(0, 0, 0, 0.6)' :
+                                    window.screen.width > 1600 ? '8px 3px 3px rgba(0, 0, 0, 0.6)' :
+                                        window.screen.width < 1370 ? '8px 2px 2px rgba(0, 0, 0, 0.6)' : '8px 2px 2px rgba(0, 0, 0, 0.6)',
+                                marginBottom: 1
+                            }}
+                        />
                         <RowFuros furos={furos} setFuroSelecionado={setFuroSelecionado} selected={selected} />
                         {
                             selected === 'Dashboard' ?
                                 <>
-                                    <Divider sx={{ borderWidth: '2px', backgroundColor: '#008F83', marginTop: 1, boxShadow: '10px 4px 4px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
+                                    <Divider
+                                        sx={{
+                                            borderWidth: window.screen.width > 1900 ?
+                                                '1px' :
+                                                window.screen.width > 1600 ? '0.8px' :
+                                                    window.screen.width < 1370 ? '0.5px' : '0.5px',
+                                            backgroundColor: '#008F83',
+                                            marginTop: window.screen.width > 1900 ?
+                                                1 :
+                                                window.screen.width > 1600 ? 0.8 :
+                                                    window.screen.width < 1370 ? 0.5 : 0.5,
+                                            boxShadow: window.screen.width > 1900 ?
+                                                '10px 4px 4px rgba(0, 0, 0, 0.6)' :
+                                                window.screen.width > 1600 ? '8px 3px 3px rgba(0, 0, 0, 0.6)' :
+                                                    window.screen.width < 1370 ? '8px 2px 2px rgba(0, 0, 0, 0.6)' : '8px 2px 2px rgba(0, 0, 0, 0.6)',
+                                            marginBottom: 1
+                                        }}
+                                    />
                                     <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
                                         {
                                             furoSelecionado ?
                                                 <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%' }} >
-                                                    <text style={{ fontSize: 20, fontWeight: 'bold', color: "#000f000", marginLeft: 10, display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', }} >Filtros: </text>
+                                                    <text style={
+                                                        {
+                                                            fontSize: window.screen.width > 1900 ?
+                                                                20 :
+                                                                window.screen.width > 1600 ? 18 :
+                                                                    window.screen.width < 1370 ? 16 : 16,
+                                                            fontWeight: 'bold', color: "#000f000",
+                                                            marginLeft: 10,
+                                                            display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex',
+                                                        }
+                                                    } >
+                                                        Filtros:
+                                                    </text>
                                                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', width: '100%' }} >
                                                         <FilterOption opcao={value === 0} onClick={() => handleChange(0)} >
-                                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
-                                                                <div style={{ backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
-                                                                    <img src="assets/value1.png" style={{ marginRight: 4, width: 50, height: 'auto' }} />
-                                                                </div>
-                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <TextFilterOption style={{ fontWeight: 'bold', margin: 4 }} >QUANTIDADE DE CAIXAS FINALIZADAS</TextFilterOption>
-                                                                    <TextFilterOption style={{ fontWeight: 'bold' }} >(TOTAL DE FUROS)</TextFilterOption>
-                                                                </div>
-                                                            </div>
+                                                            <ContainerItemFilter >
+                                                                <ContainerImgFilter >
+                                                                    <img src="assets/value1.png" style={
+                                                                        {
+                                                                            marginRight: 4, width: window.screen.width > 1900 ?
+                                                                                50 :
+                                                                                window.screen.width > 1600 ? 45 :
+                                                                                    window.screen.width < 1370 ? 30 : 30, height: 'auto'
+                                                                        }
+                                                                    } />
+                                                                </ContainerImgFilter>
+                                                                <ContainerTextFilter >
+                                                                    <TextFilterOption opcao={value === 0} >QUANTIDADE DE CAIXAS FINALIZADAS</TextFilterOption>
+                                                                    <TextFilterOption opcao={value === 0} style={{ fontWeight: 'bold' }} >(TOTAL DE FUROS)</TextFilterOption>
+                                                                </ContainerTextFilter>
+                                                            </ContainerItemFilter>
                                                         </FilterOption>
                                                         <FilterOption opcao={value === 1} onClick={() => handleChange(1)}>
-                                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
-                                                                <div style={{ backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
-                                                                    <img src="assets/value2.png" style={{ marginRight: 4, width: 50, height: 'auto' }} />
-                                                                </div>
-                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <TextFilterOption style={{ fontWeight: 'bold', margin: 4 }} >TEMPO DE PROCESSAMENTO DE CADA</TextFilterOption>
-                                                                    <TextFilterOption style={{ fontWeight: 'bold' }} >CAIXA POR PROCESSO</TextFilterOption>
-                                                                </div>
-                                                            </div>
+                                                            <ContainerItemFilter >
+                                                                <ContainerImgFilter >
+                                                                    <img src="assets/value2.png" style={
+                                                                        {
+                                                                            marginRight: 4, width: window.screen.width > 1900 ?
+                                                                                50 :
+                                                                                window.screen.width > 1600 ? 45 :
+                                                                                    window.screen.width < 1370 ? 30 : 30, height: 'auto'
+                                                                        }
+                                                                    } />
+                                                                </ContainerImgFilter>
+                                                                <ContainerTextFilter  >
+                                                                    <TextFilterOption opcao={value === 1}>TEMPO DE PROCESSAMENTO DE CADA</TextFilterOption>
+                                                                    <TextFilterOption opcao={value === 1} style={{ fontWeight: 'bold' }} >CAIXA POR PROCESSO</TextFilterOption>
+                                                                </ContainerTextFilter>
+                                                            </ContainerItemFilter>
                                                         </FilterOption>
                                                         <FilterOption opcao={value === 2} onClick={() => handleChange(2)}>
-                                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
-                                                                <div style={{ backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
-                                                                    <img src="assets/value3.png" style={{ marginRight: 4, width: 50, height: 'auto' }} />
-                                                                </div>
-                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <TextFilterOption style={{ fontWeight: 'bold', margin: 4 }} >CAIXAS PROCESSADAS POR DIA</TextFilterOption>
-                                                                    <TextFilterOption style={{ fontWeight: 'bold' }} >NA SEMANA</TextFilterOption>
-                                                                </div>
-                                                            </div>
+                                                            <ContainerItemFilter >
+                                                                <ContainerImgFilter >
+                                                                    <img src="assets/value3.png" style={
+                                                                        {
+                                                                            marginRight: 4, width: window.screen.width > 1900 ?
+                                                                                50 :
+                                                                                window.screen.width > 1600 ? 45 :
+                                                                                    window.screen.width < 1370 ? 30 : 30, height: 'auto'
+                                                                        }
+                                                                    } />
+                                                                </ContainerImgFilter>
+                                                                <ContainerTextFilter >
+                                                                    <TextFilterOption opcao={value === 2} >CAIXAS PROCESSADAS POR DIA</TextFilterOption>
+                                                                    <TextFilterOption opcao={value === 2} style={{ fontWeight: 'bold' }} >NA SEMANA</TextFilterOption>
+                                                                </ContainerTextFilter>
+                                                            </ContainerItemFilter>
                                                         </FilterOption>
                                                         <FilterOption opcao={value === 3} onClick={() => handleChange(3)}>
-                                                            <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderRadius: 10, borderWidth: 2, borderColor: '#008F83' }} >
-                                                                <div style={{ backgroundColor: '#008F83', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }} >
-                                                                    <img src="assets/value4.png" style={{ marginRight: 4, width: 50, height: 'auto', borderBottomWidth: 2, borderColor: '#008f83' }} />
-                                                                </div>
-                                                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
-                                                                    <TextFilterOption style={{ fontWeight: 'bold', margin: 4 }} >PROCESSAMENTO POR PERÍODO EM</TextFilterOption>
-                                                                    <TextFilterOption style={{ fontWeight: 'bold' }} >METROS (TODAS AS CAIXAS)</TextFilterOption>
-                                                                </div>
-                                                            </div>
+                                                            <ContainerItemFilter >
+                                                                <ContainerImgFilter >
+                                                                    <img src="assets/value4.png" style={
+                                                                        {
+                                                                            marginRight: 4, width: window.screen.width > 1900 ?
+                                                                                50 :
+                                                                                window.screen.width > 1600 ? 45 :
+                                                                                    window.screen.width < 1370 ? 30 : 30, height: 'auto'
+                                                                        }
+                                                                    } />
+                                                                </ContainerImgFilter>
+                                                                <ContainerTextFilter  >
+                                                                    <TextFilterOption opcao={value === 3} >PROCESSAMENTO POR PERÍODO EM</TextFilterOption>
+                                                                    <TextFilterOption opcao={value === 3} style={{ fontWeight: 'bold' }} >METROS (TODAS AS CAIXAS)</TextFilterOption>
+                                                                </ContainerTextFilter>
+                                                            </ContainerItemFilter>
                                                         </FilterOption>
                                                     </div>
                                                 </div>
@@ -676,7 +748,25 @@ export default function Home() {
                                                     </text>
                                                 </div>
                                         }
-                                        <Divider sx={{ borderWidth: '2px', backgroundColor: '#008F83', marginTop: 0.7, boxShadow: '10px 4px 4px rgba(0, 0, 0, 0.6)', marginBottom: 1 }} />
+                                        <Divider
+                                            sx={{
+                                                borderWidth:
+                                                    window.screen.width > 1900 ?
+                                                        '1px' :
+                                                        window.screen.width > 1600 ? '0.8px' :
+                                                            window.screen.width < 1370 ? '0.5px' : '0.5px',
+                                                backgroundColor: '#008F83',
+                                                marginTop: window.screen.width > 1900 ?
+                                                    1 :
+                                                    window.screen.width > 1600 ? 0.8 :
+                                                        window.screen.width < 1370 ? 0.5 : 0.5,
+                                                boxShadow: window.screen.width > 1900 ?
+                                                    '10px 4px 4px rgba(0, 0, 0, 0.6)' :
+                                                    window.screen.width > 1600 ? '8px 3px 3px rgba(0, 0, 0, 0.6)' :
+                                                        window.screen.width < 1370 ? '8px 2px 2px rgba(0, 0, 0, 0.6)' : '8px 2px 2px rgba(0, 0, 0, 0.6)',
+                                                marginBottom: 1
+                                            }}
+                                        />
 
                                     </Box>
                                     {
@@ -870,7 +960,6 @@ const Container = styled.div({
 const Content = styled.div({
     flex: 1,
     width: '80%',
-    //paddingLeft:20, paddingRight:20
 })
 const RenderFunctions = styled.div({
     display: 'flex',
@@ -878,7 +967,7 @@ const RenderFunctions = styled.div({
     flex: 1,
 })
 const FilterOption = styled.button`
-    background-color: ${props => (props.opcao ? '#fbca4d' : 'whitesmoke')};
+    background-color: ${props => (props.opcao ? '#008F83' : 'whitesmoke')};
     transition: opacity 0.3s;
     user-select: none;
     border-radius: 10px;
@@ -886,10 +975,49 @@ const FilterOption = styled.button`
         opacity: 0.7;
     }
 `;
+const ContainerItemFilter = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: #008F83;
+    @media only screen and (max-device-width: 1679px) {
+            border-width: 2px;
+        }
+        @media only screen and (max-device-width: 1370px) {
+            border-width: 2px;
+        }
+`
+const ContainerImgFilter = styled.div`
+    background-color: #008f83;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    @media only screen and (max-device-width: 1679px) {
+            padding: 4px;
+        }
+        @media only screen and (max-device-width: 1370px) {
+            padding: 4px;
+        }
+`
+const ContainerTextFilter = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
 const TextFilterOption = styled.text`
     font-size: 16px;
     font-weight: bold;
+    margin-left: 4px;
+    margin-right: 4px;
+    color: ${props => (props.opcao ? 'white' : 'black')};
     @media only screen and (max-device-width: 1679px) {
             font-size: 12px;
+        }
+        @media only screen and (max-device-width: 1370px) {
+            font-size: 10px;
         }
 `

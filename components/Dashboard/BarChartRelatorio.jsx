@@ -32,12 +32,22 @@ const CustomBarChart = ({ data, menuBig }) => {
 
   return (
     <ComposedChart
-      width={window.screen.width < 1920 ?
+      width={window.screen.width > 1900 ?
+        menuBig ? 1150 : 1400
+        :
+        window.screen.width > 1580 ?
         menuBig ? 800 : 1000
         :
-        menuBig ? 1150 : 1350
+        menuBig ? 650 : 800
       }
-      height={window.screen.width < 1900 ? 350 : 520}
+      height={window.screen.width > 1900 ?
+        520
+        :
+        window.screen.width > 1580 ?
+        480
+        :
+        340
+      }
       data={data}
     >
       <CartesianGrid strokeDasharray="3 3" />

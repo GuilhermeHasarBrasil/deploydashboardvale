@@ -23,26 +23,26 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
     const [fotogafiaNaoIniciada, setFotografiaNaoIniciada] = useState([])
     const [arquivamentoNaoIniciada, setArquivamentoNaoIniciada] = useState([])
 
-    useEffect(()=>{
-        setFilteredCaixasEmAndamento(caixasEmAndamento?.filter((caixa)=>caixa?.furo===furoSelecionado?.furo))
-        setFilteredCaixasNaoIniciadas(caixasNaoIniciadas?.filter((caixa)=>caixa?.furo===furoSelecionado?.furo))
-    },[furoSelecionado, caixasEmAndamento, caixasNaoIniciadas, data])
+    useEffect(() => {
+        setFilteredCaixasEmAndamento(caixasEmAndamento?.filter((caixa) => caixa?.furo === furoSelecionado?.furo))
+        setFilteredCaixasNaoIniciadas(caixasNaoIniciadas?.filter((caixa) => caixa?.furo === furoSelecionado?.furo))
+    }, [furoSelecionado, caixasEmAndamento, caixasNaoIniciadas, data])
 
-    useEffect(()=>{
-        setConferenciaEmAndamento(FilteredcaixasEmAndamento?.filter((caixa)=>caixa?.processos?.conferencia?.sai==null && caixa?.processos?.conferencia?.ent!==null))
-        setMarcacaoEmAndamento(FilteredcaixasEmAndamento?.filter((caixa)=>caixa?.processos?.marcacao?.sai==null && caixa?.processos?.marcacao?.ent!==null))
-        setFotografiaEmAndamento(FilteredcaixasEmAndamento?.filter((caixa)=>caixa?.processos?.fotografia?.sai==null && caixa?.processos?.fotografia?.ent!==null))
-        setArquivamentoEmAndamento(FilteredcaixasEmAndamento?.filter((caixa)=>caixa?.processos?.arquivamento?.sai==null && caixa?.processos?.arquivamento?.ent!==null))
-        setConferenciaNaoIniciada(FilteredcaixasNaoIniciadas?.filter((caixa)=>caixa?.processos?.conferencia?.ent==null))
-        setMarcacaoNaoIniciada(FilteredcaixasNaoIniciadas?.filter((caixa)=>caixa?.processos?.marcacao?.ent==null))
-        setFotografiaNaoIniciada(FilteredcaixasNaoIniciadas?.filter((caixa)=>caixa?.processos?.fotogafia?.ent==null))
-        setArquivamentoNaoIniciada(FilteredcaixasNaoIniciadas?.filter((caixa)=>caixa?.processos?.arquivamento?.ent==null))
-    },[FilteredcaixasEmAndamento, FilteredcaixasNaoIniciadas])
+    useEffect(() => {
+        setConferenciaEmAndamento(FilteredcaixasEmAndamento?.filter((caixa) => caixa?.processos?.conferencia?.sai == null && caixa?.processos?.conferencia?.ent !== null))
+        setMarcacaoEmAndamento(FilteredcaixasEmAndamento?.filter((caixa) => caixa?.processos?.marcacao?.sai == null && caixa?.processos?.marcacao?.ent !== null))
+        setFotografiaEmAndamento(FilteredcaixasEmAndamento?.filter((caixa) => caixa?.processos?.fotografia?.sai == null && caixa?.processos?.fotografia?.ent !== null))
+        setArquivamentoEmAndamento(FilteredcaixasEmAndamento?.filter((caixa) => caixa?.processos?.arquivamento?.sai == null && caixa?.processos?.arquivamento?.ent !== null))
+        setConferenciaNaoIniciada(FilteredcaixasNaoIniciadas?.filter((caixa) => caixa?.processos?.conferencia?.ent == null))
+        setMarcacaoNaoIniciada(FilteredcaixasNaoIniciadas?.filter((caixa) => caixa?.processos?.marcacao?.ent == null))
+        setFotografiaNaoIniciada(FilteredcaixasNaoIniciadas?.filter((caixa) => caixa?.processos?.fotogafia?.ent == null))
+        setArquivamentoNaoIniciada(FilteredcaixasNaoIniciadas?.filter((caixa) => caixa?.processos?.arquivamento?.ent == null))
+    }, [FilteredcaixasEmAndamento, FilteredcaixasNaoIniciadas])
 
     return (
         <Container>
             <Row  >
-                <BgImageCardItem BgColor= {'#206F0D'}>
+                <BgImageCardItem BgColor={'#206F0D'}>
                     <img src="/assets/images/furoimg.png" />
                 </BgImageCardItem>
                 <CardItem BgColor={'#2FAB10'}>
@@ -57,7 +57,7 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                 </CardItem>
             </Row>
             <Row  >
-                <BgImageCardItem BgColor= {'#2760BB'} >
+                <BgImageCardItem BgColor={'#2760BB'} >
                     <img src="/assets/images/furoimg.png" />
                 </BgImageCardItem>
                 <CardItem BgColor={'#307BF4'} >
@@ -65,14 +65,14 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                         <TitleBox>ETAPAS POR CAIXA NÃO INICIADAS</TitleBox>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
                             <Number>
-                                {conferenciaNaoIniciada.length+marcacaoNaoIniciada.length+fotogafiaNaoIniciada.length+arquivamentoNaoIniciada.length}
+                                {conferenciaNaoIniciada.length + marcacaoNaoIniciada.length + fotogafiaNaoIniciada.length + arquivamentoNaoIniciada.length}
                             </Number>
                         </div>
                     </Column>
                 </CardItem>
             </Row>
             <Row  >
-                <BgImageCardItem BgColor= {'#996501'} >
+                <BgImageCardItem BgColor={'#996501'} >
                     <img src="/assets/images/furoimg.png" />
                 </BgImageCardItem>
                 <CardItem BgColor={'#E89E0E'} >
@@ -80,14 +80,14 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                         <TitleBox>ETAPAS EM ANDAMENTO APÓS CONFERÊNCIA</TitleBox>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
                             <Number>
-                                {conferenciaEmAndamento.length+marcacaoEmAndamento.length+fotogafiaEmAndamento.length+arquivamentoEmAndamento.length}
+                                {conferenciaEmAndamento.length + marcacaoEmAndamento.length + fotogafiaEmAndamento.length + arquivamentoEmAndamento.length}
                             </Number>
                         </div>
                     </Column>
                 </CardItem>
             </Row>
             <Row  >
-                <BgImageCardItem BgColor= {'#990101'} >
+                <BgImageCardItem BgColor={'#990101'} >
                     <img src="/assets/images/furoimg.png" />
                 </BgImageCardItem>
                 <CardItem BgColor={'#e8410e'} >
@@ -108,9 +108,16 @@ const CardItem = styled.div`
     height: 90px;
     width: 350px;
     padding-right: 20px;
-    background-color: ${props=>props.BgColor};
+    background-color: ${props => props.BgColor};
     @media only screen and (max-device-width: 1679px) {
             width: 300px;
+            height: 85px;
+
+        }
+        @media only screen and (max-device-width: 1370px) {
+            width: 270px;
+            height: 70px;
+
         }
 `
 const Container = styled.div`
@@ -130,11 +137,29 @@ const BgImageCardItem = styled.div`
     align-items: center;
     width: 70px;
     height: 90px;
-    background-color: ${props=>props.BgColor};
+    background-color: ${props => props.BgColor};
+    @media only screen and (max-device-width: 1679px) {
+        width: 70px;
+        height: 85px;
+        }
+        @media only screen and (max-device-width: 1370px) {
+            width: 70px;
+            height: 70px;
+        }
 `
 const Row = styled.div`
     display: flex;
     flex-direction: row; 
+    margin-bottom: 20px;
+    @media only screen and (max-device-width: 1679px) {
+                margin-bottom: 10px;
+
+        }
+        @media only screen and (max-device-width: 1370px) {
+                margin-bottom: 4px;
+
+        }
+        
 `
 const Column = styled.div`
     display: flex;
@@ -144,18 +169,35 @@ const Column = styled.div`
 `
 const TitleBox = styled.text`
     color: white;
-    font-size: 17;
+    font-size: 17px;
     font-weight: bold;
     user-select: none;
     letter-spacing: 0.5px;
+    @media only screen and (max-device-width: 1679px) {
+                font-size: 15px;
+
+        }
+        @media only screen and (max-device-width: 1370px) {
+                font-size: 15px;
+
+        }
+`
+
+const Number = styled.text`
+    font-size: 35px;
+    color: white;
+    font-weight: bold;
+    user-select: none;
+    -webkit-text-stroke-color: white;
+    -webkit-text-stroke-width: 0.2px;
+    display: flex;
+    @media only screen and (max-device-width: 1679px) {
+                font-size: 30px;
+
+        }
+        @media only screen and (max-device-width: 1370px) {
+                font-size: 25px;
+
+        }
 
 `
-const Number = styled.text({
-    fontSize: 35,
-    color: 'white',
-    fontWeight: 'bold',
-    userSelect: 'none',
-    WebkitTextStrokeWidth: 0.2,
-    WebkitTextStrokeColor: 'white',
-    display:'flex'
-})

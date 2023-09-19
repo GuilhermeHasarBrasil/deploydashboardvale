@@ -76,7 +76,7 @@ const Card = styled.div`
 
 const Row = styled.div({
     display: 'flex',
-    flexDirection: 'row', marginLeft: 25, marginRight: 25
+    flexDirection: 'row', marginLeft: 25, marginRight: 25, marginBottom:6
 })
 const Column = styled.div({
     display: 'flex',

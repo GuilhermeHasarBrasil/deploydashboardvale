@@ -50,7 +50,7 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
         >
             {menuVisible ? (
                 <div style={{ padding: 20 }}>
-                    <img style={{ userSelect: 'none', width: window.screen.width<1900? 180 : 220, }} src={logoSrc} width={50} height={50} />
+                    <img style={{ userSelect: 'none', width: window.screen.width > 1900 ? 220 : window.screen.width > 1580 ? 170 : 160, }} src={logoSrc} width={50} height={50} />
                 </div>
             ) : (
                 <div style={{ padding: 0 }}>
@@ -85,8 +85,8 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                                 color={'white'}
                                 //beat
                                 title={''}
-                                height= { window.screen.width<1900? '30px' : "30px"}
-                                width= { window.screen.width<1900? '30px' : "30px"}
+                                height={window.screen.width < 1900 ? '30px' : "30px"}
+                                width={window.screen.width < 1900 ? '30px' : "30px"}
                             />
                             :
                             <></>
@@ -100,8 +100,8 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                                 color={'white'}
                                 beat
                                 title={''}
-                                height= { window.screen.width<1900? '30px' : "35px"}
-                                width= { window.screen.width<1900? '30px' : "35px"}
+                                height={window.screen.width < 1900 ? '30px' : "35px"}
+                                width={window.screen.width < 1900 ? '30px' : "35px"}
                             />
                     }
                 </Resources>
@@ -142,8 +142,8 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                                 color={'white'}
                                 rotate
                                 title={''}
-                                height= { window.screen.width<1900? '25px' : "30px"}
-                                width= { window.screen.width<1900? '25px' : "30px"}
+                                height={window.screen.width < 1900 ? '25px' : "30px"}
+                                width={window.screen.width < 1900 ? '25px' : "30px"}
                             /> :
                             <></>
                     }
@@ -155,8 +155,8 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                                 color={'white'}
                                 rotate
                                 title={''}
-                                height= { window.screen.width<1900? '28px' : "35px"}
-                                width= { window.screen.width<1900? '28px' : "35px"}
+                                height={window.screen.width < 1900 ? '28px' : "35px"}
+                                width={window.screen.width < 1900 ? '28px' : "35px"}
                             />
                     }
 
@@ -234,7 +234,19 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                         )}
                     </Button>
                 </Row>
-                <text style={{ color: 'white', paddingTop: menuVisible ? 40 : 60, marginLeft: menuVisible ? 20 : 0 }} >V. 1.0.0</text>
+                <text style=
+                    {
+                        window.screen.width>1900?
+                        { color: 'white', paddingTop: menuVisible ? 40 : 60, marginLeft: menuVisible ? 20 : 0 }
+                        :
+                        window.screen.width>1600?
+                        { color: 'white', paddingTop: menuVisible ? 30 : 50, marginLeft: menuVisible ? 20 : 0 }
+                        :
+                        { color: 'white', paddingTop: menuVisible ? 20 : 30, marginLeft: menuVisible ? 10 : 0, fontSize:12 }
+                    }
+                >
+                    V. 1.0.0
+                </text>
 
             </Content>
         </MenuHamburguer>
@@ -282,6 +294,11 @@ const TitleOption = styled.text`
         margin-left: 4px;
         letter-spacing: 0px;
     }
+    @media only screen and (max-device-width: 1370px) {
+        font-size:12px;
+        margin-left: 2px;
+        letter-spacing: 0px;
+    }
 `;
 
 const Row = styled.div`
@@ -294,6 +311,10 @@ const Row = styled.div`
     @media only screen and (max-device-width: 1679px) {
         margin-top: 8px;
         margin-left: 8px;
+    }
+    @media only screen and (max-device-width: 1370px) {
+        margin-top: 2px;
+        margin-left: 2px;
     }
 `
 

@@ -89,7 +89,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             }));
             setArrayDataProcess(fotografiaData);
         }
-       
+
         if (process == 'Arquivamento') {
             const dataArray = array
             const arquivamentoData = dataArray?.map(item => ({
@@ -114,8 +114,25 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="55"
-                    height="55"
+                    width={
+                        window.screen.width > 1900 ?
+                            "55"
+                            :
+                            window.screen.width > 1580 ?
+                                "50"
+                                :
+                                "40"
+                    }
+                    height={
+                        window.screen.width > 1900 ?
+                            "55"
+                            :
+                            window.screen.width > 1580 ?
+                                "50"
+                                :
+                                "40"
+
+                    }
                     fill="currentColor"
                     className="bi bi-chevron-down"
                     viewBox="0 0 16 16"
@@ -235,7 +252,22 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
 
     return (
         <div style={{ display: 'flex', justifyContent: 'space-between', padding: 0, flexDirection: 'column', width: '100%' }} >
-            <text style={{ fontSize: window.screen.width<1900? 20 : 25, fontWeight: 'bold', marginLeft: menuBig? -50 : 50, marginTop: 0, userSelect: 'none' }} >
+            <text style={
+                {
+                    fontSize: window.screen.width > 1900 ?
+                        25
+                        :
+                        window.screen.width > 1580 ?
+                            20
+                            :
+                            16
+                    ,
+                    fontWeight: 'bold',
+                    marginLeft: menuBig ? -50 : 50,
+                    marginTop: 0, userSelect: 'none'
+                }
+            }
+            >
                 {
                     furoSelecionado.furo === 'TODOS' ?
                         'Selecione o processo para verificar o tempo de cada caixa processada (todos os furos)'
@@ -246,7 +278,22 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 5, marginLeft: 250 }} >
                 <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden' }} >
                     {processos.map((furo, index) => (
-                        <li style={{ marginLeft: 30, marginRight: 0, backgroundColor: furo.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={furo.id}>
+                        <li style={
+                            {
+                                marginLeft: 30, marginRight: 0,
+                                backgroundColor: furo.processo == process ? '#008f83' : '#c4c4c4',
+                                padding: window.screen.width > 1900 ?
+                                    8
+                                    :
+                                    window.screen.width > 1580 ?
+                                        7
+                                        :
+                                        3,
+                                borderRadius: 10
+                            }
+                        }
+                            key={furo.id}
+                        >
                             <Button>
                                 <h1 style={{ color: furo.processo !== process ? 'black' : '#f3c108', width: 120, fontWeight: 'bold', userSelect: 'none' }} onClick={() => sett(furo.processo, index)} >
                                     {furo.processo}

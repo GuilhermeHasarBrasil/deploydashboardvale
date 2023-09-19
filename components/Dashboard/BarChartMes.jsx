@@ -241,8 +241,10 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado, menuBig 
                                         :
                                         1450
                                     :
-                                    //logica para outras tamanhos de tela
+                                    window.screen.width > 1600 ?
                                     1100
+                                    :
+                                    menuBig ? 800 : 1000
                             }
                             height={345}
                             data={

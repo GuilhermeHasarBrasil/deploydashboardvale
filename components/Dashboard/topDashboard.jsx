@@ -215,13 +215,18 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
 
     return (
         <Column notMargin={true} >
-            <TitleTopDashboard selected={selected !== 'Dashboard' ? 'none' : 'flex'} >{ window.screen.width<1900? 'Informações' : 'Painel de informações '} {optionsCaixa ? 'das caixas' : 'dos furos'}: </TitleTopDashboard>
-            <div style={{ display: selected !== 'Dashboard' ? 'none' : 'flex', flexDirection: 'row', marginLeft: window.screen.width< 1900? -10 : 10, justifyContent: 'space-between', marginTop: 0, }} >
+            <TitleTopDashboard selected={selected !== 'Dashboard' ? 'none' : 'flex'} >{window.screen.width < 1900 ? 'Informações' : 'Painel de informações '} {optionsCaixa ? 'das caixas' : 'dos furos'}: </TitleTopDashboard>
+            <div style={{ display: selected !== 'Dashboard' ? 'none' : 'flex', flexDirection: 'row', marginLeft: window.screen.width < 1900 ? -10 : 10, justifyContent: 'space-between', marginTop: 0, }} >
                 {
                     optionsCaixa ?
                         <>
                             <Row  >
-                                <BgImageCards BgColor={'#206F0D'} Padding={0}>
+                                <BgImageCards BgColor={'#206F0D'} Padding={
+                                    window.screen.width > 1900 ?
+                                        0 :
+                                        window.screen.width > 1600 ? 0 :
+                                            window.screen.width < 1370 ? 6 : 6
+                                }>
                                     <img src="/assets/images/furoimg.png" />
                                 </BgImageCards>
                                 <CardInfos BgColor={'#2FAB10'} >
@@ -262,10 +267,15 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                 </CardInfos>
                             </Row>
                             <Row  >
-                                <BgImageCards BgColor={'#2760BB'} Padding={0} >
+                                <BgImageCards BgColor={'#2f4160'} Padding={
+                                    window.screen.width > 1900 ?
+                                        0 :
+                                        window.screen.width > 1600 ? 0 :
+                                            window.screen.width < 1370 ? 6 : 6
+                                } >
                                     <img src="/assets/images/furoimg.png" />
                                 </BgImageCards>
-                                <CardInfos BgColor={'#307BF4'} >
+                                <CardInfos BgColor={'#92b8c3'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>CAIXAS NÃO INICIADAS</TitleBox>
                                         <RowIconsCards >
@@ -300,7 +310,12 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                 </CardInfos>
                             </Row>
                             <Row  >
-                                <BgImageCards BgColor={'#996501'} Padding={0} >
+                                <BgImageCards BgColor={'#996501'} Padding={
+                                    window.screen.width > 1900 ?
+                                        0 :
+                                        window.screen.width > 1600 ? 0 :
+                                            window.screen.width < 1370 ? 6 : 6
+                                } >
                                     <img src="/assets/images/furoimg.png" />
                                 </BgImageCards>
                                 <CardInfos BgColor={'#E89E0E'} >
@@ -384,7 +399,12 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                         :
                         <>
                             <Row  >
-                                <BgImageCards BgColor={'#206F0D'} Padding={0}>
+                                <BgImageCards BgColor={'#206F0D'} Padding={
+                                    window.screen.width > 1900 ?
+                                        0 :
+                                        window.screen.width > 1600 ? 0 :
+                                            window.screen.width < 1370 ? 6 : 6
+                                }>
                                     <img src="/assets/images/furoimg.png" />
                                 </BgImageCards>
                                 <CardInfos BgColor={'#2FAB10'}>
@@ -425,10 +445,15 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                 </CardInfos>
                             </Row>
                             <Row  >
-                                <BgImageCards BgColor={'#2760BB'} Padding={0} >
+                                <BgImageCards BgColor={'#62728f'} Padding={
+                                    window.screen.width > 1900 ?
+                                        0 :
+                                        window.screen.width > 1600 ? 0 :
+                                            window.screen.width < 1370 ? 6 : 6
+                                } >
                                     <img src="/assets/images/furoimg.png" />
                                 </BgImageCards>
-                                <CardInfos BgColor={'#307BF4'} >
+                                <CardInfos BgColor={'#92b8c3'} >
                                     <Column grande={menuBig}>
                                         <TitleBox>FUROS NÃO INICIADOS</TitleBox>
                                         <RowIconsCards >
@@ -465,7 +490,12 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                                 </CardInfos>
                             </Row>
                             <Row  >
-                                <BgImageCards BgColor={'#996501'} Padding={0} >
+                                <BgImageCards BgColor={'#996501'} Padding={
+                                    window.screen.width > 1900 ?
+                                        0 :
+                                        window.screen.width > 1600 ? 0 :
+                                            window.screen.width < 1370 ? 6 : 6
+                                } >
                                     <img src="/assets/images/furoimg.png" />
                                 </BgImageCards>
                                 <CardInfos BgColor={'#E89E0E'} >
@@ -582,8 +612,11 @@ const TitleTopDashboard = styled.text`
     display: ${props => props.selected};
     @media only screen and (max-device-width: 1679px) {
         font-size:17px;
-       // margin-right:-30px;
         margin-left: 10px;
+    }
+    @media only screen and (max-device-width: 1370px) {
+        font-size:14px;
+        margin-left: -4px;
     }
 `
 
@@ -603,6 +636,9 @@ const CardInfos = styled.div`
     @media only screen and (max-device-width: 1679px) {
         height: 50px;
     }
+    @media only screen and (max-device-width: 1370px) {
+        height: 44px;
+    }
 `
 const BgImageCards = styled.div`
     display: flex;
@@ -615,6 +651,10 @@ const BgImageCards = styled.div`
     @media only screen and (max-device-width: 1679px) {
         width: 60px;
         height: 50px;
+    }
+    @media only screen and (max-device-width: 1370px) {
+        width: 60px;
+        height: 44px;
     }
 `
 const Row = styled.div`
@@ -629,11 +669,12 @@ const Row = styled.div`
 const Column = styled.div`
     display: flex;
     flex-direction:  ${props => (props.grande ? 'column' : 'column')};
-    margin-left: ${props => (props.notMargin ? '15px' : '15px')};
+    margin-left: ${props => (props.notMargin ? '0px' : '15px')};
     @media only screen and (max-device-width: 1679px) {
             flex-direction: column;
             margin-bottom: -6px;
             margin-top: 2px;
+            margin-left:15px;
     }
     
 `
@@ -644,6 +685,9 @@ const TitleBox = styled.div`
     user-select: none;
     @media only screen and (max-device-width: 1679px) {
         font-size: 15px;
+    }
+    @media only screen and (max-device-width: 1370px) {
+        font-size: 12px;
     }
 `
 

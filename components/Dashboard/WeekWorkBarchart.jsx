@@ -67,7 +67,7 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
         //console.log(`Milissegundos: ${milissegundos}`);
     }, [date1, date2])
 
-    const [chartHeight, setChartHeight] = useState(menuBig? 500 : 500)
+    const [chartHeight, setChartHeight] = useState(menuBig ? 500 : 500)
     const [chartWidth, setChartWidth] = useState(menuBig ? 500 : 500);
 
     useEffect(() => {
@@ -86,15 +86,15 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
     const renderCustomizedLabel = (props) => {
         const { x, y, width, height, value } = props;
         const radius = 10;
-      
+
         return (
-          <g>
-            <text style={{fontWeight:'bold', fontSize:20}} x={x + width / 2} y={y - radius} fill="#008F83" textAnchor="middle" dominantBaseline="middle">
-              {value+' caixas'}
-            </text>
-          </g>
+            <g>
+                <text style={{ fontWeight: 'bold', fontSize: 20 }} x={x + width / 2} y={y - radius} fill="#008F83" textAnchor="middle" dominantBaseline="middle">
+                    {value + ' caixas'}
+                </text>
+            </g>
         );
-      };
+    };
 
     return (
         <div style={{ marginTop: 10, marginLeft: 40 }} >
@@ -111,10 +111,36 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
                 ))}
             </ul>
             <div style={{ display: 'flex', flexDirection: 'row' }} >
-                <BarChart width={ window.screen.width === 1920 && !menuBig ? chartWidth*2.8 : chartWidth*2} height={window.screen.height!==1080 ? chartHeight-30 : chartHeight} style={{ marginLeft: 100 }} data={arrayDiasProcesso}>
+                <BarChart
+                    width={
+                        window.screen.width > 1900 ?
+                            menuBig ? 1300 : 1500
+                            :
+                            window.screen.width > 1600 ?
+                                menuBig ? 1100 : 1300
+                                :
+                                menuBig ? 1000 : 1200
+                    }
+                    height={
+                        window.screen.width > 1900 ?
+                            menuBig ? 500 : 500
+                            :
+                            window.screen.width > 1600 ?
+                                menuBig ? 420 : 420
+                                :
+                                menuBig ? 300 : 300
+                    }
+                    style=
+                    {
+                        {
+                            marginLeft: window.screen.width > 1900 ? 100 : 0
+                        }
+                    }
+                    data={arrayDiasProcesso}
+                >
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="dia" />
-                    <YAxis type="number" domain={[0, dataMax=>dataMax+2]} />
+                    <YAxis type="number" domain={[0, dataMax => dataMax + 2]} />
                     <Tooltip />
                     <Legend />
                     <Bar dataKey="Quantidade de caixas processadas" fill="#008F83" >
