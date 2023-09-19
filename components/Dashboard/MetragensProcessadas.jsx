@@ -189,7 +189,7 @@ export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuB
         arrayDataProcessConferenciaNaoIniciado, arrayDataProcessMarcacaoNaoIniciado, arrayDataProcessFotografiaNaoIniciado, arrayDataProcessArquivamentoNaoIniciado,
         furoSelecionado, furos, somaTotalDeFuro])
 
-    const colors = ['#0088FE', 'red', '#FFBB28', 'green'];
+    const colors = ['#0088FE', '#FF5F2D', '#FFBB28', 'green'];
 
     const [data, setData] = useState()
 
@@ -269,11 +269,10 @@ export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuB
                             <Tooltip />
                             <CartesianGrid stroke="#f5f5f5" />
                             <Bar dataKey="Metros" fill="#008F83" label={{ position: 'top' }}>
-                                {data.map((entry, index) => (
+                                {data?.map((entry, index) => (
                                     <Cell key={`cell-${index}`} fill={colors[index % 20]} />
                                 ))}
                             </Bar>
-                            <Legend />
                         </BarChart>
                     </div>
                     :

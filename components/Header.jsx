@@ -53,7 +53,7 @@ const FontTitle = styled.div`
 const Cont = styled.div({
     width: '100%',
     height: '4.16%',
-    backgroundColor: '#074F92',
+    backgroundColor: '#6d6262',
     display: 'flex', flexDirection: 'row',
     alignItems: 'center',
 })
