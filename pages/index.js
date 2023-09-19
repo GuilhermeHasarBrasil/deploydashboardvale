@@ -25,6 +25,7 @@ import PrintLabelNovo from "../components/ImpressaoEtiquetas/impressaoEtiquetasN
 import Users from "../components/Usuarios/Users";
 import InfoBarChartHorizontal from "../components/Dashboard/InfoBarChartHorizontal";
 import PauseTopDashboard from "../components/PauseTopDashboard";
+import MetragensProcessadas from "../components/Dashboard/MetragensProcessadas";
 
 export default function Home() {
     const { signOut, authUser, isLoading } = useAuth();
@@ -679,8 +680,8 @@ export default function Home() {
                                                                     } />
                                                                 </ContainerImgFilter>
                                                                 <ContainerTextFilter >
-                                                                    <TextFilterOption opcao={value === 0} >QUANTIDADE DE CAIXAS FINALIZADAS</TextFilterOption>
-                                                                    <TextFilterOption opcao={value === 0} style={{ fontWeight: 'bold' }} >(TOTAL DE FUROS)</TextFilterOption>
+                                                                    <TextFilterOption opcao={value === 0} >QUANTIDADE DE CAIXAS </TextFilterOption>
+                                                                    <TextFilterOption opcao={value === 0} style={{ fontWeight: 'bold' }} >FINALIZADAS POR PROCESSO</TextFilterOption>
                                                                 </ContainerTextFilter>
                                                             </ContainerItemFilter>
                                                         </FilterOption>
@@ -697,8 +698,8 @@ export default function Home() {
                                                                     } />
                                                                 </ContainerImgFilter>
                                                                 <ContainerTextFilter  >
-                                                                    <TextFilterOption opcao={value === 1}>TEMPO DE PROCESSAMENTO DE CADA</TextFilterOption>
-                                                                    <TextFilterOption opcao={value === 1} style={{ fontWeight: 'bold' }} >CAIXA POR PROCESSO</TextFilterOption>
+                                                                    <TextFilterOption opcao={value === 1}>TEMPO DE PROCESSAMENTO DE</TextFilterOption>
+                                                                    <TextFilterOption opcao={value === 1} style={{ fontWeight: 'bold' }} > CADA CAIXA POR PROCESSO</TextFilterOption>
                                                                 </ContainerTextFilter>
                                                             </ContainerItemFilter>
                                                         </FilterOption>
@@ -715,8 +716,8 @@ export default function Home() {
                                                                     } />
                                                                 </ContainerImgFilter>
                                                                 <ContainerTextFilter >
-                                                                    <TextFilterOption opcao={value === 2} >CAIXAS PROCESSADAS POR DIA</TextFilterOption>
-                                                                    <TextFilterOption opcao={value === 2} style={{ fontWeight: 'bold' }} >NA SEMANA</TextFilterOption>
+                                                                    <TextFilterOption opcao={value === 2} >CAIXAS PROCESSADAS POR DIA </TextFilterOption>
+                                                                    <TextFilterOption opcao={value === 2} style={{ fontWeight: 'bold' }} > NA SEMANA</TextFilterOption>
                                                                 </ContainerTextFilter>
                                                             </ContainerItemFilter>
                                                         </FilterOption>
@@ -735,6 +736,24 @@ export default function Home() {
                                                                 <ContainerTextFilter  >
                                                                     <TextFilterOption opcao={value === 3} >PROCESSAMENTO POR PERÍODO EM</TextFilterOption>
                                                                     <TextFilterOption opcao={value === 3} style={{ fontWeight: 'bold' }} >METROS (TODAS AS CAIXAS)</TextFilterOption>
+                                                                </ContainerTextFilter>
+                                                            </ContainerItemFilter>
+                                                        </FilterOption>
+                                                        <FilterOption opcao={value === 4} onClick={() => handleChange(4)}>
+                                                            <ContainerItemFilter >
+                                                                <ContainerImgFilter >
+                                                                    <img src="assets/value5.png" style={
+                                                                        {
+                                                                            marginRight: 4, width: window.screen.width > 1900 ?
+                                                                                50 :
+                                                                                window.screen.width > 1600 ? 45 :
+                                                                                    window.screen.width < 1370 ? 30 : 30, height: 'auto'
+                                                                        }
+                                                                    } />
+                                                                </ContainerImgFilter>
+                                                                <ContainerTextFilter  >
+                                                                    <TextFilterOption opcao={value === 4} >METRAGEM PROCESSADA EM</TextFilterOption>
+                                                                    <TextFilterOption opcao={value === 4} style={{ fontWeight: 'bold' }} > CADA ETAPA</TextFilterOption>
                                                                 </ContainerTextFilter>
                                                             </ContainerItemFilter>
                                                         </FilterOption>
@@ -777,8 +796,8 @@ export default function Home() {
                                                     <text style={{ fontSize: 20, fontWeight: 'bold', userSelect: 'none' }} >
                                                         Quantidade de caixas finalizadas por processo
                                                     </text>
-                                                    <text style={{ margin: 5, fontWeight: 'bold', marginLeft: 55, userSelect: 'none' }} >
-                                                        Total {<SquareIcon style={{ color: '#ef3a25', userSelect: 'none' }} />}
+                                                    <text style={{ margin: 5, fontWeight: 'bold', marginLeft: 58, userSelect: 'none' }} >
+                                                        Total {<SquareIcon style={{ color: '#ff5f2d', userSelect: 'none' }} />}
                                                     </text>
                                                     <text style={{ margin: 5, fontWeight: 'bold', userSelect: 'none' }} >
                                                         Finalizadas {<SquareIcon style={{ color: '#008f83', userSelect: 'none' }} />}
@@ -852,6 +871,19 @@ export default function Home() {
                                                 filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
                                                 chipBoxesInternos={chipBoxesInternos}
                                                 authUser={authUser} menuBig={menuBig}
+                                            />
+                                            :
+                                            <></>
+                                    }
+                                    {
+                                        value === 4 ?
+                                            <MetragensProcessadas
+                                                chipBoxes={chipBoxes} furoSelecionado={furoSelecionado}
+                                                filtroConferencia={filtroConferencia} filtroMarcacao={filtroMarcacao}
+                                                filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade}
+                                                filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
+                                                chipBoxesInternos={chipBoxesInternos}
+                                                authUser={authUser} menuBig={menuBig} furos = {furos}
                                             />
                                             :
                                             <></>
@@ -971,6 +1003,7 @@ const FilterOption = styled.button`
     transition: opacity 0.3s;
     user-select: none;
     border-radius: 10px;
+    min-width: 300px;
     &:hover {
         opacity: 0.7;
     }
@@ -1009,7 +1042,7 @@ const ContainerTextFilter = styled.div`
     align-items: center;
 `
 const TextFilterOption = styled.text`
-    font-size: 16px;
+    font-size: 14px;
     font-weight: bold;
     margin-left: 4px;
     margin-right: 4px;

@@ -48,7 +48,7 @@ const CustomHorizontalBarChart = ({ data, maxValue, menuBig }) => {
       <XAxis type="number" domain={[0, maxValue]} />
       <YAxis dataKey="name" type="category" width={140} fontSize={18} fontWeight={'bold'} />
       <Tooltip />
-      <Bar barSize={50} dataKey="processed" fill="#008f83" name="Processados" background={{ fill: '#ef3a25' }}>
+      <Bar barSize={50} dataKey="processed" fill="#008f83" name="Processados" background={{ fill: '#ff5f2d' }}>
         {data.map((entry, index) => (
           <text
             key={index}
