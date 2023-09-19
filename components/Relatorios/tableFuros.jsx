@@ -97,16 +97,28 @@ export default function TableFuro({ furos }) {
     }
 
     return (
-        <TableContainer sx={{ width: 900, marginTop:5 }} component={Paper}>
+        <TableContainer sx={{ width: 900, marginTop: 5 }} component={Paper}>
             <Table sx={{ width: 900 }} aria-label="custom pagination table">
                 <TableHead style={{ backgroundColor: '#D9D9D9' }} >
                     <TableRow>
-                        <TableCell style={{ fontWeight: 'bold', userSelect:'none' }} >{<text style={{ color: '#D9D9D9', userSelect:'none' }} >__</text>} Furo</TableCell>
-                        <TableCell style={{ fontWeight: 'bold', userSelect:'none' }} >Projeto</TableCell>
-                        <TableCell style={{ fontWeight: 'bold', userSelect:'none' }} >Finalizado</TableCell>
-                        <TableCell style={{ fontWeight: 'bold', userSelect:'none' }} >Conferido</TableCell>
-                        <TableCell style={{ fontWeight: 'bold', userSelect:'none' }} > {<text style={{ color: '#D9D9D9', userSelect:'none', userSelect:'none' }} >_</text>} Data de {<br />} importação</TableCell>
-                        <TableCell style={{ fontWeight: 'bold', userSelect:'none' }} >Quantidade {<br />}{<text style={{ color: '#D9D9D9', userSelect:'none' }} >.</text>} de caixas</TableCell>
+                        <TableCell style={{ fontWeight: 'bold', userSelect: 'none' }} >
+                            {<text style={{ color: '#D9D9D9', userSelect: 'none' }} >__</text>} Furo
+                        </TableCell>
+                        <TableCell style={{ fontWeight: 'bold', userSelect: 'none' }} >
+                            Projeto
+                        </TableCell>
+                        <TableCell style={{ fontWeight: 'bold', userSelect: 'none' }} >
+                            Finalizado
+                        </TableCell>
+                        <TableCell style={{ fontWeight: 'bold', userSelect: 'none' }} >
+                            Conferido
+                        </TableCell>
+                        <TableCell style={{ fontWeight: 'bold', userSelect: 'none' }} >
+                            {<text style={{ color: '#D9D9D9', userSelect: 'none', userSelect: 'none' }} >_</text>} Data de {<br />} importação
+                        </TableCell>
+                        <TableCell style={{ fontWeight: 'bold', userSelect: 'none' }} >
+                            Quantidade {<br />}{<text style={{ color: '#D9D9D9', userSelect: 'none' }} >.</text>} de caixas
+                        </TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -116,8 +128,8 @@ export default function TableFuro({ furos }) {
                     ).map((row) => (
                         <TableRow key={row.name}>
                             <TableCell>{row.numero}</TableCell>
-                            <TableCell> {<text style={{ color: 'white', userSelect:'none' }} >_</text>} {row.projeto}</TableCell>
-                            <TableCell> {<text style={{ color: 'white', userSelect:'none' }} >____</text>}
+                            <TableCell> {<text style={{ color: 'white', userSelect: 'none' }} >_</text>} {row.projeto}</TableCell>
+                            <TableCell> {<text style={{ color: 'white', userSelect: 'none' }} >____</text>}
                                 {
                                     !row.dataFinalizado ?
                                         <CloseCircleSharp
@@ -137,7 +149,7 @@ export default function TableFuro({ furos }) {
                                         />
                                 }
                             </TableCell>
-                            <TableCell> {<text style={{ color: 'white', userSelect:'none' }} >____</text>}
+                            <TableCell> {<text style={{ color: 'white', userSelect: 'none' }} >____</text>}
                                 {
                                     !row.conferido ?
                                         <CloseCircleSharp
@@ -157,8 +169,8 @@ export default function TableFuro({ furos }) {
                                         />
                                 }
                             </TableCell>
-                            <TableCell>{<text style={{ color: 'white', userSelect:'none' }} >_.</text>}{formatTimestamp(row.createdAt)}</TableCell>
-                            <TableCell>{<text style={{ color: 'white', userSelect:'none' }} >____</text>}{row.profundidade}</TableCell>
+                            <TableCell>{<text style={{ color: 'white', userSelect: 'none' }} >_.</text>}{formatTimestamp(row.createdAt)}</TableCell>
+                            <TableCell>{<text style={{ color: 'white', userSelect: 'none' }} >____</text>}{row.profundidade}</TableCell>
                         </TableRow>
                     ))}
                     {emptyRows > 0 && (
