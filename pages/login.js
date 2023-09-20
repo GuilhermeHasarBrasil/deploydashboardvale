@@ -16,7 +16,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState(null);
     const { authUser, isLoading } = useAuth();
 
-    const [emptyEmail, setEmptyEmail] = useState(false);
+    const [recoverEmailSend, setRecoverEmailSend] = useState(false);
 
     useEffect(() => {
         if (!isLoading && authUser) {
@@ -46,11 +46,16 @@ const LoginForm = () => {
 
     const triggerResetEmail = async () => {
         if (email.length < 7) {
-            window.prompt('Insira o email para recuperação no campo de email')
-            setEmptyEmail(true)
             return
         } else {
-            await sendPasswordResetEmail(auth, email);
+            try {
+                await sendPasswordResetEmail(auth, email);
+                setRecoverEmailSend(true)
+            } catch (error) {
+                setRecoverEmailSend(false)
+                console.log(error)
+                window.alert("Algum erro ocorreu. Contate o suporte Hasar", error)
+            }
         }
     }
 
@@ -133,7 +138,7 @@ const LoginForm = () => {
                         </StyledButton>
                     </form>
 
-                    <button style={{ marginTop: 20 }} type="button" onClick={triggerResetEmail}   disabled={!email || email.length < 7 || !email.includes('@')}>
+                    <button style={{ marginTop: 20 }} type="button" onClick={triggerResetEmail} disabled={!email || email.length < 7 || !email.includes('@')}>
                         <text style={{
                             color: '#12969E', fontSize: 22, fontWeight: 'bold', marginLeft: 0, marginTop: 40, textShadow: '-0.7px -0.7px 0 #fff, 0.7px -0.7px 0 #fff, -0.7px 0.7px 0 #fff, 0.7px 0.7px 0 #fff',
                             fontFamily: 'Poppins',
@@ -142,6 +147,12 @@ const LoginForm = () => {
                     {
                         erroRecoverPassword ?
                             <div style={{ backgroundColor: "#074F92", padding: 10, borderRadius: 5 }} ><text style={{ color: 'white', fontWeight: 'bold' }} >O email não está cadastrado ou a senha está incorreta!</text></div>
+                            :
+                            <></>
+                    }
+                    {
+                        recoverEmailSend ?
+                            <div style={{ backgroundColor: "#074F92", padding: 10, borderRadius: 5 }} ><text style={{ color: 'white', fontWeight: 'bold' }} >O email de recuperação foi enviado para {email}!</text></div>
                             :
                             <></>
                     }
