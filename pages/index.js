@@ -668,7 +668,7 @@ export default function Home() {
                                                         Filtros:
                                                     </text>
                                                     <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', width: '100%' }} >
-                                                        <FilterOption opcao={value === 0} onClick={() => handleChange(0)} >
+                                                        <FilterOption menuBig={menuBig} opcao={value === 0} onClick={() => handleChange(0)} >
                                                             <ContainerItemFilter >
                                                                 <ContainerImgFilter >
                                                                     <img src="assets/value1.png" style={
@@ -681,12 +681,12 @@ export default function Home() {
                                                                     } />
                                                                 </ContainerImgFilter>
                                                                 <ContainerTextFilter >
-                                                                    <TextFilterOption opcao={value === 0} >QUANTIDADE DE CAIXAS </TextFilterOption>
-                                                                    <TextFilterOption opcao={value === 0} style={{ fontWeight: 'bold' }} >FINALIZADAS POR PROCESSO</TextFilterOption>
+                                                                    <TextFilterOption menuBig={menuBig} opcao={value === 0} >QUANTIDADE DE CAIXAS </TextFilterOption>
+                                                                    <TextFilterOption menuBig={menuBig} opcao={value === 0} style={{ fontWeight: 'bold' }} >FINALIZADAS POR PROCESSO</TextFilterOption>
                                                                 </ContainerTextFilter>
                                                             </ContainerItemFilter>
                                                         </FilterOption>
-                                                        <FilterOption opcao={value === 1} onClick={() => handleChange(1)}>
+                                                        <FilterOption menuBig={menuBig} opcao={value === 1} onClick={() => handleChange(1)}>
                                                             <ContainerItemFilter >
                                                                 <ContainerImgFilter >
                                                                     <img src="assets/value2.png" style={
@@ -699,12 +699,12 @@ export default function Home() {
                                                                     } />
                                                                 </ContainerImgFilter>
                                                                 <ContainerTextFilter  >
-                                                                    <TextFilterOption opcao={value === 1}>TEMPO DE PROCESSAMENTO DE</TextFilterOption>
-                                                                    <TextFilterOption opcao={value === 1} style={{ fontWeight: 'bold' }} > CADA CAIXA POR PROCESSO</TextFilterOption>
+                                                                    <TextFilterOption menuBig={menuBig} opcao={value === 1}>TEMPO DE PROCESSAMENTO DE</TextFilterOption>
+                                                                    <TextFilterOption menuBig={menuBig} opcao={value === 1} style={{ fontWeight: 'bold' }} > CADA CAIXA POR PROCESSO</TextFilterOption>
                                                                 </ContainerTextFilter>
                                                             </ContainerItemFilter>
                                                         </FilterOption>
-                                                        <FilterOption opcao={value === 2} onClick={() => handleChange(2)}>
+                                                        <FilterOption menuBig={menuBig} opcao={value === 2} onClick={() => handleChange(2)}>
                                                             <ContainerItemFilter >
                                                                 <ContainerImgFilter >
                                                                     <img src="assets/value3.png" style={
@@ -717,12 +717,12 @@ export default function Home() {
                                                                     } />
                                                                 </ContainerImgFilter>
                                                                 <ContainerTextFilter >
-                                                                    <TextFilterOption opcao={value === 2} >CAIXAS PROCESSADAS POR DIA </TextFilterOption>
-                                                                    <TextFilterOption opcao={value === 2} style={{ fontWeight: 'bold' }} > NA SEMANA</TextFilterOption>
+                                                                    <TextFilterOption menuBig={menuBig} opcao={value === 2} >CAIXAS PROCESSADAS POR DIA </TextFilterOption>
+                                                                    <TextFilterOption menuBig={menuBig} opcao={value === 2} style={{ fontWeight: 'bold' }} > NA SEMANA</TextFilterOption>
                                                                 </ContainerTextFilter>
                                                             </ContainerItemFilter>
                                                         </FilterOption>
-                                                        <FilterOption opcao={value === 3} onClick={() => handleChange(3)}>
+                                                        <FilterOption menuBig={menuBig} opcao={value === 3} onClick={() => handleChange(3)}>
                                                             <ContainerItemFilter >
                                                                 <ContainerImgFilter >
                                                                     <img src="assets/value4.png" style={
@@ -735,26 +735,26 @@ export default function Home() {
                                                                     } />
                                                                 </ContainerImgFilter>
                                                                 <ContainerTextFilter  >
-                                                                    <TextFilterOption opcao={value === 3} >PROCESSAMENTO POR PERÍODO EM</TextFilterOption>
-                                                                    <TextFilterOption opcao={value === 3} style={{ fontWeight: 'bold' }} >METROS (TODAS AS CAIXAS)</TextFilterOption>
+                                                                    <TextFilterOption menuBig={menuBig} opcao={value === 3} >PROCESSAMENTO POR PERÍODO EM</TextFilterOption>
+                                                                    <TextFilterOption menuBig={menuBig} opcao={value === 3} style={{ fontWeight: 'bold' }} >METROS (TODAS AS CAIXAS)</TextFilterOption>
                                                                 </ContainerTextFilter>
                                                             </ContainerItemFilter>
                                                         </FilterOption>
-                                                        <FilterOption opcao={value === 4} onClick={() => handleChange(4)}>
+                                                        <FilterOption menuBig={menuBig} opcao={value === 4} onClick={() => handleChange(4)}>
                                                             <ContainerItemFilter >
                                                                 <ContainerImgFilter >
                                                                     <img src="assets/value5.png" style={
                                                                         {
                                                                             marginRight: 4, width: window.screen.width > 1900 ?
-                                                                                50 :
-                                                                                window.screen.width > 1600 ? 45 :
+                                                                                45 :
+                                                                                window.screen.width > 1600 ? 40 :
                                                                                     window.screen.width < 1370 ? 30 : 30, height: 'auto'
                                                                         }
                                                                     } />
                                                                 </ContainerImgFilter>
                                                                 <ContainerTextFilter  >
-                                                                    <TextFilterOption opcao={value === 4} >METRAGEM PROCESSADA EM</TextFilterOption>
-                                                                    <TextFilterOption opcao={value === 4} style={{ fontWeight: 'bold' }} > CADA ETAPA</TextFilterOption>
+                                                                    <TextFilterOption menuBig={menuBig} opcao={value === 4} >METRAGEM PROCESSADA EM</TextFilterOption>
+                                                                    <TextFilterOption menuBig={menuBig} opcao={value === 4} style={{ fontWeight: 'bold' }} > CADA ETAPA</TextFilterOption>
                                                                 </ContainerTextFilter>
                                                             </ContainerItemFilter>
                                                         </FilterOption>
@@ -1007,7 +1007,7 @@ const FilterOption = styled.button`
     transition: opacity 0.3s;
     user-select: none;
     border-radius: 10px;
-    min-width: 300px;
+    min-width: ${props=> props.menuBig? 270+'px' : 300+'px'};
     &:hover {
         opacity: 0.7;
     }
@@ -1046,15 +1046,16 @@ const ContainerTextFilter = styled.div`
     align-items: center;
 `
 const TextFilterOption = styled.text`
-    font-size: 14px;
+    font-size: ${props=> props.menuBig ? 12+'px' : 14 + 'px'};
     font-weight: bold;
     margin-left: 4px;
     margin-right: 4px;
     color: ${props => (props.opcao ? 'white' : 'black')};
     @media only screen and (max-device-width: 1679px) {
-            font-size: 12px;
+            font-size: ${props=> props.menuBig ? 10+'px' : 12 + 'px'};
         }
         @media only screen and (max-device-width: 1370px) {
-            font-size: 10px;
+            font-size: ${props=> props.menuBig ? 9+'px' : 10 + 'px'};
+
         }
 `

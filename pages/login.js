@@ -16,6 +16,8 @@ const LoginForm = () => {
     const [password, setPassword] = useState(null);
     const { authUser, isLoading } = useAuth();
 
+    const [emptyEmail, setEmptyEmail] = useState(false);
+
     useEffect(() => {
         if (!isLoading && authUser) {
             router.push("/");
@@ -43,7 +45,13 @@ const LoginForm = () => {
     }, [erroRecoverPassword])
 
     const triggerResetEmail = async () => {
-        await sendPasswordResetEmail(auth, email);
+        if (email.length < 7) {
+            window.prompt('Insira o email para recuperação no campo de email')
+            setEmptyEmail(true)
+            return
+        } else {
+            await sendPasswordResetEmail(auth, email);
+        }
     }
 
     return isLoading || (!isLoading && !!authUser) ? (
@@ -56,13 +64,29 @@ const LoginForm = () => {
 
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                     <img src='/assets/valelogin.png' style={{ width: 600 }} />
-                    <text style={{ color: '#12969E', fontSize: 36, fontWeight: 'bold', textShadow: '3px 3px #000', marginLeft: 20 }} >HSD - HASAR Sample Data</text>
+                    <text style={
+                        {
+                            color: '#12969E', fontSize: 36,
+                            fontWeight: 'bold',
+                            textShadow: '-1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000',
+                            fontFamily: 'Poppins', marginLeft: 20
+                        }
+                    } >
+                        HSD - HASAR Sample Data
+                    </text>
                 </div>
 
                 <div style={{ marginLeft: '25%', width: 600, display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
                     <form onSubmit={(e) => e.preventDefault()}>
                         <div className="mt-10 pl-1 flex flex-col">
-                            <label style={{ color: '#12969E', fontWeight: 'bold', fontSize: 24, textShadow: '1px 1px #000',WebkitTextStroke: '0.5px  #000', letterSpacing: 2 }} >LOGIN</label>
+                            <label style={{
+                                color: '#12969E', fontWeight: 'bold', fontSize: 24,
+                                textShadow: '-0.7px -0.7px 0 #fff, 0.7px -0.7px 0 #fff, -0.7px 0.7px 0 #fff, 0.7px 0.7px 0 #fff',
+                                fontFamily: 'Poppins', marginLeft: 0,
+                                letterSpacing: 2
+                            }} >
+                                LOGIN
+                            </label>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} >
                                 <input
                                     type="email"
@@ -81,7 +105,12 @@ const LoginForm = () => {
                             </div>
                         </div>
                         <div className="mt-10 pl-1 flex flex-col">
-                            <label style={{ color: '#12969E', fontWeight: 'bold', fontSize: 24, textShadow: '1px 1px #000',WebkitTextStroke: '0.5px  #000', letterSpacing: 2 }} >SENHA</label>
+                            <label style={{
+                                color: '#12969E', fontWeight: 'bold',
+                                fontSize: 24,
+                                textShadow: '-0.7px -0.7px 0 #fff, 0.7px -0.7px 0 #fff, -0.7px 0.7px 0 #fff, 0.7px 0.7px 0 #fff',
+                                fontFamily: 'Poppins', marginLeft: 0, letterSpacing: 2
+                            }} >SENHA</label>
                             <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} >
                                 <input
                                     type="password"
@@ -104,12 +133,15 @@ const LoginForm = () => {
                         </StyledButton>
                     </form>
 
-                    <button style={{ marginTop: 20 }} type="button" onClick={triggerResetEmail}>
-                        <text style={{ color: '#12969E', fontSize: 22, fontWeight: 'bold', WebkitTextStroke: '0.5px  #000', marginLeft: 0, marginTop: 40 }}>Esqueceu sua senha? Clique para recuperar</text>
+                    <button style={{ marginTop: 20 }} type="button" onClick={triggerResetEmail}   disabled={!email || email.length < 7 || !email.includes('@')}>
+                        <text style={{
+                            color: '#12969E', fontSize: 22, fontWeight: 'bold', marginLeft: 0, marginTop: 40, textShadow: '-0.7px -0.7px 0 #fff, 0.7px -0.7px 0 #fff, -0.7px 0.7px 0 #fff, 0.7px 0.7px 0 #fff',
+                            fontFamily: 'Poppins',
+                        }}>Esqueceu sua senha? Clique para recuperar</text>
                     </button>
                     {
                         erroRecoverPassword ?
-                            <div style={{ backgroundColor: "#074F92", padding: 10, borderRadius: 5 }} ><text style={{ color: 'white', fontWeight: 'bold' }} >O email não está cadastrado! Verifique o email inserido.</text></div>
+                            <div style={{ backgroundColor: "#074F92", padding: 10, borderRadius: 5 }} ><text style={{ color: 'white', fontWeight: 'bold' }} >O email não está cadastrado ou a senha está incorreta!</text></div>
                             :
                             <></>
                     }

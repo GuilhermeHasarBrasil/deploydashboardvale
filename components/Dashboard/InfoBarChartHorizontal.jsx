@@ -188,8 +188,8 @@ const Number = styled.text`
     color: white;
     font-weight: bold;
     user-select: none;
-    -webkit-text-stroke-color: white;
-    -webkit-text-stroke-width: 0.2px;
+    text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000;
+    font-family: 'Poppins', sans-serif;
     display: flex;
     @media only screen and (max-device-width: 1679px) {
                 font-size: 30px;

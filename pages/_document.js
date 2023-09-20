@@ -9,6 +9,10 @@ export default function Document() {
       />
       <script type="text/javascript" src="/zebra/BrowserPrint.js" async></script>
       <script type="text/javascript" src="/zebra/BrowserPrint-Zebra.js" async></script>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap"
+        rel="stylesheet"
+      />
       <Head />
       <body>
         <Main />

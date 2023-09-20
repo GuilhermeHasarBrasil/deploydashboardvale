@@ -698,6 +698,8 @@ const Number = styled.text`
     font-weight: bold;
     user-select: none;
     margin-right: 20px;
+    text-shadow: -1.5px -1.5px 0 #000, 1.5px -1.5px 0 #000, -1.5px 1.5px 0 #000, 1.5px 1.5px 0 #000;
+    font-family: 'Poppins', sans-serif;
     @media only screen and (max-device-width: 1679px) {
         font-size:19px;
         user-select: none;
