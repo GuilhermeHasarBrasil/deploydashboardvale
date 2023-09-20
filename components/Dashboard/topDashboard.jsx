@@ -577,10 +577,10 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                         </>
                 }
                 <Button onClick={handleOptionChange} >
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }} >
+                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', backgroundColor:'##008f83' }} >
                         <TextButtonSwap>Alternar<br></br>para {!optionsCaixa ? 'caixa' : 'furo'}</TextButtonSwap>
                         <SwapVerticalOutline
-                            color={'#00000'}
+                            color={'#fff'}
                             title={''}
                             height="40px"
                             width="40px"
@@ -596,6 +596,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
 }
 const TextButtonSwap = styled.text`
     display: flex;
+    color: white;
     font-weight: 700;
     @media only screen and (max-device-width: 1679px) {
         display: none;
@@ -661,7 +662,7 @@ const Row = styled.div`
     display: flex;
     flex-direction: row; 
     //margin-left : 25px;
-    margin-right: 25px;
+    margin-right: 15px;
     @media only screen and (max-device-width: 1679px) {
         margin-right: 2px;
     }
@@ -709,6 +710,10 @@ const Button = styled.button`
     align-items: center;
     justify-content: center;
     margin-right: 20px;
+    background-color: #008F83;
+    padding: 6px;
+    padding-left: 9px;
+    border-radius: 6px;
     &:hover {
         opacity: 0.2;
     }
@@ -716,6 +721,15 @@ const Button = styled.button`
         width: 50px;
         height: 50px;
         margin-right: 0px;
+        padding: 3px;
+        padding-left: 3px;
+    }
+    @media only screen and (max-device-width: 1679px) {
+        width: 50px;
+        height: 50px;
+        margin-right: 0px;
+        padding: 1px;
+        padding-left: 1px;
     }
 `
 const ObjectList = styled.ul`

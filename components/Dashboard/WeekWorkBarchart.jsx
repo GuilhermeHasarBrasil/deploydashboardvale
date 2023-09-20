@@ -98,7 +98,7 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
 
     return (
         <div style={{ marginTop: 10, marginLeft: 40 }} >
-            <h1 style={{ marginLeft: 30, marginTop: 10, marginBottom: 5, fontSize: 20, fontWeight: 'bold', userSelect: 'none' }} >Caixas finalizadas por dia da semana (por processo)</h1>
+            <h1 style={{ marginLeft: 30, marginTop: 10, marginBottom: 5, fontSize: window.screen.width > 1900 ? 20 : window.screen.width>1580? 18 : 14, fontWeight: 'bold', userSelect: 'none' }} >Caixas finalizadas por dia da semana em cada etapa</h1>
             <ul style={{ display: 'flex', flexDirection: 'row', overflowX: 'auto', overflow: 'hidden', marginLeft: 120, marginBottom: 10 }} >
                 {processos.map((furo, index) => (
                     <li style={{ marginLeft: 15, marginRight: 0, backgroundColor: furo.processo == process ? '#008f83' : '#c4c4c4', padding: 8, borderRadius: 10 }} key={furo.id}>
