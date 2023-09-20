@@ -40,12 +40,12 @@ const PauseButton = () => {
 
   return (
 
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} >
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }} >
       <text style={
         {
           fontSize: window.screen.width>1900? 25 : window.screen.width>1580? 22 : 18, fontWeight: 'bold',
           marginTop: window.screen.width > 1900 ? 200 : window.screen.width > 1580 ? 100 : 40,
-          userSelect: 'none'
+          userSelect: 'none', marginLeft:30
         }
       }
       >
@@ -53,13 +53,13 @@ const PauseButton = () => {
       </text>
       <div style={
         {
-          display: 'flex', marginTop: '4%',
+          display: 'flex', marginTop: '3%',
           flexDirection: 'column', alignItems: 'center', justifyContent: 'space-around',
-          width: '70%', marginLeft: '15%', marginRight: '15%',
+          width: '60%', marginLeft: '20%', marginRight: '20%',
           borderWidth: window.screen.width>1900? 30 : window.screen.width>1580? 22 : 18,
           borderRadius: 20,
           borderColor: '#008F83',
-          padding: window.screen.width>1900? 80 : window.screen.width>1580? 60 : 40
+          padding: window.screen.width>1900? 70 : window.screen.width>1580? 60 : 40
         }
       } >
 
