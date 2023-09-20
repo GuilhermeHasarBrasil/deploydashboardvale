@@ -884,7 +884,7 @@ export default function Home() {
                                                 filtroFotografia={filtroFotografia} filtroDensidade={filtroDensidade}
                                                 filtroSerragem={filtroSerragem} filtroArquivamento={filtroArquivamento}
                                                 chipBoxesInternos={chipBoxesInternos}
-                                                authUser={authUser} menuBig={menuBig} furos = {furos}
+                                                authUser={authUser} menuBig={menuBig} furos={furos}
                                             />
                                             :
                                             <></>
@@ -971,7 +971,7 @@ export default function Home() {
                                 :
                                 <></>
                         }
-                                        <Footer/>
+                        <Footer />
 
                     </Content>
                 </RenderFunctions>
@@ -1007,10 +1007,16 @@ const FilterOption = styled.button`
     transition: opacity 0.3s;
     user-select: none;
     border-radius: 10px;
-    min-width: ${props=> props.menuBig? 270+'px' : 300+'px'};
+    min-width: ${props => props.menuBig ? 270 + 'px' : 300 + 'px'};
     &:hover {
         opacity: 0.7;
     }
+    @media only screen and (max-device-width: 1679px) {
+        min-width: ${props => props.menuBig ? 250 + 'px' : 270 + 'px'};       
+     }
+        @media only screen and (max-device-width: 1370px) {
+            min-width: ${props => props.menuBig ? 180 + 'px' : 230 + 'px'};  
+        }
 `;
 const ContainerItemFilter = styled.div`
     display: flex;
@@ -1046,16 +1052,16 @@ const ContainerTextFilter = styled.div`
     align-items: center;
 `
 const TextFilterOption = styled.text`
-    font-size: ${props=> props.menuBig ? 12+'px' : 14 + 'px'};
+    font-size: ${props => props.menuBig ? 12 + 'px' : 14 + 'px'};
     font-weight: bold;
     margin-left: 4px;
     margin-right: 4px;
     color: ${props => (props.opcao ? 'white' : 'black')};
     @media only screen and (max-device-width: 1679px) {
-            font-size: ${props=> props.menuBig ? 10+'px' : 12 + 'px'};
+            font-size: ${props => props.menuBig ? 10 + 'px' : 12 + 'px'};
         }
         @media only screen and (max-device-width: 1370px) {
-            font-size: ${props=> props.menuBig ? 9+'px' : 10 + 'px'};
+            font-size: ${props => props.menuBig ? 9 + 'px' : 10 + 'px'};
 
         }
 `

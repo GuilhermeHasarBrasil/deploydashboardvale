@@ -582,8 +582,8 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                         <SwapVerticalOutline
                             color={'#fff'}
                             title={''}
-                            height="40px"
-                            width="40px"
+                            height={window.screen.width > 1900 ? '40px' : '35px'}
+                            width={window.screen.width > 1900 ? '40px' : '35px'}
                             style={{ marginRight: 0 }}
                         />
                     </div>
@@ -594,15 +594,6 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
 
     )
 }
-const TextButtonSwap = styled.text`
-    display: flex;
-    color: white;
-    font-weight: 700;
-    @media only screen and (max-device-width: 1679px) {
-        display: none;
-    }
-`
-
 const TitleTopDashboard = styled.text`
     
     font-size: 18px;
@@ -706,6 +697,12 @@ const Number = styled.text`
         margin-right: 0px;
         margin-top: 10px;
     }
+    @media only screen and (max-device-width: 1370px) {
+        font-size:19px;
+        user-select: none;
+        margin-right: 0px;
+        margin-top: 10px;
+    }
 `
 const Button = styled.button`
     transition: opacity 0.3s;
@@ -722,18 +719,27 @@ const Button = styled.button`
     @media only screen and (max-device-width: 1679px) {
         width: 50px;
         height: 50px;
-        margin-right: 0px;
-        padding: 3px;
-        padding-left: 3px;
+        margin-right: 7px;
+        padding: 0px;
+        padding-left: 8px;
     }
-    @media only screen and (max-device-width: 1679px) {
+    @media only screen and (max-device-width: 1370px) {
         width: 50px;
         height: 50px;
-        margin-right: 0px;
-        padding: 1px;
-        padding-left: 1px;
+        margin-right: 4px;
+        padding: 0px;
+        padding-left: 8px;
     }
 `
+const TextButtonSwap = styled.text`
+    display: flex;
+    color: white;
+    font-weight: 700;
+    @media only screen and (max-device-width: 1679px) {
+        display: none;
+    }
+`
+
 const ObjectList = styled.ul`
   list-style-type: none;
   padding: 6px; /* Adicione "px" ao valor do padding */

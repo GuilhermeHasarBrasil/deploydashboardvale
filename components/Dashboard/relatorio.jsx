@@ -310,7 +310,7 @@ export default function Relatorio({ chipBoxes, furoSelecionado, filtroConferenci
                             <CustomBarChart data={selectedDateRange ? arrayDataProcessDateFilter : arrayDataProcess} menuBig={menuBig} />
                             {/* <text style={{ color: "#777777", fontSize: 20, fontWeight: 'bold', marginLeft:30,  }} >Caixas</text> */}
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:-30 }} >
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop:window.screen.width>1900? -30 : window.screen.width>1580? 0 : 0 }} >
                             <text style={{ marginLeft: 15, fontWeight: 'bold' }} >Filtrar por data</text>
                             <DatePickerWrapper>
                                 <DatePicker

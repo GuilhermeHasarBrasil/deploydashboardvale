@@ -244,12 +244,20 @@ export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuB
                                         :
                                         1450
                                     :
-                                    window.screen.width > 1600 ?
+                                    window.screen.width > 1580 ?
                                         1100
                                         :
                                         menuBig ? 800 : 1000
                             }
-                            height={500}
+                            height={
+                                window.screen.width > 1900 ?
+                                        500
+                                    :
+                                    window.screen.width > 1580 ?
+                                        490
+                                        :
+                                         300
+                            }
                             data={
                                 process === 'Conferência' ? conferenciaData
                                     :

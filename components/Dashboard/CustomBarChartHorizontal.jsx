@@ -39,8 +39,18 @@ const CustomHorizontalBarChart = ({ data, maxValue, menuBig }) => {
 
   return (
     <BarChart
-      width={window.screen.width > 1900 ? (menuBig ? chartWidth - 850 : chartWidth - 610) : window.screen.width > 1580 ? (menuBig ? chartWidth - 700 : chartWidth - 600) : (menuBig ? chartWidth - 650 : chartWidth - 500)}
-      height={window.screen.width > 1900 ? data.length * 50 + 250 : window.screen.width > 1580 ? data.length * 50 + 250 : data.length * 50 + 100}
+      width={
+        window.screen.width>1920 ?
+        200 :
+        window.screen.width > 1900 ?
+          (menuBig ? chartWidth - 850 : chartWidth - 610) : window.screen.width > 1580 ?
+            (menuBig ? chartWidth - 700 : chartWidth - 600) : (menuBig ? chartWidth - 650 : chartWidth - 500)
+      }
+      height={
+        window.screen.width > 1900 ?
+          data.length * 50 + 250 : window.screen.width > 1580 ?
+            data.length * 50 + 250 : data.length * 50 + 50
+      }
       data={data}
       layout="vertical"
     >

@@ -152,12 +152,12 @@ const Row = styled.div`
     flex-direction: row; 
     margin-bottom: 20px;
     @media only screen and (max-device-width: 1679px) {
-                margin-bottom: 10px;
-
+                margin-bottom: 20px;
+                margin-top: 20px;
         }
         @media only screen and (max-device-width: 1370px) {
-                margin-bottom: 4px;
-
+                margin-bottom: 14px;
+                margin-top: 0px;
         }
         
 `

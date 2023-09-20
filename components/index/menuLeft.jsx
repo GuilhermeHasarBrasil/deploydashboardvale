@@ -85,8 +85,24 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                                 color={'white'}
                                 //beat
                                 title={''}
-                                height={window.screen.width < 1900 ? '30px' : "30px"}
-                                width={window.screen.width < 1900 ? '30px' : "30px"}
+                                height={
+                                    window.screen.width > 1900 ?
+                                        '30px'
+                                        :
+                                        window.screen.width > 1580 ?
+                                            '28px'
+                                            :
+                                            '23px'
+                                }
+                                width={
+                                    window.screen.width > 1900 ?
+                                        '30px'
+                                        :
+                                        window.screen.width > 1580 ?
+                                            '28px'
+                                            :
+                                            '23px'
+                                }
                             />
                             :
                             <></>
@@ -100,8 +116,24 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                                 color={'white'}
                                 beat
                                 title={''}
-                                height={window.screen.width < 1900 ? '30px' : "35px"}
-                                width={window.screen.width < 1900 ? '30px' : "35px"}
+                                height={
+                                    window.screen.width > 1900 ?
+                                        '30px'
+                                        :
+                                        window.screen.width > 1580 ?
+                                            '28px'
+                                            :
+                                            '23px'
+                                }
+                                width={
+                                    window.screen.width > 1900 ?
+                                        '35px'
+                                        :
+                                        window.screen.width > 1580 ?
+                                            '28px'
+                                            :
+                                            '23px'
+                                }
                             />
                     }
                 </Resources>
@@ -142,8 +174,24 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                                 color={'white'}
                                 rotate
                                 title={''}
-                                height={window.screen.width < 1900 ? '25px' : "30px"}
-                                width={window.screen.width < 1900 ? '25px' : "30px"}
+                                height={
+                                    window.screen.width > 1900 ?
+                                        '30px'
+                                        :
+                                        window.screen.width > 1580 ?
+                                            '28px'
+                                            :
+                                            '23px'
+                                }
+                                width={
+                                    window.screen.width > 1900 ?
+                                        '30px'
+                                        :
+                                        window.screen.width > 1580 ?
+                                            '28px'
+                                            :
+                                            '23px'
+                                }
                             /> :
                             <></>
                     }
@@ -155,8 +203,24 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                                 color={'white'}
                                 rotate
                                 title={''}
-                                height={window.screen.width < 1900 ? '28px' : "35px"}
-                                width={window.screen.width < 1900 ? '28px' : "35px"}
+                                height={
+                                    window.screen.width > 1900 ?
+                                        '30px'
+                                        :
+                                        window.screen.width > 1580 ?
+                                            '28px'
+                                            :
+                                            '23px'
+                                }
+                                width={
+                                    window.screen.width > 1900 ?
+                                        '30px'
+                                        :
+                                        window.screen.width > 1580 ?
+                                            '28px'
+                                            :
+                                            '23px'
+                                }
                             />
                     }
 
@@ -184,7 +248,26 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                 <Resources className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
                     {
                         menuVisible ?
-                            <img style={{ userSelect: 'none' }} src='/assets/iconuserconfig.png' />
+                            <img style={{
+                                userSelect: 'none',
+                                height:
+                                    window.screen.width > 1900 ?
+                                        30
+                                        :
+                                        window.screen.width > 1580 ?
+                                            28
+                                            :
+                                            23,
+
+                                width:
+                                    window.screen.width > 1900 ?
+                                        30
+                                        :
+                                        window.screen.width > 1580 ?
+                                            28
+                                            :
+                                            23
+                            }} src='/assets/iconuserconfig.png' />
 
                             :
                             <></>
@@ -194,7 +277,26 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                             <TitleOption className={menuVisible ? 'transition-opacity' : ''}>ADMINISTRAÇÃO</TitleOption>
 
                             :
-                            <img style={{ userSelect: 'none' }} src='/assets/iconuserconfig.png' />
+                            <img style={{
+                                userSelect: 'none',
+                                height:
+                                    window.screen.width > 1900 ?
+                                        30
+                                        :
+                                        window.screen.width > 1580 ?
+                                            28
+                                            :
+                                            23,
+
+                                width:
+                                    window.screen.width > 1900 ?
+                                        30
+                                        :
+                                        window.screen.width > 1580 ?
+                                            28
+                                            :
+                                            23
+                            }} src='/assets/iconuserconfig.png' />
 
                     }
                 </Resources>
@@ -223,8 +325,24 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                         <LogOutSharp
                             color={'#ffff'}
                             title={'deslogar'}
-                            height="32px"
-                            width="32px"
+                            height={
+                                window.screen.width > 1900 ?
+                                    '30px'
+                                    :
+                                    window.screen.width > 1580 ?
+                                        '28px'
+                                        :
+                                        '23px'
+                            }
+                            width={
+                                window.screen.width > 1900 ?
+                                    '30px'
+                                    :
+                                    window.screen.width > 1580 ?
+                                        '28px'
+                                        :
+                                        '23px'
+                            }
                             style={{ marginRight: menuVisible ? -8 : 0 }}
                         />
                     </ImgContainer>
@@ -236,13 +354,13 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                 </Row>
                 <text style=
                     {
-                        window.screen.width>1900?
-                        { color: 'white', paddingTop: menuVisible ? 40 : 60, marginLeft: menuVisible ? 20 : 0 }
-                        :
-                        window.screen.width>1600?
-                        { color: 'white', paddingTop: menuVisible ? 30 : 50, marginLeft: menuVisible ? 20 : 0 }
-                        :
-                        { color: 'white', paddingTop: menuVisible ? 20 : 30, marginLeft: menuVisible ? 10 : 0, fontSize:12 }
+                        window.screen.width > 1900 ?
+                            { color: 'white', paddingTop: menuVisible ? 40 : 60, marginLeft: menuVisible ? 20 : 0 }
+                            :
+                            window.screen.width > 1580 ?
+                                { color: 'white', paddingTop: menuVisible ? 30 : 50, marginLeft: menuVisible ? 20 : 0 }
+                                :
+                                { color: 'white', paddingTop: menuVisible ? 20 : 30, marginLeft: menuVisible ? 10 : 0, fontSize: 12 }
                     }
                 >
                     V. 1.0.0
@@ -275,12 +393,16 @@ const ImgContainer = styled.div`
         width: 30px;
         height: 30px;
     }
+    @media only screen and (max-device-width: 1370px) {
+        width: 28px;
+        height: 28px;
+    }
 
 `
 const TitleOption = styled.text`
     color: ${props => (props.selected ? '#3699FF' : 'white')};
     font-size: 16px;
-    margin-left: 8px;
+    margin-left: 4px;
     font-weight: 500;
     letter-spacing: 0.3px;
     transition: opacity 0.3s;

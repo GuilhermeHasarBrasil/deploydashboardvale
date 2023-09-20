@@ -116,8 +116,8 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
                         window.screen.width > 1900 ?
                             menuBig ? 1300 : 1500
                             :
-                            window.screen.width > 1600 ?
-                                menuBig ? 1100 : 1300
+                            window.screen.width > 1580 ?
+                                menuBig ? 1200 : 1400
                                 :
                                 menuBig ? 1000 : 1200
                     }
@@ -125,10 +125,10 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
                         window.screen.width > 1900 ?
                             menuBig ? 500 : 500
                             :
-                            window.screen.width > 1600 ?
-                                menuBig ? 420 : 420
+                            window.screen.width > 1580 ?
+                                menuBig ? 420 : 480
                                 :
-                                menuBig ? 300 : 300
+                                menuBig ? 320 : 320
                     }
                     style=
                     {
