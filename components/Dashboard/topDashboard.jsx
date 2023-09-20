@@ -577,8 +577,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                         </>
                 }
                 <Button onClick={handleOptionChange} >
-                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', backgroundColor:'##008f83' }} >
-                        <TextButtonSwap>Alternar<br></br>para {!optionsCaixa ? 'caixa' : 'furo'}</TextButtonSwap>
+                    <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', backgroundColor:'#6b6b6b' }} >
                         <SwapVerticalOutline
                             color={'#fff'}
                             title={''}
@@ -586,6 +585,7 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
                             width={window.screen.width > 1900 ? '40px' : '35px'}
                             style={{ marginRight: 0 }}
                         />
+                        <TextButtonSwap>Alternar<br></br>para {!optionsCaixa ? 'caixa' : 'furo'}</TextButtonSwap>
                     </div>
 
                 </Button>
@@ -709,7 +709,7 @@ const Button = styled.button`
     align-items: center;
     justify-content: center;
     margin-right: 20px;
-    background-color: #008F83;
+    background-color: #6b6b6b;
     padding: 6px;
     padding-left: 9px;
     border-radius: 6px;
