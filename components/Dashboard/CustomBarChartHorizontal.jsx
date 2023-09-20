@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LabelList, Legend } from 'recharts';
 
-const CustomHorizontalBarChart = ({ data, maxValue, menuBig }) => {
+const CustomHorizontalBarChart = ({ data, maxValue, menuBig, showFilters }) => {
 
   console.log(data)
   const [chartWidth, setChartWidth] = useState(window.innerWidth);
@@ -48,7 +48,7 @@ const CustomHorizontalBarChart = ({ data, maxValue, menuBig }) => {
       }
       height={
         window.screen.width > 1900 ?
-          data.length * 50 + 250 : window.screen.width > 1580 ?
+          data.length * 50 + 250 + (!showFilters? 80 : 0) : window.screen.width > 1580 ?
             data.length * 50 + 250 : data.length * 50 + 50
       }
       data={data}

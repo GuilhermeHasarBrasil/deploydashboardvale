@@ -192,8 +192,8 @@ export default function TopDashboard({ finalizados, conferidos, quantidadeDeNaoI
     };
 
     function formatTimestamp(timestamp) {
-        const seconds = timestamp.seconds;
-        const nanoseconds = timestamp.nanoseconds;
+        const seconds = timestamp?.seconds;
+        const nanoseconds = timestamp?.nanoseconds;
         const date = new Date(seconds * 1000 + nanoseconds / 1000000); // Convertendo nanossegundos para milissegundos
         const formattedDate = `${parseInt(date.getDate()) > 10 ? date.getDate() : '0' + date.getDate()}/${parseInt(date.getMonth() + 1) > 10 ? (date.getMonth() + 1) : '0' + (date.getMonth() + 1)}/${date.getFullYear()}`;
         return formattedDate;

@@ -6,7 +6,7 @@ function roundUp(value) {
   return Math.max(roundedValue, 1); // Garante que o mínimo seja 1
 }
 
-const CustomBarChart = ({ data, menuBig }) => {
+const CustomBarChart = ({ data, menuBig, showFilters }) => {
 
   const [chartHeight, setChartHeight] = useState(450);
   const [chartWidth, setChartWidth] = useState(menuBig ? 1100 : 1300);
@@ -41,7 +41,7 @@ const CustomBarChart = ({ data, menuBig }) => {
         menuBig ? 650 : 800
       }
       height={window.screen.width > 1900 ?
-        520
+        520 + (!showFilters? 20 : 0)
         :
         window.screen.width > 1580 ?
         480

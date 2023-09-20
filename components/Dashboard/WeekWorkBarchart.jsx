@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList } from 'recharts';
 import styled from 'styled-components'
 
-export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorDiaMarcacao, contagensPorDiaFotografia, contagensPorDiaDensidade, contagensPorDiaSerragem, contagensPorDiaDespacho, contagensPorDiaArquivamento, chipBoxes, menuBig }) {
+export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorDiaMarcacao, contagensPorDiaFotografia, contagensPorDiaDensidade, contagensPorDiaSerragem, contagensPorDiaDespacho, contagensPorDiaArquivamento, chipBoxes, menuBig, showFilters }) {
 
     const diasDaSemana = ['Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira'];
     const [arrayDiasProcesso, setArrayDiasProcesso] = useState()
@@ -114,7 +114,7 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
                 <BarChart
                     width={
                         window.screen.width > 1900 ?
-                            menuBig ? 1300 : 1500
+                            menuBig ? 1300 : 1500 + (!showFilters? 50 : 0)
                             :
                             window.screen.width > 1580 ?
                                 menuBig ? 1200 : 1400
@@ -123,7 +123,7 @@ export default function BarChartWeek({ contagensPorDiaConferencia, contagensPorD
                     }
                     height={
                         window.screen.width > 1900 ?
-                            menuBig ? 500 : 500
+                            menuBig ? 500 : 500 + (!showFilters? 40 : 0)
                             :
                             window.screen.width > 1580 ?
                                 menuBig ? 420 : 480

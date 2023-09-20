@@ -33,7 +33,7 @@ export default function RowFuros({ furos, setFuroSelecionado, selected }) {
                     marginRight: 40, fontWeight: 'bold', color: "#000f000", marginLeft: 10,
                     display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex',
                 }} >
-                Furos:
+                Furos
             </text>
             <div style={{ maxWidth: '90%', display: selected == 'Relatórios' || selected === 'Mensagens/Avisos' || selected === 'Config. Impressora' || selected === 'Importar Arquivo' || selected === 'Usuário' ? 'none' : 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 0, }} >
                 <BgIcon>

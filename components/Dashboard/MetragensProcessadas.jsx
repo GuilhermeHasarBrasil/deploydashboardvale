@@ -9,7 +9,7 @@ registerLocale('pt-BR', ptBR);
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, Legend, Label, Cell } from 'recharts';
 import 'dayjs/locale/pt-br';
 
-export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuBig, furos }) {
+export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuBig, furos, showFilters }) {
     const [arrayDataProcessConferenciaConcluido, setArrayDataProcessConferenciaConcluido] = useState([]);
     const [arrayDataProcessMarcacaoConcluido, setArrayDataProcessMarcacaoConcluido] = useState([]);
     const [arrayDataProcessFotografiaConcluido, setArrayDataProcessFotografiaConcluido] = useState([]);
@@ -41,14 +41,14 @@ export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuB
         if (furoSelecionado.furo === 'TODOS') {
             const arrayConferenciaConcluido = chipBoxes.filter((caixa) => caixa?.processos?.conferencia?.sai !== null)
             setArrayDataProcessConferenciaConcluido(arrayConferenciaConcluido)
-            const arrayConferenciaAndamento = chipBoxes.filter((caixa) => caixa?.processos?.conferencia?.ent !== null && caixa?.processos?.conferencia?.ent === null)
+            const arrayConferenciaAndamento = chipBoxes.filter((caixa) => caixa?.processos?.conferencia?.ent !== null && caixa?.processos?.conferencia?.sai === null)
             setArrayDataProcessConferenciaAndamento(arrayConferenciaAndamento)
             const arrayConferenciaNaoIniciado = chipBoxes.filter((caixa) => caixa?.processos?.conferencia?.ent === null)
             setArrayDataProcessConferenciaNaoIniciado(arrayConferenciaNaoIniciado)
         } else {
             const arrayConferenciaConcluido = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.conferencia?.sai !== null)
             setArrayDataProcessConferenciaConcluido(arrayConferenciaConcluido)
-            const arrayConferenciaAndamento = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.conferencia?.ent !== null && caixa?.processos?.conferencia?.ent === null)
+            const arrayConferenciaAndamento = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.conferencia?.ent !== null && caixa?.processos?.conferencia?.sai === null)
             setArrayDataProcessConferenciaAndamento(arrayConferenciaAndamento)
             const arrayConferenciaNaoIniciado = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.conferencia?.ent === null)
             setArrayDataProcessConferenciaNaoIniciado(arrayConferenciaNaoIniciado)
@@ -57,14 +57,14 @@ export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuB
         if (furoSelecionado.furo === 'TODOS') {
             const arrayMarcacaoConcluido = chipBoxes.filter((caixa) => caixa?.processos?.marcacao?.sai !== null)
             setArrayDataProcessMarcacaoConcluido(arrayMarcacaoConcluido)
-            const arrayMarcacaoAndamento = chipBoxes.filter((caixa) => caixa?.processos?.marcacao?.ent !== null && caixa?.processos?.marcacao?.ent === null)
+            const arrayMarcacaoAndamento = chipBoxes.filter((caixa) => caixa?.processos?.marcacao?.ent !== null && caixa?.processos?.marcacao?.sai === null)
             setArrayDataProcessMarcacaoAndamento(arrayMarcacaoAndamento)
             const arrayMarcacaoNaoIniciado = chipBoxes.filter((caixa) => caixa?.processos?.marcacao?.ent === null)
             setArrayDataProcessMarcacaoNaoIniciado(arrayMarcacaoNaoIniciado)
         } else {
             const arrayMarcacaoConcluido = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.marcacao?.sai !== null)
             setArrayDataProcessMarcacaoConcluido(arrayMarcacaoConcluido)
-            const arrayMarcacaoAndamento = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.marcacao?.ent !== null && caixa?.processos?.marcacao?.ent === null)
+            const arrayMarcacaoAndamento = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.marcacao?.ent !== null && caixa?.processos?.marcacao?.sai === null)
             setArrayDataProcessMarcacaoAndamento(arrayMarcacaoAndamento)
             const arrayMarcacaoNaoIniciado = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.marcacao?.ent === null)
             setArrayDataProcessMarcacaoNaoIniciado(arrayMarcacaoNaoIniciado)
@@ -73,14 +73,14 @@ export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuB
         if (furoSelecionado.furo === 'TODOS') {
             const arrayFotografiaConcluido = chipBoxes.filter((caixa) => caixa?.processos?.fotografia?.sai !== null)
             setArrayDataProcessFotografiaConcluido(arrayFotografiaConcluido)
-            const arrayFotografiaAndamento = chipBoxes.filter((caixa) => caixa?.processos?.fotografia?.ent !== null && caixa?.processos?.fotografia?.ent === null)
+            const arrayFotografiaAndamento = chipBoxes.filter((caixa) => caixa?.processos?.fotografia?.ent !== null && caixa?.processos?.fotografia?.sai === null)
             setArrayDataProcessFotografiaAndamento(arrayFotografiaAndamento)
             const arrayFotografiaNaoIniciado = chipBoxes.filter((caixa) => caixa?.processos?.fotografia?.ent === null)
             setArrayDataProcessFotografiaNaoIniciado(arrayFotografiaNaoIniciado)
         } else {
             const arrayFotografiaConcluido = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.fotografia?.sai !== null)
             setArrayDataProcessFotografiaConcluido(arrayFotografiaConcluido)
-            const arrayFotografiaAndamento = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.fotografia?.ent !== null && caixa?.processos?.fotografia?.ent === null)
+            const arrayFotografiaAndamento = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.fotografia?.ent !== null && caixa?.processos?.fotografia?.sai === null)
             setArrayDataProcessFotografiaAndamento(arrayFotografiaAndamento)
             const arrayFotografiaNaoIniciado = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.fotografia?.ent === null)
             setArrayDataProcessFotografiaNaoIniciado(arrayFotografiaNaoIniciado)
@@ -89,14 +89,14 @@ export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuB
         if (furoSelecionado.furo === 'TODOS') {
             const arrayArquivamentoConcluido = chipBoxes.filter((caixa) => caixa?.processos?.arquivamento?.sai !== null)
             setArrayDataProcessArquivamentoConcluido(arrayArquivamentoConcluido)
-            const arrayArquivamentoAndamento = chipBoxes.filter((caixa) => caixa?.processos?.arquivamento?.ent !== null && caixa?.processos?.arquivamento?.ent === null)
+            const arrayArquivamentoAndamento = chipBoxes.filter((caixa) => caixa?.processos?.arquivamento?.ent !== null && caixa?.processos?.arquivamento?.sai === null)
             setArrayDataProcessArquivamentoAndamento(arrayArquivamentoAndamento)
             const arrayArquivamentoNaoIniciado = chipBoxes.filter((caixa) => caixa?.processos?.arquivamento?.ent === null)
             setArrayDataProcessArquivamentoNaoIniciado(arrayArquivamentoNaoIniciado)
         } else {
             const arrayArquivamentoConcluido = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.arquivamento?.sai !== null)
             setArrayDataProcessArquivamentoConcluido(arrayArquivamentoConcluido)
-            const arrayArquivamentoAndamento = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.arquivamento?.ent !== null && caixa?.processos?.arquivamento?.ent === null)
+            const arrayArquivamentoAndamento = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.arquivamento?.ent !== null && caixa?.processos?.arquivamento?.sai === null)
             setArrayDataProcessArquivamentoAndamento(arrayArquivamentoAndamento)
             const arrayArquivamentoNaoIniciado = chipBoxes.filter((caixa) => caixa.furo === furoSelecionado.furo && caixa?.processos?.arquivamento?.ent === null)
             setArrayDataProcessArquivamentoNaoIniciado(arrayArquivamentoNaoIniciado)
@@ -187,7 +187,7 @@ export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuB
         arrayDataProcessConferenciaConcluido, arrayDataProcessMarcacaoConcluido, arrayDataProcessFotografiaConcluido, arrayDataProcessArquivamentoConcluido,
         arrayDataProcessConferenciaAndamento, arrayDataProcessMarcacaoAndamento, arrayDataProcessFotografiaAndamento, arrayDataProcessArquivamentoAndamento,
         arrayDataProcessConferenciaNaoIniciado, arrayDataProcessMarcacaoNaoIniciado, arrayDataProcessFotografiaNaoIniciado, arrayDataProcessArquivamentoNaoIniciado,
-        furoSelecionado, furos, somaTotalDeFuro])
+        furoSelecionado, furos, somaTotalDeFuro, chipBoxes])
 
     const colors = ['#0088FE', '#FF5F2D', '#FFBB28', 'green'];
 
@@ -202,6 +202,8 @@ export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuB
                     :
                     process === 'Arquivamento' ? arquivamentoData : conferenciaData)
     })
+
+    console.log(conferenciaData)
 
     return (
         <Container >
@@ -251,7 +253,7 @@ export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuB
                             }
                             height={
                                 window.screen.width > 1900 ?
-                                        500
+                                        500 + (!showFilters? 50 : 0)
                                     :
                                     window.screen.width > 1580 ?
                                         490

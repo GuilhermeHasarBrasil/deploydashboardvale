@@ -12,7 +12,7 @@ import { ArrowBackCircleSharp, ArrowForwardCircleSharp } from 'react-ionicons'
 import dayjs from 'dayjs';
 import 'dayjs/locale/pt-br';
 
-export default function CustomBarChartMes({ chipBoxes, furoSelecionado, menuBig }) {
+export default function CustomBarChartMes({ chipBoxes, furoSelecionado, menuBig, showFilters }) {
     const [selectedDateRange, setSelectedDateRange] = useState({ startDate: null, endDate: null });
     const [numberCarrousel, setNumberCarrousel] = useState(1)
     const [arrayDataProcessConferencia, setArrayDataProcessConferencia] = useState([]);
@@ -246,7 +246,7 @@ export default function CustomBarChartMes({ chipBoxes, furoSelecionado, menuBig 
                                     :
                                     menuBig ? 800 : 1000
                             }
-                            height={300}
+                            height={300+(!showFilters? 50 : 0)}
                             data={
                                 numberCarrousel === 1 ? conferenciaData
                                     :
