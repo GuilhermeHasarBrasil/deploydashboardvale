@@ -78,7 +78,7 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                         )}
                     </Button>
                 </Row>
-                <Resources className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
+                <Resources menuBig={menuVisible} className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
                     {
                         menuVisible ?
                             <ListCircleOutline
@@ -167,7 +167,7 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                         )}
                     </Button>
                 </Row>
-                <Resources className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
+                <Resources menuBig={menuVisible} className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
                     {
                         menuVisible ?
                             <SettingsOutline
@@ -245,7 +245,7 @@ export default function MenuLeft({ setSelected, selected, setMenuBig, onClick })
                         )}
                     </Button>
                 </Row>
-                <Resources className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
+                <Resources menuBig={menuVisible} className={menuVisible ? 'resources-transition' : 'resources-hidden'}>
                     {
                         menuVisible ?
                             <img style={{
@@ -447,8 +447,8 @@ const Resources = styled.div({
     marginTop: 10,
     display: 'flex',
     alignItems: 'center',
-    //justifyContent: 'center',
-    paddingLeft: 9
+    justifyContent: props=>props.menuBig ? 'initial' : 'center',
+    paddingLeft: props=>props.menuBig ? '9px' : 0
 })
 
 const Button = styled.button`

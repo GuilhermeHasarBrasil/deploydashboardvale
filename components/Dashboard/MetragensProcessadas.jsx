@@ -268,17 +268,17 @@ export default function MetragensProcessadas({ chipBoxes, furoSelecionado, menuB
                                             process === 'Arquivamento' ? arquivamentoData : conferenciaData
                             }
                         >
-                            <XAxis dataKey="label" label={{ fontWeight: 'bold', fontSize: 18 }} >
+                            <XAxis dataKey="label" label={{ fontWeight: 'bold', fontSize: 18 }} style={{ textAnchor: 'middle', fontWeight: 'bold', fontSize: 20 }} >
                                 <Label value="" angle={0} position="insideLeft" style={{ textAnchor: 'middle', fontWeight: 'bold', fontSize: 20 }} />
                             </XAxis>
-                            <YAxis type="number" value='Metros' domain={[0, dataMax => Math.round(dataMax + 10)]} >
+                            <YAxis type="number" value='Metros' domain={[0, dataMax => Math.round(dataMax + 10)]} style={{fontWeight: 'bold', fontSize: 20 }} >
                                 <Label value="Metros" angle={-90} position="insideLeft" style={{ textAnchor: 'middle', fontWeight: 'bold', fontSize: 20 }} />
                             </YAxis>
                             <Tooltip />
                             <CartesianGrid stroke="#f5f5f5" />
-                            <Bar dataKey="Metros" fill="#008F83" label={{ position: 'top' }}>
+                            <Bar dataKey="Metros" fill="#008F83" label={{ position: 'top' }} style={{fontWeight: 'bold', fontSize: 20 }} >
                                 {data?.map((entry, index) => (
-                                    <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+                                    <Cell key={`cell-${index}`} fill={colors[index % 20]} style={{fontWeight: 'bold', fontSize: 20 }} />
                                 ))}
                             </Bar>
                         </BarChart>
