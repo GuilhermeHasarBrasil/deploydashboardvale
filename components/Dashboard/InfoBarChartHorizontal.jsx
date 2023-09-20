@@ -39,6 +39,8 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
         setArquivamentoNaoIniciada(FilteredcaixasNaoIniciadas?.filter((caixa) => caixa?.processos?.arquivamento?.ent == null))
     }, [FilteredcaixasEmAndamento, FilteredcaixasNaoIniciadas])
 
+    console.log(arquivamentoNaoIniciada)
+
     return (
         <Container>
             <Row  >
@@ -47,7 +49,7 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                 </BgImageCardItem>
                 <CardItem BgColor={'#2FAB10'}>
                     <Column grande={menuBig}>
-                        <TitleBox>ETAPAS CONCLUÍDAS POR CAIXA (ARQUIVADAS)</TitleBox>
+                        <TitleBox>ETAPAS CONCLUÍDAS POR CAIXA (TOTAL)</TitleBox>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
                             <Number>
                                 {somaProcessado ? somaProcessado : 0}
@@ -65,7 +67,7 @@ export default function InfoBarChartHorizontal({ data, menuBig, caixasEmAndament
                         <TitleBox>ETAPAS POR CAIXA NÃO INICIADAS</TitleBox>
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', marginTop: -10 }} >
                             <Number>
-                                {conferenciaNaoIniciada.length + marcacaoNaoIniciada.length + fotogafiaNaoIniciada.length + arquivamentoNaoIniciada.length}
+                                {somaTotal-(somaProcessado? somaProcessado : 0) - (marcacaoEmAndamento.length + fotogafiaEmAndamento.length + arquivamentoEmAndamento.length) }
                             </Number>
                         </div>
                     </Column>
