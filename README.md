@@ -12,6 +12,20 @@ yarn dev
 pnpm dev
 ```
 
+Pushes para dev :
+
+```bash
+git push origin main
+
+```
+
+Pushes para deploy:
+
+```bash
+git push deploydashboardvale main
+
+```
+
 Acesse [http://localhost:3000](http://localhost:3000) no navegador.
 
 # FIGMA
