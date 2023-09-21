@@ -22,6 +22,7 @@ git push origin main
 Pushes para deploy:
 
 ```bash
+git remote add deploydashboardvale https://github.com/GuilhermeHasarBrasil/deploydashboardvale.git
 git push deploydashboardvale main
 
 ```
